@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # cano
 
 A new Flutter project.
@@ -14,3 +15,6 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# CANO-FE
+>>>>>>> 08327f725395e5d0147d1d5addbc0f0e45c7cd7b
