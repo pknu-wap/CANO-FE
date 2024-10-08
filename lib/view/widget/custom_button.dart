@@ -5,74 +5,91 @@ class CustomButton extends StatelessWidget {
   final VoidCallback? onPressed; // 버튼 클릭 시 실행할 콜백 함수
   final String text; // 버튼 텍스트
   final Color buttonColor;
+  final Color textColor;
   final double borderRadius;
-  final double minimumSize;
+  final double? width;
+  final double height;
 
-  const CustomButton(
-      {Key? key,
-      this.onPressed = null,
-      required this.text,
-      this.buttonColor = AppColors.primary,
-      this.borderRadius = 12.0,
-      this.minimumSize = 45})
-      : super(key: key);
+  const CustomButton({
+    Key? key,
+    this.onPressed = null,
+    required this.text,
+    this.buttonColor = AppColors.primary,
+    this.textColor = Colors.white,
+    this.borderRadius = 12.0,
+    this.width = null,
+    required this.height,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-          backgroundColor: buttonColor,
-          disabledBackgroundColor: buttonColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius), // 둥근 모서리
-          ),
-          minimumSize: Size(double.infinity, minimumSize)),
+        backgroundColor: buttonColor,
+        disabledBackgroundColor: buttonColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(borderRadius), // 둥근 모서리
+        ),
+        minimumSize: width == null ? Size(double.infinity, height) : null,
+        fixedSize: width != null ? Size(width!, height) : null,
+      ),
       child: Text(
         text,
         style: TextStyle(
-            fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold),
+            fontSize: 15, color: textColor, fontWeight: FontWeight.bold),
       ),
     );
   }
 }
 
-class CustomContainerButton extends StatelessWidget {
-  final VoidCallback? onPressed; // 버튼 클릭 시 실행할 콜백 함수
-  final String text; // 버튼 텍스트
-  final Color buttonColor;
+class CustomButton2 extends StatelessWidget {
+  final VoidCallback onPressed;
+  final String text;
+  final Color unselectedButtonColor;
+  final Color selectedButtonColor;
+  final Color unselectedTextColor;
+  final Color selectedTextColor;
   final double borderRadius;
   final double width;
   final double height;
+  final bool isSelected;
 
-  const CustomContainerButton(
+  const CustomButton2(
       {Key? key,
-      this.onPressed = null,
+      required this.onPressed,
       required this.text,
-      this.buttonColor = AppColors.primary,
       this.borderRadius = 12.0,
       required this.width,
-      required this.height})
+      required this.height,
+      this.unselectedButtonColor = Colors.white,
+      this.selectedButtonColor = AppColors.primary,
+      this.unselectedTextColor = AppColors.primary,
+      this.selectedTextColor = Colors.white,
+      required this.isSelected})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-            backgroundColor: buttonColor,
-            disabledBackgroundColor: buttonColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadius), // 둥근 모서리
-            )),
-        child: Text(
-          text,
-          style: TextStyle(
-              fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold),
-        ),
+    return ElevatedButton(
+      onPressed: () {
+        onPressed.call();
+      },
+      style: ElevatedButton.styleFrom(
+          backgroundColor:
+              isSelected ? selectedButtonColor : unselectedButtonColor,
+          fixedSize: Size(width, height),
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+                color: isSelected ? Colors.transparent : selectedButtonColor),
+            borderRadius: BorderRadius.circular(borderRadius), // 둥근 모서리
+          )),
+      child: Text(
+        text,
+        style: TextStyle(
+            fontSize: 15,
+            color: isSelected ? selectedTextColor : unselectedTextColor,
+            fontWeight: FontWeight.bold),
       ),
     );
   }

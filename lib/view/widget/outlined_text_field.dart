@@ -8,6 +8,7 @@ class OutlinedTextField extends StatelessWidget {
   final Color borderColor;
   final double width;
   final double height;
+  final ValueChanged<String> onChanged;
   // final TextEditingController controller;
 
   const OutlinedTextField({
@@ -18,6 +19,7 @@ class OutlinedTextField extends StatelessWidget {
     this.borderColor = AppColors.primary,
     required this.width,
     required this.height,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -26,6 +28,7 @@ class OutlinedTextField extends StatelessWidget {
       width: width,
       height: height,
       child: TextField(
+        onChanged: onChanged,
         textAlign: TextAlign.center,
         maxLines: 1,
         keyboardType: keyboardType,

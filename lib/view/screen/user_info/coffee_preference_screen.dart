@@ -1,13 +1,30 @@
 import 'package:cano/desginsystem/strings.dart';
 import 'package:cano/view/widget/custom_button.dart';
 import 'package:cano/view/widget/progress_bar.dart';
+import 'package:cano/viewmodel/user_info_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
-class CoffeePreferenceScreen extends StatelessWidget {
+class CoffeePreferenceScreen extends ConsumerWidget {
   CoffeePreferenceScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userInfo = ref.watch(userInfoProvider);
+    final List<String> coffeeLables = [
+      AppStrings.americano,
+      AppStrings.espresso,
+      AppStrings.cappuccino,
+      AppStrings.caffemoca,
+      AppStrings.caffelatte,
+      AppStrings.caramelMacchiato
+    ];
+
+    ref.listen(userInfoProvider, (prev, next) {
+      print("현재 상태: $next");
+    });
+
     return Scaffold(
         body: Column(
       children: [
@@ -36,73 +53,48 @@ class CoffeePreferenceScreen extends StatelessWidget {
           ),
         ),
         SizedBox(height: 35),
-        Container(
-          alignment: Alignment.centerLeft,
-          padding: EdgeInsets.only(left: 30),
-          child: CustomContainerButton(
-              text: AppStrings.americano,
+        for (var lable in coffeeLables)
+          Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.only(left: 30, bottom: 10),
+              child: CustomButton2(
+                text: lable,
+                width: 170,
+                height: 40,
+                borderRadius: 70,
+                isSelected: userInfo.coffees.contains(lable),
+                onPressed: () {
+                  var isSelcted = userInfo.coffees.contains(lable);
+                  if (isSelcted)
+                    ref.watch(userInfoProvider.notifier).removeCoffee(lable);
+                  else
+                    ref.watch(userInfoProvider.notifier).addCoffee(lable);
+                },
+              )),
+        SizedBox(height: 160),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            CustomButton(
+              text: AppStrings.prev,
               width: 170,
-              height: 40,
-              borderRadius: 80),
-        ),
-        SizedBox(height: 15),
-        Container(
-          alignment: Alignment.centerLeft,
-          padding: EdgeInsets.only(left: 30),
-          child: CustomContainerButton(
-              text: AppStrings.espresso,
+              height: 55,
+              buttonColor: Colors.white,
+              textColor: Colors.black,
+              onPressed: () {
+                context.pop();
+              },
+            ),
+            CustomButton(
+              onPressed: () {
+                // 여기 다음화면으로 이동 코드
+              },
+              text: AppStrings.next,
               width: 170,
-              height: 40,
-              borderRadius: 80),
+              height: 55,
+            )
+          ],
         ),
-        SizedBox(height: 15),
-        Container(
-          alignment: Alignment.centerLeft,
-          padding: EdgeInsets.only(left: 30),
-          child: CustomContainerButton(
-              text: AppStrings.cappuccino,
-              width: 170,
-              height: 40,
-              borderRadius: 80),
-        ),
-        SizedBox(height: 15),
-        Container(
-          alignment: Alignment.centerLeft,
-          padding: EdgeInsets.only(left: 30),
-          child: CustomContainerButton(
-              text: AppStrings.caffemoca,
-              width: 170,
-              height: 40,
-              borderRadius: 80),
-        ),
-        SizedBox(height: 15),
-        Container(
-          alignment: Alignment.centerLeft,
-          padding: EdgeInsets.only(left: 30),
-          child: CustomContainerButton(
-              text: AppStrings.caffelatte,
-              width: 170,
-              height: 40,
-              borderRadius: 80),
-        ),
-        SizedBox(height: 15),
-        Container(
-          alignment: Alignment.centerLeft,
-          padding: EdgeInsets.only(left: 30),
-          child: CustomContainerButton(
-              text: AppStrings.caffemoca,
-              width: 170,
-              height: 40,
-              borderRadius: 80),
-        ),
-        SizedBox(height: 170),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40),
-          child: CustomButton(
-            text: AppStrings.next,
-            minimumSize: 55,
-          ),
-        )
       ],
     ));
   }

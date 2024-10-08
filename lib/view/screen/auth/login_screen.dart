@@ -54,8 +54,9 @@ class LoginScreen extends StatelessWidget {
             child: CustomButton(
               text: AppStrings.login,
               buttonColor: AppColors.primary,
+              height: 40,
               onPressed: () {
-                context.go('/user_profile');
+                context.push('/user_profile');
               },
             ),
           ),
@@ -65,20 +66,24 @@ class LoginScreen extends StatelessWidget {
             child: const CustomButton(
               text: "회원가입",
               buttonColor: AppColors.primary,
+              height: 40,
             ),
           ),
           const SizedBox(height: 20),
           const Text("또는",
               style: TextStyle(color: Colors.black26, fontSize: 15)),
           const SizedBox(height: 10),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomIconSvgButton(
-                  imagePath: "assets/images/android_light_rd_na.svg"),
+                  imagePath: "assets/images/android_light_rd_na.svg",
+                  onPressed: () {}),
               SizedBox(width: 20),
               CustomIconSvgButton(
-                  imagePath: "assets/images/android_light_rd_na.svg")
+                imagePath: "assets/images/android_light_rd_na.svg",
+                onPressed: () {},
+              )
             ],
           ),
         ],
