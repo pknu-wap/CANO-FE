@@ -63,9 +63,13 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
+
+
 # The following section is specific to Flutter packages.
 flutter:
-
+  assets:
+    - assets/images/kakao_login_medium_wide.png
+    - assets/images/android_light_rd_na.svg
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -104,8 +108,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
-flutter_native_splash:
-    color: "#42a5f5" # 배경색
-    image: assets/images/bg.png # 스플래시 화면에 들어갈 이미지 경로
-    android: true # 안드로이드 지원 여부
-    ios: true # iOS 지원 여부
