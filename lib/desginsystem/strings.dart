@@ -6,7 +6,11 @@ class AppStrings {
       "다른 목적으로 사용되거나 제 3자에게 제공되지 않습니다.";
 
   static const String coffeePreferenceText = "선호하는 커피는 무엇인가요?";
-  static const String coffeePreferenceInfoText = "선택한 요소가 내 피드에 적용됩니다.";
+  // static const String coffeePreferenceInfoText = "선택한 요소가 내 피드에 적용됩니다.";
+  // 다른 뷰에도 써서 통일
+  static const String applyPreferenceInfoText = "선택한 요소가 내 피드에 적용됩니다.";
+
+  static const String keywordPreferenceText = "선호하는 키워드를 선택해주세요.";
 
   static const String nickname = "닉네임";
   static const String man = "남자";
@@ -22,4 +26,24 @@ class AppStrings {
   static const String caffelatte = "카페라떼";
   static const String cappuccino = "카푸치노";
   static const String caramelMacchiato = "카라멜 마끼야또";
+
+  // 키워드 종류
+  static const String niceMood = "분위기 좋은";
+  static const String parkingLot = "주차장이 있는";
+  static const String dessert = "디저트가 맛있는";
+  static const String interior = "독특한 인테리어";
+  static const String hotPlace = "핫플레이스";
+  static const String highQuality = "고품질 커피";
+  static const String small = "소소한";
+  static const String cheap = "가성비";
+  static const String view = "뷰 맛집";
+  static const String special = "특별한 메뉴";
+  static const String pet = "애견 동반 가능한";
+  static const String newOpen = "새로 오픈한";
+  static const String family = "가족 모임";
+  static const String cozy = "편한 좌석";
+  static const String noKids = "노키즈존";
+  static const String busan = "부산 맛집 카페";
+
+  
 }

@@ -43,6 +43,7 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
   }
 }
 
+
 final userInfoProvider =
     StateNotifierProvider.autoDispose<UserInfoViewmodel, UserInfo>(
         (ref) => UserInfoViewmodel(UserInfo(
