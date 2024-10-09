@@ -72,17 +72,23 @@ class LoginScreen extends StatelessWidget {
           const SizedBox(height: 20),
           const Text("또는",
               style: TextStyle(color: Colors.black26, fontSize: 15)),
-          const SizedBox(height: 10),
+          const SizedBox(height: 15),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CustomIconSvgButton(
-                  imagePath: "assets/images/android_light_rd_na.svg",
-                  onPressed: () {}),
+              CustomIconPngButton(
+                  size: 55,
+                  imagePath: "assets/images/kakao_login_icon.png",
+                  onPressed: () {
+                    kakaoLogin();
+                  }),
               SizedBox(width: 20),
               CustomIconSvgButton(
+                size: 55,
                 imagePath: "assets/images/android_light_rd_na.svg",
-                onPressed: () {},
+                onPressed: () {
+                  googleLogin();
+                },
               )
             ],
           ),
@@ -91,3 +97,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+
+void kakaoLogin() {}
+
+void googleLogin() {}

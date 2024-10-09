@@ -12,7 +12,7 @@ class CustomIconSvgButton extends StatelessWidget {
     Key? key,
     this.imagePath = null,
     required this.onPressed,
-    this.size = 40,
+    this.size = 50,
     this.idx = null,
     this.selectedIdx = null,
   }) : super(key: key);
@@ -26,28 +26,37 @@ class CustomIconSvgButton extends StatelessWidget {
         child: imagePath != null
             ? SvgPicture.asset(
                 imagePath!,
+                height: size,
+                width: size,
               )
             : Icon(Icons.man, size: size));
   }
 }
 
-// class CustomIconPngButton extends StatelessWidget {
-//   final String imagePath; // 이미지 경로
-//   final VoidCallback? onPressed; // 클릭 시 호출될 함수
-//
-//   const CustomIconSvgButton({
-//     Key? key,
-//     required this.imagePath,
-//     this.onPressed = null,
-//   }) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onTap: onPressed, // 클릭 이벤트 처리
-//       child: SvgPicture.asset(
-//         imagePath,
-//       ),
-//     );
-//   }
-// }
+class CustomIconPngButton extends StatelessWidget {
+  final String imagePath;
+  final VoidCallback onPressed;
+  final double size;
+
+  const CustomIconPngButton({
+    Key? key,
+    required this.imagePath,
+    required this.onPressed,
+    this.size = 50,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        onPressed.call();
+      }, // 클릭 이벤트 처리
+      child: Image.asset(
+        imagePath, // PNG 이미지의 경로
+        fit: BoxFit.cover,
+        width: size,
+        height: size, // 필요에 따라 조정
+      ),
+    );
+  }
+}

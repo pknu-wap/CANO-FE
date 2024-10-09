@@ -71,6 +71,7 @@ flutter:
   assets:
     - assets/images/kakao_login_medium_wide.png
     - assets/images/android_light_rd_na.svg
+    - assets/images/kakao_login_icon.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
