@@ -1,5 +1,7 @@
 import 'package:cano/view/screen/auth/login_screen.dart';
 import 'package:cano/view/screen/user_info/coffee_preference_screen.dart';
+import 'package:cano/view/screen/user_info/keyword_preference_screen.dart';
+import 'package:cano/view/screen/user_info/location_preference_screen.dart';
 import 'package:cano/view/screen/user_info/user_profile_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -19,8 +21,18 @@ class AppRouter {
       GoRoute(
           path: '/coffee_preference',
           builder: (context, state) {
-            return CoffeePreferenceScreen();
+            return const CoffeePreferenceScreen();
           }),
+      GoRoute(
+          path: '/keyword_preference',
+          builder: (context, state) {
+            return const KeywordPreferenceScreen();
+          }),
+      // GoRoute(
+      //     path: '/location_preference',
+      //     builder: (context, state) {
+      //       return const LocationPreferenceScreen();
+      //     }),
     ],
   );
 }
