@@ -111,6 +111,7 @@ class KeywordPreferenceScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 30),
+          // 이전, 다음 버튼
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

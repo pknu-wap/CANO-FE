@@ -12,8 +12,8 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
     state = state.copyWith(age: newAge);
   }
 
-  void setArea(String newArea) {
-    state = state.copyWith(area: newArea);
+  void setArea(String area) {
+    state = state.copyWith(area: area);
   }
 
   void setGender(bool? newGender) {
@@ -43,15 +43,14 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
   }
 }
 
-
 final userInfoProvider =
     StateNotifierProvider.autoDispose<UserInfoViewmodel, UserInfo>(
-        (ref) => UserInfoViewmodel(UserInfo(
+        (ref) => UserInfoViewmodel(const UserInfo(
               name: "",
               age: 0,
               coffees: [],
               keywords: [],
-              area: '',
+              area: "",
               gender: null,
               profileImageUrl: '',
             )));
