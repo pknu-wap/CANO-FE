@@ -39,7 +39,7 @@ class AppRouter {
         builder: (context, state) {
           return WelcomeScreen();
         },
-      )
+      ),
     ],
   );
 }

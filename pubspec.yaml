@@ -45,6 +45,11 @@ dependencies:
   flutter_native_splash: ^2.4.1
   flutter_svg: ^2.0.10+1
   flutter_riverpod: ^2.5.1
+  kakao_flutter_sdk_auth: ^1.9.6
+  kakao_flutter_sdk_user: ^1.9.6
+  kakao_flutter_sdk: ^1.9.6
+  shared_preferences: ^2.3.2
+
 
 dev_dependencies:
   flutter_test:

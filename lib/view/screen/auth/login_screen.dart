@@ -1,5 +1,8 @@
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/desginsystem/strings.dart';
+import 'package:cano/network/google/google.dart';
+import 'package:cano/network/kakao/kakao.dart';
+import 'package:cano/network/token/token_manager.dart';
 import 'package:cano/view/widget/auth/auth_input_field.dart';
 import 'package:cano/view/widget/custom_button.dart';
 import 'package:cano/view/widget/custom_icon_button.dart';
@@ -11,6 +14,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    checkAndLogin(() => context.go('/user_profile'));
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -81,14 +86,14 @@ class LoginScreen extends StatelessWidget {
                   size: 55,
                   imagePath: "assets/images/kakao_login_icon.png",
                   onPressed: () {
-                    kakaoLogin();
+                    kakaoLogin(() => context.go('/user_profile'));
                   }),
               SizedBox(width: 20),
               CustomIconSvgButton(
                 size: 55,
                 imagePath: "assets/images/android_light_rd_na.svg",
                 onPressed: () {
-                  googleLogin();
+                  googleLogin(() => context.go('/user_profile'));
                 },
               )
             ],
@@ -98,7 +103,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
-void kakaoLogin() {}
-
-void googleLogin() {}

@@ -64,4 +64,6 @@ class AppStrings {
   static const String jeonnam = "전남";
   static const String gwangju = "광주";
   static const String jeju = "제주";
+
+  static const
 }
