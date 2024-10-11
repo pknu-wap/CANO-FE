@@ -4,7 +4,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:label="카노"
+        android:label="CANO"
         android:icon="@mipmap/ic_launcher">
 
 

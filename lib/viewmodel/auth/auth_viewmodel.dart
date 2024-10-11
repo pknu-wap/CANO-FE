@@ -16,11 +16,18 @@ class AuthViewModel extends StateNotifier<void> {
 
   Future<void> kakaoLogin(VoidCallback onSuccess) async {
     authRepository.kakaoLogin(onSuccess);
-    // authRepository.kakaoUnLink();
   }
 
   Future<void> kakaoUnlink() async {
     authRepository.kakaoUnLink();
+  }
+
+  Future<void> googleLogin(VoidCallback onSuccess) async {
+    authRepository.googleLogin(onSuccess);
+  }
+
+  Future<void> googleLogout() async {
+    authRepository.googleLogout();
   }
 }
 

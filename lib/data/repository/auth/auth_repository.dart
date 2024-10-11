@@ -1,8 +1,11 @@
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 
 class AuthRepository {
   static final AuthRepository _instance = AuthRepository._internal();
+
   AuthRepository._internal();
 
   factory AuthRepository() {
@@ -17,7 +20,7 @@ class AuthRepository {
       try {
         token = await UserApi.instance.loginWithKakaoTalk();
         onSuccess.call();
-        print("로그인 성공 - kakao Token: $token");
+        print("카카오 로그인 성공 - kakao Token: $token");
       } catch (error) {
         print('카카오톡으로 로그인 실패 $error');
 
@@ -64,6 +67,45 @@ class AuthRepository {
       print('연결 끊기 성공, SDK에서 토큰 삭제');
     } catch (error) {
       print('연결 끊기 실패 $error');
+    }
+  }
+
+  Future<void> googleLogin(VoidCallback onSuccess) async {
+    try {
+      await dotenv.load(fileName: 'assets/config/.env');
+      String? googleClientId = dotenv.env['GOOGLE_CLIENT_ID'];
+
+      final GoogleSignIn _googleSignIn = GoogleSignIn(
+        clientId: googleClientId,
+        scopes: [
+          'openid',
+        ],
+      );
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+
+      if (googleUser != null) {
+        final GoogleSignInAuthentication googleAuth =
+            await googleUser.authentication;
+
+        final String? accessToken = googleAuth.accessToken;
+        final String? idToken = googleAuth.idToken;
+        print("구글 로그인 성공");
+        print("구글 유저: $googleUser");
+        print("구글 Access 토큰: $accessToken");
+        print("구글 id 토큰: $idToken");
+        onSuccess.call();
+      }
+    } catch (error) {
+      print("구글 로그인 실패: $error");
+    }
+  }
+
+  // 카카오의 연결 끊기와 유사
+  Future<void> googleLogout() async {
+    try {
+      await GoogleSignIn().signOut();
+    } catch (error) {
+      print("구글 로그아웃 실패: $error");
     }
   }
 }
