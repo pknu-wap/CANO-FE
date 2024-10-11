@@ -2,7 +2,23 @@ import 'package:cano/data/model/user_info.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserInfoViewmodel extends StateNotifier<UserInfo> {
-  UserInfoViewmodel(super.state);
+  // 내부 생성자
+  UserInfoViewmodel._internal(super.state);
+
+  static final UserInfoViewmodel _instance =
+      UserInfoViewmodel._internal(const UserInfo(
+    name: "",
+    age: 0,
+    coffees: [],
+    keywords: [],
+    area: "",
+    gender: null,
+    profileImageUrl: '',
+  ));
+
+  factory UserInfoViewmodel() {
+    return _instance;
+  }
 
   void setName(String newName) {
     state = state.copyWith(name: newName);
@@ -45,12 +61,5 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
 
 final userInfoProvider =
     StateNotifierProvider.autoDispose<UserInfoViewmodel, UserInfo>(
-        (ref) => UserInfoViewmodel(const UserInfo(
-              name: "",
-              age: 0,
-              coffees: [],
-              keywords: [],
-              area: "",
-              gender: null,
-              profileImageUrl: '',
-            )));
+  (ref) => UserInfoViewmodel(),
+);

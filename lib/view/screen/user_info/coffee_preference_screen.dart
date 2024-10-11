@@ -74,7 +74,7 @@ class CoffeePreferenceScreen extends ConsumerWidget {
                         ref.watch(userInfoProvider.notifier).addCoffee(label);
                     },
                   )),
-            const SizedBox(height: 160),
+            const SizedBox(height: 120),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

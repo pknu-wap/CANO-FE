@@ -19,6 +19,14 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8
     }
 
+    def dotenv = new Properties()
+    def envFile = file("${rootProject.projectDir}/.env")
+    if (envFile.exists()) {
+        envFile.withInputStream { stream -> dotenv.load(stream) }
+    } else {
+        throw new FileNotFoundException("Could not find .env file at: ${envFile.path}")
+    }
+
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.example.cano"
@@ -28,6 +36,12 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+
+        def kakaoKey = dotenv['KAKAO_NATIVE_APP_KEY']
+        if (kakaoKey == null) {
+            throw new Exception("KAKAO_NATIVE_APP_KEY not found in .env file")
+        }
+        manifestPlaceholders = [KAKAO_NATIVE_APP_KEY: kakaoKey]
     }
 
     buildTypes {
