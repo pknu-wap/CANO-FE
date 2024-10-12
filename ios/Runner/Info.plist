@@ -2,21 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-        <key>CFBundleURLTypes</key>
-         <array>
-           <dict>
-           <key>CFBundleURLSchemes</key>
-           <array>
-             <!-- facebook login -->
-             <string>fbAPP-ID</string>
 
-             <!-- google login -->
-             <string>iOS URL 스키마</string>
-           </array>
-           </dict>
-         </array>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
+
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>프로필 사진 등록</string>
+
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

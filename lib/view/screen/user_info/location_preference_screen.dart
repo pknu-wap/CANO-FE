@@ -1,11 +1,11 @@
 import 'package:cano/desginsystem/colors.dart';
+import 'package:cano/desginsystem/strings.dart';
+import 'package:cano/view/widget/custom_button.dart';
 import 'package:cano/view/widget/progress_bar.dart';
 import 'package:cano/viewmodel/user_info_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:cano/desginsystem/strings.dart';
-import 'package:cano/view/widget/custom_button.dart';
 
 class LocationPreferenceScreen extends ConsumerWidget {
   const LocationPreferenceScreen({super.key});
@@ -40,9 +40,9 @@ class LocationPreferenceScreen extends ConsumerWidget {
           const SizedBox(height: 65),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 30),
-            child: ProgressBar(percent: 0.9),
+            child: ProgressBar(percent: 0.97),
           ),
-          const SizedBox(height: 70),
+          const SizedBox(height: 30),
           Padding(
             padding: const EdgeInsets.only(left: 30),
             child: Container(
@@ -53,7 +53,7 @@ class LocationPreferenceScreen extends ConsumerWidget {
               ),
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 5),
           Padding(
             padding: const EdgeInsets.only(left: 30),
             child: Container(
@@ -122,6 +122,9 @@ class LocationPreferenceScreen extends ConsumerWidget {
                     context.push('/welcome');
                   }
                 },
+                buttonColor: selectedArea.isNotEmpty
+                    ? AppColors.primary
+                    : Colors.black26,
                 text: AppStrings.next,
                 width: 170,
                 height: 55,

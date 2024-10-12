@@ -5,12 +5,14 @@ class CustomIconSvgButton extends StatelessWidget {
   final bool? idx;
   final bool? selectedIdx;
   final String? imagePath;
+  final String? selectedImagePath;
   final VoidCallback onPressed;
   final double size;
 
   const CustomIconSvgButton({
     Key? key,
     this.imagePath = null,
+    this.selectedImagePath = null,
     required this.onPressed,
     this.size = 50,
     this.idx = null,
@@ -23,13 +25,15 @@ class CustomIconSvgButton extends StatelessWidget {
         onTap: () {
           onPressed.call();
         },
-        child: imagePath != null
-            ? SvgPicture.asset(
-                imagePath!,
-                height: size,
-                width: size,
-              )
-            : Icon(Icons.man, size: size));
+        child: idx == selectedIdx
+            ? (imagePath != null
+                ? SvgPicture.asset(
+                    imagePath!,
+                    height: size,
+                    width: size,
+                  )
+                : Icon(Icons.man, size: size))
+            : Icon(Icons.access_time_filled_rounded, size: size));
   }
 }
 

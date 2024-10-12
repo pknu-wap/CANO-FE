@@ -1,5 +1,7 @@
 import 'package:cano/data/model/user_info.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 
 class UserInfoViewmodel extends StateNotifier<UserInfo> {
   // 내부 생성자
@@ -56,6 +58,20 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
   void removeKeyword(String keyword) {
     state = state.copyWith(
         keywords: state.keywords.where((k) => k != keyword).toList());
+  }
+
+  Future<void> pickImageFromGallery(
+      BuildContext context, void onSuccess(String)) async {
+    final ImagePicker _picker = ImagePicker();
+
+    // 갤러리에서 이미지 선택
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      // 선택된 이미지의 경로
+      String imagePath = image.path;
+      onSuccess(imagePath);
+    }
   }
 }
 

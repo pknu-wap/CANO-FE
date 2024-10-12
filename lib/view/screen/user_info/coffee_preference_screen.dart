@@ -1,3 +1,4 @@
+import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/desginsystem/strings.dart';
 import 'package:cano/view/widget/custom_button.dart';
 import 'package:cano/view/widget/progress_bar.dart';
@@ -33,7 +34,7 @@ class CoffeePreferenceScreen extends ConsumerWidget {
             const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30),
                 child: ProgressBar(percent: 0.5)),
-            const SizedBox(height: 70),
+            const SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.only(left: 30),
               child: Container(
@@ -44,7 +45,7 @@ class CoffeePreferenceScreen extends ConsumerWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 5),
             Padding(
               padding: const EdgeInsets.only(left: 30),
               child: Container(
@@ -74,7 +75,7 @@ class CoffeePreferenceScreen extends ConsumerWidget {
                         ref.watch(userInfoProvider.notifier).addCoffee(label);
                     },
                   )),
-            const SizedBox(height: 120),
+            Expanded(child: SizedBox()),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -90,18 +91,20 @@ class CoffeePreferenceScreen extends ConsumerWidget {
                 ),
                 CustomButton(
                   onPressed: () {
-                    // 여기 다음화면으로 이동 코드
-                    // keyword로 이동 적용
                     if (userInfo.coffees.isNotEmpty) {
                       context.push('/keyword_preference');
                     }
                   },
+                  buttonColor: userInfo.coffees.isNotEmpty
+                      ? AppColors.primary
+                      : Colors.black26,
                   text: AppStrings.next,
                   width: 170,
                   height: 55,
                 )
               ],
             ),
+            SizedBox(height: 30),
           ],
         ));
   }
