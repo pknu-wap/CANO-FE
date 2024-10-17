@@ -17,6 +17,7 @@ class LoginScreen extends ConsumerWidget {
     requestPermission();
     return Scaffold(
       backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: false,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,7 +73,7 @@ class LoginScreen extends ConsumerWidget {
               text: "회원가입",
               buttonColor: AppColors.primary,
               height: 40,
-              onPressed: () => requestPermission,
+              onPressed: () => {context.push('/home')},
             ),
           ),
           const SizedBox(height: 20),
