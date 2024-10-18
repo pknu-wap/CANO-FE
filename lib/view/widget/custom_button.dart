@@ -184,7 +184,8 @@ class CustomOutlinedButton2 extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor:
             isSelected ? selectedButtonColor : unSelectedButtonColor,
-        disabledBackgroundColor:  isSelected ? selectedButtonColor : unSelectedButtonColor,
+        disabledBackgroundColor:
+            isSelected ? selectedButtonColor : unSelectedButtonColor,
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: borderColor,

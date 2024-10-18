@@ -1,11 +1,12 @@
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/util/mediaquery.dart';
 import 'package:cano/view/widget/custom_button.dart';
-import 'package:cano/view/widget/search/search_keyword.dart';
+import 'package:cano/view/widget/search/search_layouts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../data/model/menu_info.dart';
 import '../../../desginsystem/strings.dart';
+import '../../../viewmodel/search/search_viewmodel.dart';
 
 class PreSearchWidget extends StatelessWidget {
   PreSearchWidget({super.key});
@@ -82,12 +83,18 @@ class PreSearchWidget extends StatelessWidget {
   }
 }
 
-class PostSearchWidget extends StatelessWidget {
+class PostSearchWidget extends ConsumerWidget {
   final String tabText;
-  const PostSearchWidget({Key? key, required this.tabText}) : super(key: key);
+  final ValueChanged<String> onPressed;
+
+  const PostSearchWidget(
+      {Key? key, required this.tabText, required this.onPressed})
+      : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final searchState = ref.watch(searchProvider);
+
     return Column(
       children: [
         SizedBox(
@@ -98,18 +105,24 @@ class PostSearchWidget extends StatelessWidget {
           child: Row(
             children: [
               CustomOutlinedButton2(
+                  onPressed: () {
+                    onPressed(AppStrings.cafe);
+                  },
                   text: AppStrings.cafe,
-                  width: mediaWidth(context, 0.2),
+                  width: mediaWidth(context, 0.23),
                   height: 40,
-                  tabText: "까페"),
+                  tabText: tabText),
               SizedBox(
                 width: 10,
               ),
               CustomOutlinedButton2(
+                  onPressed: () {
+                    onPressed(AppStrings.menu);
+                  },
                   text: AppStrings.menu,
-                  width: mediaWidth(context, 0.2),
+                  width: mediaWidth(context, 0.23),
                   height: 40,
-                  tabText: "까페")
+                  tabText: tabText)
             ],
           ),
         ),
@@ -119,36 +132,21 @@ class PostSearchWidget extends StatelessWidget {
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical, // 가로로 스크롤
-              itemCount: 10, // 아이템 수
+              itemCount: searchState.tabText == AppStrings.cafe
+                  ? searchState.cafeInfoList.length
+                  : searchState.menuInfoList.length, // 아이템 수
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
-                  onTap: () {},
-                  child: Container(
-                    child: MenuInfoLayout(
-                        menuInfo: MenuInfo(
-                      cafeName: '스타벅스',
-                      menuName: '아메리카노',
-                      menuInfoText: '맛있음',
-                      price: 4500,
-                      rating: 5.0,
-                      ratingCount: 300,
-                      isLike: true,
-                      likeCount: 150,
-                      menuImageUrl: '',
-                    )),
-                  ),
-                  // child: Container(
-                  //     // 아이템 간의 여백
-                  //     child: CafeInfoLayout(
-                  //         cafeInfo: CafeInfo(
-                  //   cafeName: '스타벅스 경성대점',
-                  //   rating: 5.0,
-                  //   isLike: true,
-                  //   likeCount: 200,
-                  //   ratingCount: 59,
-                  //   cafeImageUrl: '',
-                  // ))),
-                );
+                    onTap: () {},
+                    child: searchState.tabText == AppStrings.cafe
+                        ? Container(
+                            child: CafeInfoLayout(
+                                cafeInfo: searchState.cafeInfoList[index]),
+                          )
+                        : Container(
+                            child: MenuInfoLayout(
+                                menuInfo: searchState.menuInfoList[index]),
+                          ));
               }),
         ),
       ],

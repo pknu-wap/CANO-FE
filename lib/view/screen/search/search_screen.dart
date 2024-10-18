@@ -2,14 +2,22 @@ import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/desginsystem/strings.dart';
 import 'package:cano/view/widget/search/search_field.dart';
 import 'package:cano/view/widget/search/search_widgets.dart';
+import 'package:cano/viewmodel/search/search_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends ConsumerWidget {
   SearchScreen({super.key});
-  final TextEditingController searchController = TextEditingController();
+  final searchController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final searchState = ref.watch(searchProvider);
+
+    ref.listen(searchProvider, (prev, next) {
+      print("현재 상태: $next");
+    });
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -35,10 +43,17 @@ class SearchScreen extends StatelessWidget {
                   hintText: AppStrings.todayCoffeSearchText,
                   height: 50,
                   borderRadius: 30,
-                  onSearch: (String) {},
+                  onSearch: (String) {
+                    ref.watch(searchProvider.notifier).setIsSearched();
+                  },
                   controller: searchController),
             ),
-            PostSearchWidget(tabText: "까페")
+            searchState.isSearched
+                ? PostSearchWidget(
+                    tabText: searchState.tabText,
+                    onPressed: (tab) =>
+                        ref.watch(searchProvider.notifier).setTabText(tab))
+                : PreSearchWidget(),
           ],
         ),
       ),
