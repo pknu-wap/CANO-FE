@@ -1,6 +1,5 @@
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/desginsystem/strings.dart';
-import 'package:cano/permission.dart';
 import 'package:cano/view/widget/auth/auth_input_field.dart';
 import 'package:cano/view/widget/custom_button.dart';
 import 'package:cano/view/widget/custom_icon_button.dart';
@@ -14,7 +13,6 @@ class LoginScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    requestPermission();
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,

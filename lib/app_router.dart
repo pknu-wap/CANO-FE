@@ -83,15 +83,24 @@ class AppRouter {
                   color: Colors.white,
                 ),
                 label: "조회"),
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "홈"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle), label: "마이페이지"),
+                icon: Icon(
+                  Icons.home,
+                  color: Colors.white,
+                ),
+                label: "홈"),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.account_circle,
+                  color: Colors.white,
+                ),
+                label: "마이페이지"),
           ],
           currentIndex: navigationShell.currentIndex,
           onTap: (int index) => navigationShell.goBranch(index),
           backgroundColor: AppColors.primary,
-          selectedItemColor: Colors.white24,
-          unselectedItemColor: Colors.white10,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.white70,
         ),
       ),
     ),
