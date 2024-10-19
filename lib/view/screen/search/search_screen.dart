@@ -15,7 +15,9 @@ class SearchScreen extends ConsumerWidget {
     final searchState = ref.watch(searchProvider);
 
     ref.listen(searchProvider, (prev, next) {
-      print("현재 상태: $next");
+      print("현재 상태: ${next.cafeInfoList}");
+      print("현재 상태: ${next.menuInfoList}");
+      print("현재 상태: ${next.keywordList}");
     });
 
     return Scaffold(
@@ -44,7 +46,8 @@ class SearchScreen extends ConsumerWidget {
                   height: 50,
                   borderRadius: 30,
                   onSearch: (String) {
-                    ref.watch(searchProvider.notifier).setIsSearched();
+                    ref.read(searchProvider.notifier).setIsSearched();
+                    ref.read(searchProvider.notifier).saveKeyword(String);
                   },
                   controller: searchController),
             ),

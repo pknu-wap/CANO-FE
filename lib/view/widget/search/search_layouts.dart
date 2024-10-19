@@ -7,13 +7,17 @@ import '../../../desginsystem/colors.dart';
 
 class SearchKeyword extends StatelessWidget {
   final VoidCallback onPressed;
+  final VoidCallback? onClose;
   final String text;
   final double borderRadius;
+  final bool isCano;
 
   const SearchKeyword({
     Key? key,
     required this.onPressed,
+    this.onClose = null,
     required this.text,
+    this.isCano = false,
     this.borderRadius = 12.0,
   }) : super(key: key);
 
@@ -25,19 +29,50 @@ class SearchKeyword extends StatelessWidget {
       },
       style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
+          padding: isCano ? null : EdgeInsets.only(left: 24, right: 5),
           shape: RoundedRectangleBorder(
             side: BorderSide(
               color: AppColors.primary,
             ),
             borderRadius: BorderRadius.circular(borderRadius), // 둥근 모서리
           )),
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: 12,
-          color: AppColors.primary,
-        ),
-      ),
+      child: isCano
+          ? Text(text,
+              style: TextStyle(
+                fontSize: 12,
+                color: AppColors.primary,
+              ))
+          : Container(
+              child: Row(
+                children: [
+                  Text(
+                    text,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: AppColors.primary,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  TextButton(
+                      onPressed: onClose,
+                      style: TextButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        minimumSize: Size(20, 30), // 원하는 크기로 최소 크기 설정
+                        tapTargetSize:
+                            MaterialTapTargetSize.shrinkWrap, // 터치 영역 최소화
+                      ),
+                      child: Text(
+                        "X",
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: AppColors.primary,
+                        ),
+                      ))
+                ],
+              ),
+            ),
     );
   }
 }

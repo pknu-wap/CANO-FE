@@ -9,7 +9,6 @@ class SearchField extends StatelessWidget {
   final double height;
   final ValueChanged<String> onSearch;
   final TextEditingController controller;
-  // final TextEditingController controller;
 
   const SearchField(
       {Key? key,
@@ -30,6 +29,7 @@ class SearchField extends StatelessWidget {
         cursorColor: AppColors.primary,
         maxLines: 1,
         keyboardType: keyboardType,
+        controller: controller,
         decoration: InputDecoration(
           suffixIcon: IconButton(
               onPressed: () {

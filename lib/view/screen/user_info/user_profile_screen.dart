@@ -71,8 +71,8 @@ class UserProfileScreen extends ConsumerWidget {
                       imagePath: userInfo.profileImageUrl,
                     ), // 기본 아이콘
                     Positioned(
-                      right: 3, // 오른쪽에 위치
-                      bottom: 3, // 아래쪽에 위치
+                      right: 3,
+                      bottom: 3,
                       child: Container(
                         width: 20,
                         height: 20,

@@ -8,20 +8,33 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../desginsystem/strings.dart';
 import '../../../viewmodel/search/search_viewmodel.dart';
 
-class PreSearchWidget extends StatelessWidget {
+final List<String> coffeLabels = [
+  AppStrings.americano,
+  AppStrings.espresso,
+  AppStrings.cappuccino,
+  AppStrings.caffemoca,
+  AppStrings.caffelatte,
+  AppStrings.caramelMacchiato
+];
+
+class PreSearchWidget extends ConsumerStatefulWidget {
   PreSearchWidget({super.key});
 
-  final List<String> coffeLabels = [
-    AppStrings.americano,
-    AppStrings.espresso,
-    AppStrings.cappuccino,
-    AppStrings.caffemoca,
-    AppStrings.caffelatte,
-    AppStrings.caramelMacchiato
-  ];
+  @override
+  _PreSearchWidgetState createState() => _PreSearchWidgetState();
+}
+
+class _PreSearchWidgetState extends ConsumerState<PreSearchWidget> {
+  @override
+  void initState() {
+    super.initState();
+    ref.read(searchProvider.notifier).setKeywordList();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final keywordList = ref.watch(searchProvider).keywordList;
+
     return Column(children: [
       SizedBox(height: 40),
       Container(
@@ -39,16 +52,21 @@ class PreSearchWidget extends StatelessWidget {
           height: 35,
           child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: coffeLabels.length,
+              itemCount: keywordList.length,
               itemBuilder: (BuildContext context, int index) {
-                return Container(
-                    margin: EdgeInsets.symmetric(horizontal: 8.0), // 아이템 간의 여백
-
-                    child: SearchKeyword(
-                      onPressed: () {},
-                      text: coffeLabels[index],
-                      borderRadius: 18,
-                    ));
+                return keywordList[index] == ""
+                    ? null
+                    : Container(
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 8.0), // 아이템 간의 여백
+                        child: SearchKeyword(
+                          onPressed: () {},
+                          onClose: () => ref
+                              .read(searchProvider.notifier)
+                              .removeKeyword(keywordList[index]),
+                          text: keywordList[index],
+                          borderRadius: 18,
+                        ));
               }),
         ),
       ),
@@ -72,6 +90,7 @@ class PreSearchWidget extends StatelessWidget {
               height: 35,
               child: SearchKeyword(
                 onPressed: () {},
+                isCano: true,
                 text: keyword,
                 borderRadius: 18,
               ),

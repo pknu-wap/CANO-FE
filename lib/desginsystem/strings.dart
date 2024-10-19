@@ -21,7 +21,7 @@ class AppStrings {
   static const String next = "다음";
   static const String prev = "이전";
 
-  static const String cafe = "까페";
+  static const String cafe = "카페";
   static const String menu = "메뉴";
 
   // 커피 종류
