@@ -37,7 +37,7 @@ class AppRouter {
       GoRoute(
         path: '/welcome',
         builder: (context, state) {
-          return WelcomeScreen();
+          return const WelcomeScreen();
         },
       ),
     ],

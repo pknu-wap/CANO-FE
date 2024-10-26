@@ -9,13 +9,13 @@ class CustomIconSvgButton extends StatelessWidget {
   final double size;
 
   const CustomIconSvgButton({
-    Key? key,
-    this.imagePath = null,
+    super.key,
+    this.imagePath,
     required this.onPressed,
     this.size = 50,
-    this.idx = null,
-    this.selectedIdx = null,
-  }) : super(key: key);
+    this.idx,
+    this.selectedIdx,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +39,11 @@ class CustomIconPngButton extends StatelessWidget {
   final double size;
 
   const CustomIconPngButton({
-    Key? key,
+    super.key,
     required this.imagePath,
     required this.onPressed,
     this.size = 50,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

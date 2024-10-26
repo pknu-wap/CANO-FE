@@ -12,7 +12,7 @@ class OutlinedTextField extends StatelessWidget {
   // final TextEditingController controller;
 
   const OutlinedTextField({
-    Key? key,
+    super.key,
     required this.hintText,
     this.keyboardType = TextInputType.text,
     this.borderRadius = 12,
@@ -20,11 +20,11 @@ class OutlinedTextField extends StatelessWidget {
     required this.width,
     required this.height,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: width,
       height: height,
       child: TextField(
@@ -34,8 +34,8 @@ class OutlinedTextField extends StatelessWidget {
         keyboardType: keyboardType,
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: TextStyle(color: Colors.black26),
-          border: OutlineInputBorder(),
+          hintStyle: const TextStyle(color: Colors.black26),
+          border: const OutlineInputBorder(),
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: borderColor, width: 1.0),
               borderRadius: BorderRadius.circular(borderRadius)),

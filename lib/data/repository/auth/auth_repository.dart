@@ -1,5 +1,5 @@
+import 'package:cano/utils/key_manager.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 
@@ -13,7 +13,7 @@ class AuthRepository {
   }
 
   Future<void> kakaoLogin(VoidCallback onSuccess) async {
-    OAuthToken? token = null;
+    OAuthToken? token;
 
     // 카카오톡 설치 여부 확인
     if (await isKakaoTalkInstalled()) {
@@ -72,16 +72,15 @@ class AuthRepository {
 
   Future<void> googleLogin(VoidCallback onSuccess) async {
     try {
-      await dotenv.load(fileName: 'assets/config/.env');
-      String? googleClientId = dotenv.env['GOOGLE_CLIENT_ID'];
+      String? googleClientId = KeyManager().getGoogleClinedId().toString();
 
-      final GoogleSignIn _googleSignIn = GoogleSignIn(
+      final GoogleSignIn googleSignIn = GoogleSignIn(
         clientId: googleClientId,
         scopes: [
           'openid',
         ],
       );
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
       if (googleUser != null) {
         final GoogleSignInAuthentication googleAuth =

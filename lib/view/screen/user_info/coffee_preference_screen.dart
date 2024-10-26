@@ -66,12 +66,13 @@ class CoffeePreferenceScreen extends ConsumerWidget {
                     isSelected: userInfo.coffees.contains(label),
                     onPressed: () {
                       var isSelcted = userInfo.coffees.contains(label);
-                      if (isSelcted)
+                      if (isSelcted) {
                         ref
                             .watch(userInfoProvider.notifier)
                             .removeCoffee(label);
-                      else
+                      } else {
                         ref.watch(userInfoProvider.notifier).addCoffee(label);
+                      }
                     },
                   )),
             const SizedBox(height: 120),

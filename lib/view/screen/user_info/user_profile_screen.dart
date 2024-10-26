@@ -210,8 +210,9 @@ class UserProfileScreen extends ConsumerWidget {
                   onPressed: () {
                     if (userInfo.name != "" &&
                         userInfo.age != 0 &&
-                        userInfo.gender != null)
+                        userInfo.gender != null) {
                       context.push('/coffee_preference');
+                    }
                   },
                 ),
               )

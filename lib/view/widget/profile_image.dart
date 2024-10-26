@@ -5,10 +5,10 @@ class ProfileImage extends StatelessWidget {
   final double radius; // 반지름
 
   const ProfileImage({
-    Key? key,
-    this.imageUrl = null,
+    super.key,
+    this.imageUrl,
     this.radius = 45.0, // 기본 반지름 설정
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

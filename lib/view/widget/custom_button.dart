@@ -11,15 +11,15 @@ class CustomButton extends StatelessWidget {
   final double height;
 
   const CustomButton({
-    Key? key,
-    this.onPressed = null,
+    super.key,
+    this.onPressed,
     required this.text,
     this.buttonColor = AppColors.primary,
     this.textColor = Colors.white,
     this.borderRadius = 12.0,
-    this.width = null,
+    this.width,
     required this.height,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class CustomButton2 extends StatelessWidget {
   final bool isSelected;
 
   const CustomButton2(
-      {Key? key,
+      {super.key,
       required this.onPressed,
       required this.text,
       this.borderRadius = 12.0,
@@ -66,8 +66,7 @@ class CustomButton2 extends StatelessWidget {
       this.selectedButtonColor = AppColors.primary,
       this.unselectedTextColor = AppColors.primary,
       this.selectedTextColor = Colors.white,
-      required this.isSelected})
-      : super(key: key);
+      required this.isSelected});
 
   @override
   Widget build(BuildContext context) {
