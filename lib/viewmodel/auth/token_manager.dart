@@ -13,9 +13,12 @@ class TokenManager extends StateNotifier<void> {
   }
 
   static final keyManager = KeyManager();
+  static const storage = FlutterSecureStorage();
 
-  final storage = const FlutterSecureStorage();
-  final String accessTokenKey = keyManager.getAccessTokenKey().toString();
+  Future<bool> checkToken() async {
+    String? token = await getAccessToken();
+    return token != null && token.isNotEmpty;
+  }
 
   Future<void> saveEncryptedToken(String key, String token) async {
     final encryptedToken = encrypt(token);
