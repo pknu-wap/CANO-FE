@@ -128,8 +128,9 @@ class UserProfileScreen extends ConsumerWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    CustomIconSvgButton(
+                    CustomIconPngButton(
                       size: 60,
+                      imagePath: "assets/images/man.png",
                       onPressed: () =>
                           ref.watch(userInfoProvider.notifier).setGender(false),
                       idx: false,
@@ -143,17 +144,19 @@ class UserProfileScreen extends ConsumerWidget {
                       style: TextStyle(
                           color: userInfo.gender == false
                               ? AppColors.primary
-                              : Colors.black26),
+                              : Colors.black26,
+                          fontWeight: FontWeight.bold),
                     )
                   ],
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    CustomIconSvgButton(
+                    CustomIconPngButton(
                       onPressed: () {
                         ref.watch(userInfoProvider.notifier).setGender(true);
                       },
+                      imagePath: "assets/images/woman.png",
                       idx: true,
                       selectedIdx: userInfo.gender,
                       size: 60,
@@ -166,7 +169,8 @@ class UserProfileScreen extends ConsumerWidget {
                       style: TextStyle(
                           color: userInfo.gender == true
                               ? AppColors.primary
-                              : Colors.black26),
+                              : Colors.black26,
+                          fontWeight: FontWeight.bold),
                     )
                   ],
                 )
