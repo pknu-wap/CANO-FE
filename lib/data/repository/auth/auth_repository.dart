@@ -14,7 +14,6 @@ class AuthRepository {
 
   Future<void> kakaoLogin(VoidCallback onSuccess) async {
     OAuthToken? token;
-
     // 카카오톡 설치 여부 확인
     if (await isKakaoTalkInstalled()) {
       try {
@@ -58,7 +57,7 @@ class AuthRepository {
   //   } catch (error) {
   //     print('로그아웃 실패, SDK에서 토큰 삭제 $error');
   //   }
-  // }
+  //
 
   // 카카오 연결 끊기(회원 탈퇴)
   Future<void> kakaoUnLink() async {
@@ -72,7 +71,7 @@ class AuthRepository {
 
   Future<void> googleLogin(VoidCallback onSuccess) async {
     try {
-      String? googleClientId = KeyManager().getGoogleClinedId().toString();
+      String? googleClientId = await KeyManager().getGoogleClinedId();
 
       final GoogleSignIn googleSignIn = GoogleSignIn(
         clientId: googleClientId,

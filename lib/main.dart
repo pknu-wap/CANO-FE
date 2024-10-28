@@ -6,12 +6,13 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   FlutterNativeSplash.remove();
 
-  String? kakaoNativeAppKey = KeyManager().getKakaoNativeAppKey().toString();
+  String? kakaoNativeAppKey = await KeyManager().getKakaoNativeAppKey();
+
   KakaoSdk.init(
     nativeAppKey: kakaoNativeAppKey,
   );
