@@ -1,10 +1,11 @@
-import 'package:cano/network/api/auth/cano_auth_api.dart';
 import 'package:cano/utils/key_manager.dart';
-import 'package:cano/viewmodel/auth/cano_token_manager.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
+
+import '../../../network/api/auth/cano_auth_api.dart';
+import '../../../viewmodel/auth/cano_token_manager.dart';
 
 class AuthRepository {
   static final AuthRepository _instance = AuthRepository._internal();
@@ -48,7 +49,7 @@ class AuthRepository {
     }
 
     if (kakaotoken != null) {
-      final canoToken = await authApi.loginWithKakao(kakaotoken.accessToken);
+      // final canoToken = await authApi.loginWithKakao(kakaotoken.accessToken);
       // final loginResponse = await authApi.getTokens(canoToken);
       // if (loginResponse.code == 200) {
       //   await tokenManager.saveAccessToken(loginResponse.accessToken);
@@ -84,7 +85,7 @@ class AuthRepository {
 
   Future<void> loginWithGoogle(VoidCallback onSuccess) async {
     try {
-      String? googleClientId = KeyManager().getGoogleClinedId().toString();
+      String? googleClientId = await KeyManager().getGoogleClinedId();
 
       final GoogleSignIn googleSignIn = GoogleSignIn(
         clientId: googleClientId,
