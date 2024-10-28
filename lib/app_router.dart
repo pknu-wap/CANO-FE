@@ -5,7 +5,7 @@ import 'package:cano/view/screen/user_info/keyword_preference_screen.dart';
 import 'package:cano/view/screen/user_info/location_preference_screen.dart';
 import 'package:cano/view/screen/user_info/user_profile_screen.dart';
 import 'package:cano/view/screen/user_info/welcome_screen.dart';
-import 'package:cano/viewmodel/auth/token_manager.dart';
+import 'package:cano/viewmodel/auth/cano_token_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -16,7 +16,7 @@ class AppRouter {
           path: '/',
           builder: (context, state) {
             return FutureBuilder<bool>(
-                future: TokenManager().checkToken(),
+                future: CanoTokenManager().checkToken(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData && snapshot.data == true)
                     return HomeScreen();

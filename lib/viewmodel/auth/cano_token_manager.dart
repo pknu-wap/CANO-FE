@@ -3,12 +3,12 @@ import 'package:encrypt/encrypt.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-class TokenManager extends StateNotifier<void> {
-  TokenManager._internal(super.state);
+class CanoTokenManager extends StateNotifier<void> {
+  CanoTokenManager._internal(super.state);
 
-  static final TokenManager _instance = TokenManager._internal(null);
+  static final CanoTokenManager _instance = CanoTokenManager._internal(null);
 
-  factory TokenManager() {
+  factory CanoTokenManager() {
     return _instance;
   }
 
@@ -20,34 +20,34 @@ class TokenManager extends StateNotifier<void> {
     return token != null && token.isNotEmpty;
   }
 
-  Future<void> saveEncryptedToken(String key, String token) async {
+  Future<void> _saveEncryptedToken(String key, String token) async {
     final encryptedToken = encrypt(token);
     await storage.write(key: key, value: encryptedToken);
   }
 
-  Future<String?> getDecryptedToken(String key) async {
+  Future<String?> _getDecryptedToken(String key) async {
     final encryptedToken = await storage.read(key: key);
     return encryptedToken != null ? decrypt(encryptedToken) : null;
   }
 
   Future<void> saveAccessToken(String accessToken) async {
     final String accessTokenKey = keyManager.getAccessTokenKey().toString();
-    await saveEncryptedToken(accessTokenKey, accessToken);
+    await _saveEncryptedToken(accessTokenKey, accessToken);
   }
 
   Future<void> saveRefreshToken(String refreshToken) async {
     final String refreshTokenKey = keyManager.getRefreshTokenKey().toString();
-    await saveEncryptedToken(refreshTokenKey, refreshToken);
+    await _saveEncryptedToken(refreshTokenKey, refreshToken);
   }
 
   Future<String?> getAccessToken() async {
     final String accessTokenKey = keyManager.getAccessTokenKey().toString();
-    return await getDecryptedToken(accessTokenKey);
+    return await _getDecryptedToken(accessTokenKey);
   }
 
   Future<String?> getRefreshToken() async {
     final String refreshTokenKey = keyManager.getRefreshTokenKey().toString();
-    return await getDecryptedToken(refreshTokenKey);
+    return await _getDecryptedToken(refreshTokenKey);
   }
 
   String encrypt(String text) {
@@ -74,6 +74,6 @@ class TokenManager extends StateNotifier<void> {
   }
 }
 
-final authProvider = StateNotifierProvider.autoDispose<TokenManager, void>(
-  (ref) => TokenManager(),
+final authProvider = StateNotifierProvider.autoDispose<CanoTokenManager, void>(
+  (ref) => CanoTokenManager(),
 );

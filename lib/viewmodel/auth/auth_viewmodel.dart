@@ -11,23 +11,22 @@ class AuthViewModel extends StateNotifier<void> {
   factory AuthViewModel() {
     return _instance;
   }
-
   final AuthRepository authRepository = AuthRepository();
 
-  Future<void> kakaoLogin(VoidCallback onSuccess) async {
-    authRepository.kakaoLogin(onSuccess);
+  Future<void> loginWithKakao(VoidCallback onSuccess) async {
+    await authRepository.loginWithKakao(onSuccess);
   }
 
-  Future<void> kakaoUnlink() async {
-    authRepository.kakaoUnLink();
+  Future<void> unlinkWithKakao() async {
+    await authRepository.unLinkWithKakao();
   }
 
-  Future<void> googleLogin(VoidCallback onSuccess) async {
-    authRepository.googleLogin(onSuccess);
+  Future<void> loginWithGoogle(VoidCallback onSuccess) async {
+    await authRepository.loginWithGoogle(onSuccess);
   }
 
-  Future<void> googleLogout() async {
-    authRepository.googleLogout();
+  Future<void> logoutWithGoogle() async {
+    await authRepository.logoutWithGoogle();
   }
 }
 

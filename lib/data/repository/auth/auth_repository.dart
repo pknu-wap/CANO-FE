@@ -1,4 +1,7 @@
+import 'package:cano/network/api/auth/cano_auth_api.dart';
 import 'package:cano/utils/key_manager.dart';
+import 'package:cano/viewmodel/auth/cano_token_manager.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
@@ -12,15 +15,16 @@ class AuthRepository {
     return _instance;
   }
 
-  Future<void> kakaoLogin(VoidCallback onSuccess) async {
-    OAuthToken? token;
+  static final authApi = CanoAuthApi(Dio());
+  static final tokenManager = CanoTokenManager();
+
+  Future<void> loginWithKakao(VoidCallback onSuccess) async {
+    OAuthToken? kakaotoken;
 
     // 카카오톡 설치 여부 확인
     if (await isKakaoTalkInstalled()) {
       try {
-        token = await UserApi.instance.loginWithKakaoTalk();
-        onSuccess.call();
-        print("카카오 로그인 성공 - kakao Token: $token");
+        kakaotoken = await UserApi.instance.loginWithKakaoTalk();
       } catch (error) {
         print('카카오톡으로 로그인 실패 $error');
 
@@ -30,24 +34,32 @@ class AuthRepository {
         }
         // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인
         try {
-          token = await UserApi.instance.loginWithKakaoAccount();
-          onSuccess.call();
-          print('카카오계정으로 로그인 성공');
+          kakaotoken = await UserApi.instance.loginWithKakaoAccount();
         } catch (error) {
           print('카카오계정으로 로그인 실패 $error');
         }
       }
     } else {
       try {
-        token = await UserApi.instance.loginWithKakaoAccount();
-        onSuccess.call();
-        print('카카오계정으로 로그인 성공');
+        kakaotoken = await UserApi.instance.loginWithKakaoAccount();
       } catch (error) {
         print('카카오계정으로 로그인 실패 $error');
       }
     }
 
-    if (token != null) {}
+    if (kakaotoken != null) {
+      final canoToken = await authApi.loginWithKakao(kakaotoken.accessToken);
+      // final loginResponse = await authApi.getTokens(canoToken);
+      // if (loginResponse.code == 200) {
+      //   await tokenManager.saveAccessToken(loginResponse.accessToken);
+      //   await tokenManager.saveRefreshToken(loginResponse.refreshToken);
+      //   onSuccess.call();
+      //   print("카카오 로그인 성공 - kakao Token: $kakaotoken");
+      // }
+
+      onSuccess.call();
+      print("카카오 로그인 성공 - kakao Token: $kakaotoken");
+    }
   }
 
   // 카카오 로그아웃
@@ -61,7 +73,7 @@ class AuthRepository {
   // }
 
   // 카카오 연결 끊기(회원 탈퇴)
-  Future<void> kakaoUnLink() async {
+  Future<void> unLinkWithKakao() async {
     try {
       await UserApi.instance.unlink();
       print('연결 끊기 성공, SDK에서 토큰 삭제');
@@ -70,7 +82,7 @@ class AuthRepository {
     }
   }
 
-  Future<void> googleLogin(VoidCallback onSuccess) async {
+  Future<void> loginWithGoogle(VoidCallback onSuccess) async {
     try {
       String? googleClientId = KeyManager().getGoogleClinedId().toString();
 
@@ -100,7 +112,7 @@ class AuthRepository {
   }
 
   // 카카오의 연결 끊기와 유사
-  Future<void> googleLogout() async {
+  Future<void> logoutWithGoogle() async {
     try {
       await GoogleSignIn().signOut();
     } catch (error) {

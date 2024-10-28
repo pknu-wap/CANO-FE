@@ -15,6 +15,8 @@ void main() {
   KakaoSdk.init(
     nativeAppKey: kakaoNativeAppKey,
   );
+
+  print(KakaoSdk.origin);
   runApp(ProviderScope(child: MyApp()));
 }
 

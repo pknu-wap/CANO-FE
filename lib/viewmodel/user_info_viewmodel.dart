@@ -1,4 +1,4 @@
-import 'package:cano/data/model/user_info.dart';
+import 'package:cano/data/model/user_info/user_info.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserInfoViewmodel extends StateNotifier<UserInfo> {
