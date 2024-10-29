@@ -37,7 +37,7 @@ class WelcomeScreen extends ConsumerWidget {
           ),
           GestureDetector(
             onTap: () {
-              context.push('/nextScreen');
+              context.push('/cafe_info');
             },
             child: const Padding(
               padding: EdgeInsets.only(bottom: 50),

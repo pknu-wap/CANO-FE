@@ -1,4 +1,5 @@
 import 'package:cano/view/screen/auth/login_screen.dart';
+import 'package:cano/view/screen/cafe_info/cafe_info_screen.dart';
 import 'package:cano/view/screen/user_info/coffee_preference_screen.dart';
 import 'package:cano/view/screen/user_info/keyword_preference_screen.dart';
 import 'package:cano/view/screen/user_info/location_preference_screen.dart';
@@ -37,9 +38,15 @@ class AppRouter {
       GoRoute(
         path: '/welcome',
         builder: (context, state) {
-          return WelcomeScreen();
+          return const WelcomeScreen();
         },
-      )
+      ),
+      GoRoute(
+        path: '/cafe_info',
+        builder: (context, state) {
+          return const CafeInfoScreen();
+        },
+      ),
     ],
   );
 }
