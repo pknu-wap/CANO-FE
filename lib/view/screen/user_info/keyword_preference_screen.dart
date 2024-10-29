@@ -1,11 +1,11 @@
 import 'package:cano/desginsystem/colors.dart';
+import 'package:cano/desginsystem/strings.dart';
+import 'package:cano/view/widget/custom_button.dart';
 import 'package:cano/view/widget/progress_bar.dart';
 import 'package:cano/viewmodel/user_info_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:cano/desginsystem/strings.dart';
-import 'package:cano/view/widget/custom_button.dart';
 
 class KeywordPreferenceScreen extends ConsumerWidget {
   const KeywordPreferenceScreen({super.key});
@@ -43,9 +43,9 @@ class KeywordPreferenceScreen extends ConsumerWidget {
           const SizedBox(height: 65),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 30),
-            child: ProgressBar(percent: 0.7),
+            child: ProgressBar(percent: 0.75),
           ),
-          const SizedBox(height: 70),
+          const SizedBox(height: 30),
           Padding(
             padding: const EdgeInsets.only(left: 30),
             child: Container(
@@ -56,7 +56,7 @@ class KeywordPreferenceScreen extends ConsumerWidget {
               ),
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 5),
           Padding(
             padding: const EdgeInsets.only(left: 30),
             child: Container(
@@ -110,7 +110,6 @@ class KeywordPreferenceScreen extends ConsumerWidget {
               ),
             ),
           ),
-          const SizedBox(height: 30),
           // 이전, 다음 버튼
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -133,6 +132,9 @@ class KeywordPreferenceScreen extends ConsumerWidget {
                     context.push('/location_preference');
                   }
                 },
+                buttonColor: userInfo.keywords.isNotEmpty
+                    ? AppColors.primary
+                    : Colors.black26,
                 text: AppStrings.next,
                 width: 170,
                 height: 55,

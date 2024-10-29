@@ -3,16 +3,19 @@ import 'package:cano/desginsystem/strings.dart';
 import 'package:cano/view/widget/auth/auth_input_field.dart';
 import 'package:cano/view/widget/custom_button.dart';
 import 'package:cano/view/widget/custom_icon_button.dart';
+import 'package:cano/viewmodel/auth/auth_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: false,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -57,17 +60,18 @@ class LoginScreen extends StatelessWidget {
               buttonColor: AppColors.primary,
               height: 40,
               onPressed: () {
-                context.push('/user_profile');
+                context.go('/user_profile');
               },
             ),
           ),
           const SizedBox(height: 10),
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 30),
             child: CustomButton(
               text: "회원가입",
               buttonColor: AppColors.primary,
               height: 40,
+              onPressed: () => {context.push('/home')},
             ),
           ),
           const SizedBox(height: 20),
@@ -81,14 +85,18 @@ class LoginScreen extends StatelessWidget {
                   size: 55,
                   imagePath: "assets/images/kakao_login_icon.png",
                   onPressed: () {
-                    kakaoLogin();
+                    ref
+                        .read(authProvider.notifier)
+                        .kakaoLogin(() => context.go('/user_profile'));
                   }),
               SizedBox(width: 20),
               CustomIconSvgButton(
                 size: 55,
                 imagePath: "assets/images/android_light_rd_na.svg",
                 onPressed: () {
-                  googleLogin();
+                  ref
+                      .read(authProvider.notifier)
+                      .googleLogin(() => context.go('/user_profile'));
                 },
               )
             ],
@@ -98,7 +106,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
-void kakaoLogin() {}
-
-void googleLogin() {}

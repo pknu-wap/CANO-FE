@@ -45,6 +45,13 @@ dependencies:
   flutter_native_splash: ^2.4.1
   flutter_svg: ^2.0.10+1
   flutter_riverpod: ^2.5.1
+  flutter_dotenv: ^5.1.0
+  kakao_flutter_sdk_common: ^1.9.6
+  kakao_flutter_sdk: ^1.9.6
+  google_sign_in: ^6.2.1
+  image_picker: ^1.0.0
+  permission_handler: ^11.3.1
+  shared_preferences: ^2.3.2
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +79,9 @@ flutter:
     - assets/images/kakao_login_medium_wide.png
     - assets/images/android_light_rd_na.svg
     - assets/images/kakao_login_icon.png
+    - assets/config/.env
+    - assets/images/starbucks_icon.svg
+    - assets/images/americano.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
