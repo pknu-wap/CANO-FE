@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cano/utils/key_manager.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
@@ -87,17 +89,22 @@ class AuthRepository {
     try {
       String? googleClientId = await KeyManager().getGoogleClinedId();
 
-      final GoogleSignIn googleSignIn = GoogleSignIn(
-        clientId: googleClientId,
-        scopes: [
-          'openid',
-        ],
-      );
+      if (Platform.isAndroid) {
+        final GoogleSignIn googleSignIn = GoogleSignIn(
+          clientId: googleClientId,
+          scopes: [
+            'openid',
+          ],
+        );
+      } else if (Platform.isIOS) {
+        final GoogleSignIn googleSignIn = GoogleSignIn();
+      }
+
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
       if (googleUser != null) {
         final GoogleSignInAuthentication googleAuth =
-            await googleUser.authentication;
+        await googleUser.authentication;
 
         final String? accessToken = googleAuth.accessToken;
         final String? idToken = googleAuth.idToken;
