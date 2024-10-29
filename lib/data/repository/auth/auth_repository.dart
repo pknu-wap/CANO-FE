@@ -88,23 +88,23 @@ class AuthRepository {
   Future<void> loginWithGoogle(VoidCallback onSuccess) async {
     try {
       String? googleClientId = await KeyManager().getGoogleClinedId();
-
+      late GoogleSignIn googleSignIn;
       if (Platform.isAndroid) {
-        final GoogleSignIn googleSignIn = GoogleSignIn(
+        googleSignIn = GoogleSignIn(
           clientId: googleClientId,
           scopes: [
             'openid',
           ],
         );
       } else if (Platform.isIOS) {
-        final GoogleSignIn googleSignIn = GoogleSignIn();
+        googleSignIn = GoogleSignIn();
       }
 
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
       if (googleUser != null) {
         final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
+            await googleUser.authentication;
 
         final String? accessToken = googleAuth.accessToken;
         final String? idToken = googleAuth.idToken;
