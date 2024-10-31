@@ -37,12 +37,12 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
-
         def kakaoKey = dotenv['KAKAO_NATIVE_APP_KEY']
         if (kakaoKey == null) {
             throw new Exception("KAKAO_NATIVE_APP_KEY not found in .env file")
         }
         manifestPlaceholders = [KAKAO_NATIVE_APP_KEY: kakaoKey]
+
     }
 
     buildTypes {
