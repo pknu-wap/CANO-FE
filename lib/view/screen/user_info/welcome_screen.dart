@@ -38,10 +38,16 @@ class WelcomeScreen extends ConsumerWidget {
                 textAlign: TextAlign.left,
               ),
             ),
-            const SizedBox(height: 200),
-
-            // 화 아이콘
-            const Padding(
+          ),
+          // 화살표 버튼
+          const SizedBox(
+            height: 200,
+          ),
+          GestureDetector(
+            onTap: () {
+              context.push('/cafe_info');
+            },
+            child: const Padding(
               padding: EdgeInsets.only(bottom: 50),
               child: Icon(
                 Icons.keyboard_double_arrow_left_outlined,

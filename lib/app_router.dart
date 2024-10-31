@@ -1,5 +1,6 @@
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/view/screen/auth/login_screen.dart';
+import 'package:cano/view/screen/cafe_info/cafe_info_screen.dart';
 import 'package:cano/view/screen/home/home_screen.dart';
 import 'package:cano/view/screen/my_page/my_page_screen.dart';
 import 'package:cano/view/screen/search/search_screen.dart';
@@ -17,6 +18,12 @@ class AppRouter {
         path: '/',
         builder: (context, state) {
           return const LoginScreen();
+        },
+      ),
+      GoRoute(
+        path: '/cafe_info',
+        builder: (context, state) {
+          return const CafeInfoScreen();
         }),
     GoRoute(
         path: '/user_profile',

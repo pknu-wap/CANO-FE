@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:cano/desginsystem/colors.dart';
 import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
 
 void main() async {
@@ -21,11 +22,35 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-        debugShowCheckedModeBanner: false, routerConfig: AppRouter.router);
+      theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.white,
+            surfaceTintColor: AppColors.primary,
+          ),
+          primaryColor: const Color(0xFF3E160C),
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            backgroundColor: AppColors.primary,
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Colors.grey,
+          ),
+          tabBarTheme: const TabBarTheme(
+            labelColor: Color(0xFF3E160C),
+            unselectedLabelColor: Colors.grey,
+            // indicator: BoxDecoration(
+            //   color: Colors.white,
+            // ),
+          ),
+          cardTheme: const CardTheme(
+            color: Colors.white,
+          )),
+      debugShowCheckedModeBanner: false,
+      routerConfig: AppRouter.router,
+    );
   }
 }
