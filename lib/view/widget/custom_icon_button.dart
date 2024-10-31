@@ -13,7 +13,6 @@ class CustomIconSvgButton extends StatelessWidget {
     Key? key,
     required this.imagePath,
     this.selectedImagePath = null,
-
     required this.onPressed,
     this.size = 50,
     this.idx,
@@ -57,7 +56,7 @@ class CustomIconPngButton extends StatelessWidget {
     this.size = 50,
     this.idx,
     this.selectedIdx,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
