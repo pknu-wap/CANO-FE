@@ -1,6 +1,5 @@
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/desginsystem/strings.dart';
-import 'package:cano/permission.dart';
 import 'package:cano/view/widget/auth/auth_input_field.dart';
 import 'package:cano/view/widget/custom_button.dart';
 import 'package:cano/view/widget/custom_icon_button.dart';
@@ -14,9 +13,9 @@ class LoginScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    requestPermission();
     return Scaffold(
       backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: false,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,7 +71,7 @@ class LoginScreen extends ConsumerWidget {
               text: "회원가입",
               buttonColor: AppColors.primary,
               height: 40,
-              onPressed: () => requestPermission,
+              onPressed: () => {context.push('/home')},
             ),
           ),
           const SizedBox(height: 20),

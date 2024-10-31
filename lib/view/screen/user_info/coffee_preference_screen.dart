@@ -27,85 +27,82 @@ class CoffeePreferenceScreen extends ConsumerWidget {
     });
 
     return Scaffold(
-        backgroundColor: Colors.white,
         body: Column(
+      children: [
+        const SizedBox(height: 65),
+        const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30),
+            child: ProgressBar(percent: 0.5)),
+        const SizedBox(height: 30),
+        Padding(
+          padding: const EdgeInsets.only(left: 30),
+          child: Container(
+            alignment: Alignment.centerLeft,
+            child: const Text(
+              AppStrings.coffeePreferenceText,
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+        const SizedBox(height: 5),
+        Padding(
+          padding: const EdgeInsets.only(left: 30),
+          child: Container(
+            alignment: Alignment.centerLeft,
+            child: const Text(AppStrings.applyPreferenceInfoText,
+                style: TextStyle(color: Colors.black26, fontSize: 12)),
+          ),
+        ),
+        const SizedBox(height: 35),
+        for (var label in coffeLabels)
+          Container(
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.only(left: 30, bottom: 10),
+              child: CustomButton2(
+                text: label,
+                width: 170,
+                height: 40,
+                borderRadius: 70,
+                isSelected: userInfo.coffees.contains(label),
+                onPressed: () {
+                  var isSelcted = userInfo.coffees.contains(label);
+                  if (isSelcted)
+                    ref.watch(userInfoProvider.notifier).removeCoffee(label);
+                  else
+                    ref.watch(userInfoProvider.notifier).addCoffee(label);
+                },
+              )),
+        Expanded(child: SizedBox()),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const SizedBox(height: 65),
-            const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
-                child: ProgressBar(percent: 0.5)),
-            const SizedBox(height: 30),
-            Padding(
-              padding: const EdgeInsets.only(left: 30),
-              child: Container(
-                alignment: Alignment.centerLeft,
-                child: const Text(
-                  AppStrings.coffeePreferenceText,
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                ),
-              ),
+            CustomButton(
+              text: AppStrings.prev,
+              width: 170,
+              height: 55,
+              buttonColor: Colors.white,
+              textColor: Colors.black,
+              onPressed: () {
+                context.pop();
+              },
             ),
-            const SizedBox(height: 5),
-            Padding(
-              padding: const EdgeInsets.only(left: 30),
-              child: Container(
-                alignment: Alignment.centerLeft,
-                child: const Text(AppStrings.applyPreferenceInfoText,
-                    style: TextStyle(color: Colors.black26, fontSize: 12)),
-              ),
-            ),
-            const SizedBox(height: 35),
-            for (var label in coffeLabels)
-              Container(
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.only(left: 30, bottom: 10),
-                  child: CustomButton2(
-                    text: label,
-                    width: 170,
-                    height: 40,
-                    borderRadius: 70,
-                    isSelected: userInfo.coffees.contains(label),
-                    onPressed: () {
-                      var isSelcted = userInfo.coffees.contains(label);
-                      if (isSelcted)
-                        ref
-                            .watch(userInfoProvider.notifier)
-                            .removeCoffee(label);
-                      else
-                        ref.watch(userInfoProvider.notifier).addCoffee(label);
-                    },
-                  )),
-            Expanded(child: SizedBox()),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CustomButton(
-                  text: AppStrings.prev,
-                  width: 170,
-                  height: 55,
-                  buttonColor: Colors.white,
-                  textColor: Colors.black,
-                  onPressed: () {
-                    context.pop();
-                  },
-                ),
-                CustomButton(
-                  onPressed: () {
-                    if (userInfo.coffees.isNotEmpty) {
-                      context.push('/keyword_preference');
-                    }
-                  },
-                  buttonColor: userInfo.coffees.isNotEmpty
-                      ? AppColors.primary
-                      : Colors.black26,
-                  text: AppStrings.next,
-                  width: 170,
-                  height: 55,
-                )
-              ],
-            ),
-            SizedBox(height: 30),
+            CustomButton(
+              onPressed: () {
+                if (userInfo.coffees.isNotEmpty) {
+                  context.push('/keyword_preference');
+                }
+              },
+              buttonColor: userInfo.coffees.isNotEmpty
+                  ? AppColors.primary
+                  : Colors.black26,
+              text: AppStrings.next,
+              width: 170,
+              height: 55,
+            )
           ],
-        ));
+        ),
+        SizedBox(height: 30),
+      ],
+    ));
   }
 }

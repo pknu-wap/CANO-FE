@@ -25,27 +25,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _index = 0;
-
-    // List _pages = [
-    //   HomeScreen(),
-    //   SearchScreen(),
-    //   MyPageScreen(),
-    // ];
-
-    //     home: Scaffold(
-    //       bottomNavigationBar: BottomNavigationBar(
-    //         items: [
-    //           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
-    //           BottomNavigationBarItem(
-    //               icon: Icon(Icons.account_circle_rounded), label: 'mypage'),
-    //           BottomNavigationBarItem(icon: Icon(Icons.menu), label: 'menu'),
-    //         ],
-    //       ),
-    //     ),
-    //   );
-    // }
-
     return MaterialApp.router(
         debugShowCheckedModeBanner: false, routerConfig: AppRouter.router);
   }
