@@ -1,19 +1,18 @@
-import 'package:cano/app_router.dart';
+import 'package:cano'
+    '/app_router.dart';
+import 'package:cano/utils/key_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cano/desginsystem/colors.dart';
 import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
 
-void main() async {
-  await dotenv.load(fileName: 'assets/config/.env');
-
+Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   FlutterNativeSplash.remove();
+  String? kakaoNativeAppKey = await KeyManager().getKakaoNativeAppKey();
 
-  String? kakaoNativeAppKey = dotenv.env['KAKAO_NATIVE_APP_KEY'];
   KakaoSdk.init(
     nativeAppKey: kakaoNativeAppKey,
   );

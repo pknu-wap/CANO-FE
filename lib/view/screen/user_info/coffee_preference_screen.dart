@@ -42,6 +42,7 @@ class CoffeePreferenceScreen extends ConsumerWidget {
               AppStrings.coffeePreferenceText,
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
+
           ),
         ),
         const SizedBox(height: 5),

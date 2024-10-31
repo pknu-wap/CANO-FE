@@ -6,10 +6,10 @@ import 'package:cano/viewmodel/search/search_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+
 class SearchScreen extends ConsumerWidget {
   SearchScreen({super.key});
   final searchController = TextEditingController();
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final searchState = ref.watch(searchProvider);

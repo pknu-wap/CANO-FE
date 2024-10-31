@@ -5,10 +5,10 @@ class AuthInputField extends StatelessWidget {
   final TextInputType keyboardType;
 
   const AuthInputField({
-    Key? key,
+    super.key,
     required this.lableText,
     this.keyboardType = TextInputType.text, // 기본값은 일반 텍스트 입력
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +21,14 @@ class AuthInputField extends StatelessWidget {
       maxLines: 1,
       decoration: InputDecoration(
         hintText: lableText,
-        labelStyle: TextStyle(color: Colors.black),
-        border: OutlineInputBorder(),
+        labelStyle: const TextStyle(color: Colors.black),
+        border: const OutlineInputBorder(),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black26, width: 1.0),
+          borderSide: const BorderSide(color: Colors.black26, width: 1.0),
           borderRadius: BorderRadius.circular(12),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black26, width: 1.0),
+          borderSide: const BorderSide(color: Colors.black26, width: 1.0),
           borderRadius: BorderRadius.circular(12),
         ),
       ),

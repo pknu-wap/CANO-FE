@@ -16,7 +16,7 @@ class SquareButton extends StatelessWidget {
   final VoidCallback onClear;
 
   const SquareButton({
-    Key? key,
+    super.key,
     required this.age,
     required this.text,
     required this.size,
@@ -29,16 +29,17 @@ class SquareButton extends StatelessWidget {
     required this.onTap,
     required this.onClear,
     required this.selectedAge,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (age == selectedAge)
+        if (age == selectedAge) {
           onClear.call();
-        else
+        } else {
           onTap.call();
+        }
       }, // 클릭 이벤트 처리
       child: Container(
         width: size, // 정사각형으로 만들기 위해 고정된 크기

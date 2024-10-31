@@ -87,16 +87,16 @@ class LoginScreen extends ConsumerWidget {
                   onPressed: () {
                     ref
                         .read(authProvider.notifier)
-                        .kakaoLogin(() => context.go('/user_profile'));
+                        .loginWithKakao(() => context.go('/user_profile'));
                   }),
-              SizedBox(width: 20),
+              const SizedBox(width: 20),
               CustomIconSvgButton(
                 size: 55,
                 imagePath: "assets/images/android_light_rd_na.svg",
                 onPressed: () {
                   ref
                       .read(authProvider.notifier)
-                      .googleLogin(() => context.go('/user_profile'));
+                      .loginWithGoogle(() => context.go('/user_profile'));
                 },
               )
             ],

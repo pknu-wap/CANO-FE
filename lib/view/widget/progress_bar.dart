@@ -6,10 +6,10 @@ class ProgressBar extends StatelessWidget {
   final Color color;
 
   const ProgressBar({
-    Key? key,
+    super.key,
     required this.percent,
     this.color = AppColors.primary,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
