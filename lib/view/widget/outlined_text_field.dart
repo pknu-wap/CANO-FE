@@ -6,7 +6,6 @@ class OutlinedTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final double borderRadius;
   final Color borderColor;
-  final double width;
   final double height;
   final ValueChanged<String> onChanged;
   // final TextEditingController controller;
@@ -17,7 +16,6 @@ class OutlinedTextField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.borderRadius = 12,
     this.borderColor = AppColors.primary,
-    required this.width,
     required this.height,
     required this.onChanged,
   });
@@ -26,8 +24,10 @@ class OutlinedTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: width,
+    return Container(
       height: height,
       child: TextField(
+        cursorColor: AppColors.primary,
         onChanged: onChanged,
         textAlign: TextAlign.center,
         maxLines: 1,

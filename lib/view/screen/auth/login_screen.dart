@@ -15,6 +15,7 @@ class LoginScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: false,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,17 +60,18 @@ class LoginScreen extends ConsumerWidget {
               buttonColor: AppColors.primary,
               height: 40,
               onPressed: () {
-                context.push('/user_profile');
+                context.go('/user_profile');
               },
             ),
           ),
           const SizedBox(height: 10),
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 30),
             child: CustomButton(
               text: "회원가입",
               buttonColor: AppColors.primary,
               height: 40,
+              onPressed: () => {context.push('/home')},
             ),
           ),
           const SizedBox(height: 20),

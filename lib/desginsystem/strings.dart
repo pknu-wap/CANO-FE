@@ -12,7 +12,7 @@ class AppStrings {
 
   static const String keywordPreferenceText = "선호하는 키워드를 선택해주세요.";
 
-  static const String areaPreferenceText = "관심 지역을 설정헤주세요.";
+  static const String areaPreferenceText = "관심 지역을 설정해주세요.";
 
   static const String nickname = "닉네임";
   static const String man = "남자";
@@ -20,6 +20,9 @@ class AppStrings {
 
   static const String next = "다음";
   static const String prev = "이전";
+
+  static const String cafe = "카페";
+  static const String menu = "메뉴";
 
   // 커피 종류
   static const String americano = "아메리카노";
@@ -64,4 +67,12 @@ class AppStrings {
   static const String jeonnam = "전남";
   static const String gwangju = "광주";
   static const String jeju = "제주";
+
+  // 검색 화면
+  static const String search = "조회";
+  static const String recentKeyword = "최근 검색어";
+  static const String canoKeyword = "카노 추천 검색어";
+  static const String todayCoffeSearchText = "오늘의 커피를 검색해보세요.";
+  static const String noSearchResultText = "대연동 근처에는 카노 카페의\n검색결과가 없습니다.";
+  static const String addCafeText = "원하는 정보를 얻지 못했다면 새로운 카페를 추가해보세요";
 }
