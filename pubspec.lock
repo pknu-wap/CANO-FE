@@ -355,7 +355,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.6.1"
-
   flutter_svg:
     dependency: "direct main"
     description:
@@ -526,7 +525,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.8.12+17"
-
   image_picker_for_web:
     dependency: transitive
     description:
@@ -938,12 +936,11 @@ packages:
   retrofit_generator:
     dependency: "direct dev"
     description:
-      name: retrofit_generators
+      name: retrofit_generator
       sha256: "93d7e6ec656de3d6c8c9b41faf23e50df5761d873a9aaf7531c0982606d1f887"
       url: "https://pub.dev"
     source: hosted
     version: "9.1.4"
-
   riverpod:
     dependency: transitive
     description:
@@ -952,7 +949,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.6.1"
-
   shared_preferences:
     dependency: "direct main"
     description:

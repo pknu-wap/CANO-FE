@@ -104,5 +104,5 @@ class AppRouter {
         ),
       ),
     ),
-  ]);
+  ])
 }
