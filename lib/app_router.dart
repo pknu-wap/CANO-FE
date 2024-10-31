@@ -1,7 +1,6 @@
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/view/screen/auth/login_screen.dart';
 import 'package:cano/view/screen/cafe_info/cafe_info_screen.dart';
-import 'package:cano/view/screen/home/home_screen.dart';
 import 'package:cano/view/screen/my_page/my_page_screen.dart';
 import 'package:cano/view/screen/search/search_screen.dart';
 import 'package:cano/view/screen/user_info/coffee_preference_screen.dart';
@@ -15,12 +14,12 @@ import 'package:go_router/go_router.dart';
 class AppRouter {
   static GoRouter router = GoRouter(routes: [
     GoRoute(
-        path: '/',
-        builder: (context, state) {
-          return const LoginScreen();
-        },
-      ),
-      GoRoute(
+      path: '/',
+      builder: (context, state) {
+        return const LoginScreen();
+      },
+    ),
+    GoRoute(
         path: '/cafe_info',
         builder: (context, state) {
           return const CafeInfoScreen();
@@ -65,7 +64,7 @@ class AppRouter {
           routes: [
             GoRoute(
               path: "/home",
-              builder: (context, state) => HomeScreen(),
+              builder: (context, state) => CafeInfoScreen(),
             ),
           ],
         ),
@@ -111,5 +110,5 @@ class AppRouter {
         ),
       ),
     ),
-  ])
+  ]);
 }
