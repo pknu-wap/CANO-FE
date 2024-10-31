@@ -10,7 +10,7 @@ class CafeLocationScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // cafeLocationProvider로 위치 정보 관리
-    const cafeLocation = LatLng(35.1796, 129.0756); // 부산 위치 예시
+    const cafeLocation = LatLng(35.136122, 129.103453);
 
     return Scaffold(
       body: SingleChildScrollView(
