@@ -16,7 +16,7 @@ class CafeInfoScreen extends ConsumerWidget {
           IconButton(
             icon: const Icon(Icons.favorite_border),
             onPressed: () => showAddCafeBottomSheet(context),
-        ),
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -133,22 +133,6 @@ class CafeInfoScreen extends ConsumerWidget {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: '조회',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '홈',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'MY',
-          ),
-        ],
       ),
     );
   }
