@@ -80,6 +80,8 @@ flutter:
     - assets/images/android_light_rd_na.svg
     - assets/images/kakao_login_icon.png
     - assets/config/.env
+    - assets/images/man.png
+    - assets/images/woman.png
     - assets/images/starbucks_icon.svg
     - assets/images/americano.png
   # The following line ensures that the Material Icons font is

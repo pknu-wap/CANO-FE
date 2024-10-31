@@ -12,7 +12,7 @@ class AppStrings {
 
   static const String keywordPreferenceText = "선호하는 키워드를 선택해주세요.";
 
-  static const String areaPreferenceText = "관심 지역을 설정헤주세요.";
+  static const String areaPreferenceText = "관심 지역을 설정해주세요.";
 
   static const String nickname = "닉네임";
   static const String man = "남자";
