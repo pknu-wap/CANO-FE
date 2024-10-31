@@ -14,21 +14,29 @@ class WelcomeScreen extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: AppColors.primary,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          const SizedBox(height: 100),
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: Text(
-              '환영합니다. $userName님,\n오늘의 CANO를 시작해보세요!',
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.w800,
+      body: GestureDetector(
+        onHorizontalDragEnd: (details) {
+          if (details.primaryVelocity! < -50) {
+            // 왼쪽으로 스와이프할 때 다음 화면으로 이동
+            context.push('/nextScreen');
+          }
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const SizedBox(height: 100),
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Text(
+                '환영합니다. $userName님,\n오늘의 CANO를 시작해보세요!',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w800,
+                ),
+                textAlign: TextAlign.left,
               ),
-              textAlign: TextAlign.left,
             ),
           ),
           // 화살표 버튼
@@ -42,13 +50,13 @@ class WelcomeScreen extends ConsumerWidget {
             child: const Padding(
               padding: EdgeInsets.only(bottom: 50),
               child: Icon(
-                Icons.keyboard_double_arrow_right_outlined,
+                Icons.keyboard_double_arrow_left_outlined,
                 size: 120,
                 color: Colors.white38,
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
