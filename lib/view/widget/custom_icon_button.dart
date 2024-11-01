@@ -57,7 +57,7 @@ class CustomIconPngButton extends StatelessWidget {
     this.size = 50,
     this.idx,
     this.selectedIdx,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
