@@ -38,4 +38,9 @@ class KeyManager {
     await dotenv.load(fileName: 'assets/config/.env');
     return dotenv.env['TOKEN_AES_KEY'].toString();
   }
+
+  Future<String?> getGoogleMapsKey() async {
+    await dotenv.load(fileName: "assets/config/.env");
+    return dotenv.env['GOOGLE_MAPS_API_KEY'].toString();
+  }
 }

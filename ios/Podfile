@@ -32,6 +32,14 @@ target 'Runner' do
   use_modular_headers!
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+
+   # Google Maps SDK
+   pod 'GoogleMaps', '~> 9.1.1' 
+
+   # Kakao SDK
+   pod 'KakaoSDKCommon', '~> 2.22.7'
+   pod 'KakaoSDKAuth', '~> 2.22.7'
+
   target 'RunnerTests' do
     inherit! :search_paths
   end
