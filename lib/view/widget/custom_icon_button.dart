@@ -2,22 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CustomIconSvgButton extends StatelessWidget {
-  final bool? idx;
-  final bool? selectedIdx;
   final String imagePath;
   final String? selectedImagePath;
   final VoidCallback onPressed;
-  final double size;
+  final double width;
+  final double height;
 
-  const CustomIconSvgButton({
-    Key? key,
-    required this.imagePath,
-    this.selectedImagePath = null,
-    required this.onPressed,
-    this.size = 50,
-    this.idx,
-    this.selectedIdx,
-  });
+  const CustomIconSvgButton(
+      {Key? key,
+      required this.imagePath,
+      this.selectedImagePath = null,
+      required this.onPressed,
+      required this.width,
+      required this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -25,20 +22,19 @@ class CustomIconSvgButton extends StatelessWidget {
         onTap: () {
           onPressed.call();
         },
-        child: idx == selectedIdx
-            ? SvgPicture.asset(
-                imagePath,
-                height: size,
-                width: size,
-              )
-            : Container(
-                color: Colors.black26,
-                child: SvgPicture.asset(
-                  imagePath,
-                  height: size,
-                  width: size,
-                ),
-              ));
+        child: Container(
+          decoration: BoxDecoration(boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 6,
+                offset: Offset(4, 4))
+          ]),
+          child: SvgPicture.asset(
+            imagePath,
+            height: height,
+            width: width,
+          ),
+        ));
   }
 }
 
