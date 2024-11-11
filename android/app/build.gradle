@@ -21,7 +21,7 @@ android {
     }
 
     def dotenv = new Properties()
-    def envFile = file("${rootProject.projectDir}/.env")
+    def envFile = file("${rootProject.projectDir}/../assets/config/.env")
     if (envFile.exists()) {
         envFile.withInputStream { stream -> dotenv.load(stream) }
     } else {
