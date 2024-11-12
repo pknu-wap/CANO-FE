@@ -29,6 +29,10 @@ mixin _$MenuInfo {
   bool get isLike => throw _privateConstructorUsedError;
   int get likeCount => throw _privateConstructorUsedError;
   String get menuImageUrl => throw _privateConstructorUsedError;
+  List<String> get aroma => throw _privateConstructorUsedError;
+  Map<int, int> get ratingCountsByStar => throw _privateConstructorUsedError;
+  Map<String, double> get flavorCounts => throw _privateConstructorUsedError;
+  Map<String, int> get aromaCounts => throw _privateConstructorUsedError;
 
   /// Serializes this MenuInfo to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -54,7 +58,11 @@ abstract class $MenuInfoCopyWith<$Res> {
       int ratingCount,
       bool isLike,
       int likeCount,
-      String menuImageUrl});
+      String menuImageUrl,
+      List<String> aroma,
+      Map<int, int> ratingCountsByStar,
+      Map<String, double> flavorCounts,
+      Map<String, int> aromaCounts});
 }
 
 /// @nodoc
@@ -81,6 +89,10 @@ class _$MenuInfoCopyWithImpl<$Res, $Val extends MenuInfo>
     Object? isLike = null,
     Object? likeCount = null,
     Object? menuImageUrl = null,
+    Object? aroma = null,
+    Object? ratingCountsByStar = null,
+    Object? flavorCounts = null,
+    Object? aromaCounts = null,
   }) {
     return _then(_value.copyWith(
       cafeName: null == cafeName
@@ -119,6 +131,22 @@ class _$MenuInfoCopyWithImpl<$Res, $Val extends MenuInfo>
           ? _value.menuImageUrl
           : menuImageUrl // ignore: cast_nullable_to_non_nullable
               as String,
+      aroma: null == aroma
+          ? _value.aroma
+          : aroma // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      ratingCountsByStar: null == ratingCountsByStar
+          ? _value.ratingCountsByStar
+          : ratingCountsByStar // ignore: cast_nullable_to_non_nullable
+              as Map<int, int>,
+      flavorCounts: null == flavorCounts
+          ? _value.flavorCounts
+          : flavorCounts // ignore: cast_nullable_to_non_nullable
+              as Map<String, double>,
+      aromaCounts: null == aromaCounts
+          ? _value.aromaCounts
+          : aromaCounts // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
     ) as $Val);
   }
 }
@@ -140,7 +168,11 @@ abstract class _$$MenuInfoImplCopyWith<$Res>
       int ratingCount,
       bool isLike,
       int likeCount,
-      String menuImageUrl});
+      String menuImageUrl,
+      List<String> aroma,
+      Map<int, int> ratingCountsByStar,
+      Map<String, double> flavorCounts,
+      Map<String, int> aromaCounts});
 }
 
 /// @nodoc
@@ -165,6 +197,10 @@ class __$$MenuInfoImplCopyWithImpl<$Res>
     Object? isLike = null,
     Object? likeCount = null,
     Object? menuImageUrl = null,
+    Object? aroma = null,
+    Object? ratingCountsByStar = null,
+    Object? flavorCounts = null,
+    Object? aromaCounts = null,
   }) {
     return _then(_$MenuInfoImpl(
       cafeName: null == cafeName
@@ -203,6 +239,22 @@ class __$$MenuInfoImplCopyWithImpl<$Res>
           ? _value.menuImageUrl
           : menuImageUrl // ignore: cast_nullable_to_non_nullable
               as String,
+      aroma: null == aroma
+          ? _value._aroma
+          : aroma // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      ratingCountsByStar: null == ratingCountsByStar
+          ? _value._ratingCountsByStar
+          : ratingCountsByStar // ignore: cast_nullable_to_non_nullable
+              as Map<int, int>,
+      flavorCounts: null == flavorCounts
+          ? _value._flavorCounts
+          : flavorCounts // ignore: cast_nullable_to_non_nullable
+              as Map<String, double>,
+      aromaCounts: null == aromaCounts
+          ? _value._aromaCounts
+          : aromaCounts // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
     ));
   }
 }
@@ -219,7 +271,15 @@ class _$MenuInfoImpl implements _MenuInfo {
       required this.ratingCount,
       required this.isLike,
       required this.likeCount,
-      required this.menuImageUrl});
+      required this.menuImageUrl,
+      required final List<String> aroma,
+      required final Map<int, int> ratingCountsByStar,
+      required final Map<String, double> flavorCounts,
+      required final Map<String, int> aromaCounts})
+      : _aroma = aroma,
+        _ratingCountsByStar = ratingCountsByStar,
+        _flavorCounts = flavorCounts,
+        _aromaCounts = aromaCounts;
 
   factory _$MenuInfoImpl.fromJson(Map<String, dynamic> json) =>
       _$$MenuInfoImplFromJson(json);
@@ -242,10 +302,42 @@ class _$MenuInfoImpl implements _MenuInfo {
   final int likeCount;
   @override
   final String menuImageUrl;
+  final List<String> _aroma;
+  @override
+  List<String> get aroma {
+    if (_aroma is EqualUnmodifiableListView) return _aroma;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_aroma);
+  }
+
+  final Map<int, int> _ratingCountsByStar;
+  @override
+  Map<int, int> get ratingCountsByStar {
+    if (_ratingCountsByStar is EqualUnmodifiableMapView)
+      return _ratingCountsByStar;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_ratingCountsByStar);
+  }
+
+  final Map<String, double> _flavorCounts;
+  @override
+  Map<String, double> get flavorCounts {
+    if (_flavorCounts is EqualUnmodifiableMapView) return _flavorCounts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_flavorCounts);
+  }
+
+  final Map<String, int> _aromaCounts;
+  @override
+  Map<String, int> get aromaCounts {
+    if (_aromaCounts is EqualUnmodifiableMapView) return _aromaCounts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_aromaCounts);
+  }
 
   @override
   String toString() {
-    return 'MenuInfo(cafeName: $cafeName, menuName: $menuName, menuInfoText: $menuInfoText, price: $price, rating: $rating, ratingCount: $ratingCount, isLike: $isLike, likeCount: $likeCount, menuImageUrl: $menuImageUrl)';
+    return 'MenuInfo(cafeName: $cafeName, menuName: $menuName, menuInfoText: $menuInfoText, price: $price, rating: $rating, ratingCount: $ratingCount, isLike: $isLike, likeCount: $likeCount, menuImageUrl: $menuImageUrl, aroma: $aroma, ratingCountsByStar: $ratingCountsByStar, flavorCounts: $flavorCounts, aromaCounts: $aromaCounts)';
   }
 
   @override
@@ -267,13 +359,33 @@ class _$MenuInfoImpl implements _MenuInfo {
             (identical(other.likeCount, likeCount) ||
                 other.likeCount == likeCount) &&
             (identical(other.menuImageUrl, menuImageUrl) ||
-                other.menuImageUrl == menuImageUrl));
+                other.menuImageUrl == menuImageUrl) &&
+            const DeepCollectionEquality().equals(other._aroma, _aroma) &&
+            const DeepCollectionEquality()
+                .equals(other._ratingCountsByStar, _ratingCountsByStar) &&
+            const DeepCollectionEquality()
+                .equals(other._flavorCounts, _flavorCounts) &&
+            const DeepCollectionEquality()
+                .equals(other._aromaCounts, _aromaCounts));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, cafeName, menuName, menuInfoText,
-      price, rating, ratingCount, isLike, likeCount, menuImageUrl);
+  int get hashCode => Object.hash(
+      runtimeType,
+      cafeName,
+      menuName,
+      menuInfoText,
+      price,
+      rating,
+      ratingCount,
+      isLike,
+      likeCount,
+      menuImageUrl,
+      const DeepCollectionEquality().hash(_aroma),
+      const DeepCollectionEquality().hash(_ratingCountsByStar),
+      const DeepCollectionEquality().hash(_flavorCounts),
+      const DeepCollectionEquality().hash(_aromaCounts));
 
   /// Create a copy of MenuInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -301,7 +413,11 @@ abstract class _MenuInfo implements MenuInfo {
       required final int ratingCount,
       required final bool isLike,
       required final int likeCount,
-      required final String menuImageUrl}) = _$MenuInfoImpl;
+      required final String menuImageUrl,
+      required final List<String> aroma,
+      required final Map<int, int> ratingCountsByStar,
+      required final Map<String, double> flavorCounts,
+      required final Map<String, int> aromaCounts}) = _$MenuInfoImpl;
 
   factory _MenuInfo.fromJson(Map<String, dynamic> json) =
       _$MenuInfoImpl.fromJson;
@@ -324,6 +440,14 @@ abstract class _MenuInfo implements MenuInfo {
   int get likeCount;
   @override
   String get menuImageUrl;
+  @override
+  List<String> get aroma;
+  @override
+  Map<int, int> get ratingCountsByStar;
+  @override
+  Map<String, double> get flavorCounts;
+  @override
+  Map<String, int> get aromaCounts;
 
   /// Create a copy of MenuInfo
   /// with the given fields replaced by the non-null parameter values.

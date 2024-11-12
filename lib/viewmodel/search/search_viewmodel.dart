@@ -3,7 +3,7 @@ import 'package:cano/desginsystem/strings.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/model/cafe_info.dart';
-import '../../data/model/menu_info.dart';
+import '../../data/model/menu/menu_info.dart';
 
 class SearchState {
   final List<CafeInfo> cafeInfoList;
@@ -43,7 +43,7 @@ class SearchViewmodel extends StateNotifier<SearchState> {
   static final SearchViewmodel _instance =
       SearchViewmodel._internal(SearchState(
           cafeInfoList: [
-            CafeInfo(
+            const CafeInfo(
                 cafeName: '스타벅스 경성대점',
                 rating: 5.0,
                 isLike: true,
@@ -52,16 +52,51 @@ class SearchViewmodel extends StateNotifier<SearchState> {
                 cafeImageUrl: ''),
           ],
           menuInfoList: [
-            MenuInfo(
-              cafeName: '스타벅스',
-              menuName: '아메리카노',
-              menuInfoText: '맛있음',
-              price: 4500,
-              rating: 5.0,
-              ratingCount: 300,
-              isLike: true,
-              likeCount: 150,
-              menuImageUrl: '',
+            const MenuInfo(
+              cafeName: "스타벅스",
+              menuName: "스타벅스 돌체 라떼",
+              menuInfoText: "",
+              price: 5900,
+              rating: 4.88,
+              ratingCount: 201,
+              isLike: false,
+              likeCount: 0,
+              menuImageUrl: "",
+              ratingCountsByStar: {
+                5: 180,
+                4: 11,
+                3: 10,
+                2: 0,
+                1: 0,
+              },
+              flavorCounts: {
+                '산미': 0.38,
+                '바디감': 0.72,
+                '쓴맛': 0.0,
+                '달달함': 0.88,
+              },
+              aroma: [
+                '우디향',
+                '마일드',
+                '견과류향',
+                '곡물향',
+                '구운 곡물향',
+                '아몬드향',
+                '코코아향',
+                '스파이스향',
+                '캐러멜향'
+              ],
+              aromaCounts: {
+                "우디향": 0,
+                "마일드": 0,
+                "견과류향": 0,
+                "곡물향": 0,
+                "구운 곡물향": 0,
+                "아몬드향": 17,
+                "코코아향": 8,
+                "스파이시향": 0,
+                "캐러멜향": 0,
+              },
             ),
           ],
           isSearched: false,

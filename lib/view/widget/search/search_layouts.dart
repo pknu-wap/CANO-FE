@@ -2,7 +2,7 @@ import 'package:cano/data/model/cafe_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../data/model/menu_info.dart';
+import '../../../data/model/menu/menu_info.dart';
 import '../../../desginsystem/colors.dart';
 
 class SearchKeyword extends StatelessWidget {
