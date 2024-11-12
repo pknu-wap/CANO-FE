@@ -5,16 +5,17 @@ class CustomIconSvgButton extends StatelessWidget {
   final String imagePath;
   final String? selectedImagePath;
   final VoidCallback onPressed;
-  final double width;
-  final double height;
+  // final double width;
+  // final double height;
 
-  const CustomIconSvgButton(
-      {Key? key,
-      required this.imagePath,
-      this.selectedImagePath = null,
-      required this.onPressed,
-      required this.width,
-      required this.height});
+  const CustomIconSvgButton({
+    Key? key,
+    required this.imagePath,
+    this.selectedImagePath = null,
+    required this.onPressed,
+    // required this.width,
+    // required this.height
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +32,8 @@ class CustomIconSvgButton extends StatelessWidget {
           ]),
           child: SvgPicture.asset(
             imagePath,
-            height: height,
-            width: width,
+            // height: height,
+            // width: width,
           ),
         ));
   }

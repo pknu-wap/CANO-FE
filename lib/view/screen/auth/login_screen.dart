@@ -32,8 +32,6 @@ class LoginScreen extends ConsumerWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28)),
             const SizedBox(height: 30),
             CustomIconSvgButton(
-                width: 220,
-                height: 47,
                 imagePath: "assets/images/kakao_login.svg",
                 onPressed: () {
                   ref
@@ -44,8 +42,6 @@ class LoginScreen extends ConsumerWidget {
               height: 15,
             ),
             CustomIconSvgButton(
-              width: 220,
-              height: 50,
               imagePath: "assets/images/google_login.svg",
               onPressed: () {
                 ref
