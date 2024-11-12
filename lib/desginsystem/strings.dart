@@ -2,11 +2,12 @@ class AppStrings {
   static const String login = "로그인";
   static const String emailPlaceholder = "이메일을 입력해주세요.";
   static const String profileText = "프로필을 작성해주세요.";
-  static const String profileInfoText = "선택하신 정보를 기반으로 관심주제를 추천해드립니다.\n"
+  static const String interestRecommendationText =
+      "선택하신 정보를 기반으로 관심주제를 추천해드립니다.\n"
       "다른 목적으로 사용되거나 제 3자에게 제공되지 않습니다.";
 
-  static const String coffeePreferenceText = "선호하는 커피는 무엇인가요?";
-  // static const String coffeePreferenceInfoText = "선택한 요소가 내 피드에 적용됩니다.";
+  static const String coffeePreferenceText = "님의 커피 취향을 알려주세요.";
+
   // 다른 뷰에도 써서 통일
   static const String applyPreferenceInfoText = "선택한 요소가 내 피드에 적용됩니다.";
 

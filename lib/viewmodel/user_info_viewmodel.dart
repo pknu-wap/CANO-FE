@@ -25,18 +25,13 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
   void setName(String newName) {
     state = state.copyWith(name: newName);
   }
+  // void setAge(int newAge) {
+  //   state = state.copyWith(age: newAge);
+  // }
 
-  void setAge(int newAge) {
-    state = state.copyWith(age: newAge);
-  }
-
-  void setArea(String area) {
-    state = state.copyWith(area: area);
-  }
-
-  void setGender(bool? newGender) {
-    state = state.copyWith(gender: newGender);
-  }
+  // void setGender(bool? newGender) {
+  //   state = state.copyWith(gender: newGender);
+  // }
 
   void setProfileImageUrl(String newUrl) {
     state = state.copyWith(profileImageUrl: newUrl);
@@ -49,15 +44,6 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
   void removeCoffee(String coffee) {
     state = state.copyWith(
         coffees: state.coffees.where((c) => c != coffee).toList());
-  }
-
-  void addKeyword(String keyword) {
-    state = state.copyWith(keywords: [...state.keywords, keyword]);
-  }
-
-  void removeKeyword(String keyword) {
-    state = state.copyWith(
-        keywords: state.keywords.where((k) => k != keyword).toList());
   }
 
   Future<void> pickImageFromGallery(
