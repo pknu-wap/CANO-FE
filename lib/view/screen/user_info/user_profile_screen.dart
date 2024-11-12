@@ -3,7 +3,7 @@ import 'package:cano/desginsystem/strings.dart';
 import 'package:cano/view/widget/custom_button.dart';
 import 'package:cano/view/widget/outlined_text_field.dart';
 import 'package:cano/view/widget/profile_image.dart';
-import 'package:cano/viewmodel/user_info_viewmodel.dart';
+import 'package:cano/viewmodel/user_info/user_info_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -14,14 +14,6 @@ class UserProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userInfo = ref.watch(userInfoProvider);
-    final Map<int, String> ageLabels = {
-      10: "10대",
-      20: "20대",
-      30: "30대",
-      40: "40대",
-      50: "50대",
-      60: "60대\n이상"
-    };
 
     ref.listen(userInfoProvider, (prev, next) {
       print("현재 상태: $next");
@@ -114,82 +106,6 @@ class UserProfileScreen extends ConsumerWidget {
               ],
             ),
             const SizedBox(height: 25),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //   children: [
-            //     Column(
-            //       crossAxisAlignment: CrossAxisAlignment.center,
-            //       children: [
-            //         CustomIconPngButton(
-            //           size: 60,
-            //           imagePath: "assets/images/man.png",
-            //           onPressed: () =>
-            //               ref.watch(userInfoProvider.notifier).setGender(false),
-            //           idx: false,
-            //           selectedIdx: userInfo.gender,
-            //         ),
-            //         SizedBox(
-            //           height: 5,
-            //         ),
-            //         Text(
-            //           AppStrings.man,
-            //           style: TextStyle(
-            //               color: userInfo.gender == false
-            //                   ? AppColors.primary
-            //                   : Colors.black26,
-            //               fontWeight: FontWeight.bold),
-            //         )
-            //       ],
-            //     ),
-            //     Column(
-            //       crossAxisAlignment: CrossAxisAlignment.center,
-            //       children: [
-            //         CustomIconPngButton(
-            //           onPressed: () {
-            //             ref.watch(userInfoProvider.notifier).setGender(true);
-            //           },
-            //           imagePath: "assets/images/woman.png",
-            //           idx: true,
-            //           selectedIdx: userInfo.gender,
-            //           size: 60,
-            //         ),
-            //         SizedBox(
-            //           height: 5,
-            //         ),
-            //         Text(
-            //           AppStrings.woman,
-            //           style: TextStyle(
-            //               color: userInfo.gender == true
-            //                   ? AppColors.primary
-            //                   : Colors.black26,
-            //               fontWeight: FontWeight.bold),
-            //         )
-            //       ],
-            //     )
-            //   ],
-            // ),
-            // const SizedBox(height: 40),
-            // Expanded(
-            //   child: Padding(
-            //     padding: const EdgeInsets.symmetric(horizontal: 25),
-            //     child: Wrap(
-            //       runSpacing: 15,
-            //       spacing: 15,
-            //       children: ageLabels.entries.map((entry) {
-            //         return SquareButton(
-            //             age: entry.key,
-            //             text: entry.value,
-            //             size: mediaWidth(context, 0.22),
-            //             onTap: () => ref
-            //                 .watch(userInfoProvider.notifier)
-            //                 .setAge(entry.key),
-            //             onClear: () =>
-            //                 ref.watch(userInfoProvider.notifier).setAge(0),
-            //             selectedAge: userInfo.age);
-            //       }).toList(),
-            //     ),
-            //   ),
-            // ),
             Expanded(child: SizedBox()),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),

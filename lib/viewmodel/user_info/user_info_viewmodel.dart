@@ -8,14 +8,14 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
   UserInfoViewmodel._internal(super.state);
 
   static final UserInfoViewmodel _instance =
-      UserInfoViewmodel._internal(const UserInfo(
+      UserInfoViewmodel._internal(UserInfo(
     name: "",
-    age: 0,
-    coffees: [],
-    keywords: [],
-    area: "",
-    gender: null,
     profileImageUrl: '',
+    acidity: null,
+    body: null,
+    bitterness: null,
+    sweetness: null,
+    aroma: [],
   ));
 
   factory UserInfoViewmodel() {
@@ -37,13 +37,38 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
     state = state.copyWith(profileImageUrl: newUrl);
   }
 
-  void addCoffee(String coffee) {
-    state = state.copyWith(coffees: [...state.coffees, coffee]);
+  void setAcidity(String description) {
+    state = state.copyWith(acidity: Intensitylevel.fromString(description));
   }
 
-  void removeCoffee(String coffee) {
-    state = state.copyWith(
-        coffees: state.coffees.where((c) => c != coffee).toList());
+  void setBody(String description) {
+    state = state.copyWith(body: Intensitylevel.fromString(description));
+  }
+
+  void setBitterness(String description) {
+    state = state.copyWith(bitterness: Intensitylevel.fromString(description));
+  }
+
+  void setSweetness(String description) {
+    state = state.copyWith(sweetness: Intensitylevel.fromString(description));
+  }
+
+  void addAroma(String scent) {
+    state = state.copyWith(aroma: [...state.aroma, Aroma.fromString(scent)]);
+  }
+
+  void toggleAroma(String scent) {
+    final aromaToAdd = Aroma.fromString(scent);
+
+    if (state.aroma.contains(aromaToAdd)) {
+      state = state.copyWith(
+        aroma: List.from(state.aroma)..remove(aromaToAdd),
+      );
+    } else {
+      state = state.copyWith(
+        aroma: [...state.aroma, aromaToAdd],
+      );
+    }
   }
 
   Future<void> pickImageFromGallery(

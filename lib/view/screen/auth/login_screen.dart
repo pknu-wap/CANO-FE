@@ -1,5 +1,4 @@
 import 'package:cano/desginsystem/colors.dart';
-import 'package:cano/desginsystem/strings.dart';
 import 'package:cano/view/widget/auth/auth_input_field.dart';
 import 'package:cano/view/widget/custom_button.dart';
 import 'package:cano/view/widget/custom_icon_button.dart';
@@ -20,7 +19,7 @@ class LoginScreen extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Text(AppStrings.login,
+          const Text("로그인",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28)),
           const SizedBox(height: 50),
           Padding(
@@ -56,7 +55,7 @@ class LoginScreen extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: CustomButton(
-              text: AppStrings.login,
+              text: "로그인",
               buttonColor: AppColors.primary,
               height: 40,
               onPressed: () {
