@@ -21,11 +21,11 @@ UserInfo _$UserInfoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserInfo {
   String get name => throw _privateConstructorUsedError;
-  int get age => throw _privateConstructorUsedError;
-  List<String> get coffees => throw _privateConstructorUsedError;
-  List<String> get keywords => throw _privateConstructorUsedError;
-  String get area => throw _privateConstructorUsedError;
-  bool? get gender => throw _privateConstructorUsedError;
+  Intensitylevel? get acidity => throw _privateConstructorUsedError;
+  Intensitylevel? get body => throw _privateConstructorUsedError;
+  Intensitylevel? get bitterness => throw _privateConstructorUsedError;
+  Intensitylevel? get sweetness => throw _privateConstructorUsedError;
+  List<Aroma?> get aroma => throw _privateConstructorUsedError;
   String get profileImageUrl => throw _privateConstructorUsedError;
 
   /// Serializes this UserInfo to a JSON map.
@@ -45,11 +45,11 @@ abstract class $UserInfoCopyWith<$Res> {
   @useResult
   $Res call(
       {String name,
-      int age,
-      List<String> coffees,
-      List<String> keywords,
-      String area,
-      bool? gender,
+      Intensitylevel? acidity,
+      Intensitylevel? body,
+      Intensitylevel? bitterness,
+      Intensitylevel? sweetness,
+      List<Aroma?> aroma,
       String profileImageUrl});
 }
 
@@ -69,11 +69,11 @@ class _$UserInfoCopyWithImpl<$Res, $Val extends UserInfo>
   @override
   $Res call({
     Object? name = null,
-    Object? age = null,
-    Object? coffees = null,
-    Object? keywords = null,
-    Object? area = null,
-    Object? gender = freezed,
+    Object? acidity = freezed,
+    Object? body = freezed,
+    Object? bitterness = freezed,
+    Object? sweetness = freezed,
+    Object? aroma = null,
     Object? profileImageUrl = null,
   }) {
     return _then(_value.copyWith(
@@ -81,26 +81,26 @@ class _$UserInfoCopyWithImpl<$Res, $Val extends UserInfo>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      age: null == age
-          ? _value.age
-          : age // ignore: cast_nullable_to_non_nullable
-              as int,
-      coffees: null == coffees
-          ? _value.coffees
-          : coffees // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      keywords: null == keywords
-          ? _value.keywords
-          : keywords // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      area: null == area
-          ? _value.area
-          : area // ignore: cast_nullable_to_non_nullable
-              as String,
-      gender: freezed == gender
-          ? _value.gender
-          : gender // ignore: cast_nullable_to_non_nullable
-              as bool?,
+      acidity: freezed == acidity
+          ? _value.acidity
+          : acidity // ignore: cast_nullable_to_non_nullable
+              as Intensitylevel?,
+      body: freezed == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as Intensitylevel?,
+      bitterness: freezed == bitterness
+          ? _value.bitterness
+          : bitterness // ignore: cast_nullable_to_non_nullable
+              as Intensitylevel?,
+      sweetness: freezed == sweetness
+          ? _value.sweetness
+          : sweetness // ignore: cast_nullable_to_non_nullable
+              as Intensitylevel?,
+      aroma: null == aroma
+          ? _value.aroma
+          : aroma // ignore: cast_nullable_to_non_nullable
+              as List<Aroma?>,
       profileImageUrl: null == profileImageUrl
           ? _value.profileImageUrl
           : profileImageUrl // ignore: cast_nullable_to_non_nullable
@@ -119,11 +119,11 @@ abstract class _$$UserInfoImplCopyWith<$Res>
   @useResult
   $Res call(
       {String name,
-      int age,
-      List<String> coffees,
-      List<String> keywords,
-      String area,
-      bool? gender,
+      Intensitylevel? acidity,
+      Intensitylevel? body,
+      Intensitylevel? bitterness,
+      Intensitylevel? sweetness,
+      List<Aroma?> aroma,
       String profileImageUrl});
 }
 
@@ -141,11 +141,11 @@ class __$$UserInfoImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
-    Object? age = null,
-    Object? coffees = null,
-    Object? keywords = null,
-    Object? area = null,
-    Object? gender = freezed,
+    Object? acidity = freezed,
+    Object? body = freezed,
+    Object? bitterness = freezed,
+    Object? sweetness = freezed,
+    Object? aroma = null,
     Object? profileImageUrl = null,
   }) {
     return _then(_$UserInfoImpl(
@@ -153,26 +153,26 @@ class __$$UserInfoImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      age: null == age
-          ? _value.age
-          : age // ignore: cast_nullable_to_non_nullable
-              as int,
-      coffees: null == coffees
-          ? _value._coffees
-          : coffees // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      keywords: null == keywords
-          ? _value._keywords
-          : keywords // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      area: null == area
-          ? _value.area
-          : area // ignore: cast_nullable_to_non_nullable
-              as String,
-      gender: freezed == gender
-          ? _value.gender
-          : gender // ignore: cast_nullable_to_non_nullable
-              as bool?,
+      acidity: freezed == acidity
+          ? _value.acidity
+          : acidity // ignore: cast_nullable_to_non_nullable
+              as Intensitylevel?,
+      body: freezed == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as Intensitylevel?,
+      bitterness: freezed == bitterness
+          ? _value.bitterness
+          : bitterness // ignore: cast_nullable_to_non_nullable
+              as Intensitylevel?,
+      sweetness: freezed == sweetness
+          ? _value.sweetness
+          : sweetness // ignore: cast_nullable_to_non_nullable
+              as Intensitylevel?,
+      aroma: null == aroma
+          ? _value._aroma
+          : aroma // ignore: cast_nullable_to_non_nullable
+              as List<Aroma?>,
       profileImageUrl: null == profileImageUrl
           ? _value.profileImageUrl
           : profileImageUrl // ignore: cast_nullable_to_non_nullable
@@ -186,14 +186,13 @@ class __$$UserInfoImplCopyWithImpl<$Res>
 class _$UserInfoImpl implements _UserInfo {
   const _$UserInfoImpl(
       {required this.name,
-      required this.age,
-      required final List<String> coffees,
-      required final List<String> keywords,
-      required this.area,
-      required this.gender,
+      required this.acidity,
+      required this.body,
+      required this.bitterness,
+      required this.sweetness,
+      required final List<Aroma?> aroma,
       required this.profileImageUrl})
-      : _coffees = coffees,
-        _keywords = keywords;
+      : _aroma = aroma;
 
   factory _$UserInfoImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserInfoImplFromJson(json);
@@ -201,33 +200,27 @@ class _$UserInfoImpl implements _UserInfo {
   @override
   final String name;
   @override
-  final int age;
-  final List<String> _coffees;
+  final Intensitylevel? acidity;
   @override
-  List<String> get coffees {
-    if (_coffees is EqualUnmodifiableListView) return _coffees;
+  final Intensitylevel? body;
+  @override
+  final Intensitylevel? bitterness;
+  @override
+  final Intensitylevel? sweetness;
+  final List<Aroma?> _aroma;
+  @override
+  List<Aroma?> get aroma {
+    if (_aroma is EqualUnmodifiableListView) return _aroma;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_coffees);
+    return EqualUnmodifiableListView(_aroma);
   }
 
-  final List<String> _keywords;
-  @override
-  List<String> get keywords {
-    if (_keywords is EqualUnmodifiableListView) return _keywords;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_keywords);
-  }
-
-  @override
-  final String area;
-  @override
-  final bool? gender;
   @override
   final String profileImageUrl;
 
   @override
   String toString() {
-    return 'UserInfo(name: $name, age: $age, coffees: $coffees, keywords: $keywords, area: $area, gender: $gender, profileImageUrl: $profileImageUrl)';
+    return 'UserInfo(name: $name, acidity: $acidity, body: $body, bitterness: $bitterness, sweetness: $sweetness, aroma: $aroma, profileImageUrl: $profileImageUrl)';
   }
 
   @override
@@ -236,26 +229,21 @@ class _$UserInfoImpl implements _UserInfo {
         (other.runtimeType == runtimeType &&
             other is _$UserInfoImpl &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.age, age) || other.age == age) &&
-            const DeepCollectionEquality().equals(other._coffees, _coffees) &&
-            const DeepCollectionEquality().equals(other._keywords, _keywords) &&
-            (identical(other.area, area) || other.area == area) &&
-            (identical(other.gender, gender) || other.gender == gender) &&
+            (identical(other.acidity, acidity) || other.acidity == acidity) &&
+            (identical(other.body, body) || other.body == body) &&
+            (identical(other.bitterness, bitterness) ||
+                other.bitterness == bitterness) &&
+            (identical(other.sweetness, sweetness) ||
+                other.sweetness == sweetness) &&
+            const DeepCollectionEquality().equals(other._aroma, _aroma) &&
             (identical(other.profileImageUrl, profileImageUrl) ||
                 other.profileImageUrl == profileImageUrl));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      name,
-      age,
-      const DeepCollectionEquality().hash(_coffees),
-      const DeepCollectionEquality().hash(_keywords),
-      area,
-      gender,
-      profileImageUrl);
+  int get hashCode => Object.hash(runtimeType, name, acidity, body, bitterness,
+      sweetness, const DeepCollectionEquality().hash(_aroma), profileImageUrl);
 
   /// Create a copy of UserInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -276,11 +264,11 @@ class _$UserInfoImpl implements _UserInfo {
 abstract class _UserInfo implements UserInfo {
   const factory _UserInfo(
       {required final String name,
-      required final int age,
-      required final List<String> coffees,
-      required final List<String> keywords,
-      required final String area,
-      required final bool? gender,
+      required final Intensitylevel? acidity,
+      required final Intensitylevel? body,
+      required final Intensitylevel? bitterness,
+      required final Intensitylevel? sweetness,
+      required final List<Aroma?> aroma,
       required final String profileImageUrl}) = _$UserInfoImpl;
 
   factory _UserInfo.fromJson(Map<String, dynamic> json) =
@@ -289,15 +277,15 @@ abstract class _UserInfo implements UserInfo {
   @override
   String get name;
   @override
-  int get age;
+  Intensitylevel? get acidity;
   @override
-  List<String> get coffees;
+  Intensitylevel? get body;
   @override
-  List<String> get keywords;
+  Intensitylevel? get bitterness;
   @override
-  String get area;
+  Intensitylevel? get sweetness;
   @override
-  bool? get gender;
+  List<Aroma?> get aroma;
   @override
   String get profileImageUrl;
 
