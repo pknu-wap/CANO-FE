@@ -1,4 +1,6 @@
 class AppStrings {
+  static const String appName = "CANO";
+
   static const String login = "로그인";
   static const String emailPlaceholder = "이메일을 입력해주세요.";
   static const String profileText = "프로필을 작성해주세요.";

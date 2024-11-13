@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../desginsystem/colors.dart';
 import '../../../desginsystem/strings.dart';
 import '../../../viewmodel/auth/auth_viewmodel.dart';
 import '../../widget/custom_icon_button.dart';
@@ -28,8 +29,11 @@ class LoginScreen extends ConsumerWidget {
             SizedBox(
               height: 30,
             ),
-            const Text(AppStrings.login,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28)),
+            const Text(AppStrings.appName,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 28,
+                    color: AppColors.primary)),
             const SizedBox(height: 30),
             CustomIconSvgButton(
                 imagePath: "assets/images/kakao_login.svg",
