@@ -98,10 +98,6 @@ flutter:
     - assets/images/woman.png
     - assets/images/starbucks_icon.svg
     - assets/images/americano.png
-    - assets/images/cano_icon.svg
-    - assets/images/kakao_login.svg
-    - assets/images/google_login.svg
-    - assets/images/naver_login.svg
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
