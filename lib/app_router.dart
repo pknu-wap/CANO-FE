@@ -32,7 +32,7 @@ class AppRouter {
     GoRoute(
         path: '/coffee_preference',
         builder: (context, state) {
-          return const CoffeePreferenceScreen();
+          return CoffeePreferenceScreen();
         }),
     GoRoute(
         path: '/cafe_info',
@@ -47,7 +47,7 @@ class AppRouter {
     GoRoute(
         path: '/coffee_preference',
         builder: (context, state) {
-          return const CoffeePreferenceScreen();
+          return CoffeePreferenceScreen();
         }),
     StatefulShellRoute.indexedStack(
       branches: [
