@@ -1,5 +1,8 @@
 class AppStrings {
-  // 유저 정보 추가
+
+  static const String appName = "CANO";
+  static const String login = "로그인";
+  static const String emailPlaceholder = "이메일을 입력해주세요.";
   static const String profileText = "프로필을 작성해주세요.";
   static const String interestRecommendationText =
       "선택하신 정보를 기반으로 관심주제를 추천해드립니다.\n"
