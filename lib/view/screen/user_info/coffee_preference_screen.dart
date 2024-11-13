@@ -4,6 +4,7 @@ import 'package:cano/utils/mediaquery.dart';
 import 'package:cano/viewmodel/user_info/user_info_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../desginsystem/colors.dart';
@@ -41,9 +42,40 @@ class CoffeePreferenceScreen extends ConsumerWidget {
           SizedBox(
             height: 20,
           ),
-          Text(
-            AppStrings.acidity,
-            style: TextStyle(fontWeight: FontWeight.bold),
+          Row(
+            children: [
+              Text(
+                AppStrings.acidity,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                width: 6,
+              ),
+              Tooltip(
+                message: AppStrings.acidityDescription,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      blurRadius: 4,
+                      offset: Offset(2, 2),
+                    ),
+                  ],
+                ),
+                preferBelow: false,
+                verticalOffset: 0,
+                triggerMode: TooltipTriggerMode.tap,
+                margin: EdgeInsets.only(left: 40, top: 40),
+                textStyle: TextStyle(color: Colors.black, fontSize: 12),
+                child: SvgPicture.asset(
+                  "assets/images/info_icon.svg",
+                ),
+                showDuration: const Duration(seconds: 3),
+                waitDuration: const Duration(seconds: 1),
+              )
+            ],
           ),
           SizedBox(
             height: 5,
@@ -82,9 +114,40 @@ class CoffeePreferenceScreen extends ConsumerWidget {
           SizedBox(
             height: 15,
           ),
-          Text(
-            AppStrings.body,
-            style: TextStyle(fontWeight: FontWeight.bold),
+          Row(
+            children: [
+              Text(
+                AppStrings.body,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                width: 6,
+              ),
+              Tooltip(
+                message: AppStrings.bodyDescription,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      blurRadius: 4,
+                      offset: Offset(2, 2),
+                    ),
+                  ],
+                ),
+                preferBelow: false,
+                verticalOffset: 0,
+                triggerMode: TooltipTriggerMode.tap,
+                margin: EdgeInsets.only(left: 40, top: 40),
+                textStyle: TextStyle(color: Colors.black, fontSize: 12),
+                child: SvgPicture.asset(
+                  "assets/images/info_icon.svg",
+                ),
+                showDuration: const Duration(seconds: 3),
+                waitDuration: const Duration(seconds: 1),
+              )
+            ],
           ),
           SizedBox(
             height: 5,
@@ -207,9 +270,40 @@ class CoffeePreferenceScreen extends ConsumerWidget {
           SizedBox(
             height: 15,
           ),
-          Text(
-            AppStrings.aroma,
-            style: TextStyle(fontWeight: FontWeight.bold),
+          Row(
+            children: [
+              Text(
+                AppStrings.aroma,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                width: 6,
+              ),
+              Tooltip(
+                message: AppStrings.aromaDescription,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      blurRadius: 4,
+                      offset: Offset(2, 2),
+                    ),
+                  ],
+                ),
+                preferBelow: false,
+                verticalOffset: 0,
+                triggerMode: TooltipTriggerMode.tap,
+                margin: EdgeInsets.only(left: 40, top: 40),
+                textStyle: TextStyle(color: Colors.black, fontSize: 12),
+                child: SvgPicture.asset(
+                  "assets/images/info_icon.svg",
+                ),
+                showDuration: const Duration(seconds: 3),
+                waitDuration: const Duration(seconds: 1),
+              )
+            ],
           ),
           SizedBox(
             height: 5,

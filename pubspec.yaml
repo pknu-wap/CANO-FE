@@ -98,9 +98,8 @@ flutter:
     - assets/images/woman.png
     - assets/images/starbucks_icon.svg
     - assets/images/americano.png
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
+    - assets/images/info_icon.svg
+
   uses-material-design: true
 
 

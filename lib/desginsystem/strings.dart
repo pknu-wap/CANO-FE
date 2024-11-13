@@ -21,6 +21,12 @@ class AppStrings {
   static const String bitterness = "쓴맛";
   static const String sweetness = "달달함";
   static const String aroma = "아로마";
+  static const String bodyDescription =
+      "커피의 바디감은 입 안에서 느껴지는 커피의 무게감과 질감을\n의미해요. 쉽게 말해, 커피를 마실 때 혀와 입안에 남는 감촉으로\n가볍고 맑은 느낌부터 진하고 묵직한 느낌까지 다양합니다.";
+  static const String aromaDescription =
+      "커피의 아로마는 커피를 마시기 전에 향기로 느껴지는 향기를\n 의미해요. 커피의 원두에서 나오는 향기는 그 자체로 커피의\n특징을 알려주며 다양한 향미가 있습니다.";
+  static const String acidityDescription =
+      "커피의 산미는 커피를 마셨을 때 입안에서 느껴지는 신맛을\n말해요. 산미는 커피의 신선도와 품질을 결정짓는 중요한\n요소입니다.";
 
   //// 아로마
   static const woody = "우디";
@@ -50,42 +56,6 @@ class AppStrings {
   static const String caffelatte = "카페라떼";
   static const String cappuccino = "카푸치노";
   static const String caramelMacchiato = "카라멜 마끼야또";
-
-  // 키워드 종류
-  static const String niceMood = "분위기 좋은";
-  static const String parkingLot = "주차장이 있는";
-  static const String dessert = "디저트가 맛있는";
-  static const String interior = "독특한 인테리어";
-  static const String hotPlace = "핫플레이스";
-  static const String highQuality = "고품질 커피";
-  static const String small = "소소한";
-  static const String cheap = "가성비";
-  static const String view = "뷰 맛집";
-  static const String special = "특별한 메뉴";
-  static const String pet = "애견 동반 가능한";
-  static const String newOpen = "새로 오픈한";
-  static const String family = "가족 모임";
-  static const String cozy = "편한 좌석";
-  static const String noKids = "노키즈존";
-  static const String busanMatjip = "부산 맛집 카페";
-
-  // 지역 종류
-  static const String seoul = "서울";
-  static const String gyeongggi = "경기";
-  static const String incheon = "인천";
-  static const String gangwon = "강원";
-  static const String sejong = "세종";
-  static const String chungbuk = "충북";
-  static const String chungnam = "충남";
-  static const String busan = "부산";
-  static const String daegu = "대구";
-  static const String ulsan = "울산";
-  static const String kyungbuk = "경북";
-  static const String kyungnam = "경남";
-  static const String jeonbuk = "전북";
-  static const String jeonnam = "전남";
-  static const String gwangju = "광주";
-  static const String jeju = "제주";
 
   // 검색 화면
   static const String search = "조회";
