@@ -21,7 +21,7 @@ class CoffeePreferenceScreen extends ConsumerWidget {
     final userInfo = ref.watch(userInfoProvider);
 
     ref.listen(userInfoProvider, (prev, next) {
-      print("현재 상태: $next");
+      print("current State: $next");
     });
 
     return Scaffold(
@@ -268,7 +268,7 @@ class CoffeePreferenceScreen extends ConsumerWidget {
                   }),
               CustomButton(
                 onPressed: () {
-                  context.push('/home');
+                  context.go('/home');
                 },
                 buttonColor: AppColors.primary,
                 text: AppStrings.finish,
