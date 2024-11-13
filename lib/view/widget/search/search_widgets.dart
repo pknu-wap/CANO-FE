@@ -8,15 +8,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../desginsystem/strings.dart';
 import '../../../viewmodel/search/search_viewmodel.dart';
 
-final List<String> coffeLabels = [
-  AppStrings.americano,
-  AppStrings.espresso,
-  AppStrings.cappuccino,
-  AppStrings.caffemoca,
-  AppStrings.caffelatte,
-  AppStrings.caramelMacchiato
-];
-
 class PreSearchWidget extends ConsumerStatefulWidget {
   PreSearchWidget({super.key});
 
@@ -57,8 +48,7 @@ class _PreSearchWidgetState extends ConsumerState<PreSearchWidget> {
                 return keywordList[index] == ""
                     ? null
                     : Container(
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 8.0), // 아이템 간의 여백
+                        margin: EdgeInsets.symmetric(horizontal: 8.0),
                         child: SearchKeyword(
                           onPressed: () {},
                           onClose: () => ref
@@ -70,45 +60,12 @@ class _PreSearchWidgetState extends ConsumerState<PreSearchWidget> {
               }),
         ),
       ),
-      SizedBox(height: 30),
-      Container(
-        alignment: Alignment.centerLeft,
-        padding: EdgeInsets.only(left: 30),
-        child: Text(
-          AppStrings.canoKeyword,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-        ),
-      ),
-      SizedBox(height: 10),
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
-        child: Wrap(
-          spacing: 8.0, // 가로 여백
-          runSpacing: 8.0, // 세로 여백
-          children: coffeLabels.map((keyword) {
-            return Container(
-              height: 35,
-              child: SearchKeyword(
-                onPressed: () {},
-                isCano: true,
-                text: keyword,
-                borderRadius: 18,
-              ),
-            );
-          }).toList(),
-        ),
-      ),
     ]);
   }
 }
 
 class PostSearchWidget extends ConsumerWidget {
-  final String tabText;
-  final ValueChanged<String> onPressed;
-
-  const PostSearchWidget(
-      {Key? key, required this.tabText, required this.onPressed})
-      : super(key: key);
+  const PostSearchWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -119,53 +76,20 @@ class PostSearchWidget extends ConsumerWidget {
         SizedBox(
           height: 10,
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 30),
-          child: Row(
-            children: [
-              CustomOutlinedButton2(
-                  onPressed: () {
-                    onPressed(AppStrings.cafe);
-                  },
-                  text: AppStrings.cafe,
-                  width: mediaWidth(context, 0.23),
-                  height: 40,
-                  tabText: tabText),
-              SizedBox(
-                width: 10,
-              ),
-              CustomOutlinedButton2(
-                  onPressed: () {
-                    onPressed(AppStrings.menu);
-                  },
-                  text: AppStrings.menu,
-                  width: mediaWidth(context, 0.23),
-                  height: 40,
-                  tabText: tabText)
-            ],
-          ),
-        ),
         Transform.translate(
           offset: Offset(0, -25),
           child: ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical, // 가로로 스크롤
-              itemCount: searchState.tabText == AppStrings.cafe
-                  ? searchState.cafeInfoList.length
-                  : searchState.menuInfoList.length, // 아이템 수
+              itemCount: searchState.menuInfoList.length, // 아이템 수
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
                     onTap: () {},
-                    child: searchState.tabText == AppStrings.cafe
-                        ? Container(
-                            child: CafeInfoLayout(
-                                cafeInfo: searchState.cafeInfoList[index]),
-                          )
-                        : Container(
-                            child: MenuInfoLayout(
-                                menuInfo: searchState.menuInfoList[index]),
-                          ));
+                    child: Container(
+                      child: MenuInfoLayout(
+                          menuInfo: searchState.menuInfoList[index]),
+                    ));
               }),
         ),
       ],

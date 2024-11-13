@@ -1,11 +1,9 @@
-import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/desginsystem/strings.dart';
 import 'package:cano/view/widget/search/search_field.dart';
 import 'package:cano/view/widget/search/search_widgets.dart';
 import 'package:cano/viewmodel/search/search_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 
 class SearchScreen extends ConsumerWidget {
   SearchScreen({super.key});
@@ -15,7 +13,6 @@ class SearchScreen extends ConsumerWidget {
     final searchState = ref.watch(searchProvider);
 
     ref.listen(searchProvider, (prev, next) {
-      print("현재 상태: ${next.cafeInfoList}");
       print("현재 상태: ${next.menuInfoList}");
       print("현재 상태: ${next.keywordList}");
     });
@@ -27,18 +24,6 @@ class SearchScreen extends ConsumerWidget {
         child: Column(
           children: [
             const SizedBox(height: 65),
-            Container(
-              alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(left: 30),
-              child: Text(
-                AppStrings.search,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: AppColors.primary),
-              ),
-            ),
-            SizedBox(height: 15),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: SearchField(
@@ -51,12 +36,7 @@ class SearchScreen extends ConsumerWidget {
                   },
                   controller: searchController),
             ),
-            searchState.isSearched
-                ? PostSearchWidget(
-                    tabText: searchState.tabText,
-                    onPressed: (tab) =>
-                        ref.watch(searchProvider.notifier).setTabText(tab))
-                : PreSearchWidget(),
+            searchState.isSearched ? PostSearchWidget() : PreSearchWidget(),
           ],
         ),
       ),
