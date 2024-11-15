@@ -1,109 +1,285 @@
-import 'package:cano/desginsystem/colors.dart';
+import 'package:cano/data/model/user_info/user_info.dart';
 import 'package:cano/desginsystem/strings.dart';
-import 'package:cano/view/widget/custom_button.dart';
-import 'package:cano/view/widget/progress_bar.dart';
-import 'package:cano/viewmodel/user_info_viewmodel.dart';
+import 'package:cano/utils/mediaquery.dart';
+import 'package:cano/viewmodel/user_info/user_info_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../desginsystem/colors.dart';
+import '../../widget/custom_button.dart';
+
 class CoffeePreferenceScreen extends ConsumerWidget {
-  const CoffeePreferenceScreen({super.key});
+  CoffeePreferenceScreen({super.key});
+
+  final intensitys =
+      Intensitylevel.values.map((level) => level.description).toList();
+  final aromas = Aroma.values.map((aroma) => aroma.scent).toList();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userInfo = ref.watch(userInfoProvider);
-    final List<String> coffeLabels = [
-      AppStrings.americano,
-      AppStrings.espresso,
-      AppStrings.cappuccino,
-      AppStrings.caffemoca,
-      AppStrings.caffelatte,
-      AppStrings.caramelMacchiato
-    ];
 
     ref.listen(userInfoProvider, (prev, next) {
-      print("현재 상태: $next");
+      print("current State: $next");
     });
 
     return Scaffold(
-        body: Column(
-      children: [
-        const SizedBox(height: 65),
-        const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30),
-            child: ProgressBar(percent: 0.5)),
-        const SizedBox(height: 30),
-        Padding(
-          padding: const EdgeInsets.only(left: 30),
-          child: Container(
-            alignment: Alignment.centerLeft,
-            child: const Text(
-              AppStrings.coffeePreferenceText,
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-            ),
-
+        body: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 65),
+          Text(
+            "${userInfo.name}${AppStrings.coffeePreferenceText}",
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
-        ),
-        const SizedBox(height: 5),
-        Padding(
-          padding: const EdgeInsets.only(left: 30),
-          child: Container(
-            alignment: Alignment.centerLeft,
-            child: const Text(AppStrings.applyPreferenceInfoText,
-                style: TextStyle(color: Colors.black26, fontSize: 12)),
+          const SizedBox(height: 5),
+          const Text(AppStrings.interestRecommendationText,
+              style: TextStyle(color: Colors.black26, fontSize: 12)),
+          SizedBox(
+            height: 20,
           ),
-        ),
-        const SizedBox(height: 35),
-        for (var label in coffeLabels)
-          Container(
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.only(left: 30, bottom: 10),
-              child: CustomButton2(
-                text: label,
-                width: 170,
-                height: 40,
-                borderRadius: 70,
-                isSelected: userInfo.coffees.contains(label),
-                onPressed: () {
-                  var isSelcted = userInfo.coffees.contains(label);
-                  if (isSelcted)
-                    ref.watch(userInfoProvider.notifier).removeCoffee(label);
-                  else
-                    ref.watch(userInfoProvider.notifier).addCoffee(label);
+          Text(
+            AppStrings.acidity,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Wrap(
+            spacing: 8,
+            runSpacing: 4,
+            children: List<Widget>.generate(intensitys.length, (int index) {
+              return ChoiceChip(
+                showCheckmark: false,
+                label: Text(intensitys[index]),
+                selected: userInfo.acidity?.description == intensitys[index],
+                onSelected: (bool selected) {
+                  ref
+                      .read(userInfoProvider.notifier)
+                      .setAcidity(intensitys[index]);
                 },
-              )),
-        Expanded(child: SizedBox()),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            CustomButton(
-              text: AppStrings.prev,
-              width: 170,
-              height: 55,
-              buttonColor: Colors.white,
-              textColor: Colors.black,
-              onPressed: () {
-                context.pop();
-              },
-            ),
-            CustomButton(
-              onPressed: () {
-                if (userInfo.coffees.isNotEmpty) {
-                  context.push('/keyword_preference');
-                }
-              },
-              buttonColor: userInfo.coffees.isNotEmpty
-                  ? AppColors.primary
-                  : Colors.black26,
-              text: AppStrings.next,
-              width: 170,
-              height: 55,
-            )
-          ],
-        ),
-        SizedBox(height: 30),
-      ],
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    side: BorderSide(
+                      color: userInfo.acidity?.description == intensitys[index]
+                          ? AppColors.selectedColor
+                          : Colors.grey,
+                      width: 1,
+                    )),
+                backgroundColor: Colors.white,
+                selectedColor: Colors.white,
+                labelStyle: TextStyle(
+                  color: userInfo.acidity?.description == intensitys[index]
+                      ? AppColors.selectedColor
+                      : Colors.grey,
+                ),
+              );
+            }),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Text(
+            AppStrings.body,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Wrap(
+            spacing: 8,
+            runSpacing: 4,
+            children: List<Widget>.generate(intensitys.length, (int index) {
+              return ChoiceChip(
+                showCheckmark: false,
+                label: Text(intensitys[index]),
+                selected: userInfo.body?.description == intensitys[index],
+                onSelected: (bool selected) {
+                  ref
+                      .read(userInfoProvider.notifier)
+                      .setBody(intensitys[index]);
+                },
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    side: BorderSide(
+                      color: userInfo.body?.description == intensitys[index]
+                          ? AppColors.selectedColor
+                          : Colors.grey,
+                      width: 1,
+                    )),
+                backgroundColor: Colors.white,
+                selectedColor: Colors.white,
+                labelStyle: TextStyle(
+                  color: userInfo.body?.description == intensitys[index]
+                      ? AppColors.selectedColor
+                      : Colors.grey,
+                ),
+              );
+            }),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Text(
+            AppStrings.bitterness,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Wrap(
+            spacing: 8,
+            runSpacing: 4,
+            children: List<Widget>.generate(intensitys.length, (int index) {
+              return ChoiceChip(
+                showCheckmark: false,
+                label: Text(intensitys[index]),
+                selected: userInfo.bitterness?.description == intensitys[index],
+                onSelected: (bool selected) {
+                  ref
+                      .read(userInfoProvider.notifier)
+                      .setBitterness(intensitys[index]);
+                },
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    side: BorderSide(
+                      color:
+                          userInfo.bitterness?.description == intensitys[index]
+                              ? AppColors.selectedColor
+                              : Colors.grey,
+                      width: 1,
+                    )),
+                backgroundColor: Colors.white,
+                selectedColor: Colors.white,
+                labelStyle: TextStyle(
+                  color: userInfo.bitterness?.description == intensitys[index]
+                      ? AppColors.selectedColor
+                      : Colors.grey,
+                ),
+              );
+            }),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Text(
+            AppStrings.sweetness,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Wrap(
+            spacing: 8,
+            runSpacing: 4,
+            children: List<Widget>.generate(intensitys.length, (int index) {
+              return ChoiceChip(
+                showCheckmark: false,
+                label: Text(intensitys[index]),
+                selected: userInfo.sweetness?.description == intensitys[index],
+                onSelected: (bool selected) {
+                  ref
+                      .read(userInfoProvider.notifier)
+                      .setSweetness(intensitys[index]);
+                },
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    side: BorderSide(
+                      color:
+                          userInfo.sweetness?.description == intensitys[index]
+                              ? AppColors.selectedColor
+                              : Colors.grey,
+                      width: 1,
+                    )),
+                backgroundColor: Colors.white,
+                selectedColor: Colors.white,
+                labelStyle: TextStyle(
+                  color: userInfo.sweetness?.description == intensitys[index]
+                      ? AppColors.selectedColor
+                      : Colors.grey,
+                ),
+              );
+            }),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Text(
+            AppStrings.aroma,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Wrap(
+            spacing: 8,
+            runSpacing: 4,
+            children: List<Widget>.generate(aromas.length, (int index) {
+              return ChoiceChip(
+                showCheckmark: false,
+                label: Text(aromas[index]),
+                selected:
+                    userInfo.aroma.contains(Aroma.fromString(aromas[index])),
+                onSelected: (bool selected) {
+                  ref
+                      .read(userInfoProvider.notifier)
+                      .toggleAroma(aromas[index]);
+                },
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    side: BorderSide(
+                      color: userInfo.aroma
+                              .contains(Aroma.fromString(aromas[index]))
+                          ? AppColors.selectedColor
+                          : Colors.grey,
+                      width: 1,
+                    )),
+                backgroundColor: Colors.white,
+                selectedColor: Colors.white,
+                labelStyle: TextStyle(
+                  color:
+                      userInfo.aroma.contains(Aroma.fromString(aromas[index]))
+                          ? AppColors.selectedColor
+                          : Colors.grey,
+                ),
+              );
+            }),
+          ),
+          Expanded(child: SizedBox()),
+          Text(
+            AppStrings.coffeeTasteModifiableText,
+            style: TextStyle(color: Colors.black26, fontSize: 12),
+          ),
+          Expanded(child: SizedBox()),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CustomButton(
+                  text: AppStrings.prev,
+                  width: mediaWidth(context, 0.4),
+                  height: 55,
+                  buttonColor: Colors.white,
+                  textColor: Colors.black,
+                  onPressed: () {
+                    context.pop();
+                  }),
+              CustomButton(
+                onPressed: () {
+                  context.go('/home');
+                },
+                buttonColor: AppColors.primary,
+                text: AppStrings.finish,
+                width: mediaWidth(context, 0.4),
+                height: 55,
+              )
+            ],
+          ),
+          SizedBox(height: 30),
+        ],
+      ),
     ));
   }
 }

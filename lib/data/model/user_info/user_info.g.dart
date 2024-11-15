@@ -9,23 +9,44 @@ part of 'user_info.dart';
 _$UserInfoImpl _$$UserInfoImplFromJson(Map<String, dynamic> json) =>
     _$UserInfoImpl(
       name: json['name'] as String,
-      age: (json['age'] as num).toInt(),
-      coffees:
-          (json['coffees'] as List<dynamic>).map((e) => e as String).toList(),
-      keywords:
-          (json['keywords'] as List<dynamic>).map((e) => e as String).toList(),
-      area: json['area'] as String,
-      gender: json['gender'] as bool?,
+      acidity: $enumDecodeNullable(_$IntensitylevelEnumMap, json['acidity']),
+      body: $enumDecodeNullable(_$IntensitylevelEnumMap, json['body']),
+      bitterness:
+          $enumDecodeNullable(_$IntensitylevelEnumMap, json['bitterness']),
+      sweetness:
+          $enumDecodeNullable(_$IntensitylevelEnumMap, json['sweetness']),
+      aroma: (json['aroma'] as List<dynamic>)
+          .map((e) => $enumDecodeNullable(_$AromaEnumMap, e))
+          .toList(),
       profileImageUrl: json['profileImageUrl'] as String,
     );
 
 Map<String, dynamic> _$$UserInfoImplToJson(_$UserInfoImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'age': instance.age,
-      'coffees': instance.coffees,
-      'keywords': instance.keywords,
-      'area': instance.area,
-      'gender': instance.gender,
+      'acidity': _$IntensitylevelEnumMap[instance.acidity],
+      'body': _$IntensitylevelEnumMap[instance.body],
+      'bitterness': _$IntensitylevelEnumMap[instance.bitterness],
+      'sweetness': _$IntensitylevelEnumMap[instance.sweetness],
+      'aroma': instance.aroma.map((e) => _$AromaEnumMap[e]).toList(),
       'profileImageUrl': instance.profileImageUrl,
     };
+
+const _$IntensitylevelEnumMap = {
+  Intensitylevel.weak: 'weak',
+  Intensitylevel.normal: 'normal',
+  Intensitylevel.strong: 'strong',
+  Intensitylevel.veryStrong: 'veryStrong',
+};
+
+const _$AromaEnumMap = {
+  Aroma.woody: 'woody',
+  Aroma.mild: 'mild',
+  Aroma.nutty: 'nutty',
+  Aroma.grain: 'grain',
+  Aroma.smmothGrain: 'smmothGrain',
+  Aroma.almond: 'almond',
+  Aroma.cocoa: 'cocoa',
+  Aroma.spicy: 'spicy',
+  Aroma.caramel: 'caramel',
+};

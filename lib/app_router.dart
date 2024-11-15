@@ -5,10 +5,7 @@ import 'package:cano/view/screen/home/home_screen.dart';
 import 'package:cano/view/screen/my_page/my_page_screen.dart';
 import 'package:cano/view/screen/search/search_screen.dart';
 import 'package:cano/view/screen/user_info/coffee_preference_screen.dart';
-import 'package:cano/view/screen/user_info/keyword_preference_screen.dart';
-import 'package:cano/view/screen/user_info/location_preference_screen.dart';
 import 'package:cano/view/screen/user_info/user_profile_screen.dart';
-import 'package:cano/view/screen/user_info/welcome_screen.dart';
 import 'package:cano/viewmodel/auth/cano_token_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -35,24 +32,8 @@ class AppRouter {
     GoRoute(
         path: '/coffee_preference',
         builder: (context, state) {
-          return const CoffeePreferenceScreen();
+          return CoffeePreferenceScreen();
         }),
-    GoRoute(
-        path: '/keyword_preference',
-        builder: (context, state) {
-          return const KeywordPreferenceScreen();
-        }),
-    GoRoute(
-        path: '/location_preference',
-        builder: (context, state) {
-          return const LocationPreferenceScreen();
-        }),
-    GoRoute(
-      path: '/welcome',
-      builder: (context, state) {
-        return const WelcomeScreen();
-      },
-    ),
     GoRoute(
         path: '/cafe_info',
         builder: (context, state) {
@@ -66,24 +47,8 @@ class AppRouter {
     GoRoute(
         path: '/coffee_preference',
         builder: (context, state) {
-          return const CoffeePreferenceScreen();
+          return CoffeePreferenceScreen();
         }),
-    GoRoute(
-        path: '/keyword_preference',
-        builder: (context, state) {
-          return const KeywordPreferenceScreen();
-        }),
-    GoRoute(
-        path: '/location_preference',
-        builder: (context, state) {
-          return const LocationPreferenceScreen();
-        }),
-    GoRoute(
-      path: '/welcome',
-      builder: (context, state) {
-        return WelcomeScreen();
-      },
-    ),
     StatefulShellRoute.indexedStack(
       branches: [
         StatefulShellBranch(
