@@ -15,7 +15,6 @@ Future<void> main() async {
   // iOS에 환경변수 전달
   const platform = MethodChannel("com.example.cano/secure_keys");
   platform.invokeMethod('setEnv', {
-    "GOOGLE_MAPS_API_KEY": dotenv.env['GOOGLE_MAPS_API_KEY'],
     "KAKAO_NATIVE_APP_KEY": dotenv.env['KAKAO_NATIVE_APP_KEY'],
   });
 

@@ -77,7 +77,9 @@ DEPENDENCIES:
   - GoogleMaps (~> 9.1.1)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - kakao_flutter_sdk_common (from `.symlinks/plugins/kakao_flutter_sdk_common/ios`)
+  - KakaoSDKAuth
   - KakaoSDKAuth (~> 2.22.7)
+  - KakaoSDKCommon
   - KakaoSDKCommon (~> 2.22.7)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
@@ -145,6 +147,6 @@ SPEC CHECKSUMS:
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   webview_flutter_wkwebview: 0982481e3d9c78fd5c6f62a002fcd24fc791f1e4
 
-PODFILE CHECKSUM: e0791ee0f701498ede9775657efa3a15e150022d
+PODFILE CHECKSUM: 848a7715b0c3d7c412f8bfc4ce14061ad19fe73d
 
 COCOAPODS: 1.16.1

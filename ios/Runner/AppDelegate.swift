@@ -17,15 +17,7 @@ import GoogleMaps
     
     channel.setMethodCallHandler { (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
       if call.method == "setEnv", let args = call.arguments as? [String: String] {
-        let googleMapsApiKey = args["GOOGLE_MAPS_API_KEY"]
         let kakaoApiKey = args["KAKAO_NATIVE_APP_KEY"]
-
-
-        guard let googleMapsApiKey = googleMapsApiKey, !googleMapsApiKey.isEmpty else {
-            print("Google Maps API Key is missing or empty.")
-            result(FlutterError(code: "MISSING_API_KEY", message: "Google Maps API Key is missing.", details: nil))
-            return
-        }
 
         guard let kakaoApiKey = kakaoApiKey, !kakaoApiKey.isEmpty else {
             print("Kakao API Key is missing or empty.")
@@ -33,7 +25,6 @@ import GoogleMaps
             return
         }
 
-        GMSServices.provideAPIKey(googleMapsApiKey)
         KakaoSDK.initSDK(appKey: kakaoApiKey)
       }
     }

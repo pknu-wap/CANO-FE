@@ -1,2 +1,4 @@
 #include? "Pods/Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"
 #include "Generated.xcconfig"
+
+KAKAO_NATIVE_APP_KEY = ca36366695e1b40fe91e9c7c4a22754b
