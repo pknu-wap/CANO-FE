@@ -86,7 +86,10 @@ class CoffeePreferenceScreen extends ConsumerWidget {
             children: List<Widget>.generate(intensitys.length, (int index) {
               return ChoiceChip(
                 showCheckmark: false,
-                label: Text(intensitys[index]),
+                label: Text(
+                  intensitys[index],
+                  style: TextStyle(fontSize: 12),
+                ),
                 selected: userInfo.acidity?.description == intensitys[index],
                 onSelected: (bool selected) {
                   ref
@@ -158,7 +161,7 @@ class CoffeePreferenceScreen extends ConsumerWidget {
             children: List<Widget>.generate(intensitys.length, (int index) {
               return ChoiceChip(
                 showCheckmark: false,
-                label: Text(intensitys[index]),
+                label: Text(intensitys[index], style: TextStyle(fontSize: 12)),
                 selected: userInfo.body?.description == intensitys[index],
                 onSelected: (bool selected) {
                   ref
@@ -199,7 +202,7 @@ class CoffeePreferenceScreen extends ConsumerWidget {
             children: List<Widget>.generate(intensitys.length, (int index) {
               return ChoiceChip(
                 showCheckmark: false,
-                label: Text(intensitys[index]),
+                label: Text(intensitys[index], style: TextStyle(fontSize: 12)),
                 selected: userInfo.bitterness?.description == intensitys[index],
                 onSelected: (bool selected) {
                   ref
@@ -241,7 +244,7 @@ class CoffeePreferenceScreen extends ConsumerWidget {
             children: List<Widget>.generate(intensitys.length, (int index) {
               return ChoiceChip(
                 showCheckmark: false,
-                label: Text(intensitys[index]),
+                label: Text(intensitys[index], style: TextStyle(fontSize: 12)),
                 selected: userInfo.sweetness?.description == intensitys[index],
                 onSelected: (bool selected) {
                   ref
@@ -314,7 +317,7 @@ class CoffeePreferenceScreen extends ConsumerWidget {
             children: List<Widget>.generate(aromas.length, (int index) {
               return ChoiceChip(
                 showCheckmark: false,
-                label: Text(aromas[index]),
+                label: Text(aromas[index], style: TextStyle(fontSize: 12)),
                 selected:
                     userInfo.aroma.contains(Aroma.fromString(aromas[index])),
                 onSelected: (bool selected) {

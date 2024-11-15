@@ -9,7 +9,7 @@ class AppStrings {
       "※ 작성하신 내용은 마이페이지에서 언제든지 수정할 수 있습니다.";
 
   //// 커피 강도
-  static const String veryWeak = "매우 약함";
+  static const String none = "없음";
   static const String weak = "약함";
   static const String normal = "보통";
   static const String strong = "강함";

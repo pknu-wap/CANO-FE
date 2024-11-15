@@ -20,6 +20,7 @@ class UserInfo with _$UserInfo {
 }
 
 enum Intensitylevel {
+  none(AppStrings.none),
   weak(AppStrings.weak),
   normal(AppStrings.normal),
   strong(AppStrings.strong),
@@ -31,6 +32,8 @@ enum Intensitylevel {
 
   static Intensitylevel? fromString(String value) {
     switch (value) {
+      case AppStrings.none:
+        return Intensitylevel.none;
       case AppStrings.weak:
         return Intensitylevel.weak;
       case AppStrings.normal:
