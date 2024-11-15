@@ -24,21 +24,7 @@ class AppRouter {
                   return LoginScreen();
               });
         }),
-    GoRoute(
-        path: '/user_profile',
-        builder: (context, state) {
-          return const UserProfileScreen();
-        }),
-    GoRoute(
-        path: '/coffee_preference',
-        builder: (context, state) {
-          return CoffeePreferenceScreen();
-        }),
-    GoRoute(
-        path: '/cafe_info',
-        builder: (context, state) {
-          return const CafeInfoScreen();
-        }),
+
     GoRoute(
         path: '/user_profile',
         builder: (context, state) {
@@ -108,6 +94,6 @@ class AppRouter {
           unselectedItemColor: Colors.white70,
         ),
       ),
-    ),
-  ]);
+    ],
+  );
 }
