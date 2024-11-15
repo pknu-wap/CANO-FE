@@ -22,7 +22,7 @@ class OutlinedTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: height,
       child: TextField(
         cursorColor: AppColors.primary,

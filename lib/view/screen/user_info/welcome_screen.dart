@@ -18,7 +18,7 @@ class WelcomeScreen extends ConsumerWidget {
           onHorizontalDragEnd: (details) {
             if (details.primaryVelocity! < -50) {
               // 왼쪽으로 스와이프할 때 다음 화면으로 이동
-              context.push('/nextScreen');
+              context.push('/home');
             }
           },
           child: Column(
@@ -44,7 +44,7 @@ class WelcomeScreen extends ConsumerWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  context.push('/cafe_info');
+                  context.push('/home');
                 },
                 child: const Padding(
                   padding: EdgeInsets.only(bottom: 50),

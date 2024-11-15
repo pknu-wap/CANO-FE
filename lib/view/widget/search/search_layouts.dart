@@ -139,7 +139,7 @@ class CafeInfoLayout extends StatelessWidget {
                 Row(
                   children: [
                     Icon(
-                      Icons.heart_broken,
+                      Icons.favorite,
                       color: Colors.red,
                     ),
                     SizedBox(
@@ -154,7 +154,7 @@ class CafeInfoLayout extends StatelessWidget {
             Expanded(child: SizedBox()),
             Padding(
               padding: EdgeInsets.only(right: 15),
-              child: Icon(Icons.heart_broken, color: Colors.red),
+              child: Icon(Icons.favorite, color: Colors.red),
             )
           ]),
         ),
@@ -270,7 +270,7 @@ class MenuInfoLayout extends StatelessWidget {
                   Row(
                     children: [
                       Icon(
-                        Icons.heart_broken,
+                        Icons.favorite,
                         color: Colors.red,
                       ),
                       SizedBox(
@@ -285,7 +285,7 @@ class MenuInfoLayout extends StatelessWidget {
               Expanded(child: SizedBox()),
               Padding(
                 padding: const EdgeInsets.only(right: 15),
-                child: Icon(Icons.heart_broken, color: Colors.red),
+                child: Icon(Icons.favorite, color: Colors.red),
               ),
             ],
           ),

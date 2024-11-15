@@ -13,7 +13,6 @@ class CustomIconSvgButton extends StatelessWidget {
     Key? key,
     required this.imagePath,
     this.selectedImagePath = null,
-
     required this.onPressed,
     this.size = 50,
     this.idx,
