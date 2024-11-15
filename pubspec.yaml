@@ -102,6 +102,11 @@ flutter:
     - assets/images/kakao_login.svg
     - assets/images/google_login.svg
     - assets/images/naver_login.svg
+    - assets/images/star_on.svg
+    - assets/images/star_off.svg
+    - assets/images/like_on.svg
+    - assets/images/like_off.svg
+    - assets/images/coffee_ex.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
