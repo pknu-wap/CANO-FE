@@ -1,6 +1,6 @@
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/desginsystem/strings.dart';
-import 'package:cano/util/mediaquery.dart';
+import 'package:cano/utils/mediaquery.dart';
 import 'package:cano/view/widget/custom_button.dart';
 import 'package:cano/view/widget/custom_icon_button.dart';
 import 'package:cano/view/widget/outlined_text_field.dart';
