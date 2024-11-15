@@ -29,6 +29,7 @@ class AppStrings {
   static const searchCoffeeText = "찾는 커피가 없으신가요?";
   static const addCoffeeText = "커피 추가하기";
   static const price = "가격";
+
   //// 커피 맛 기준
   static const String acidity = "산미";
   static const String body = "바디감";
@@ -43,6 +44,16 @@ class AppStrings {
   static const String caffelatte = "카페라떼";
   static const String cappuccino = "카푸치노";
   static const String caramelMacchiato = "카라멜 마끼야또";
+
+  // 메뉴 등록
+  static const String registerMenu = "메뉴 등록";
+  static const String cafeName = "카페 이름";
+  static const String menuName = "메뉴 이름";
+  static const String priceText = "가격 (단위: 원)";
+  static const String registerImage = "대표 이미지 등록";
+  static const String cafeNameHint = "띄어쓰기 없이 작성해주세요! 예) OO까페";
+  static const String menuNameHint = "예) 아이스 아메리카노";
+  static const String priceHint = "단위나 쉼표 없이 적어주세요! 예) 4500";
 
   // 키워드 종류
   static const String niceMood = "분위기 좋은";

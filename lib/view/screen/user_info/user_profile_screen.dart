@@ -69,7 +69,7 @@ class UserProfileScreen extends ConsumerWidget {
                   children: [
                     ProfileImage(
                       imagePath: userInfo.profileImageUrl,
-                    ), // 기본 아이콘
+                    ),
                     Positioned(
                       right: 3,
                       bottom: 3,

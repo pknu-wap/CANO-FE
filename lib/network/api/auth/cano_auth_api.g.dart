@@ -14,10 +14,10 @@ class _CanoAuthApi implements CanoAuthApi {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= '/';
+    baseUrl ??= '/https://cano.com/';
   }
 
-  final _dio;
+  final Dio _dio;
 
   String? baseUrl;
 

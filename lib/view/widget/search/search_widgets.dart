@@ -1,6 +1,7 @@
 import 'package:cano/view/widget/search/search_layouts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../desginsystem/colors.dart';
 import '../../../desginsystem/strings.dart';
@@ -81,12 +82,14 @@ class PostSearchWidget extends ConsumerWidget {
               Text(AppStrings.searchCoffeeText,
                   style: TextStyle(color: Colors.grey, fontSize: 13)),
               TextButton(
-                  onPressed: () {},
+                  onPressed: () => context.push('/register_menu'),
                   style: TextButton.styleFrom(overlayColor: Colors.grey),
                   child: Text(
                     AppStrings.addCoffeeText,
                     style: TextStyle(
-                        color: AppColors.primary, fontWeight: FontWeight.bold),
+                        fontSize: 15,
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.bold),
                   ))
             ],
           ),

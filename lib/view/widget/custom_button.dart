@@ -1,5 +1,6 @@
 import 'package:cano/desginsystem/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class CustomButton extends StatelessWidget {
   final VoidCallback? onPressed; // 버튼 클릭 시 실행할 콜백 함수
@@ -43,6 +44,7 @@ class CustomButton extends StatelessWidget {
   }
 }
 
+// on, off 기능
 class CustomButton2 extends StatelessWidget {
   final VoidCallback onPressed;
   final String text;
@@ -89,6 +91,64 @@ class CustomButton2 extends StatelessWidget {
             fontSize: 15,
             color: isSelected ? selectedTextColor : unselectedTextColor,
             fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+}
+
+// 이미지가 있는 Custom Button
+class CustomButtonWihImage extends StatelessWidget {
+  final VoidCallback? onPressed;
+  final String text;
+  final Color buttonColor;
+  final Color textColor;
+  final double borderRadius;
+  final double? width;
+  final double height;
+  final String imagePath;
+
+  const CustomButtonWihImage({
+    super.key,
+    this.onPressed,
+    required this.text,
+    this.buttonColor = AppColors.buttonColor,
+    this.textColor = Colors.white,
+    this.borderRadius = 100,
+    this.width,
+    required this.height,
+    required this.imagePath,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: buttonColor,
+        disabledBackgroundColor: buttonColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(borderRadius), // 둥근 모서리
+        ),
+        minimumSize: width == null ? Size(double.infinity, height) : null,
+        fixedSize: width != null ? Size(width!, height) : null,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(
+            "assets/images/register_menu_icon.svg",
+          ),
+          // Icon(
+          //   Icons.coffee,
+          //   color: Colors.white,
+          // ),
+          SizedBox(width: 10),
+          Text(
+            text,
+            style: TextStyle(
+                fontSize: 16, color: textColor, fontWeight: FontWeight.bold),
+          ),
+        ],
       ),
     );
   }

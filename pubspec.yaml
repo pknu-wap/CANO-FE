@@ -107,6 +107,8 @@ flutter:
     - assets/images/like_on.svg
     - assets/images/like_off.svg
     - assets/images/coffee_ex.png
+    - assets/images/image_template.svg
+    - assets/images/register_menu_icon.svg
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

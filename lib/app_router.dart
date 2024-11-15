@@ -3,6 +3,7 @@ import 'package:cano/view/screen/auth/login_screen.dart';
 import 'package:cano/view/screen/cafe_info/cafe_info_screen.dart';
 import 'package:cano/view/screen/home/home_screen.dart';
 import 'package:cano/view/screen/my_page/my_page_screen.dart';
+import 'package:cano/view/screen/search/register_menu_screen.dart';
 import 'package:cano/view/screen/search/search_screen.dart';
 import 'package:cano/view/screen/user_info/coffee_preference_screen.dart';
 import 'package:cano/view/screen/user_info/keyword_preference_screen.dart';
@@ -82,6 +83,12 @@ class AppRouter {
       path: '/welcome',
       builder: (context, state) {
         return WelcomeScreen();
+      },
+    ),
+    GoRoute(
+      path: '/register_menu',
+      builder: (context, state) {
+        return RegisterMenuScreen();
       },
     ),
     StatefulShellRoute.indexedStack(
