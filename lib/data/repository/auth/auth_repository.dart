@@ -51,31 +51,32 @@ class AuthRepository {
     }
 
     if (kakaotoken != null) {
-      // final canoToken = await authApi.loginWithKakao(kakaotoken.accessToken);
-      // final loginResponse = await authApi.getTokens(canoToken);
-      // if (loginResponse.code == 200) {
-      //   await tokenManager.saveAccessToken(loginResponse.accessToken);
-      //   await tokenManager.saveRefreshToken(loginResponse.refreshToken);
-      //   onSuccess.call();
-      //   print("카카오 로그인 성공 - kakao Token: $kakaotoken");
-      // }
+      print("카카오 로그인 SDK 성공 - kakao Token: $kakaotoken");
 
-      onSuccess.call();
-      print("카카오 로그인 성공 - kakao Token: $kakaotoken");
-    }
+      try {
+        final loginResponse =
+            await authApi.loginWithKakao({"token": kakaotoken.accessToken});
+        await tokenManager.saveAccessToken(loginResponse.accessToken);
+        await tokenManager.saveRefreshToken(loginResponse.refreshToken);
+        onSuccess.call();
+      } catch (e) {
+        print("카카오 로그인 실패: $e");
+      }
+    } else
+      print("카카오 로그인 실패");
   }
 
-  // 카카오 로그아웃
-  // Future<void> kakaoLogout() async {
-  //   try {
-  //     await UserApi.instance.logout();
-  //     print('로그아웃 성공, SDK에서 토큰 삭제');
-  //   } catch (error) {
-  //     print('로그아웃 실패, SDK에서 토큰 삭제 $error');
-  //   }
-  // }
+// 카카오 로그아웃
+// Future<void> kakaoLogout() async {
+//   try {
+//     await UserApi.instance.logout();
+//     print('로그아웃 성공, SDK에서 토큰 삭제');
+//   } catch (error) {
+//     print('로그아웃 실패, SDK에서 토큰 삭제 $error');
+//   }
+// }
 
-  // 카카오 연결 끊기(회원 탈퇴)
+// 카카오 연결 끊기(회원 탈퇴)
   Future<void> unLinkWithKakao() async {
     try {
       await UserApi.instance.unlink();
@@ -119,7 +120,7 @@ class AuthRepository {
     }
   }
 
-  // 카카오의 연결 끊기와 유사
+// 카카오의 연결 끊기와 유사
   Future<void> logoutWithGoogle() async {
     try {
       await GoogleSignIn().signOut();
@@ -127,7 +128,6 @@ class AuthRepository {
       print("구글 로그아웃 실패: $error");
     }
   }
-}
 
 // Future<void> refreshKakaoToken(VoidCallback onSuccess, OAuthToken token) async {
 //   try {
@@ -184,3 +184,4 @@ class AuthRepository {
 //     print("토큰 재발급 실패: $error");
 //   }
 // }
+}

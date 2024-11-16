@@ -20,8 +20,6 @@ LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LoginResponse {
-  String get code => throw _privateConstructorUsedError;
-  String get message => throw _privateConstructorUsedError;
   String get accessToken => throw _privateConstructorUsedError;
   String get refreshToken => throw _privateConstructorUsedError;
 
@@ -41,8 +39,7 @@ abstract class $LoginResponseCopyWith<$Res> {
           LoginResponse value, $Res Function(LoginResponse) then) =
       _$LoginResponseCopyWithImpl<$Res, LoginResponse>;
   @useResult
-  $Res call(
-      {String code, String message, String accessToken, String refreshToken});
+  $Res call({String accessToken, String refreshToken});
 }
 
 /// @nodoc
@@ -60,20 +57,10 @@ class _$LoginResponseCopyWithImpl<$Res, $Val extends LoginResponse>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? code = null,
-    Object? message = null,
     Object? accessToken = null,
     Object? refreshToken = null,
   }) {
     return _then(_value.copyWith(
-      code: null == code
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
-              as String,
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
       accessToken: null == accessToken
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
@@ -94,8 +81,7 @@ abstract class _$$LoginResponseImplCopyWith<$Res>
       __$$LoginResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String code, String message, String accessToken, String refreshToken});
+  $Res call({String accessToken, String refreshToken});
 }
 
 /// @nodoc
@@ -111,20 +97,10 @@ class __$$LoginResponseImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? code = null,
-    Object? message = null,
     Object? accessToken = null,
     Object? refreshToken = null,
   }) {
     return _then(_$LoginResponseImpl(
-      code: null == code
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
-              as String,
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
       accessToken: null == accessToken
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
@@ -141,18 +117,11 @@ class __$$LoginResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LoginResponseImpl implements _LoginResponse {
   const _$LoginResponseImpl(
-      {required this.code,
-      required this.message,
-      required this.accessToken,
-      required this.refreshToken});
+      {required this.accessToken, required this.refreshToken});
 
   factory _$LoginResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$LoginResponseImplFromJson(json);
 
-  @override
-  final String code;
-  @override
-  final String message;
   @override
   final String accessToken;
   @override
@@ -160,7 +129,7 @@ class _$LoginResponseImpl implements _LoginResponse {
 
   @override
   String toString() {
-    return 'LoginResponse(code: $code, message: $message, accessToken: $accessToken, refreshToken: $refreshToken)';
+    return 'LoginResponse(accessToken: $accessToken, refreshToken: $refreshToken)';
   }
 
   @override
@@ -168,8 +137,6 @@ class _$LoginResponseImpl implements _LoginResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoginResponseImpl &&
-            (identical(other.code, code) || other.code == code) &&
-            (identical(other.message, message) || other.message == message) &&
             (identical(other.accessToken, accessToken) ||
                 other.accessToken == accessToken) &&
             (identical(other.refreshToken, refreshToken) ||
@@ -178,8 +145,7 @@ class _$LoginResponseImpl implements _LoginResponse {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, code, message, accessToken, refreshToken);
+  int get hashCode => Object.hash(runtimeType, accessToken, refreshToken);
 
   /// Create a copy of LoginResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -199,18 +165,12 @@ class _$LoginResponseImpl implements _LoginResponse {
 
 abstract class _LoginResponse implements LoginResponse {
   const factory _LoginResponse(
-      {required final String code,
-      required final String message,
-      required final String accessToken,
+      {required final String accessToken,
       required final String refreshToken}) = _$LoginResponseImpl;
 
   factory _LoginResponse.fromJson(Map<String, dynamic> json) =
       _$LoginResponseImpl.fromJson;
 
-  @override
-  String get code;
-  @override
-  String get message;
   @override
   String get accessToken;
   @override
