@@ -81,33 +81,8 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/images/kakao_login_medium_wide.png
-    - assets/images/android_light_rd_na.svg
-    - assets/images/kakao_login_icon.png
-    - assets/images/051_americano.jpg
-    - assets/images/051_icetea.jpg
-    - assets/images/051_snowmilk.jpg
-    - assets/images/051_vanilalatte.jpg
-    - assets/images/051_background1.png
-    - assets/images/051_background2.png
-    - assets/images/051_background3.png
-    - assets/images/051_background4.png
-    - assets/images/051_background5.png
+    - assets/images/
     - assets/config/.env
-    - assets/images/man.png
-    - assets/images/woman.png
-    - assets/images/starbucks_icon.svg
-    - assets/images/americano.png
-    - assets/images/info_icon.svg
-    - assets/images/cano_icon.svg
-    - assets/images/kakao_login.svg
-    - assets/images/google_login.svg
-    - assets/images/naver_login.svg
-    - assets/images/star_on.svg
-    - assets/images/star_off.svg
-    - assets/images/like_on.svg
-    - assets/images/like_off.svg
-    - assets/images/coffee_ex.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
