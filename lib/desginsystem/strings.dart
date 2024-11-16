@@ -1,5 +1,4 @@
 class AppStrings {
-
   static const String appName = "CANO";
   static const String login = "로그인";
   static const String emailPlaceholder = "이메일을 입력해주세요.";
@@ -55,12 +54,6 @@ class AppStrings {
   static const searchCoffeeText = "찾는 커피가 없으신가요?";
   static const addCoffeeText = "커피 추가하기";
   static const price = "가격";
-  //// 커피 맛 기준
-  static const String acidity = "산미";
-  static const String body = "바디감";
-  static const String bitterness = "쓴맛";
-  static const String sweetness = "달달함";
-  static const String aroma = "아로마";
 
   // 커피 종류
   static const String americano = "아메리카노";
