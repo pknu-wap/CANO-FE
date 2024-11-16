@@ -12,7 +12,8 @@ abstract class CanoAuthApi {
   Future<LoginResponse> loginWithKakao(@Body() Map<String, String> token);
 
   @POST("api/auth/reissue")
-  Future<String> reissueAcesstoken(@Body() Map<String, String> refreshToken);
+  Future<LoginResponse> reissueAccessToken(
+      @Body() Map<String, String> refreshToken);
 
   @GET("api/user")
   Future<LoginResponse> getTokens(@Header("Authorization") String token);

@@ -28,6 +28,10 @@ class AuthViewModel extends StateNotifier<void> {
   Future<void> logoutWithGoogle() async {
     await authRepository.logoutWithGoogle();
   }
+
+  Future<void> reissueAceesToken() async {
+    await authRepository.reissueAccessToken();
+  }
 }
 
 final authProvider = StateNotifierProvider.autoDispose<AuthViewModel, void>(
