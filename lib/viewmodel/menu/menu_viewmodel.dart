@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cano/data/model/menu/menu_info.dart';
+import 'package:cano/data/repository/menu_repository.dart';
 
 class MenuViewModel extends StateNotifier<MenuInfo> {
   MenuViewModel._internal(super.state);
@@ -57,15 +58,27 @@ class MenuViewModel extends StateNotifier<MenuInfo> {
     return _instance;
   }
 
-  // Future<void> getMenuName() async {}
+  final MenuRepository menuRepository = MenuRepository();
 
-  // Future<void> getReview() async {}
+  Future<void> getMenuName() async {
+    menuRepository.getMenuName();
+  }
 
-  // Future<void> getLikes() async {}
+  Future<void> getReview() async {
+    menuRepository.getReview();
+  }
 
-  // Future<void> getRatings() async {}
+  Future<void> getLikes() async {
+    menuRepository.getLikes();
+  }
 
-  // Future<void> getFlavorAttribute() async {}
+  Future<void> getRatings() async {
+    menuRepository.getRatings();
+  }
+
+  Future<void> getFlavorAttribute() async {
+    menuRepository.getFlavorAttribute();
+  }
 }
 
 // final menuProvider = StateNotifierProvider.autoDispose<MenuViewModel, MenuInfo>(
