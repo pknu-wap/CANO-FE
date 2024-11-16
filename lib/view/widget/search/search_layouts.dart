@@ -1,9 +1,12 @@
-import 'package:cano/data/model/cafe_info.dart';
+import 'package:cano/utils/format_string.dart';
+import 'package:cano/utils/mediaquery.dart';
+import 'package:cano/view/widget/search/intensity_bar.dart';
+import 'package:cano/view/widget/search/star_rating.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../data/model/menu_info.dart';
 import '../../../desginsystem/colors.dart';
+import '../../../desginsystem/strings.dart';
 
 class SearchKeyword extends StatelessWidget {
   final VoidCallback onPressed;
@@ -77,100 +80,6 @@ class SearchKeyword extends StatelessWidget {
   }
 }
 
-class CafeInfoLayout extends StatelessWidget {
-  final CafeInfo cafeInfo;
-
-  const CafeInfoLayout({
-    Key? key,
-    required this.cafeInfo,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 5,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 30),
-          child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            ClipOval(
-              child: Container(
-                height: 80,
-                width: 80,
-                color: Colors.red,
-                child: SvgPicture.asset("assets/images/starbucks_icon.svg"),
-              ),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  cafeInfo.cafeName,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 5),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.star,
-                      color: Colors.yellow,
-                    ),
-                    SizedBox(
-                      width: 2,
-                    ),
-                    Text(
-                      cafeInfo.rating.toString(),
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      "(${cafeInfo.ratingCount})",
-                      style: TextStyle(color: Colors.black87),
-                    )
-                  ],
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.favorite,
-                      color: Colors.red,
-                    ),
-                    SizedBox(
-                      width: 2,
-                    ),
-                    Text(cafeInfo.likeCount.toString(),
-                        style: TextStyle(fontWeight: FontWeight.bold))
-                  ],
-                ),
-              ],
-            ),
-            Expanded(child: SizedBox()),
-            Padding(
-              padding: EdgeInsets.only(right: 15),
-              child: Icon(Icons.favorite, color: Colors.red),
-            )
-          ]),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Divider(
-          color: Colors.black, // 검은색
-          thickness: 1.0, // 두께
-          height: 20.0, // 수직 여백
-        ),
-      ],
-    );
-  }
-}
-
 class MenuInfoLayout extends StatelessWidget {
   final MenuInfo menuInfo;
 
@@ -183,120 +92,151 @@ class MenuInfoLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          height: 10,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 30),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: 100,
-                height: 120,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0), // 둥근 모서리
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 10, // 그림자 흐림 반경
-                      offset: Offset(0, 1), // 그림자 위치
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0), // 둥근 모서리에 맞추기
-                  child: Image.asset(
-                    'assets/images/americano.png',
-                    fit: BoxFit.cover, // 이미지 크기 조정
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: mediaWidth(context, 0.24),
+              height: mediaHeight(context, 0.12),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 3,
+                    offset: Offset(0, 0.1),
                   ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: Image.asset(
+                  'assets/images/coffee_ex.png',
                 ),
               ),
-              SizedBox(
-                width: 18,
-              ),
-              Column(
+            ),
+            SizedBox(
+              width: 18,
+            ),
+            Expanded(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        menuInfo.menuName,
+                        "${menuInfo.cafeName} ${menuInfo.menuName}",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
+                      Icon(
+                          menuInfo.isLike
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          color: Colors.red),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        menuInfo.rating.toString(),
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      SizedBox(width: 3),
+                      StarRating(rating: menuInfo.rating),
                       SizedBox(
-                        width: 10,
+                        width: 3,
                       ),
                       Text(
-                        "${menuInfo.price}원",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        width: 10,
+                        "(${menuInfo.ratingCount})",
+                        style: TextStyle(color: Colors.black12, fontSize: 12),
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        AppStrings.price,
+                        style: TextStyle(fontSize: 12),
                       ),
                       Text(
-                        "(${menuInfo.cafeName})",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        "${formatWithComma(menuInfo.price)}원",
+                        style: TextStyle(fontSize: 12),
                       ),
+                    ],
+                  ),
+                  SizedBox(height: 3),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        AppStrings.acidity,
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      IntensityBar(intensity: menuInfo.acidity)
                     ],
                   ),
                   SizedBox(
                     height: 3,
                   ),
-                  Text(
-                    menuInfo.menuInfoText,
-                    style: TextStyle(fontSize: 12),
-                  ),
-                  SizedBox(height: 15),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(
-                        Icons.star,
-                        color: Colors.yellow,
-                      ),
-                      SizedBox(
-                        width: 4,
-                      ),
                       Text(
-                        menuInfo.rating.toString(),
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        AppStrings.body,
+                        style: TextStyle(fontSize: 12),
                       ),
-                      Text(
-                        "(${menuInfo.ratingCount})",
-                        style: TextStyle(color: Colors.black87),
-                      )
+                      IntensityBar(intensity: menuInfo.body)
                     ],
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(
-                        Icons.favorite,
-                        color: Colors.red,
+                      Text(
+                        AppStrings.bitterness,
+                        style: TextStyle(fontSize: 12),
                       ),
-                      SizedBox(
-                        width: 4,
+                      IntensityBar(intensity: menuInfo.bitterness)
+                    ],
+                  ),
+                  SizedBox(
+                    height: 3,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        AppStrings.sweetness,
+                        style: TextStyle(fontSize: 12),
                       ),
-                      Text(menuInfo.likeCount.toString(),
-                          style: TextStyle(fontWeight: FontWeight.bold))
+                      IntensityBar(intensity: menuInfo.sweetness)
+                    ],
+                  ),
+                  SizedBox(
+                    height: 3,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        AppStrings.aroma,
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      Text(
+                        joinWithComma(menuInfo.aromas),
+                        style:
+                            TextStyle(fontSize: 12, color: AppColors.primary),
+                      )
                     ],
                   ),
                 ],
               ),
-              Expanded(child: SizedBox()),
-              Padding(
-                padding: const EdgeInsets.only(right: 15),
-                child: Icon(Icons.favorite, color: Colors.red),
-              ),
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 15,
-        ),
-        Divider(
-          color: Colors.black, // 검은색
-          thickness: 1.0, // 두께
-          height: 20.0, // 수직 여백
+            ),
+          ],
         ),
       ],
     );

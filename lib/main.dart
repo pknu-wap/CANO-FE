@@ -6,8 +6,18 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cano/desginsystem/colors.dart';
 import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter/services.dart';
 
 Future<void> main() async {
+  await dotenv.load(fileName: 'assets/config/.env');
+
+  // iOS에 환경변수 전달
+  const platform = MethodChannel("com.example.cano/secure_keys");
+  platform.invokeMethod('setEnv', {
+    "KAKAO_NATIVE_APP_KEY": dotenv.env['KAKAO_NATIVE_APP_KEY'],
+  });
+
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   FlutterNativeSplash.remove();
@@ -17,7 +27,7 @@ Future<void> main() async {
     nativeAppKey: kakaoNativeAppKey,
   );
 
-  runApp(ProviderScope(child: MyApp()));
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
