@@ -17,6 +17,10 @@ class RegisterMenuScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final registerMenuRequest = ref.watch(registerMenuProvider);
+    final registerAvailable = registerMenuRequest.imageUrl != '' &&
+        registerMenuRequest.cafeName != '' &&
+        registerMenuRequest.menuName != '' &&
+        registerMenuRequest.price != 0;
 
     ref.listen(registerMenuProvider, (prev, next) {
       print("현재 상태: $next");
@@ -83,7 +87,7 @@ class RegisterMenuScreen extends ConsumerWidget {
                 hintText: AppStrings.priceHint,
                 onChange: (text) => ref
                     .read(registerMenuProvider.notifier)
-                    .setPrice(int.parse(text))),
+                    .setPrice(text != "" ? int.parse(text) : 0)),
             SizedBox(height: 15),
             Text(
               AppStrings.registerImage,
@@ -138,6 +142,9 @@ class RegisterMenuScreen extends ConsumerWidget {
             CustomButtonWihImage(
                 text: AppStrings.registerMenu,
                 height: 40,
+                onPressed: () => registerAvailable ? {} : {},
+                buttonColor:
+                    registerAvailable ? AppColors.buttonColor : Colors.grey,
                 imagePath: 'assets/images/register_menu_icon.svg'),
             SizedBox(
               height: 20,

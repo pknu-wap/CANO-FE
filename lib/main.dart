@@ -1,10 +1,10 @@
 import 'package:cano'
     '/app_router.dart';
+import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/utils/key_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cano/desginsystem/colors.dart';
 import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
 
 Future<void> main() async {
@@ -32,6 +32,9 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.white,
             surfaceTintColor: AppColors.primary,
           ),
+          textSelectionTheme: TextSelectionThemeData(
+              cursorColor: AppColors.primary,
+              selectionHandleColor: AppColors.primary),
           primaryColor: const Color(0xFF3E160C),
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(
             backgroundColor: AppColors.primary,
