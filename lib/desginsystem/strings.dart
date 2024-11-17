@@ -70,4 +70,10 @@ class AppStrings {
   static const String todayCoffeSearchText = "오늘의 커피를 검색해보세요.";
   static const String noSearchResultText = "대연동 근처에는 카노 카페의\n검색결과가 없습니다.";
   static const String addCafeText = "원하는 정보를 얻지 못했다면 새로운 카페를 추가해보세요";
+
+  // 메뉴 화면
+  static const String menuIsWrong = "메뉴의 정보가 잘못되었나요?";
+
+  // 리뷰 쓰기 화면
+  static const String reviewHint = "더 나은 서비스 제공을 위해 해당 메뉴에 대한 정보를 위주로 작성해주세요!";
 }

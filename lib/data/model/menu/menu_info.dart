@@ -17,6 +17,8 @@ class MenuInfo with _$MenuInfo {
       required double bitterness,
       required double sweetness,
       required List<String> aromas,
+      Map<String, int>? aromaCounts,
+      Map<int, int>? ratingCountsByStar,
       required String menuImageUrl}) = _MenuInfo;
 
   factory MenuInfo.fromJson(Map<String, dynamic> json) =>
