@@ -18,6 +18,8 @@ class AuthRepository {
     return _instance;
   }
 
+  // final dio = Dio().interceptors.add(AuthInterceptor());
+
   static final authApi = CanoAuthApi(Dio());
   static final tokenManager = CanoTokenManager();
 
@@ -128,21 +130,6 @@ class AuthRepository {
       await GoogleSignIn().signOut();
     } catch (error) {
       print("구글 로그아웃 실패: $error");
-    }
-  }
-
-  Future<void> reissueAccessToken() async {
-    try {
-      final refreshToken = await tokenManager.getRefreshToken();
-      final loginResponse =
-          await authApi.reissueAccessToken({"refreshToken": refreshToken!});
-      print("Access Token 재발급 성공 - access Token: ${loginResponse.accessToken}");
-      print(
-          "Refresh Token 재발급 성공 - refresh Token: ${loginResponse.refreshToken}");
-      await tokenManager.saveAccessToken(loginResponse.accessToken);
-      await tokenManager.saveRefreshToken(loginResponse.refreshToken);
-    } catch (e) {
-      print("토큰 재발급 실패: $e");
     }
   }
 
