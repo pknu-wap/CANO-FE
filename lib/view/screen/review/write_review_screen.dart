@@ -159,7 +159,7 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                       borderSide: const BorderSide(color: AppColors.barBorder),
                     ),
                     hintStyle: const TextStyle(
-                      fontSize: 10,
+                      fontSize: 12,
                     ),
                     filled: true,
                     fillColor: AppColors.barBg,
@@ -202,12 +202,12 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                             ),
                           ),
                           Positioned(
-                            top: -5,
-                            right: -5,
+                            top: -10,
+                            right: -3,
                             child: IconButton(
                               icon: const Icon(
                                 Icons.cancel,
-                                color: Colors.red,
+                                color: Colors.white,
                                 size: 20,
                               ),
                               onPressed: () => removeImage(i),
