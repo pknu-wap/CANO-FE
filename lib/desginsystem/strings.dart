@@ -1,4 +1,6 @@
 class AppStrings {
+  static const String baseurl = "http://3.34.234.63:8080/";
+
   static const String appName = "CANO";
   static const String login = "로그인";
   static const String emailPlaceholder = "이메일을 입력해주세요.";
@@ -73,4 +75,34 @@ class AppStrings {
 
   // 메인 화면
   static const String mainTitle = "오늘도 CANO";
+}
+
+class FlavorDescriptions {
+  // 산미 관련
+  static const String acidityVeryStrong = "산미가 매우 강한";
+  static const String acidityStrong = "산미가 강한";
+  static const String acidityModerate = "산미가 적당한";
+  static const String acidityWeak = "산미가 약한";
+  static const String acidityNone = "산미가 없는";
+
+  // 바디감 관련
+  static const String bodyVeryStrong = "바디감이 매우 강한";
+  static const String bodyStrong = "바디감이 강한";
+  static const String bodyModerate = "바디감이 적당한";
+  static const String bodyWeak = "바디감이 약한";
+  static const String bodyNone = "바디감이 없는";
+
+  // 쓴맛 관련
+  static const String bitternessVeryStrong = "쓴맛이 매우 강한";
+  static const String bitternessStrong = "쓴맛이 강한";
+  static const String bitternessModerate = "쓴맛이 적당한";
+  static const String bitternessWeak = "쓴맛이 약한";
+  static const String bitternessNone = "쓴맛이 없는";
+
+  // 단맛 관련
+  static const String sweetnessVeryStrong = "단맛이 매우 강한";
+  static const String sweetnessStrong = "단맛이 강한";
+  static const String sweetnessModerate = "단맛이 적당한";
+  static const String sweetnessWeak = "단맛이 약한";
+  static const String sweetnessNone = "단맛이 없는";
 }

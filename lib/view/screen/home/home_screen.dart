@@ -1,39 +1,48 @@
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/view/widget/search/search_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../desginsystem/strings.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            toolbarHeight: 35,
+            floating: true,
+            toolbarHeight: 30,
             backgroundColor: AppColors.primary,
             flexibleSpace: FlexibleSpaceBar(
-              titlePadding: EdgeInsets.only(
-                left: 30,
+                background: Padding(
+              padding: const EdgeInsets.only(top: 30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(left: 30),
+                    child: Text(
+                      AppStrings.mainTitle,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    ),
+                  ),
+                ],
               ),
-              title: Text(
-                AppStrings.mainTitle,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
-              ),
-            ),
+            )),
           ),
           SliverPersistentHeader(
             delegate: _SearchBarDelegate(),
             pinned: true,
-            floating: true,
+            floating: false,
           ),
           SliverFillRemaining(
             child: Column(
@@ -54,9 +63,9 @@ class HomeScreen extends StatelessWidget {
 // 검색창을 고정하기 위한 SliverPersistentHeaderDelegate
 class _SearchBarDelegate extends SliverPersistentHeaderDelegate {
   @override
-  double get maxExtent => 80;
+  double get maxExtent => 90;
   @override
-  double get minExtent => 80;
+  double get minExtent => 90;
   final appBarSearchController = TextEditingController();
 
   @override
@@ -66,7 +75,7 @@ class _SearchBarDelegate extends SliverPersistentHeaderDelegate {
       color: AppColors.primary,
       child: Padding(
         padding:
-            const EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 20),
+            const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 20),
         child: AppBarSearchField(
             hintText: AppStrings.todayCoffeSearchText,
             height: 40,

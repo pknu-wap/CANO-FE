@@ -11,7 +11,8 @@ class AuthViewModel extends StateNotifier<void> {
   factory AuthViewModel() {
     return _instance;
   }
-  final AuthRepository authRepository = AuthRepository();
+
+  static final authRepository = AuthRepository();
 
   Future<void> loginWithKakao(VoidCallback onSuccess) async {
     await authRepository.loginWithKakao(onSuccess);
