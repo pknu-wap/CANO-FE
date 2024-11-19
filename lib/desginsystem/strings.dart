@@ -75,6 +75,7 @@ class AppStrings {
 
   // 메인 화면
   static const String mainTitle = "오늘도 CANO";
+  static const String coffee = "커피";
 }
 
 class FlavorDescriptions {

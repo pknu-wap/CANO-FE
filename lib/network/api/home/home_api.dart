@@ -11,9 +11,9 @@ abstract class HomeApi {
   factory HomeApi(Dio dio, {String baseUrl}) = _HomeApi;
 
   @GET("api/menus/attribute")
-  Future<HomeMenu> getHomeMenusWithType(
+  Future<List<HomeMenu>> getHomeMenusWithType(
       @Query("type") String type, @Query("degree") String degree);
 
   @GET("/api/menus/aroma")
-  Future<HomeMenu> getHomeMenusWithAroma(@Query("type") String aromas);
+  Future<List<HomeMenu>> getHomeMenusWithAroma(@Query("type") String aromas);
 }

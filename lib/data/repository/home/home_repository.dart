@@ -15,11 +15,12 @@ class HomeRepository {
   static final dio = Dio();
   static final homeApi = HomeApi(dio);
 
-  Future<HomeMenu> getHomeMenusWithType(String type, String degree) async {
+  Future<List<HomeMenu>> getHomeMenusWithType(
+      String type, String degree) async {
     return await homeApi.getHomeMenusWithType(type, degree);
   }
 
-  Future<HomeMenu> getHomeMenusWithAroma(String aromas) async {
+  Future<List<HomeMenu>> getHomeMenusWithAroma(String aromas) async {
     return await homeApi.getHomeMenusWithAroma(aromas);
   }
 
