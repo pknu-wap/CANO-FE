@@ -11,6 +11,9 @@ import 'package:cano/viewmodel/review/review_viewmodel.dart';
 import 'package:cano/data/model/review/review_info.dart';
 import 'package:intl/intl.dart';
 import 'package:cano/view/screen/review/write_review_screen.dart';
+import 'package:cano/view/widget/menu/flavor_profile_widget.dart';
+import 'package:cano/view/widget/menu/rating_breakdown_widget.dart';
+import 'package:cano/view/widget/menu/review_card_widget.dart';
 
 class MenuScreen extends ConsumerWidget {
   const MenuScreen({super.key});
@@ -132,9 +135,7 @@ class MenuScreen extends ConsumerWidget {
             // 별점 별로 정리
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Column(
-                children: _buildRatingBreakdown(menuData),
-              ),
+              child: RatingBreakdownWidget(menuData: menuData),
             ),
 
             const SizedBox(
@@ -144,9 +145,8 @@ class MenuScreen extends ConsumerWidget {
             // 맛
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Column(children: [
-                _buildFlavorProfile(menuData),
-              ]),
+              child:
+                  Column(children: [FlavorProfileWidget(menuData: menuData)]),
             ),
 
             const SizedBox(
@@ -210,9 +210,9 @@ class MenuScreen extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Column(
-                children: [
-                  ..._buildReviewList(reviewData),
-                ],
+                children: reviewData
+                    .map((review) => ReviewCardWidget(review: review))
+                    .toList(),
               ),
             ),
 
@@ -268,88 +268,6 @@ class MenuScreen extends ConsumerWidget {
     );
   }
 
-  List<Widget> _buildRatingBreakdown(MenuInfo menuData) {
-    if (menuData.ratingCountsByStar == null) return [];
-    return menuData.ratingCountsByStar!.entries.map((entry) {
-      final star = entry.key;
-      final count = entry.value;
-      final total = menuData.ratingCount;
-      final percentage = (total > 0) ? (count / total * 100).toInt() : 0;
-      return Row(
-        children: [
-          Text('$star', style: const TextStyle(fontSize: 16)),
-          const Icon(Icons.star, color: AppColors.star, size: 16),
-          Expanded(
-            child: LinearProgressIndicator(
-              value: count / total,
-              backgroundColor: AppColors.barBg,
-              color: AppColors.star,
-            ),
-          ),
-          Text("$percentage%"),
-        ],
-      );
-    }).toList();
-  }
-
-  Widget _buildFlavorProfile(MenuInfo menuData) {
-    final attributes = [
-      {'label': '산미', 'value': menuData.acidity},
-      {'label': '바디감', 'value': menuData.body},
-      {'label': '쓴맛', 'value': menuData.bitterness},
-      {'label': '달달함', 'value': menuData.sweetness},
-    ];
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: attributes.map((attr) {
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: 60,
-                child: Text(
-                  attr['label'] as String,
-                  style: const TextStyle(
-                    color: AppColors.basicText,
-                  ),
-                ),
-              ),
-              Expanded(
-                child: SizedBox(
-                  width: 200,
-                  height: 15,
-                  child: LinearProgressIndicator(
-                    value: attr['value'] as double,
-                    color: AppColors.bar,
-                    backgroundColor: Colors.white,
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 60,
-                child: Text(
-                  // 퍼센트
-                  (attr['value'] != 0)
-                      ? '${((attr['value'] as double) * 100).toStringAsFixed(0)}%'
-                      : '정보 없음',
-
-                  style: TextStyle(
-                      color: (attr['value'] == 0)
-                          ? AppColors.secondary
-                          : AppColors.basicText),
-                  textAlign: TextAlign.right,
-                ),
-              )
-            ],
-          ),
-        );
-      }).toList(),
-    );
-  }
-
   double _calculateAverageRating(MenuInfo menuData) {
     if (menuData.ratingCountsByStar == null ||
         menuData.ratingCountsByStar!.isEmpty) {
@@ -359,139 +277,4 @@ class MenuScreen extends ConsumerWidget {
         .fold(0, (sum, entry) => sum + (entry.key * entry.value));
     return totalRatings / menuData.ratingCount;
   }
-}
-
-List<Widget> _buildReviewList(List<ReviewInfo> reviewList) {
-  return reviewList.map((review) {
-    return Card(
-      elevation: 0,
-      shape: const RoundedRectangleBorder(
-        side: BorderSide.none,
-      ),
-      margin: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // 첫 번째 행: 아바타, 유저 정보, 더보기 아이콘
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // 유저 아바타
-                CircleAvatar(
-                  backgroundColor: Colors.grey.shade300,
-                  child: Text(
-                    review.userName.isNotEmpty ? review.userName[0] : 'U',
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                // 유저 정보 (이름, 날짜, 별점)
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        review.userName,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        DateFormat('yyyy.MM.dd').format(review.timestamp),
-                        style: TextStyle(
-                          color: Colors.grey.shade600,
-                          fontSize: 12,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Row(
-                        children: List.generate(
-                          int.parse(review.rating),
-                          (index) => const Icon(
-                            Icons.star,
-                            color: AppColors.star,
-                            size: 16,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                // 더보기 아이콘
-                IconButton(
-                  icon: const Icon(Icons.more_vert),
-                  onPressed: () {
-                    // 더보기 버튼 클릭 시 동작 구현
-                  },
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            // 리뷰 텍스트
-            Text(
-              review.reviewText,
-              style: const TextStyle(fontSize: 14),
-            ),
-            const SizedBox(height: 8),
-            // 리뷰 이미지 (있을 경우)
-            if (review.reviewImageUrl.isNotEmpty &&
-                review.reviewImageUrl.any((url) => url.isNotEmpty)) ...[
-              SizedBox(
-                height: 100,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: review.reviewImageUrl.length,
-                  itemBuilder: (context, index) {
-                    final imageUrl = review.reviewImageUrl[index];
-                    if (imageUrl.isEmpty) return const SizedBox.shrink();
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: Image.network(
-                          imageUrl,
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.cover,
-                          loadingBuilder: (context, child, loadingProgress) {
-                            if (loadingProgress == null) return child;
-                            return Container(
-                              width: 100,
-                              height: 100,
-                              color: Colors.grey.shade300,
-                              child: const Center(
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  color: AppColors.star,
-                                ),
-                              ),
-                            );
-                          },
-                          errorBuilder: (context, error, stackTrace) {
-                            return Container(
-                              width: 100,
-                              height: 100,
-                              color: Colors.grey.shade300,
-                              child: const Icon(
-                                Icons.broken_image,
-                                color: Colors.white,
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ],
-        ),
-      ),
-    );
-  }).toList();
 }

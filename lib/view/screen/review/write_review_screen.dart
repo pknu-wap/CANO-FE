@@ -22,7 +22,7 @@ class WriteReviewScreen extends ConsumerStatefulWidget {
 }
 
 class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
-  double rating = 5.0;
+  double rating = 0.0;
   final TextEditingController reviewController = TextEditingController();
   List<String> uploadedImagePaths = [];
   final ImagePicker picker = ImagePicker();
@@ -71,6 +71,10 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
     // Watch the review list provider
     final reviewData = ref.watch(reviewListProvider);
 
+    ref.listen(reviewListProvider, (prev, next) {
+      print("현재 상태: $next");
+    });
+
     // Helper function to get Intensitylevel from description
     Intensitylevel? getIntensityLevel(String description) {
       return Intensitylevel.values.firstWhere(
@@ -102,7 +106,7 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
               children: [
                 // Title
                 const Text(
-                  '커피가 어땠나요?',
+                  AppStrings.howIsCoffee,
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w900,
@@ -111,7 +115,7 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                 const SizedBox(height: 8),
                 // Rating Section
                 const Text(
-                  '전체 평점',
+                  AppStrings.wholeRating,
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
@@ -176,7 +180,7 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                 const SizedBox(height: 16),
                 // Image Upload Section
                 const Text(
-                  '사진 업로드',
+                  AppStrings.uploadPhoto,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -573,12 +577,14 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                     child: ElevatedButton(
                       onPressed: () async {
                         final reviewText = reviewController.text.trim();
-                        if (reviewText.isEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('리뷰를 입력해주세요.')),
-                          );
-                          return;
-                        }
+                        // if (reviewText.isEmpty) {
+                        //   // 리뷰 작성 안했을 시
+                        //   ScaffoldMessenger.of(context).showSnackBar(
+                        //     const SnackBar(
+                        //         content: Text(AppStrings.uploadReviewAlert)),
+                        //   );
+                        //   return;
+                        // }
 
                         // Ideally, upload images to a server and get their URLs
                         // For demonstration, we'll use local file paths
@@ -612,14 +618,17 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
 
                         // Optionally, show a success message
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('리뷰가 작성되었습니다!')),
+                          const SnackBar(
+                              content: Text(AppStrings.submitReviewAlert)),
                         );
 
                         // Navigate back or reset the form
                         Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.floatingButton,
+                        backgroundColor: rating == 0
+                            ? Colors.grey
+                            : AppColors.floatingButton,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0),
                         ),
@@ -634,7 +643,7 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                           ),
                           SizedBox(width: 8),
                           Text(
-                            '리뷰 쓰기',
+                            AppStrings.writeReview,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
