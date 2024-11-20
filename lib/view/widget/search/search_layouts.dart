@@ -126,7 +126,7 @@ class MenuInfoLayout extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "${menuInfo.cafeName} ${menuInfo.menuName}",
+                        menuInfo.name,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Icon(
@@ -142,16 +142,16 @@ class MenuInfoLayout extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        menuInfo.rating.toString(),
+                        menuInfo.score.toString(),
                         style: TextStyle(fontSize: 12),
                       ),
                       SizedBox(width: 3),
-                      StarRating(rating: menuInfo.rating),
+                      StarRating(rating: menuInfo.score),
                       SizedBox(
                         width: 3,
                       ),
                       Text(
-                        "(${menuInfo.ratingCount})",
+                        "(${menuInfo.scoreCount})",
                         style: TextStyle(color: Colors.black12, fontSize: 12),
                       )
                     ],

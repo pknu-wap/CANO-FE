@@ -1,4 +1,8 @@
+import 'package:cano/data/model/menu_info.dart';
+import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../network/api/search/search_api.dart';
 
 const String recentKeywordKey = "recent_keyword";
 
@@ -9,6 +13,12 @@ class SearchRepository {
 
   factory SearchRepository() {
     return _instance;
+  }
+
+  static final searchApi = SearchApi(Dio());
+
+  Future<List<MenuInfo>> searchWithKeyword(String query) async {
+    return await searchApi.searchWithKeyword(query);
   }
 
   // 검색어 관련 로직
@@ -36,8 +46,4 @@ class SearchRepository {
     keywordList!.remove(keyword);
     await prefs.setStringList(recentKeywordKey, keywordList);
   }
-
-  Future<void> getCafeInfoList() async {}
-
-  Future<void> getMenuInfoList() async {}
 }
