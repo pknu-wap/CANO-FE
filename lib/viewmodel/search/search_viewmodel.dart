@@ -1,7 +1,6 @@
 import 'package:cano/data/repository/search_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../data/model/menu_info.dart';
+import 'package:cano/data/model/menu/menu_info.dart';
 
 class SearchState {
   final List<MenuInfo> menuInfoList;
@@ -34,8 +33,17 @@ class SearchViewmodel extends StateNotifier<SearchState> {
 
   static final SearchViewmodel _instance =
       SearchViewmodel._internal(SearchState(
+          // cafeInfoList: [
+          //   const CafeInfo(
+          //       cafeName: '스타벅스 경성대점',
+          //       rating: 5.0,
+          //       isLike: true,
+          //       likeCount: 200,
+          //       ratingCount: 59,
+          //       cafeImageUrl: ''),
+          // ],
           menuInfoList: [
-            MenuInfo(
+            const MenuInfo(
                 cafeName: '컴포즈커피',
                 menuName: '돌체라떼',
                 price: 5900,
@@ -48,7 +56,7 @@ class SearchViewmodel extends StateNotifier<SearchState> {
                 body: 0.72,
                 bitterness: 0.4,
                 sweetness: 0.88),
-            MenuInfo(
+            const MenuInfo(
                 cafeName: '컴포즈커피',
                 menuName: '돌체라떼',
                 price: 5900,
@@ -61,7 +69,7 @@ class SearchViewmodel extends StateNotifier<SearchState> {
                 body: 0.72,
                 bitterness: 0.4,
                 sweetness: 0.88),
-            MenuInfo(
+            const MenuInfo(
                 cafeName: '컴포즈커피',
                 menuName: '돌체라떼',
                 price: 5900,
@@ -74,7 +82,7 @@ class SearchViewmodel extends StateNotifier<SearchState> {
                 body: 0.72,
                 bitterness: 0.4,
                 sweetness: 0.88),
-            MenuInfo(
+            const MenuInfo(
                 cafeName: '컴포즈커피',
                 menuName: '돌체라떼',
                 price: 5900,
@@ -87,7 +95,7 @@ class SearchViewmodel extends StateNotifier<SearchState> {
                 body: 0.72,
                 bitterness: 0.4,
                 sweetness: 0.88),
-            MenuInfo(
+            const MenuInfo(
                 cafeName: '컴포즈커피',
                 menuName: '돌체라떼',
                 price: 5900,
@@ -100,7 +108,7 @@ class SearchViewmodel extends StateNotifier<SearchState> {
                 body: 0.72,
                 bitterness: 0.4,
                 sweetness: 0.88),
-            MenuInfo(
+            const MenuInfo(
                 cafeName: '컴포즈커피',
                 menuName: '돌체라떼',
                 price: 5900,
