@@ -1,4 +1,4 @@
-import 'package:cano/data/repository/search_repository.dart';
+import 'package:cano/data/repository/search/search_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/model/menu_info.dart';

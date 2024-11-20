@@ -1,6 +1,7 @@
 import 'dart:io';
 
-import 'package:cano/data/model/search/register_menu_request.dart';
+import 'package:cano/data/model/register_menu/register_menu_request.dart';
+import 'package:cano/data/repository/register_menu/register_menu_repository.dart';
 import 'package:cano/utils/format_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,6 +16,12 @@ class RegisterMenuViewmodel extends StateNotifier<RegisterMenuRequest> {
 
   factory RegisterMenuViewmodel() {
     return _instance;
+  }
+
+  static final registerMenuRepository = RegisterMenuRepository();
+
+  Future<bool> registerMenu(RegisterMenuRequest registerMenuRequest) async {
+    return await registerMenuRepository.registerMenu(registerMenuRequest);
   }
 
   void setCafeName(String cafeName) {

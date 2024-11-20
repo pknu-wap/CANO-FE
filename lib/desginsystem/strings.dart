@@ -1,5 +1,6 @@
 class AppStrings {
   static const String appName = "CANO";
+  static const String baseUrl = "http://3.34.234.63:8080/";
 
   static const String login = "로그인";
   static const String emailPlaceholder = "이메일을 입력해주세요.";

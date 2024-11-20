@@ -7,9 +7,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../desginsystem/colors.dart';
-import '../../../desginsystem/strings.dart';
-import '../../../viewmodel/search/register_menu_viewmodel.dart';
+import '../../desginsystem/colors.dart';
+import '../../desginsystem/strings.dart';
+import '../../viewmodel/register_menu/register_menu_viewmodel.dart';
 
 class RegisterMenuScreen extends ConsumerWidget {
   RegisterMenuScreen({super.key});
