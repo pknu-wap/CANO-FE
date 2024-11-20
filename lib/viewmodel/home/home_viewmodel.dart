@@ -7,7 +7,104 @@ import '../../data/model/home/home_menu.dart';
 class HomeViewmodel extends StateNotifier<List<Map<String, List<HomeMenu>>>> {
   HomeViewmodel._internal(super.state);
 
-  static final HomeViewmodel _instance = HomeViewmodel._internal([]);
+  static final HomeViewmodel _instance = HomeViewmodel._internal([
+    {
+      FlavorDescriptions.acidityStrong: [
+        HomeMenu(
+            id: 1,
+            name: "스타벅스 돌체 라떼",
+            score: 4.8,
+            attribute: AppStrings.acidity,
+            degree: 88,
+            image_url: "https://picsum.photos/23"),
+        HomeMenu(
+            id: 1,
+            name: "투썸플레이스 연유 라떼",
+            score: 3.6,
+            attribute: AppStrings.acidity,
+            degree: 88,
+            image_url: "https://picsum.photos/43"),
+        HomeMenu(
+            id: 1,
+            name: "부경대 파라다이스 아메리카노",
+            score: 5.0,
+            attribute: AppStrings.acidity,
+            degree: 88,
+            image_url: "https://picsum.photos/33"),
+        HomeMenu(
+            id: 1,
+            name: "오빠 다방 아메리카노",
+            score: 1.8,
+            attribute: AppStrings.acidity,
+            degree: 88,
+            image_url: "https://picsum.photos/13"),
+      ],
+    },
+    {
+      FlavorDescriptions.sweetnessVeryStrong: [
+        HomeMenu(
+            id: 1,
+            name: "스타벅스 돌체 라떼",
+            score: 4.4,
+            attribute: AppStrings.sweetness,
+            degree: 88,
+            image_url: "https://picsum.photos/69"),
+        HomeMenu(
+            id: 1,
+            name: "051 아메리카노",
+            score: 4.8,
+            attribute: AppStrings.sweetness,
+            degree: 88,
+            image_url: "https://picsum.photos/32"),
+        HomeMenu(
+            id: 1,
+            name: "051 카페라떼",
+            score: 4.2,
+            attribute: AppStrings.sweetness,
+            degree: 88,
+            image_url: "https://picsum.photos/22"),
+        HomeMenu(
+            id: 1,
+            name: "노씨커피 옥수수 라떼",
+            score: 4.8,
+            attribute: AppStrings.sweetness,
+            degree: 88,
+            image_url: "https://picsum.photos/12"),
+      ],
+    },
+    {
+      FlavorDescriptions.bodyModerate: [
+        HomeMenu(
+            id: 1,
+            name: "스타벅스 돌체 라떼",
+            score: 4.8,
+            attribute: AppStrings.body,
+            degree: 88,
+            image_url: "https://picsum.photos/23"),
+        HomeMenu(
+            id: 1,
+            name: "스타벅스 돌체 라떼",
+            score: 4.8,
+            attribute: AppStrings.body,
+            degree: 88,
+            image_url: "https://picsum.photos/43"),
+        HomeMenu(
+            id: 1,
+            name: "스타벅스 돌체 라떼",
+            score: 4.8,
+            attribute: AppStrings.body,
+            degree: 88,
+            image_url: "https://picsum.photos/33"),
+        HomeMenu(
+            id: 1,
+            name: "스타벅스 돌체 라떼",
+            score: 4.8,
+            attribute: AppStrings.body,
+            degree: 88,
+            image_url: "https://picsum.photos/13"),
+      ],
+    }
+  ]);
 
   factory HomeViewmodel() {
     return _instance;
@@ -117,6 +214,7 @@ class HomeViewmodel extends StateNotifier<List<Map<String, List<HomeMenu>>>> {
   }
 }
 
-final homeProvider = StateNotifierProvider.autoDispose<HomeViewmodel, void>(
+final homeProvider = StateNotifierProvider.autoDispose<HomeViewmodel,
+    List<Map<String, List<HomeMenu>>>>(
   (ref) => HomeViewmodel(),
 );

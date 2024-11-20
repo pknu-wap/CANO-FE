@@ -24,7 +24,7 @@ class _HomeApi implements HomeApi {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<HomeMenu> getHomeMenusWithType(
+  Future<List<HomeMenu>> getHomeMenusWithType(
     String type,
     String degree,
   ) async {
@@ -35,7 +35,7 @@ class _HomeApi implements HomeApi {
     };
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<HomeMenu>(Options(
+    final _options = _setStreamType<List<HomeMenu>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -51,10 +51,12 @@ class _HomeApi implements HomeApi {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late HomeMenu _value;
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<HomeMenu> _value;
     try {
-      _value = HomeMenu.fromJson(_result.data!);
+      _value = _result.data!
+          .map((dynamic i) => HomeMenu.fromJson(i as Map<String, dynamic>))
+          .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -63,12 +65,12 @@ class _HomeApi implements HomeApi {
   }
 
   @override
-  Future<HomeMenu> getHomeMenusWithAroma(String aromas) async {
+  Future<List<HomeMenu>> getHomeMenusWithAroma(String aromas) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'type': aromas};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<HomeMenu>(Options(
+    final _options = _setStreamType<List<HomeMenu>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -84,10 +86,12 @@ class _HomeApi implements HomeApi {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late HomeMenu _value;
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<HomeMenu> _value;
     try {
-      _value = HomeMenu.fromJson(_result.data!);
+      _value = _result.data!
+          .map((dynamic i) => HomeMenu.fromJson(i as Map<String, dynamic>))
+          .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
