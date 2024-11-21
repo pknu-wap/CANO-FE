@@ -24,21 +24,29 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: buttonColor,
-        disabledBackgroundColor: buttonColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius), // 둥근 모서리
+    return Container(
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 6,
+            offset: Offset(4, 4))
+      ]),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: buttonColor,
+          disabledBackgroundColor: buttonColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(borderRadius), // 둥근 모서리
+          ),
+          minimumSize: width == null ? Size(double.infinity, height) : null,
+          fixedSize: width != null ? Size(width!, height) : null,
         ),
-        minimumSize: width == null ? Size(double.infinity, height) : null,
-        fixedSize: width != null ? Size(width!, height) : null,
-      ),
-      child: Text(
-        text,
-        style: TextStyle(
-            fontSize: 15, color: textColor, fontWeight: FontWeight.bold),
+        child: Text(
+          text,
+          style: TextStyle(
+              fontSize: 15, color: textColor, fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }
