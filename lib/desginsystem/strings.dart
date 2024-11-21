@@ -82,4 +82,15 @@ class AppStrings {
   static const String uploadReviewAlert = '리뷰를 입력해주세요.';
   static const String submitReviewAlert = '리뷰가 작성되었습니다!';
   static const String writeReview = '리뷰 쓰기';
+
+  // 메뉴 리포트
+  static const String whichPartIsWrong = "어떤 부분이 잘못되었나요?";
+  static const String cafeNameIncorrect = "카페 이름이 잘못되었어요";
+  static const String menuNameIncorrect = "메뉴 이름이 잘못되었어요";
+  static const String priceIncorrect = "가격 정보가 잘못되었어요";
+  static const String imgIncorrect = "대표 이미지가 잘못되었어요";
+  static const String etc = "기타";
+  static const String reportMenuHint = "필요한 경우 추가적인 설명을 적어주세요.";
+  static const String submitMenuReport = "제출 하기";
+  static const String submitMenuReportAlert = '메뉴 수정이 제출되었습니다!';
 }

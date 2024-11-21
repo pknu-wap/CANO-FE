@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cano/viewmodel/review/review_viewmodel.dart';
 import 'package:cano/data/model/review/review_info.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:cano/view/widget/grey_textfield.dart';
 
 class WriteReviewScreen extends ConsumerStatefulWidget {
   WriteReviewScreen({super.key});
@@ -152,31 +153,9 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                 ),
                 const SizedBox(height: 16),
                 // Review TextField
-                TextField(
-                  style: const TextStyle(fontSize: 14),
-                  controller: reviewController,
-                  maxLines: 5,
-                  decoration: InputDecoration(
+                GreyBgTextField(
                     hintText: AppStrings.reviewHint,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: const BorderSide(color: AppColors.barBorder),
-                    ),
-                    hintStyle: const TextStyle(
-                      fontSize: 12,
-                    ),
-                    filled: true,
-                    fillColor: AppColors.barBg,
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: AppColors.barBorder),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: AppColors.barBorder),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                ),
+                    textController: reviewController),
                 const SizedBox(height: 16),
                 // Image Upload Section
                 const Text(
@@ -633,16 +612,17 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                           borderRadius: BorderRadius.circular(30.0),
                         ),
                       ),
-                      child: const Row(
+                      child: Row(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(
-                            Icons.edit,
-                            color: Colors.white,
+                          Image.asset(
+                            "assets/images/reviewPencil.png",
+                            width: 24,
+                            height: 24,
                           ),
-                          SizedBox(width: 8),
-                          Text(
+                          const SizedBox(width: 8),
+                          const Text(
                             AppStrings.writeReview,
                             style: TextStyle(
                               color: Colors.white,
