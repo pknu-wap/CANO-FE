@@ -20,13 +20,6 @@ _$MenuInfoImpl _$$MenuInfoImplFromJson(Map<String, dynamic> json) =>
       sweetness: (json['sweetness'] as num).toDouble(),
       aromas:
           (json['aromas'] as List<dynamic>).map((e) => e as String).toList(),
-      aromaCounts: (json['aromaCounts'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, (e as num).toInt()),
-      ),
-      ratingCountsByStar:
-          (json['ratingCountsByStar'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(int.parse(k), (e as num).toInt()),
-      ),
       menuImageUrl: json['menuImageUrl'] as String,
     );
 
@@ -43,8 +36,5 @@ Map<String, dynamic> _$$MenuInfoImplToJson(_$MenuInfoImpl instance) =>
       'bitterness': instance.bitterness,
       'sweetness': instance.sweetness,
       'aromas': instance.aromas,
-      'aromaCounts': instance.aromaCounts,
-      'ratingCountsByStar':
-          instance.ratingCountsByStar?.map((k, e) => MapEntry(k.toString(), e)),
       'menuImageUrl': instance.menuImageUrl,
     };

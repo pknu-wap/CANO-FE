@@ -45,7 +45,7 @@ class CoffeePreferenceScreen extends ConsumerWidget {
                 SizedBox(
                   height: 20,
                 ),
-                 Row(
+                Row(
                   children: [
                     Text(
                       AppStrings.acidity,
