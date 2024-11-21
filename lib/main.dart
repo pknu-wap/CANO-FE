@@ -25,34 +25,39 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
-          appBarTheme: const AppBarTheme(
-            backgroundColor: Colors.white,
-            surfaceTintColor: AppColors.primary,
-          ),
-          textSelectionTheme: TextSelectionThemeData(
-              cursorColor: AppColors.primary,
-              selectionHandleColor: AppColors.primary),
-          primaryColor: const Color(0xFF3E160C),
-          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-            backgroundColor: AppColors.primary,
-            selectedItemColor: Colors.white,
-            unselectedItemColor: Colors.grey,
-          ),
-          tabBarTheme: const TabBarTheme(
-            labelColor: Color(0xFF3E160C),
-            unselectedLabelColor: Colors.grey,
-            // indicator: BoxDecoration(
-            //   color: Colors.white,
-            // ),
-          ),
-          cardTheme: const CardTheme(
-            color: Colors.white,
-          )),
-      debugShowCheckedModeBanner: false,
-      routerConfig: AppRouter.router,
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus(); // 키보드 닫기
+      },
+      child: MaterialApp.router(
+        theme: ThemeData(
+            scaffoldBackgroundColor: Colors.white,
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Colors.white,
+              surfaceTintColor: AppColors.primary,
+            ),
+            textSelectionTheme: TextSelectionThemeData(
+                cursorColor: AppColors.primary,
+                selectionHandleColor: AppColors.primary),
+            primaryColor: const Color(0xFF3E160C),
+            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+              backgroundColor: AppColors.primary,
+              selectedItemColor: Colors.white,
+              unselectedItemColor: Colors.grey,
+            ),
+            tabBarTheme: const TabBarTheme(
+              labelColor: Color(0xFF3E160C),
+              unselectedLabelColor: Colors.grey,
+              // indicator: BoxDecoration(
+              //   color: Colors.white,
+              // ),
+            ),
+            cardTheme: const CardTheme(
+              color: Colors.white,
+            )),
+        debugShowCheckedModeBanner: false,
+        routerConfig: AppRouter.router,
+      ),
     );
   }
 }
