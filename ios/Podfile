@@ -31,13 +31,10 @@ target 'Runner' do
   use_frameworks!
   use_modular_headers!
 
-  pod 'KakaoSDKCommon'
-  pod 'KakaoSDKAuth'
   
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 
-   # Google Maps SDK
-   pod 'GoogleMaps', '~> 9.1.1' 
+
 
    # Kakao SDK
    pod 'KakaoSDKCommon', '~> 2.22.7'

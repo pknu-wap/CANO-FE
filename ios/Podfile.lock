@@ -15,6 +15,7 @@ PODS:
     - Flutter
     - Toast
   - geocoding_ios (1.0.5):
+    - Flutter
   - google_sign_in_ios (0.0.1):
     - AppAuth (>= 1.7.4)
     - Flutter
@@ -68,9 +69,7 @@ DEPENDENCIES:
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/darwin`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - kakao_flutter_sdk_common (from `.symlinks/plugins/kakao_flutter_sdk_common/ios`)
-  - KakaoSDKAuth
   - KakaoSDKAuth (~> 2.22.7)
-  - KakaoSDKCommon
   - KakaoSDKCommon (~> 2.22.7)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
@@ -84,6 +83,9 @@ SPEC REPOS:
     - GoogleSignIn
     - GTMAppAuth
     - GTMSessionFetcher
+    - KakaoSDKAuth
+    - KakaoSDKCommon
+    - Toast
 
 EXTERNAL SOURCES:
   Flutter:
@@ -133,6 +135,6 @@ SPEC CHECKSUMS:
   Toast: 1f5ea13423a1e6674c4abdac5be53587ae481c4e
   webview_flutter_wkwebview: 0982481e3d9c78fd5c6f62a002fcd24fc791f1e4
 
-PODFILE CHECKSUM: 848a7715b0c3d7c412f8bfc4ce14061ad19fe73d
+PODFILE CHECKSUM: 8c26d4894594efe46e2a3842273ace09c0305368
 
 COCOAPODS: 1.16.1
