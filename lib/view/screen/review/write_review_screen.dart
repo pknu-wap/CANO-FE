@@ -51,15 +51,6 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
     });
   }
 
-  Future<void> _launchURL(String url) async {
-    final Uri uri = Uri.parse(url);
-    if (!await launchUrl(uri)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Could not launch $url')),
-      );
-    }
-  }
-
   @override
   void dispose() {
     reviewController.dispose();
@@ -151,7 +142,8 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                   ],
                 ),
                 const SizedBox(height: 16),
-                // Review TextField
+                
+                // 리뷰 텍스트
                 TextField(
                   style: const TextStyle(fontSize: 14),
                   controller: reviewController,
@@ -178,7 +170,6 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                // Image Upload Section
                 const Text(
                   AppStrings.uploadPhoto,
                   style: TextStyle(
@@ -238,8 +229,7 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                 const SizedBox(height: 16),
                 const Divider(),
                 const SizedBox(height: 16),
-                // Menu-Related Choice Chips and Tooltips
-                // Acidity Section
+
                 Row(
                   children: [
                     const Text(
@@ -577,17 +567,7 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                     child: ElevatedButton(
                       onPressed: () async {
                         final reviewText = reviewController.text.trim();
-                        // if (reviewText.isEmpty) {
-                        //   // 리뷰 작성 안했을 시
-                        //   ScaffoldMessenger.of(context).showSnackBar(
-                        //     const SnackBar(
-                        //         content: Text(AppStrings.uploadReviewAlert)),
-                        //   );
-                        //   return;
-                        // }
-
-                        // Ideally, upload images to a server and get their URLs
-                        // For demonstration, we'll use local file paths
+                    
                         final List<String> reviewImageUrls =
                             uploadedImagePaths.isNotEmpty
                                 ? uploadedImagePaths
@@ -595,10 +575,9 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                                     .toList()
                                 : [];
 
-                        // Create a new ReviewInfo instance
                         final newReview = ReviewInfo(
                           userName:
-                              '현재 유저', // Replace with actual user data if available
+                              '현재 유저', // 현재 유저 이름으로 변경
                           rating: rating.toString(),
                           timestamp: DateTime.now(),
                           reviewText: reviewText,
@@ -622,7 +601,6 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                               content: Text(AppStrings.submitReviewAlert)),
                         );
 
-                        // Navigate back or reset the form
                         Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(
