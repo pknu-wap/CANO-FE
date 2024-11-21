@@ -9,6 +9,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../desginsystem/colors.dart';
 import '../../desginsystem/strings.dart';
+import '../../utils/view/dialog.dart';
+import '../../utils/view/show_toast.dart';
 import '../../viewmodel/register_menu/register_menu_viewmodel.dart';
 
 class RegisterMenuScreen extends ConsumerWidget {
@@ -142,7 +144,16 @@ class RegisterMenuScreen extends ConsumerWidget {
             CustomButtonWihImage(
                 text: AppStrings.registerMenu,
                 height: 40,
-                onPressed: () => registerAvailable ? {} : {},
+                onPressed: () => registerAvailable
+                    ? {
+                        showDoubleButtonAlertDialog(
+                            context, "메뉴 등록", AppStrings.askToRegisterMenu,
+                            onConfirm: () {
+                          context.pop();
+                          showToast(AppStrings.registerMenuScript);
+                        })
+                      }
+                    : {},
                 buttonColor:
                     registerAvailable ? AppColors.buttonColor : Colors.grey,
                 imagePath: 'assets/images/register_menu_icon.svg'),

@@ -2,6 +2,9 @@ class AppStrings {
   static const String appName = "CANO";
   static const String baseUrl = "http://3.34.234.63:8080/";
 
+  static const String confirm = "확인";
+  static const String cancle = "취소";
+
   static const String login = "로그인";
   static const String emailPlaceholder = "이메일을 입력해주세요.";
   static const String profileText = "프로필을 작성해주세요.";
@@ -48,6 +51,8 @@ class AppStrings {
 
   // 메뉴 등록
   static const String registerMenu = "메뉴 등록";
+  static const String askToRegisterMenu = "메뉴를 등록하시겠습니까?";
+  static const String registerMenuScript = "메뉴가 등록되었습니다";
   static const String cafeName = "카페 이름";
   static const String menuName = "메뉴 이름";
   static const String priceText = "가격 (단위: 원)";
