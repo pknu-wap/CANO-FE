@@ -6,7 +6,7 @@ import '../../../desginsystem/strings.dart';
 
 part 'home_api.g.dart';
 
-@RestApi(baseUrl: AppStrings.baseurl)
+@RestApi(baseUrl: AppStrings.baseUrl)
 abstract class HomeApi {
   factory HomeApi(Dio dio, {String baseUrl}) = _HomeApi;
 

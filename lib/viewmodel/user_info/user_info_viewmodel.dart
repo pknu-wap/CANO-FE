@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UserInfoViewmodel extends StateNotifier<UserInfo> {
-  // 내부 생성자
   UserInfoViewmodel._internal(super.state);
 
   static final UserInfoViewmodel _instance =

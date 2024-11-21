@@ -1,4 +1,4 @@
-import 'package:cano/network/model/login_response.dart';
+import 'package:cano/network/model/auth/login_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 

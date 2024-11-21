@@ -1,4 +1,4 @@
-import 'package:cano/data/repository/search_repository.dart';
+import 'package:cano/data/repository/search/search_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/model/menu_info.dart';
@@ -36,83 +36,83 @@ class SearchViewmodel extends StateNotifier<SearchState> {
       SearchViewmodel._internal(SearchState(
           menuInfoList: [
             MenuInfo(
-                cafeName: '컴포즈커피',
-                menuName: '돌체라떼',
+                name: '컴포즈 커피 돌체 라떼',
                 price: 5900,
-                rating: 3.5,
-                ratingCount: 300,
+                score: 3.5,
+                scoreCount: 300,
                 isLike: true,
                 menuImageUrl: '',
                 acidity: 0.38,
                 aromas: ["아몬드", "곡물"],
                 body: 0.72,
                 bitterness: 0.4,
-                sweetness: 0.88),
+                sweetness: 0.88,
+                id: 1),
             MenuInfo(
-                cafeName: '컴포즈커피',
-                menuName: '돌체라떼',
+                name: '컴포즈 커피 돌체 라떼',
                 price: 5900,
-                rating: 3.5,
-                ratingCount: 300,
+                score: 3.5,
+                scoreCount: 300,
                 isLike: true,
                 menuImageUrl: '',
                 acidity: 0.38,
                 aromas: ["아몬드", "곡물"],
                 body: 0.72,
                 bitterness: 0.4,
-                sweetness: 0.88),
+                sweetness: 0.88,
+                id: 1),
             MenuInfo(
-                cafeName: '컴포즈커피',
-                menuName: '돌체라떼',
+                name: '컴포즈 커피 돌체 라떼',
                 price: 5900,
-                rating: 3.5,
-                ratingCount: 300,
+                score: 3.5,
+                scoreCount: 300,
                 isLike: true,
                 menuImageUrl: '',
                 acidity: 0.38,
                 aromas: ["아몬드", "곡물"],
                 body: 0.72,
                 bitterness: 0.4,
-                sweetness: 0.88),
+                sweetness: 0.88,
+                id: 1),
             MenuInfo(
-                cafeName: '컴포즈커피',
-                menuName: '돌체라떼',
+                name: '컴포즈 커피 돌체 라떼',
                 price: 5900,
-                rating: 3.5,
-                ratingCount: 300,
+                score: 3.5,
+                scoreCount: 300,
                 isLike: true,
                 menuImageUrl: '',
                 acidity: 0.38,
                 aromas: ["아몬드", "곡물"],
                 body: 0.72,
                 bitterness: 0.4,
-                sweetness: 0.88),
+                sweetness: 0.88,
+                id: 1),
             MenuInfo(
-                cafeName: '컴포즈커피',
-                menuName: '돌체라떼',
+                name: '컴포즈 커피 돌체 라떼',
                 price: 5900,
-                rating: 3.5,
-                ratingCount: 300,
+                score: 3.5,
+                scoreCount: 300,
                 isLike: true,
                 menuImageUrl: '',
                 acidity: 0.38,
                 aromas: ["아몬드", "곡물"],
                 body: 0.72,
                 bitterness: 0.4,
-                sweetness: 0.88),
+                sweetness: 0.88,
+                id: 1),
             MenuInfo(
-                cafeName: '컴포즈커피',
-                menuName: '돌체라떼',
+                name: '컴포즈 커피 돌체 라떼',
                 price: 5900,
-                rating: 3.5,
-                ratingCount: 300,
+                score: 3.5,
+                scoreCount: 300,
                 isLike: true,
                 menuImageUrl: '',
                 acidity: 0.38,
                 aromas: ["아몬드", "곡물"],
                 body: 0.72,
                 bitterness: 0.4,
-                sweetness: 0.88),
+                sweetness: 0.88,
+                id: 1),
           ],
           isSearched: false,
           keywordList: []));
@@ -121,7 +121,16 @@ class SearchViewmodel extends StateNotifier<SearchState> {
     return _instance;
   }
 
-  final SearchRepository searchRepository = SearchRepository();
+  static final SearchRepository searchRepository = SearchRepository();
+
+  Future<void> searchWithKeyword(String query) async {
+    final menus = await searchRepository.searchWithKeyword(query);
+    setMenuInfoList(menus);
+  }
+
+  void setMenuInfoList(List<MenuInfo> menus) {
+    state = state.copyWith(menuInfoList: menus);
+  }
 
   void setIsSearched() {
     state = state.copyWith(isSearched: true);
@@ -140,10 +149,6 @@ class SearchViewmodel extends StateNotifier<SearchState> {
   Future<void> removeKeyword(String keyword) async {
     searchRepository.removeKeyword(keyword);
     setKeywordList();
-  }
-
-  Future<void> getMenuInfoList() async {
-    searchRepository.getMenuInfoList();
   }
 }
 

@@ -1,8 +1,9 @@
+import UIKit
 import Flutter
 import UIKit
 import KakaoSDKCommon
 import KakaoSDKAuth
-import GoogleMaps
+
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
@@ -14,7 +15,7 @@ import GoogleMaps
     let controller: FlutterViewController = window?.rootViewController as! FlutterViewController
     let channel = FlutterMethodChannel(name: "com.example.cano/secure_keys",
                                        binaryMessenger: controller.binaryMessenger)
-    
+
     channel.setMethodCallHandler { (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
       if call.method == "setEnv", let args = call.arguments as? [String: String] {
         let kakaoApiKey = args["KAKAO_NATIVE_APP_KEY"]
@@ -38,7 +39,7 @@ import GoogleMaps
     if url.absoluteString.hasPrefix("kakao"){
       result = super.application(app, open:url, options: options)
     }
-    
+
     if !result {
       if (AuthApi.isKakaoTalkLoginUrl(url)) {
         return AuthController.handleOpenUrl(url: url)

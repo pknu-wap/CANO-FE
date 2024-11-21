@@ -1,7 +1,9 @@
 class AppStrings {
-  static const String baseurl = "http://3.34.234.63:8080/";
-
   static const String appName = "CANO";
+  static const String baseUrl = "http://3.34.234.63:8080/";
+  static const String confirm = "확인";
+  static const String cancle = "취소";
+
   static const String login = "로그인";
   static const String emailPlaceholder = "이메일을 입력해주세요.";
   static const String profileText = "프로필을 작성해주세요.";
@@ -46,7 +48,12 @@ class AppStrings {
   // 다른 뷰에도 써서 통일
   static const String applyPreferenceInfoText = "선택한 요소가 내 피드에 적용됩니다.";
   static const String keywordPreferenceText = "선호하는 키워드를 선택해주세요.";
+  static const String areaPreferenceText = "관심 지역을 설정해주세요.";
+
   static const String nickname = "닉네임";
+  static const String man = "남자";
+  static const String woman = "여자";
+
   static const String next = "다음";
   static const String prev = "이전";
   static const String finish = "완료";
@@ -64,6 +71,18 @@ class AppStrings {
   static const String caffelatte = "카페라떼";
   static const String cappuccino = "카푸치노";
   static const String caramelMacchiato = "카라멜 마끼야또";
+
+  // 메뉴 등록
+  static const String registerMenu = "메뉴 등록";
+  static const String askToRegisterMenu = "메뉴를 등록하시겠습니까?";
+  static const String registerMenuScript = "메뉴가 등록되었습니다";
+  static const String cafeName = "카페 이름";
+  static const String menuName = "메뉴 이름";
+  static const String priceText = "가격 (단위: 원)";
+  static const String registerImage = "대표 이미지 등록";
+  static const String cafeNameHint = "띄어쓰기 없이 작성해주세요! 예) OO까페";
+  static const String menuNameHint = "예) 아이스 아메리카노";
+  static const String priceHint = "단위나 쉼표 없이 적어주세요! 예) 4500";
 
   // 검색 화면
   static const String search = "검색";
