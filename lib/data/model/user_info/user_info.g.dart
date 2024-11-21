@@ -33,6 +33,7 @@ Map<String, dynamic> _$$UserInfoImplToJson(_$UserInfoImpl instance) =>
     };
 
 const _$IntensitylevelEnumMap = {
+  Intensitylevel.none: 'none',
   Intensitylevel.weak: 'weak',
   Intensitylevel.normal: 'normal',
   Intensitylevel.strong: 'strong',
