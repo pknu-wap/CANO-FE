@@ -31,8 +31,6 @@ mixin _$MenuInfo {
   double get bitterness => throw _privateConstructorUsedError;
   double get sweetness => throw _privateConstructorUsedError;
   List<String> get aromas => throw _privateConstructorUsedError;
-  Map<String, int>? get aromaCounts => throw _privateConstructorUsedError;
-  Map<int, int>? get ratingCountsByStar => throw _privateConstructorUsedError;
   String get menuImageUrl => throw _privateConstructorUsedError;
 
   /// Serializes this MenuInfo to a JSON map.
@@ -62,8 +60,6 @@ abstract class $MenuInfoCopyWith<$Res> {
       double bitterness,
       double sweetness,
       List<String> aromas,
-      Map<String, int>? aromaCounts,
-      Map<int, int>? ratingCountsByStar,
       String menuImageUrl});
 }
 
@@ -93,8 +89,6 @@ class _$MenuInfoCopyWithImpl<$Res, $Val extends MenuInfo>
     Object? bitterness = null,
     Object? sweetness = null,
     Object? aromas = null,
-    Object? aromaCounts = freezed,
-    Object? ratingCountsByStar = freezed,
     Object? menuImageUrl = null,
   }) {
     return _then(_value.copyWith(
@@ -142,14 +136,6 @@ class _$MenuInfoCopyWithImpl<$Res, $Val extends MenuInfo>
           ? _value.aromas
           : aromas // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      aromaCounts: freezed == aromaCounts
-          ? _value.aromaCounts
-          : aromaCounts // ignore: cast_nullable_to_non_nullable
-              as Map<String, int>?,
-      ratingCountsByStar: freezed == ratingCountsByStar
-          ? _value.ratingCountsByStar
-          : ratingCountsByStar // ignore: cast_nullable_to_non_nullable
-              as Map<int, int>?,
       menuImageUrl: null == menuImageUrl
           ? _value.menuImageUrl
           : menuImageUrl // ignore: cast_nullable_to_non_nullable
@@ -178,8 +164,6 @@ abstract class _$$MenuInfoImplCopyWith<$Res>
       double bitterness,
       double sweetness,
       List<String> aromas,
-      Map<String, int>? aromaCounts,
-      Map<int, int>? ratingCountsByStar,
       String menuImageUrl});
 }
 
@@ -207,8 +191,6 @@ class __$$MenuInfoImplCopyWithImpl<$Res>
     Object? bitterness = null,
     Object? sweetness = null,
     Object? aromas = null,
-    Object? aromaCounts = freezed,
-    Object? ratingCountsByStar = freezed,
     Object? menuImageUrl = null,
   }) {
     return _then(_$MenuInfoImpl(
@@ -256,14 +238,6 @@ class __$$MenuInfoImplCopyWithImpl<$Res>
           ? _value._aromas
           : aromas // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      aromaCounts: freezed == aromaCounts
-          ? _value._aromaCounts
-          : aromaCounts // ignore: cast_nullable_to_non_nullable
-              as Map<String, int>?,
-      ratingCountsByStar: freezed == ratingCountsByStar
-          ? _value._ratingCountsByStar
-          : ratingCountsByStar // ignore: cast_nullable_to_non_nullable
-              as Map<int, int>?,
       menuImageUrl: null == menuImageUrl
           ? _value.menuImageUrl
           : menuImageUrl // ignore: cast_nullable_to_non_nullable
@@ -287,12 +261,8 @@ class _$MenuInfoImpl implements _MenuInfo {
       required this.bitterness,
       required this.sweetness,
       required final List<String> aromas,
-      final Map<String, int>? aromaCounts,
-      final Map<int, int>? ratingCountsByStar,
       required this.menuImageUrl})
-      : _aromas = aromas,
-        _aromaCounts = aromaCounts,
-        _ratingCountsByStar = ratingCountsByStar;
+      : _aromas = aromas;
 
   factory _$MenuInfoImpl.fromJson(Map<String, dynamic> json) =>
       _$$MenuInfoImplFromJson(json);
@@ -325,33 +295,12 @@ class _$MenuInfoImpl implements _MenuInfo {
     return EqualUnmodifiableListView(_aromas);
   }
 
-  final Map<String, int>? _aromaCounts;
-  @override
-  Map<String, int>? get aromaCounts {
-    final value = _aromaCounts;
-    if (value == null) return null;
-    if (_aromaCounts is EqualUnmodifiableMapView) return _aromaCounts;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
-  }
-
-  final Map<int, int>? _ratingCountsByStar;
-  @override
-  Map<int, int>? get ratingCountsByStar {
-    final value = _ratingCountsByStar;
-    if (value == null) return null;
-    if (_ratingCountsByStar is EqualUnmodifiableMapView)
-      return _ratingCountsByStar;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
-  }
-
   @override
   final String menuImageUrl;
 
   @override
   String toString() {
-    return 'MenuInfo(cafeName: $cafeName, menuName: $menuName, price: $price, rating: $rating, ratingCount: $ratingCount, isLike: $isLike, acidity: $acidity, body: $body, bitterness: $bitterness, sweetness: $sweetness, aromas: $aromas, aromaCounts: $aromaCounts, ratingCountsByStar: $ratingCountsByStar, menuImageUrl: $menuImageUrl)';
+    return 'MenuInfo(cafeName: $cafeName, menuName: $menuName, price: $price, rating: $rating, ratingCount: $ratingCount, isLike: $isLike, acidity: $acidity, body: $body, bitterness: $bitterness, sweetness: $sweetness, aromas: $aromas, menuImageUrl: $menuImageUrl)';
   }
 
   @override
@@ -375,10 +324,6 @@ class _$MenuInfoImpl implements _MenuInfo {
             (identical(other.sweetness, sweetness) ||
                 other.sweetness == sweetness) &&
             const DeepCollectionEquality().equals(other._aromas, _aromas) &&
-            const DeepCollectionEquality()
-                .equals(other._aromaCounts, _aromaCounts) &&
-            const DeepCollectionEquality()
-                .equals(other._ratingCountsByStar, _ratingCountsByStar) &&
             (identical(other.menuImageUrl, menuImageUrl) ||
                 other.menuImageUrl == menuImageUrl));
   }
@@ -398,8 +343,6 @@ class _$MenuInfoImpl implements _MenuInfo {
       bitterness,
       sweetness,
       const DeepCollectionEquality().hash(_aromas),
-      const DeepCollectionEquality().hash(_aromaCounts),
-      const DeepCollectionEquality().hash(_ratingCountsByStar),
       menuImageUrl);
 
   /// Create a copy of MenuInfo
@@ -431,8 +374,6 @@ abstract class _MenuInfo implements MenuInfo {
       required final double bitterness,
       required final double sweetness,
       required final List<String> aromas,
-      final Map<String, int>? aromaCounts,
-      final Map<int, int>? ratingCountsByStar,
       required final String menuImageUrl}) = _$MenuInfoImpl;
 
   factory _MenuInfo.fromJson(Map<String, dynamic> json) =
@@ -460,10 +401,6 @@ abstract class _MenuInfo implements MenuInfo {
   double get sweetness;
   @override
   List<String> get aromas;
-  @override
-  Map<String, int>? get aromaCounts;
-  @override
-  Map<int, int>? get ratingCountsByStar;
   @override
   String get menuImageUrl;
 

@@ -4,7 +4,7 @@ import 'package:cano/view/widget/search/intensity_bar.dart';
 import 'package:cano/view/widget/search/star_rating.dart';
 import 'package:flutter/material.dart';
 
-import '../../../data/model/menu/menu_info.dart';
+import '../../../data/model/menu_info.dart';
 import '../../../desginsystem/colors.dart';
 import '../../../desginsystem/strings.dart';
 

@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
           appBarTheme: const AppBarTheme(
-            backgroundColor: AppColors.cano,
+            backgroundColor: Colors.white,
             surfaceTintColor: AppColors.primary,
           ),
           primaryColor: const Color(0xFF3E160C),

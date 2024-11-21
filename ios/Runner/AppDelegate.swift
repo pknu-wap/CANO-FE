@@ -2,6 +2,7 @@ import Flutter
 import UIKit
 import KakaoSDKCommon
 import KakaoSDKAuth
+import GoogleMaps
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {

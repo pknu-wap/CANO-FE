@@ -1,7 +1,7 @@
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/view/screen/auth/login_screen.dart';
+import 'package:cano/view/screen/cafe_info/cafe_info_screen.dart';
 import 'package:cano/view/screen/home/home_screen.dart';
-import 'package:cano/view/screen/menu/menu_screen.dart';
 import 'package:cano/view/screen/my_page/my_page_screen.dart';
 import 'package:cano/view/screen/search/search_screen.dart';
 import 'package:cano/view/screen/user_info/coffee_preference_screen.dart';
@@ -20,9 +20,9 @@ class AppRouter {
                 future: CanoTokenManager().checkToken(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData && snapshot.data == true)
-                    return const HomeScreen();
+                    return HomeScreen();
                   else
-                    return const LoginScreen();
+                    return LoginScreen();
                 });
           }),
       GoRoute(
@@ -34,11 +34,6 @@ class AppRouter {
           path: '/coffee_preference',
           builder: (context, state) {
             return CoffeePreferenceScreen();
-          }),
-      GoRoute(
-          path: '/menu',
-          builder: (context, state) {
-            return const MenuScreen();
           }),
       StatefulShellRoute.indexedStack(
         branches: [
@@ -54,13 +49,7 @@ class AppRouter {
             routes: [
               GoRoute(
                 path: "/home",
-                builder: (context, state) => const HomeScreen(),
-                routes: [
-                  GoRoute(
-                    path: '/menu',
-                    builder: (context, state) => const MenuScreen(),
-                  ),
-                ],
+                builder: (context, state) => CafeInfoScreen(),
               ),
             ],
           ),
@@ -68,7 +57,7 @@ class AppRouter {
             routes: [
               GoRoute(
                 path: "/my_page",
-                builder: (context, state) => const MyPageScreen(),
+                builder: (context, state) => MyPageScreen(),
               ),
             ],
           ),
