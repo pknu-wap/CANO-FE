@@ -8,5 +8,5 @@ Future<bool> getGalleryPermissionStatus() async {
 
 Future<void> requestGalleryPermission() async {
   final galleryPermission = Permission.photos;
-  final result = await galleryPermission.request();
+  await galleryPermission.request();
 }

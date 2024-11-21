@@ -7,7 +7,7 @@
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>>사진을 선택하려면 갤러리 접근 권한이 필요합니다.</string>
+    <string>사진을 선택하려면 갤러리 접근 권한이 필요합니다.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
