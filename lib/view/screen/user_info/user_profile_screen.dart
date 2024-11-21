@@ -1,5 +1,6 @@
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/desginsystem/strings.dart';
+import 'package:cano/permission/permission.dart';
 import 'package:cano/utils/mediaquery.dart';
 import 'package:cano/view/widget/custom_button.dart';
 import 'package:cano/view/widget/custom_icon_button.dart';
@@ -85,14 +86,16 @@ class UserProfileScreen extends ConsumerWidget {
                           padding: EdgeInsets.all(2), // 아이콘 간격 없애기
                           icon: Icon(Icons.add,
                               size: 15, color: AppColors.primary),
-                          onPressed: () {
-                            ref
-                                .watch(userInfoProvider.notifier)
-                                .pickImageFromGallery(
-                                    context,
-                                    (imagePath) => ref
-                                        .watch(userInfoProvider.notifier)
-                                        .setProfileImageUrl(imagePath));
+                          onPressed: () async {
+                            await getGalleryPermissionStatus()
+                                ? ref
+                                    .read(userInfoProvider.notifier)
+                                    .pickImageFromGallery(
+                                        context,
+                                        (imagePath) => ref
+                                            .watch(userInfoProvider.notifier)
+                                            .setProfileImageUrl(imagePath))
+                                : requestGalleryPermission();
                           },
                         ),
                       ),

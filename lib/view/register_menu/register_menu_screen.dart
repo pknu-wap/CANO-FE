@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../desginsystem/colors.dart';
 import '../../desginsystem/strings.dart';
+import '../../permission/permission.dart';
 import '../../utils/view/dialog.dart';
 import '../../utils/view/show_toast.dart';
 import '../../viewmodel/register_menu/register_menu_viewmodel.dart';
@@ -125,14 +126,16 @@ class RegisterMenuScreen extends ConsumerWidget {
                         padding: EdgeInsets.all(2),
                         icon:
                             Icon(Icons.add, size: 15, color: AppColors.primary),
-                        onPressed: () {
-                          ref
-                              .read(registerMenuProvider.notifier)
-                              .pickImageFromGallery(
-                                  context,
-                                  (imagePath) => ref
-                                      .watch(registerMenuProvider.notifier)
-                                      .setImageUrl(imagePath));
+                        onPressed: () async {
+                          await getGalleryPermissionStatus()
+                              ? ref
+                                  .read(registerMenuProvider.notifier)
+                                  .pickImageFromGallery(
+                                      context,
+                                      (imagePath) => ref
+                                          .watch(registerMenuProvider.notifier)
+                                          .setImageUrl(imagePath))
+                              : requestGalleryPermission();
                         },
                       ),
                     ),
