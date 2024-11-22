@@ -38,14 +38,15 @@ class LoginScreen extends ConsumerWidget {
             CustomIconSvgButton(
                 imagePath: "assets/images/kakao_login.svg",
                 onPressed: () {
-                  ref
-                      .read(authProvider.notifier)
-                      .loginWithKakao(() => context.go('/user_profile'));
+                  ref.read(authProvider.notifier).loginWithKakao(() {
+                    context.go('/home');
+                  }, () {
+                    context.go('/user_profile');
+                  });
                 }),
             SizedBox(
               height: 15,
             ),
-
             CustomIconSvgButton(
               imagePath: "assets/images/google_login.svg",
               onPressed: () {

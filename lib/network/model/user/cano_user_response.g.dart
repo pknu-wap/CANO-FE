@@ -9,17 +9,17 @@ part of 'cano_user_response.dart';
 _$CanoUserResponseImpl _$$CanoUserResponseImplFromJson(
         Map<String, dynamic> json) =>
     _$CanoUserResponseImpl(
-      code: json['code'] as String?,
-      message: json['message'] as String?,
+      code: json['code'] as String,
+      message: json['message'] as String,
       name: json['name'] as String?,
-      email: json['email'] as String?,
-      socialId: (json['socialId'] as num?)?.toInt(),
+      email: json['email'] as String,
+      socialId: (json['socialId'] as num).toInt(),
       profileImageUrl: json['profileImageUrl'] as String?,
       acidity: json['acidity'] as String?,
       body: json['body'] as String?,
       bitterness: json['bitterness'] as String?,
       sweetness: json['sweetness'] as String?,
-      onboarded: json['onboarded'] as bool?,
+      onboarded: json['onboarded'] as bool,
       error: json['error'] as String?,
     );
 

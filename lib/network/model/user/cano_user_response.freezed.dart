@@ -20,17 +20,17 @@ CanoUserResponse _$CanoUserResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CanoUserResponse {
-  String? get code => throw _privateConstructorUsedError;
-  String? get message => throw _privateConstructorUsedError;
+  String get code => throw _privateConstructorUsedError;
+  String get message => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  String? get email => throw _privateConstructorUsedError;
-  int? get socialId => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
+  int get socialId => throw _privateConstructorUsedError;
   String? get profileImageUrl => throw _privateConstructorUsedError;
   String? get acidity => throw _privateConstructorUsedError;
   String? get body => throw _privateConstructorUsedError;
   String? get bitterness => throw _privateConstructorUsedError;
   String? get sweetness => throw _privateConstructorUsedError;
-  bool? get onboarded => throw _privateConstructorUsedError;
+  bool get onboarded => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
   /// Serializes this CanoUserResponse to a JSON map.
@@ -50,17 +50,17 @@ abstract class $CanoUserResponseCopyWith<$Res> {
       _$CanoUserResponseCopyWithImpl<$Res, CanoUserResponse>;
   @useResult
   $Res call(
-      {String? code,
-      String? message,
+      {String code,
+      String message,
       String? name,
-      String? email,
-      int? socialId,
+      String email,
+      int socialId,
       String? profileImageUrl,
       String? acidity,
       String? body,
       String? bitterness,
       String? sweetness,
-      bool? onboarded,
+      bool onboarded,
       String? error});
 }
 
@@ -79,40 +79,40 @@ class _$CanoUserResponseCopyWithImpl<$Res, $Val extends CanoUserResponse>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? code = freezed,
-    Object? message = freezed,
+    Object? code = null,
+    Object? message = null,
     Object? name = freezed,
-    Object? email = freezed,
-    Object? socialId = freezed,
+    Object? email = null,
+    Object? socialId = null,
     Object? profileImageUrl = freezed,
     Object? acidity = freezed,
     Object? body = freezed,
     Object? bitterness = freezed,
     Object? sweetness = freezed,
-    Object? onboarded = freezed,
+    Object? onboarded = null,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
-      code: freezed == code
+      code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
-              as String?,
-      message: freezed == message
+              as String,
+      message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      email: freezed == email
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      socialId: freezed == socialId
+              as String,
+      socialId: null == socialId
           ? _value.socialId
           : socialId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       profileImageUrl: freezed == profileImageUrl
           ? _value.profileImageUrl
           : profileImageUrl // ignore: cast_nullable_to_non_nullable
@@ -133,10 +133,10 @@ class _$CanoUserResponseCopyWithImpl<$Res, $Val extends CanoUserResponse>
           ? _value.sweetness
           : sweetness // ignore: cast_nullable_to_non_nullable
               as String?,
-      onboarded: freezed == onboarded
+      onboarded: null == onboarded
           ? _value.onboarded
           : onboarded // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -154,17 +154,17 @@ abstract class _$$CanoUserResponseImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? code,
-      String? message,
+      {String code,
+      String message,
       String? name,
-      String? email,
-      int? socialId,
+      String email,
+      int socialId,
       String? profileImageUrl,
       String? acidity,
       String? body,
       String? bitterness,
       String? sweetness,
-      bool? onboarded,
+      bool onboarded,
       String? error});
 }
 
@@ -181,40 +181,40 @@ class __$$CanoUserResponseImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? code = freezed,
-    Object? message = freezed,
+    Object? code = null,
+    Object? message = null,
     Object? name = freezed,
-    Object? email = freezed,
-    Object? socialId = freezed,
+    Object? email = null,
+    Object? socialId = null,
     Object? profileImageUrl = freezed,
     Object? acidity = freezed,
     Object? body = freezed,
     Object? bitterness = freezed,
     Object? sweetness = freezed,
-    Object? onboarded = freezed,
+    Object? onboarded = null,
     Object? error = freezed,
   }) {
     return _then(_$CanoUserResponseImpl(
-      code: freezed == code
+      code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
-              as String?,
-      message: freezed == message
+              as String,
+      message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      email: freezed == email
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      socialId: freezed == socialId
+              as String,
+      socialId: null == socialId
           ? _value.socialId
           : socialId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       profileImageUrl: freezed == profileImageUrl
           ? _value.profileImageUrl
           : profileImageUrl // ignore: cast_nullable_to_non_nullable
@@ -235,10 +235,10 @@ class __$$CanoUserResponseImplCopyWithImpl<$Res>
           ? _value.sweetness
           : sweetness // ignore: cast_nullable_to_non_nullable
               as String?,
-      onboarded: freezed == onboarded
+      onboarded: null == onboarded
           ? _value.onboarded
           : onboarded // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -268,15 +268,15 @@ class _$CanoUserResponseImpl implements _CanoUserResponse {
       _$$CanoUserResponseImplFromJson(json);
 
   @override
-  final String? code;
+  final String code;
   @override
-  final String? message;
+  final String message;
   @override
   final String? name;
   @override
-  final String? email;
+  final String email;
   @override
-  final int? socialId;
+  final int socialId;
   @override
   final String? profileImageUrl;
   @override
@@ -288,7 +288,7 @@ class _$CanoUserResponseImpl implements _CanoUserResponse {
   @override
   final String? sweetness;
   @override
-  final bool? onboarded;
+  final bool onboarded;
   @override
   final String? error;
 
@@ -357,32 +357,32 @@ class _$CanoUserResponseImpl implements _CanoUserResponse {
 
 abstract class _CanoUserResponse implements CanoUserResponse {
   const factory _CanoUserResponse(
-      {required final String? code,
-      required final String? message,
+      {required final String code,
+      required final String message,
       required final String? name,
-      required final String? email,
-      required final int? socialId,
+      required final String email,
+      required final int socialId,
       required final String? profileImageUrl,
       required final String? acidity,
       required final String? body,
       required final String? bitterness,
       required final String? sweetness,
-      required final bool? onboarded,
+      required final bool onboarded,
       required final String? error}) = _$CanoUserResponseImpl;
 
   factory _CanoUserResponse.fromJson(Map<String, dynamic> json) =
       _$CanoUserResponseImpl.fromJson;
 
   @override
-  String? get code;
+  String get code;
   @override
-  String? get message;
+  String get message;
   @override
   String? get name;
   @override
-  String? get email;
+  String get email;
   @override
-  int? get socialId;
+  int get socialId;
   @override
   String? get profileImageUrl;
   @override
@@ -394,7 +394,7 @@ abstract class _CanoUserResponse implements CanoUserResponse {
   @override
   String? get sweetness;
   @override
-  bool? get onboarded;
+  bool get onboarded;
   @override
   String? get error;
 

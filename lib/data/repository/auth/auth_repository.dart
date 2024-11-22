@@ -23,7 +23,8 @@ class AuthRepository {
   static final tokenManager = CanoTokenManager();
   static final userRepositroy = CanoUserRepository();
 
-  Future<void> loginWithKakao(VoidCallback onSuccess) async {
+  Future<void> loginWithKakao(
+      VoidCallback onBoarded, VoidCallback unOnBoarded) async {
     OAuthToken? kakaotoken;
 
     // 카카오톡 설치 여부 확인
@@ -61,8 +62,14 @@ class AuthRepository {
         print("카카오 로그인 API 성공 - refresh Token: ${loginResponse.refreshToken}");
         await tokenManager.saveAccessToken(loginResponse.accessToken);
         await tokenManager.saveRefreshToken(loginResponse.refreshToken);
-        await userRepositroy.getUserInfo();
-        // onSuccess.call();
+
+        final userResponse = await userRepositroy.getUserInfo();
+
+        if (userResponse.onboarded) {
+          onBoarded.call();
+        } else {
+          unOnBoarded.call();
+        }
       } catch (e) {
         print("카카오 로그인 실패: $e");
       }
