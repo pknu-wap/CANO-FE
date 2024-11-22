@@ -2,8 +2,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cano/data/model/review/review_info.dart';
 import 'package:cano/desginsystem/strings.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:flutter/material.dart';
 
 class ReviewViewmodel extends StateNotifier<List<ReviewInfo>> {
   ReviewViewmodel()
@@ -46,78 +44,12 @@ class ReviewViewmodel extends StateNotifier<List<ReviewInfo>> {
               aroma: [Aroma.nutty]),
         ]);
 
-  double rating = 0.0;
-  TextEditingController reviewController = TextEditingController();
-  List<String> uploadedImagePaths = [];
-  IntensityLevel? selectedAcidity;
-  IntensityLevel? selectedBody;
-  IntensityLevel? selectedBitterness;
-  IntensityLevel? selectedSweetness;
-  List<Aroma> selectedAromas = [];
-  final ImagePicker picker = ImagePicker();
-
-  IntensityLevel? getIntensityLevel(String description) {
-    return IntensityLevel.values.firstWhere(
-      (level) => level.description == description,
-      orElse: () => IntensityLevel.none,
-    );
-  }
-
-  void setRating(double newRating) {
-    rating = newRating;
-    // 필요한 경우 상태 업데이트 로직 추가
-  }
-
-  // getRating 메서드 추가 (필요한 경우)
-  double getRating() {
-    return rating;
-  }
-
-  // 이미지 추가
-  Future<void> addImage() async {
-    final XFile? pickedFile =
-        await picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      uploadedImagePaths.add(pickedFile.path);
-      // 상태 업데이트
-    }
-  }
-
-  // 이미지 제거
-  void removeImage(int index) {
-    uploadedImagePaths.removeAt(index);
-    // 상태 업데이트
-  }
-
-  // 리뷰 추가
-  void submitReview() {
-    final reviewText = reviewController.text.trim();
-    final List<String> reviewImageUrls = uploadedImagePaths.isNotEmpty
-        ? uploadedImagePaths.map((path) => 'file://$path').toList()
-        : [];
-
-    final newReview = ReviewInfo(
-      userName: '현재 유저',
-      rating: rating.toString(),
-      timestamp: DateTime.now(),
-      reviewText: reviewText,
-      reviewImageUrl: reviewImageUrls,
-      acidity: selectedAcidity,
-      body: selectedBody,
-      bitterness: selectedBitterness,
-      sweetness: selectedSweetness,
-      aroma: selectedAromas.isNotEmpty ? selectedAromas : null,
-    );
-
-    addReview(newReview);
-  }
-
-  // 리뷰 추가
+  // 리뷰 추가 메서드
   void addReview(ReviewInfo newReview) {
     state = [...state, newReview];
   }
 
-  // 리뷰 업데이트
+  // 리뷰 업데이트 메서드
   void updateReview(int index, ReviewInfo updatedReview) {
     final updatedList = [...state];
     if (index >= 0 && index < updatedList.length) {
@@ -126,7 +58,7 @@ class ReviewViewmodel extends StateNotifier<List<ReviewInfo>> {
     }
   }
 
-  // 리뷰 삭제
+  // 리뷰 삭제 메서드
   void deleteReview(int index) {
     final updatedList = [...state];
     if (index >= 0 && index < updatedList.length) {
@@ -136,7 +68,8 @@ class ReviewViewmodel extends StateNotifier<List<ReviewInfo>> {
   }
 }
 
-final reviewViewModelProvider =
+// Provider 정의
+final reviewListProvider =
     StateNotifierProvider.autoDispose<ReviewViewmodel, List<ReviewInfo>>(
   (ref) => ReviewViewmodel(),
 );

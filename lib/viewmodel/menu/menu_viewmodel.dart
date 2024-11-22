@@ -79,10 +79,7 @@ class MenuViewModel extends StateNotifier<MenuInfo> {
   }
 }
 
-// final menuProvider = StateNotifierProvider.autoDispose<MenuViewModel, MenuInfo>(
-//   (ref) => MenuViewModel(),
-// );
 
-final menuProvider = StateNotifierProvider<MenuViewModel, MenuInfo>(
+final menuProvider = StateNotifierProvider.autoDispose<MenuViewModel, MenuInfo>(
   (ref) => MenuViewModel(),
 );
