@@ -8,6 +8,7 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 
 import '../../../network/api/auth/cano_auth_api.dart';
 import '../../../viewmodel/auth/cano_token_manager.dart';
+import '../user/cano_user_repository.dart';
 
 class AuthRepository {
   static final AuthRepository _instance = AuthRepository._internal();
@@ -18,10 +19,9 @@ class AuthRepository {
     return _instance;
   }
 
-  // final dio = Dio().interceptors.add(AuthInterceptor());
-
   static final authApi = CanoAuthApi(Dio());
   static final tokenManager = CanoTokenManager();
+  static final userRepositroy = CanoUserRepository();
 
   Future<void> loginWithKakao(VoidCallback onSuccess) async {
     OAuthToken? kakaotoken;
@@ -54,7 +54,6 @@ class AuthRepository {
 
     if (kakaotoken != null) {
       print("카카오 로그인 SDK 성공 - kakao Token: $kakaotoken");
-
       try {
         final loginResponse =
             await authApi.loginWithKakao({"token": kakaotoken.accessToken});
@@ -62,6 +61,7 @@ class AuthRepository {
         print("카카오 로그인 API 성공 - refresh Token: ${loginResponse.refreshToken}");
         await tokenManager.saveAccessToken(loginResponse.accessToken);
         await tokenManager.saveRefreshToken(loginResponse.refreshToken);
+        await userRepositroy.getUserInfo();
         // onSuccess.call();
       } catch (e) {
         print("카카오 로그인 실패: $e");

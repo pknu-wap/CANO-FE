@@ -1,4 +1,4 @@
-import 'package:cano/network/model/login_response.dart';
+import 'package:cano/network/model/auth/login_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -14,7 +14,4 @@ abstract class CanoAuthApi {
   @POST("api/auth/reissue")
   Future<LoginResponse> reissueAccessToken(
       @Body() Map<String, String> refreshToken);
-
-  @GET("api/user")
-  Future<LoginResponse> getTokens(@Header("Authorization") String token);
 }

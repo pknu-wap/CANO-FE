@@ -23,12 +23,12 @@ class AuthInterceptor extends Interceptor {
       final accessToken = await AuthRepository.tokenManager.getAccessToken();
       if (accessToken != null) {
         options.headers['Authorization'] = 'Bearer $accessToken';
+        handler.next(options);
       }
-      handler.next(options);
     } catch (e) {
       handler.reject(DioException(
         requestOptions: options,
-        error: 'Auhtroization 헤더 추가 실패 $e',
+        error: '카카오 Auhtroization 헤더 추가 실패 $e',
       ));
     }
   }
