@@ -5,6 +5,7 @@ import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/desginsystem/strings.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cano/viewmodel/menu/menu_viewmodel.dart';
 import 'package:cano/data/model/menu/menu_info.dart';
@@ -22,7 +23,7 @@ class MenuScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final menuData = ref.watch(menuProvider);
-    final reviewData = ref.watch(reviewListProvider);
+    final reviewData = ref.watch(reviewViewModelProvider);
 
     double averageRating = _calculateAverageRating(menuData);
 
@@ -233,7 +234,7 @@ class MenuScreen extends ConsumerWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => WriteReviewScreen(),
+                builder: (context) => const WriteReviewScreen(),
               ),
             );
           },
@@ -247,10 +248,8 @@ class MenuScreen extends ConsumerWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Image.asset(
-                "assets/images/reviewPencil.png",
-                width: 24,
-                height: 24,
+              SvgPicture.asset(
+                "assets/images/reviewPencil.svg",
               ),
               const SizedBox(width: 8),
               const Text(

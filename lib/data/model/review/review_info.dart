@@ -4,7 +4,6 @@ import 'package:cano/desginsystem/strings.dart';
 part 'review_info.freezed.dart';
 part 'review_info.g.dart';
 
-
 @freezed
 class ReviewInfo with _$ReviewInfo {
   const factory ReviewInfo({
@@ -12,11 +11,11 @@ class ReviewInfo with _$ReviewInfo {
     required String rating,
     required DateTime timestamp,
     required String reviewText,
-    required List<String> reviewImageUrl, 
-    required Intensitylevel? acidity,
-    required Intensitylevel? body,
-    required Intensitylevel? bitterness,
-    required Intensitylevel? sweetness,
+    required List<String> reviewImageUrl,
+    required IntensityLevel? acidity,
+    required IntensityLevel? body,
+    required IntensityLevel? bitterness,
+    required IntensityLevel? sweetness,
     required List<Aroma>? aroma,
   }) = _ReviewInfo;
 
@@ -24,8 +23,7 @@ class ReviewInfo with _$ReviewInfo {
       _$ReviewInfoFromJson(json);
 }
 
-
-enum Intensitylevel {
+enum IntensityLevel {
   none(AppStrings.none),
   weak(AppStrings.weak),
   normal(AppStrings.normal),
@@ -34,20 +32,20 @@ enum Intensitylevel {
 
   final String description;
 
-  const Intensitylevel(this.description);
+  const IntensityLevel(this.description);
 
-  static Intensitylevel? fromString(String value) {
+  static IntensityLevel? fromString(String value) {
     switch (value) {
       case AppStrings.none:
-        return Intensitylevel.none;
+        return IntensityLevel.none;
       case AppStrings.weak:
-        return Intensitylevel.weak;
+        return IntensityLevel.weak;
       case AppStrings.normal:
-        return Intensitylevel.normal;
+        return IntensityLevel.normal;
       case AppStrings.strong:
-        return Intensitylevel.strong;
+        return IntensityLevel.strong;
       case AppStrings.veryStrong:
-        return Intensitylevel.veryStrong;
+        return IntensityLevel.veryStrong;
       default:
         return null;
     }
@@ -94,4 +92,3 @@ enum Aroma {
     }
   }
 }
-
