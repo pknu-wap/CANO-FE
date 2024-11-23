@@ -394,11 +394,9 @@ class CoffeePreferenceScreen extends ConsumerWidget {
                             .modifiyUserInfo();
 
                         if (isSuccess) {
-                          print("회원 정보 변경 성공");
                           showToast(AppStrings.modifiyUserInfoSuccess);
                           context.go('/home');
                         } else {
-                          print("회원 정보 변경 실패");
                           showToast(AppStrings.modifiyUserInfoFailure);
                         }
                       },

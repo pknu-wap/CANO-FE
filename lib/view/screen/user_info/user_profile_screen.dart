@@ -74,11 +74,9 @@ class UserProfileScreen extends ConsumerWidget {
                             await getGalleryPermissionStatus()
                                 ? ref
                                     .read(userInfoProvider.notifier)
-                                    .pickImageFromGallery(
-                                        context,
-                                        (imagePath) => ref
-                                            .watch(userInfoProvider.notifier)
-                                            .setProfileImageUrl(imagePath))
+                                    .pickProfileImage(
+                                      context,
+                                    )
                                 : requestGalleryPermission();
                           },
                         ),

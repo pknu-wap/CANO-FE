@@ -101,10 +101,10 @@ class RegisterMenuScreen extends ConsumerWidget {
             ),
             Stack(
               children: [
-                registerMenuRequest.imageUrl == ''
+                registerMenuRequest.imageUrl == null
                     ? SvgPicture.asset("assets/images/image_template.svg")
                     : Image.file(
-                        File(registerMenuRequest.imageUrl),
+                        File(registerMenuRequest.imageUrl!),
                         fit: BoxFit.cover,
                         width: 150,
                         height: 150,
@@ -130,11 +130,9 @@ class RegisterMenuScreen extends ConsumerWidget {
                           await getGalleryPermissionStatus()
                               ? ref
                                   .read(registerMenuProvider.notifier)
-                                  .pickImageFromGallery(
-                                      context,
-                                      (imagePath) => ref
-                                          .watch(registerMenuProvider.notifier)
-                                          .setImageUrl(imagePath))
+                                  .pickMenuImage(
+                                    context,
+                                  )
                               : requestGalleryPermission();
                         },
                       ),
