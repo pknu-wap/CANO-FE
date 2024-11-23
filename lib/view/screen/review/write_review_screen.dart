@@ -3,80 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/desginsystem/strings.dart';
-import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cano/viewmodel/review/review_viewmodel.dart';
 import 'package:cano/data/model/review/review_info.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-class WriteReviewScreen extends ConsumerStatefulWidget {
-  WriteReviewScreen({super.key});
-
-  final List<String> intensities =
-      IntensityLevel.values.map((level) => level.description).toList();
-  final List<String> aromas = Aroma.values.map((aroma) => aroma.scent).toList();
+class WriteReviewScreen extends ConsumerWidget {
+  const WriteReviewScreen({super.key});
 
   @override
-  _WriteReviewScreenState createState() => _WriteReviewScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final reviewState = ref.watch(reviewViewModelProvider);
+    final reviewViewModel = ref.read(reviewViewModelProvider.notifier);
 
-class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
-  double rating = 0.0;
-  final TextEditingController reviewController = TextEditingController();
-  List<String> uploadedImagePaths = [];
-  final ImagePicker picker = ImagePicker();
+    print(reviewState.reviewText);
 
-  // Initialize menu attribute selections
-  IntensityLevel? selectedAcidity;
-  IntensityLevel? selectedBody;
-  IntensityLevel? selectedBitterness;
-  IntensityLevel? selectedSweetness;
-  List<Aroma> selectedAromas = [];
+    final List<String> intensities =
+        IntensityLevel.values.map((level) => level.description).toList();
+    final List<String> aromas =
+        Aroma.values.map((aroma) => aroma.scent).toList();
 
-  Future<void> addImage() async {
-    final XFile? pickedFile =
-        await picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedFile != null) {
-      setState(() {
-        uploadedImagePaths.add(pickedFile.path);
-      });
-    }
-  }
-
-  void removeImage(int index) {
-    setState(() {
-      uploadedImagePaths.removeAt(index);
-    });
-  }
-
-  @override
-  void dispose() {
-    reviewController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // Watch the review list provider
-    final reviewData = ref.watch(reviewListProvider);
-
-    ref.listen(reviewListProvider, (prev, next) {
-      print("현재 상태: $next");
-    });
-
-    // Helper function to get Intensitylevel from description
     IntensityLevel? getIntensityLevel(String description) {
       return IntensityLevel.values.firstWhere(
         (level) => level.description == description,
-        orElse: () => IntensityLevel.none,
+        orElse: () => IntensityLevel.none, // none 반환
       );
     }
-
-    // Extract intensities and aromas from widget
-    final intensities = widget.intensities;
-    final aromas = widget.aromas;
 
     return Scaffold(
       appBar: AppBar(
@@ -118,13 +70,11 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                     for (int i = 1; i <= 5; i++)
                       GestureDetector(
                         onTap: () {
-                          setState(() {
-                            rating = i.toDouble();
-                          });
+                          reviewViewModel.setRating(i.toDouble());
                         },
                         child: Icon(
                           Icons.star,
-                          color: i <= rating
+                          color: i <= reviewState.rating
                               ? AppColors.star
                               : AppColors.emptyStar,
                           size: 28,
@@ -132,7 +82,7 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                       ),
                     const SizedBox(width: 8),
                     Text(
-                      '${rating.toInt()}/5',
+                      '${reviewState.rating.toInt()}/5',
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -146,7 +96,9 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                 // 리뷰 텍스트
                 TextField(
                   style: const TextStyle(fontSize: 14),
-                  controller: reviewController,
+                  onChanged: (text) {
+                    reviewViewModel.setReviewText(text);
+                  },
                   maxLines: 5,
                   decoration: InputDecoration(
                     hintText: AppStrings.reviewHint,
@@ -180,7 +132,9 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    for (int i = 0; i < uploadedImagePaths.length; i++)
+                    for (int i = 0;
+                        i < reviewState.uploadedImagePaths.length;
+                        i++)
                       Stack(
                         children: [
                           Container(
@@ -189,7 +143,8 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                             height: 100,
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: FileImage(File(uploadedImagePaths[i])),
+                                image: FileImage(
+                                    File(reviewState.uploadedImagePaths[i])),
                                 fit: BoxFit.cover,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
@@ -205,14 +160,14 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                                 color: Colors.white,
                                 size: 20,
                               ),
-                              onPressed: () => removeImage(i),
+                              onPressed: () => reviewViewModel.removeImage(i),
                             ),
                           ),
                         ],
                       ),
-                    if (uploadedImagePaths.length < 2)
+                    if (reviewState.uploadedImagePaths.length < 2)
                       GestureDetector(
-                        onTap: addImage,
+                        onTap: reviewViewModel.addImage,
                         child: Container(
                           width: 100,
                           height: 100,
@@ -230,6 +185,7 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                 const Divider(),
                 const SizedBox(height: 16),
 
+                // Acidity
                 Row(
                   children: [
                     const Text(
@@ -268,28 +224,23 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                 Wrap(
                   spacing: 8,
                   runSpacing: -5,
-                  children:
-                      List<Widget>.generate(intensities.length, (int index) {
+                  children: intensities.map((description) {
+                    final intensityLevel = getIntensityLevel(description);
                     return ChoiceChip(
                       showCheckmark: false,
                       label: Text(
-                        intensities[index],
+                        description,
                         style: const TextStyle(fontSize: 11),
                       ),
-                      selected: selectedAcidity ==
-                          getIntensityLevel(intensities[index]),
+                      selected: reviewState.selectedAcidity == intensityLevel,
                       onSelected: (bool selected) {
-                        setState(() {
-                          selectedAcidity = selected
-                              ? getIntensityLevel(intensities[index])
-                              : null;
-                        });
+                        reviewViewModel.setSelectedAcidity(
+                            selected ? intensityLevel : null);
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                         side: BorderSide(
-                          color: selectedAcidity ==
-                                  getIntensityLevel(intensities[index])
+                          color: reviewState.selectedAcidity == intensityLevel
                               ? AppColors.selectedColor
                               : Colors.grey,
                           width: 1,
@@ -298,16 +249,17 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                       backgroundColor: Colors.white,
                       selectedColor: Colors.white,
                       labelStyle: TextStyle(
-                        color: selectedAcidity ==
-                                getIntensityLevel(intensities[index])
+                        color: reviewState.selectedAcidity == intensityLevel
                             ? AppColors.selectedColor
                             : Colors.grey,
                       ),
                     );
-                  }),
+                  }).toList(),
                 ),
+
                 const SizedBox(height: 15),
-                // Body Section
+
+                // Body 
                 Row(
                   children: [
                     const Text(
@@ -346,28 +298,23 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                 Wrap(
                   spacing: 8,
                   runSpacing: -5,
-                  children:
-                      List<Widget>.generate(intensities.length, (int index) {
+                  children: intensities.map((description) {
+                    final intensityLevel = getIntensityLevel(description);
                     return ChoiceChip(
                       showCheckmark: false,
                       label: Text(
-                        intensities[index],
+                        description,
                         style: const TextStyle(fontSize: 11),
                       ),
-                      selected:
-                          selectedBody == getIntensityLevel(intensities[index]),
+                      selected: reviewState.selectedBody == intensityLevel,
                       onSelected: (bool selected) {
-                        setState(() {
-                          selectedBody = selected
-                              ? getIntensityLevel(intensities[index])
-                              : null;
-                        });
+                        reviewViewModel
+                            .setSelectedBody(selected ? intensityLevel : null);
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                         side: BorderSide(
-                          color: selectedBody ==
-                                  getIntensityLevel(intensities[index])
+                          color: reviewState.selectedBody == intensityLevel
                               ? AppColors.selectedColor
                               : Colors.grey,
                           width: 1,
@@ -376,16 +323,17 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                       backgroundColor: Colors.white,
                       selectedColor: Colors.white,
                       labelStyle: TextStyle(
-                        color: selectedBody ==
-                                getIntensityLevel(intensities[index])
+                        color: reviewState.selectedBody == intensityLevel
                             ? AppColors.selectedColor
                             : Colors.grey,
                       ),
                     );
-                  }),
+                  }).toList(),
                 ),
+
                 const SizedBox(height: 15),
-                // Bitterness Section
+
+                // Bitterness 
                 const Text(
                   AppStrings.bitterness,
                   style: TextStyle(fontWeight: FontWeight.bold),
@@ -394,46 +342,44 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                 Wrap(
                   spacing: 8,
                   runSpacing: -5,
-                  children:
-                      List<Widget>.generate(intensities.length, (int index) {
+                  children: intensities.map((description) {
+                    final intensityLevel = getIntensityLevel(description);
                     return ChoiceChip(
                       showCheckmark: false,
                       label: Text(
-                        intensities[index],
+                        description,
                         style: const TextStyle(fontSize: 11),
                       ),
-                      selected: selectedBitterness ==
-                          getIntensityLevel(intensities[index]),
+                      selected:
+                          reviewState.selectedBitterness == intensityLevel,
                       onSelected: (bool selected) {
-                        setState(() {
-                          selectedBitterness = selected
-                              ? getIntensityLevel(intensities[index])
-                              : null;
-                        });
+                        reviewViewModel.setSelectedBitterness(
+                            selected ? intensityLevel : null);
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                         side: BorderSide(
-                          color: selectedBitterness ==
-                                  getIntensityLevel(intensities[index])
-                              ? AppColors.selectedColor
-                              : Colors.grey,
+                          color:
+                              reviewState.selectedBitterness == intensityLevel
+                                  ? AppColors.selectedColor
+                                  : Colors.grey,
                           width: 1,
                         ),
                       ),
                       backgroundColor: Colors.white,
                       selectedColor: Colors.white,
                       labelStyle: TextStyle(
-                        color: selectedBitterness ==
-                                getIntensityLevel(intensities[index])
+                        color: reviewState.selectedBitterness == intensityLevel
                             ? AppColors.selectedColor
                             : Colors.grey,
                       ),
                     );
-                  }),
+                  }).toList(),
                 ),
+
                 const SizedBox(height: 15),
-                // Sweetness Section
+
+                // Sweetness 
                 const Text(
                   AppStrings.sweetness,
                   style: TextStyle(fontWeight: FontWeight.bold),
@@ -442,28 +388,23 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                 Wrap(
                   spacing: 8,
                   runSpacing: -5,
-                  children:
-                      List<Widget>.generate(intensities.length, (int index) {
+                  children: intensities.map((description) {
+                    final intensityLevel = getIntensityLevel(description);
                     return ChoiceChip(
                       showCheckmark: false,
                       label: Text(
-                        intensities[index],
+                        description,
                         style: const TextStyle(fontSize: 11),
                       ),
-                      selected: selectedSweetness ==
-                          getIntensityLevel(intensities[index]),
+                      selected: reviewState.selectedSweetness == intensityLevel,
                       onSelected: (bool selected) {
-                        setState(() {
-                          selectedSweetness = selected
-                              ? getIntensityLevel(intensities[index])
-                              : null;
-                        });
+                        reviewViewModel.setSelectedSweetness(
+                            selected ? intensityLevel : null);
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                         side: BorderSide(
-                          color: selectedSweetness ==
-                                  getIntensityLevel(intensities[index])
+                          color: reviewState.selectedSweetness == intensityLevel
                               ? AppColors.selectedColor
                               : Colors.grey,
                           width: 1,
@@ -472,16 +413,17 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                       backgroundColor: Colors.white,
                       selectedColor: Colors.white,
                       labelStyle: TextStyle(
-                        color: selectedSweetness ==
-                                getIntensityLevel(intensities[index])
+                        color: reviewState.selectedSweetness == intensityLevel
                             ? AppColors.selectedColor
                             : Colors.grey,
                       ),
                     );
-                  }),
+                  }).toList(),
                 ),
+
                 const SizedBox(height: 15),
-                // Aroma Section
+
+                // Aroma 
                 Row(
                   children: [
                     const Text(
@@ -520,28 +462,23 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                 Wrap(
                   spacing: 8,
                   runSpacing: -5,
-                  children: List<Widget>.generate(aromas.length, (int index) {
-                    Aroma aroma = Aroma.values[index];
+                  children: aromas.map((scent) {
+                    final aroma =
+                        Aroma.values.firstWhere((a) => a.scent == scent);
                     return ChoiceChip(
                       showCheckmark: false,
                       label: Text(
-                        aromas[index],
+                        scent,
                         style: const TextStyle(fontSize: 11),
                       ),
-                      selected: selectedAromas.contains(aroma),
+                      selected: reviewState.selectedAromas.contains(aroma),
                       onSelected: (bool selected) {
-                        setState(() {
-                          if (selected) {
-                            selectedAromas.add(aroma);
-                          } else {
-                            selectedAromas.remove(aroma);
-                          }
-                        });
+                        reviewViewModel.toggleAroma(aroma);
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                         side: BorderSide(
-                          color: selectedAromas.contains(aroma)
+                          color: reviewState.selectedAromas.contains(aroma)
                               ? AppColors.selectedColor
                               : Colors.grey,
                           width: 1,
@@ -550,51 +487,51 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                       backgroundColor: Colors.white,
                       selectedColor: Colors.white,
                       labelStyle: TextStyle(
-                        color: selectedAromas.contains(aroma)
+                        color: reviewState.selectedAromas.contains(aroma)
                             ? AppColors.selectedColor
                             : Colors.grey,
                       ),
                     );
-                  }),
+                  }).toList(),
                 ),
+
                 const SizedBox(height: 32),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.8,
-                    height: 54, // Fixed height for consistency
+                    height: 54, 
                     margin: const EdgeInsets.only(bottom: 24),
                     child: ElevatedButton(
                       onPressed: () async {
-                        final reviewText = reviewController.text.trim();
+                        final reviewText = reviewState.reviewText.trim();
 
                         final List<String> reviewImageUrls =
-                            uploadedImagePaths.isNotEmpty
-                                ? uploadedImagePaths
+                            reviewState.uploadedImagePaths.isNotEmpty
+                                ? reviewState.uploadedImagePaths
                                     .map((path) => 'file://$path')
                                     .toList()
                                 : [];
 
                         final newReview = ReviewInfo(
-                          userName: '현재 유저', // 현재 유저 이름으로 변경
-                          rating: rating.toString(),
+                          userName: '현재 유저', 
+                          rating: reviewState.rating.toString(),
                           timestamp: DateTime.now(),
                           reviewText: reviewText,
                           reviewImageUrl: reviewImageUrls,
-                          acidity: selectedAcidity,
-                          body: selectedBody,
-                          bitterness: selectedBitterness,
-                          sweetness: selectedSweetness,
-                          aroma:
-                              selectedAromas.isNotEmpty ? selectedAromas : null,
+                          acidity: reviewState.selectedAcidity,
+                          body: reviewState.selectedBody,
+                          bitterness: reviewState.selectedBitterness,
+                          sweetness: reviewState.selectedSweetness,
+                          aroma: reviewState.selectedAromas.isNotEmpty
+                              ? reviewState.selectedAromas
+                              : null,
                         );
 
-                        // Add the new review to the provider
                         ref
-                            .read(reviewListProvider.notifier)
+                            .read(reviewViewModelProvider.notifier)
                             .addReview(newReview);
 
-                        // Optionally, show a success message
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                               content: Text(AppStrings.submitReviewAlert)),
@@ -603,9 +540,10 @@ class _WriteReviewScreenState extends ConsumerState<WriteReviewScreen> {
                         Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: rating == 0
-                            ? Colors.grey
-                            : AppColors.floatingButton,
+                        backgroundColor: reviewState.rating != 0 &&
+                                reviewState.reviewText.isNotEmpty
+                            ? AppColors.floatingButton
+                            : Colors.grey,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0),
                         ),

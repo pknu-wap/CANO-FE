@@ -23,7 +23,7 @@ class MenuScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final menuData = ref.watch(menuProvider);
-    final reviewData = ref.watch(reviewListProvider);
+    final reviewData = ref.watch(reviewViewModelProvider);
 
     double averageRating = _calculateAverageRating(menuData);
 
@@ -213,7 +213,7 @@ class MenuScreen extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Column(
-                children: reviewData
+                children: reviewData.reviews
                     .map((review) => ReviewCardWidget(review: review))
                     .toList(),
               ),
@@ -234,7 +234,7 @@ class MenuScreen extends ConsumerWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => WriteReviewScreen(),
+                builder: (context) => const WriteReviewScreen(),
               ),
             );
           },
