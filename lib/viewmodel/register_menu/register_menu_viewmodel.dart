@@ -1,10 +1,14 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:cano/data/model/register_menu/register_menu_request.dart';
 import 'package:cano/data/repository/register_menu/register_menu_repository.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../desginsystem/strings.dart';
 
 class RegisterMenuViewmodel extends StateNotifier<RegisterMenuRequest> {
   RegisterMenuViewmodel._internal(super.state);
@@ -19,8 +23,22 @@ class RegisterMenuViewmodel extends StateNotifier<RegisterMenuRequest> {
 
   static final registerMenuRepository = RegisterMenuRepository();
 
-  Future<bool> registerMenu(RegisterMenuRequest registerMenuRequest) async {
-    return await registerMenuRepository.registerMenu(registerMenuRequest);
+  Future<bool> registerMenu() async {
+    final jsonData = {
+      AppStrings.cafeNameEng: state.cafeName,
+      AppStrings.menuNameEng: state.menuName,
+      AppStrings.priceEng: state.price
+    };
+
+    final formData = FormData.fromMap({
+      "dto": MultipartFile.fromString(
+        jsonEncode(jsonData),
+        contentType: DioMediaType.parse("application/json"),
+      ),
+      "image": await MultipartFile.fromFile(state.imageUrl)
+    });
+
+    return await registerMenuRepository.registerMenu(formData);
   }
 
   void setCafeName(String cafeName) {
@@ -43,15 +61,15 @@ class RegisterMenuViewmodel extends StateNotifier<RegisterMenuRequest> {
       BuildContext context, void onSuccess(String)) async {
     final ImagePicker _picker = ImagePicker();
 
-    // 갤러리에서 이미지 선택
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
 
     if (image != null) {
-      // 선택된 이미지의 경로
       String imagePath = image.path;
       final fileSize = await File(image.path).length();
-      print("File size: ${fileSize / 1024} KB");
-      print("File size: ${fileSize / (1024 * 1024)} MB");
+
+      print("갤러리 파일 크기: ${fileSize / 1024} KB");
+      print("갤러리 파일 크기: ${fileSize / (1024 * 1024)} MB");
+
       onSuccess(imagePath);
     }
   }
