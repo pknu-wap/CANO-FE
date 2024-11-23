@@ -1,12 +1,15 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:cano/data/model/user_info/user_info.dart';
 import 'package:cano/data/repository/user/cano_user_repository.dart';
 import 'package:cano/utils/format_string.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../desginsystem/strings.dart';
 
@@ -103,13 +106,19 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
           : intensityLevelToRequest(state.sweetness!.description),
     };
 
+    final compressedBytes =
+        state.profileImageUrl != null ? await _compressImageToByte() : null;
+    final tempFile = compressedBytes != null
+        ? await _saveCompressedImage(compressedBytes)
+        : null;
+
     final formData = FormData.fromMap({
       "dto": MultipartFile.fromString(
         jsonEncode(jsonData),
         contentType: DioMediaType.parse("application/json"),
       ),
       "image": state.profileImageUrl != null
-          ? await MultipartFile.fromFile(state.profileImageUrl!)
+          ? await MultipartFile.fromFile(tempFile!.path)
           : null
     });
 
@@ -122,6 +131,23 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
     // }
     //
     // canoUserRepository.modifiyUserInfo(dto, imageFile);
+  }
+
+  Future<List<int>> _compressImageToByte() async {
+    final compressedImage = await FlutterImageCompress.compressWithFile(
+        state.profileImageUrl!,
+        quality: 70,
+        format: CompressFormat.jpeg);
+
+    print("압축된 파일 크기: ${compressedImage!.lengthInBytes / 1024} KB");
+    return List<int>.from(compressedImage);
+  }
+
+  Future<File> _saveCompressedImage(List<int> bytes) async {
+    final tempDir = await getTemporaryDirectory();
+    final tempFile = File('${tempDir.path}/compressed_image.jpg');
+    await tempFile.writeAsBytes(bytes);
+    return tempFile;
   }
 }
 

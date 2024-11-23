@@ -5,8 +5,10 @@ import 'package:cano/data/model/register_menu/register_menu_request.dart';
 import 'package:cano/data/repository/register_menu/register_menu_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../desginsystem/strings.dart';
 
@@ -30,12 +32,15 @@ class RegisterMenuViewmodel extends StateNotifier<RegisterMenuRequest> {
       AppStrings.priceEng: state.price
     };
 
+    final compressedBytes = await _compressImageToByte();
+    final tempFile = await _saveCompressedImage(compressedBytes);
+
     final formData = FormData.fromMap({
       "dto": MultipartFile.fromString(
         jsonEncode(jsonData),
         contentType: DioMediaType.parse("application/json"),
       ),
-      "image": await MultipartFile.fromFile(state.imageUrl)
+      "image": await MultipartFile.fromFile(tempFile.path)
     });
 
     return await registerMenuRepository.registerMenu(formData);
@@ -72,6 +77,32 @@ class RegisterMenuViewmodel extends StateNotifier<RegisterMenuRequest> {
 
       onSuccess(imagePath);
     }
+  }
+
+  // Future<void> _compressImage() async {
+  //   final imageFile =  File(state.imageUrl);
+  //   final bytes = imageFile.readAsBytes();
+  //   List<int>.from(await bytes);
+  //   img.Image image = img.decodeImage(bytes)!;
+  //
+  //   final compressedBytes = img.encodeJpg(resizedImage, quality: 85);
+  // }
+
+  Future<List<int>> _compressImageToByte() async {
+    final compressedImage = await FlutterImageCompress.compressWithFile(
+        state.imageUrl,
+        quality: 70,
+        format: CompressFormat.jpeg);
+
+    print("압축된 파일 크기: ${compressedImage!.lengthInBytes / 1024} KB");
+    return List<int>.from(compressedImage);
+  }
+
+  Future<File> _saveCompressedImage(List<int> bytes) async {
+    final tempDir = await getTemporaryDirectory();
+    final tempFile = File('${tempDir.path}/compressed_image.jpg');
+    await tempFile.writeAsBytes(bytes);
+    return tempFile;
   }
 }
 
