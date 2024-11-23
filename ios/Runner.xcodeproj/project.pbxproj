@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
+		24E8D89AB7EBFC92289B797D /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72F2988AB2EE4F924941B29D /* Pods_Runner.framework */; };
 		331C808B294A63AB00263BE5 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C807B294A618700263BE5 /* RunnerTests.swift */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		6624E7D72CD4EF5000E67084 /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 6624E7D62CD4EF5000E67084 /* KakaoSDK */; };
@@ -321,6 +322,7 @@
 		};
 		6EC0BFDF9AEA8586D7093ED8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);

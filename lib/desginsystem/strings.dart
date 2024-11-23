@@ -104,6 +104,18 @@ class AppStrings {
   // 회원 정보 변경
   static const String modifiyUserInfoSuccess = "회원 정보가 정상적으로 등록되었습니다";
   static const String modifiyUserInfoFailure = "회원 등록에 실패했습니다";
+
+  // 메뉴 화면
+  static const String menuIsWrong = "메뉴의 정보가 잘못되었나요?";
+
+  // 리뷰 쓰기 화면
+  static const String howIsCoffee = '커피가 어땠나요?';
+  static const String wholeRating = '전체 평점';
+  static const String reviewHint = "더 나은 서비스 제공을 위해 해당 메뉴에 대한 정보를 위주로 작성해주세요!";
+  static const String uploadPhoto = '사진 업로드';
+  static const String uploadReviewAlert = '리뷰를 입력해주세요.';
+  static const String submitReviewAlert = '리뷰가 작성되었습니다!';
+  static const String writeReview = '리뷰 쓰기';
 }
 
 class apiUrl {

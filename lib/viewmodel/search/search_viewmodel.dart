@@ -1,7 +1,6 @@
+import 'package:cano/data/model/menu/menu_info.dart';
 import 'package:cano/data/repository/search/search_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../data/model/menu/menu_info.dart';
 
 class SearchState {
   final List<MenuInfo> menuInfoList;
@@ -41,7 +40,7 @@ class SearchViewmodel extends StateNotifier<SearchState> {
                 score: 3.5,
                 scoreCount: 300,
                 isLike: true,
-                menuImageUrl: '',
+                image_url: '',
                 acidity: 0.38,
                 aromas: ["아몬드", "곡물"],
                 body: 0.72,
@@ -54,7 +53,7 @@ class SearchViewmodel extends StateNotifier<SearchState> {
                 score: 3.5,
                 scoreCount: 300,
                 isLike: true,
-                menuImageUrl: '',
+                image_url: '',
                 acidity: 0.38,
                 aromas: ["아몬드", "곡물"],
                 body: 0.72,
@@ -67,7 +66,7 @@ class SearchViewmodel extends StateNotifier<SearchState> {
                 score: 3.5,
                 scoreCount: 300,
                 isLike: true,
-                menuImageUrl: '',
+                image_url: '',
                 acidity: 0.38,
                 aromas: ["아몬드", "곡물"],
                 body: 0.72,
@@ -80,7 +79,7 @@ class SearchViewmodel extends StateNotifier<SearchState> {
                 score: 3.5,
                 scoreCount: 300,
                 isLike: true,
-                menuImageUrl: '',
+                image_url: '',
                 acidity: 0.38,
                 aromas: ["아몬드", "곡물"],
                 body: 0.72,
@@ -93,7 +92,7 @@ class SearchViewmodel extends StateNotifier<SearchState> {
                 score: 3.5,
                 scoreCount: 300,
                 isLike: true,
-                menuImageUrl: '',
+                image_url: '',
                 acidity: 0.38,
                 aromas: ["아몬드", "곡물"],
                 body: 0.72,
@@ -106,7 +105,7 @@ class SearchViewmodel extends StateNotifier<SearchState> {
                 score: 3.5,
                 scoreCount: 300,
                 isLike: true,
-                menuImageUrl: '',
+                image_url: '',
                 acidity: 0.38,
                 aromas: ["아몬드", "곡물"],
                 body: 0.72,

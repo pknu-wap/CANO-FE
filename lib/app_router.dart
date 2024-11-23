@@ -1,6 +1,7 @@
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/view/screen/auth/login_screen.dart';
 import 'package:cano/view/screen/home/home_screen.dart';
+import 'package:cano/view/screen/menu/menu_screen.dart';
 import 'package:cano/view/screen/my_page/my_page_screen.dart';
 import 'package:cano/view/screen/register_menu/register_menu_screen.dart';
 import 'package:cano/view/screen/search/search_screen.dart';
@@ -39,6 +40,11 @@ class AppRouter {
           path: '/register_menu',
           builder: (context, state) {
             return RegisterMenuScreen();
+          }),
+      GoRoute(
+          path: '/menu',
+          builder: (context, state) {
+            return MenuScreen();
           }),
       StatefulShellRoute.indexedStack(
         branches: [
