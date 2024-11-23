@@ -1,7 +1,4 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:path_provider/path_provider.dart';
+import '../desginsystem/strings.dart';
 
 String formatWithComma(int number) {
   return number.toString().replaceAllMapped(
@@ -14,16 +11,13 @@ String joinWithComma(List<String> strings) {
   return strings.join(', ');
 }
 
-void convertToBase64(File image) async {
-  final bytes = await image.readAsBytes();
-  String base64String = base64Encode(bytes);
-  print("Base64 String: $base64String");
-
-  final directory = await getApplicationDocumentsDirectory();
-
-  final filePath = '${directory.path}/test.txt';
-
-  // 파일 쓰기
-  final file = File(filePath);
-  await file.writeAsString(base64String);
+String? intensityLevelToRequest(String description) {
+  const map = {
+    AppStrings.none: AppStrings.NONE,
+    AppStrings.weak: AppStrings.LOW,
+    AppStrings.normal: AppStrings.MEDIUM,
+    AppStrings.strong: AppStrings.HIGH,
+    AppStrings.veryStrong: AppStrings.VERY_HIGH,
+  };
+  return map[description];
 }

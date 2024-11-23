@@ -1,9 +1,7 @@
-import UIKit
 import Flutter
 import UIKit
 import KakaoSDKCommon
 import KakaoSDKAuth
-
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {

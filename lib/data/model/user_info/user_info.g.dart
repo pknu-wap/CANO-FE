@@ -18,7 +18,7 @@ _$UserInfoImpl _$$UserInfoImplFromJson(Map<String, dynamic> json) =>
       aroma: (json['aroma'] as List<dynamic>)
           .map((e) => $enumDecodeNullable(_$AromaEnumMap, e))
           .toList(),
-      profileImageUrl: json['profileImageUrl'] as String,
+      profileImageUrl: json['profileImageUrl'] as String?,
     );
 
 Map<String, dynamic> _$$UserInfoImplToJson(_$UserInfoImpl instance) =>

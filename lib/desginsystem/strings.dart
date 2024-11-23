@@ -20,6 +20,11 @@ class AppStrings {
   static const String normal = "보통";
   static const String strong = "강함";
   static const String veryStrong = "매우 강함";
+  static const String NONE = "NONE";
+  static const String LOW = "LOW";
+  static const String MEDIUM = "MEDIUM";
+  static const String HIGH = "HIGH";
+  static const String VERY_HIGH = "VERY_HIGH";
 
   //// 커피 맛 기준
   static const String acidity = "산미";
@@ -27,6 +32,12 @@ class AppStrings {
   static const String bitterness = "쓴맛";
   static const String sweetness = "달달함";
   static const String aroma = "아로마";
+  static const String nameEng = "name";
+  static const String acidityEng = "acidity";
+  static const String bodyEng = "body";
+  static const String bitternessEng = "bitterness";
+  static const String sweetnessEng = "sweetness";
+
   static const String bodyDescription =
       "커피의 바디감은 입 안에서 느껴지는 커피의 무게감과 질감을\n의미해요. 쉽게 말해, 커피를 마실 때 혀와 입안에 남는 감촉으로\n가볍고 맑은 느낌부터 진하고 묵직한 느낌까지 다양합니다.";
   static const String aromaDescription =
@@ -48,17 +59,15 @@ class AppStrings {
   // 다른 뷰에도 써서 통일
   static const String applyPreferenceInfoText = "선택한 요소가 내 피드에 적용됩니다.";
   static const String keywordPreferenceText = "선호하는 키워드를 선택해주세요.";
-  static const String areaPreferenceText = "관심 지역을 설정해주세요.";
 
   static const String nickname = "닉네임";
-  static const String man = "남자";
-  static const String woman = "여자";
-
   static const String next = "다음";
   static const String prev = "이전";
   static const String finish = "완료";
   static const String cafe = "카페";
   static const String menu = "메뉴";
+  static const String coffee = "커피";
+  static const String mainTitle = "오늘도 CANO";
 
   static const searchCoffeeText = "찾는 커피가 없으신가요?";
   static const addCoffeeText = "커피 추가하기";
@@ -91,6 +100,14 @@ class AppStrings {
   static const String todayCoffeSearchText = "오늘의 커피를 검색해보세요.";
   static const String noSearchResultText = "대연동 근처에는 카노 카페의\n검색결과가 없습니다.";
   static const String addCafeText = "원하는 정보를 얻지 못했다면 새로운 카페를 추가해보세요";
+
+  // 회원 정보 변경
+  static const String modifiyUserInfoSuccess = "회원 정보가 정상적으로 등록되었습니다";
+  static const String modifiyUserInfoFailure = "회원 등록에 실패했습니다";
+}
+
+class apiUrl {
+  static const modifiyUserInfo = "http://3.34.234.63:8080/api/members/me";
 
   // 메인 화면
   static const String mainTitle = "오늘도 CANO";

@@ -24,23 +24,13 @@ class KeyManager {
     return dotenv.env['GOOGLE_CLIENT_ID'].toString();
   }
 
-  Future<String?> getAccessTokenKey() async {
+  Future<String> getAccessTokenKey() async {
     await dotenv.load(fileName: 'assets/config/.env');
     return dotenv.env['ACCESS_TOKEN_KEY'].toString();
   }
 
-  Future<String?> getRefreshTokenKey() async {
+  Future<String> getRefreshTokenKey() async {
     await dotenv.load(fileName: 'assets/config/.env');
     return dotenv.env['REFRESH_TOKEN_KEY'].toString();
-  }
-
-  Future<String?> getTokenAESKey() async {
-    await dotenv.load(fileName: 'assets/config/.env');
-    return dotenv.env['TOKEN_AES_KEY'].toString();
-  }
-
-  Future<String?> getGoogleMapsKey() async {
-    await dotenv.load(fileName: "assets/config/.env");
-    return dotenv.env['GOOGLE_MAPS_API_KEY'].toString();
   }
 }

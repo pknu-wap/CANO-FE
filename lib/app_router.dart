@@ -6,7 +6,6 @@ import 'package:cano/view/screen/register_menu/register_menu_screen.dart';
 import 'package:cano/view/screen/search/search_screen.dart';
 import 'package:cano/view/screen/user_info/coffee_preference_screen.dart';
 import 'package:cano/view/screen/user_info/user_profile_screen.dart';
-import 'package:cano/viewmodel/auth/cano_token_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -16,14 +15,15 @@ class AppRouter {
       GoRoute(
           path: '/',
           builder: (context, state) {
-            return FutureBuilder<bool>(
-                future: CanoTokenManager().checkToken(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData && snapshot.data == true)
-                    return HomeScreen();
-                  else
-                    return LoginScreen();
-                });
+            return LoginScreen();
+            // return FutureBuilder<bool>(
+            //     future: CanoTokenManager().checkToken(),
+            //     builder: (context, snapshot) {
+            //       if (snapshot.hasData && snapshot.data == true)
+            //         return HomeScreen();
+            //       else
+            //         return LoginScreen();
+            //     });
           }),
       GoRoute(
           path: '/user_profile',

@@ -1,4 +1,4 @@
-import 'package:cano/data/model/menu_info.dart';
+import 'package:cano/data/model/menu/menu_info.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
