@@ -8,11 +8,11 @@ part of 'menu_info.dart';
 
 _$MenuInfoImpl _$$MenuInfoImplFromJson(Map<String, dynamic> json) =>
     _$MenuInfoImpl(
-      cafeName: json['cafeName'] as String,
-      menuName: json['menuName'] as String,
+      id: (json['id'] as num).toInt(),
+      name: json['name'] as String,
       price: (json['price'] as num).toInt(),
-      rating: (json['rating'] as num).toDouble(),
-      ratingCount: (json['ratingCount'] as num).toInt(),
+      score: (json['score'] as num).toDouble(),
+      scoreCount: (json['scoreCount'] as num).toInt(),
       isLike: json['isLike'] as bool,
       acidity: (json['acidity'] as num).toDouble(),
       body: (json['body'] as num).toDouble(),
@@ -25,11 +25,11 @@ _$MenuInfoImpl _$$MenuInfoImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$MenuInfoImplToJson(_$MenuInfoImpl instance) =>
     <String, dynamic>{
-      'cafeName': instance.cafeName,
-      'menuName': instance.menuName,
+      'id': instance.id,
+      'name': instance.name,
       'price': instance.price,
-      'rating': instance.rating,
-      'ratingCount': instance.ratingCount,
+      'score': instance.score,
+      'scoreCount': instance.scoreCount,
       'isLike': instance.isLike,
       'acidity': instance.acidity,
       'body': instance.body,

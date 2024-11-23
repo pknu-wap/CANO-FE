@@ -1,6 +1,8 @@
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/view/screen/auth/login_screen.dart';
+import 'package:cano/view/screen/home/home_screen.dart';
 import 'package:cano/view/screen/my_page/my_page_screen.dart';
+import 'package:cano/view/screen/register_menu/register_menu_screen.dart';
 import 'package:cano/view/screen/search/search_screen.dart';
 import 'package:cano/view/screen/user_info/coffee_preference_screen.dart';
 import 'package:cano/view/screen/user_info/user_profile_screen.dart';
@@ -33,6 +35,11 @@ class AppRouter {
           builder: (context, state) {
             return CoffeePreferenceScreen();
           }),
+      GoRoute(
+          path: '/register_menu',
+          builder: (context, state) {
+            return RegisterMenuScreen();
+          }),
       StatefulShellRoute.indexedStack(
         branches: [
           StatefulShellBranch(
@@ -43,7 +50,14 @@ class AppRouter {
               ),
             ],
           ),
-          
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: "/home",
+                builder: (context, state) => HomeScreen(),
+              ),
+            ],
+          ),
           StatefulShellBranch(
             routes: [
               GoRoute(

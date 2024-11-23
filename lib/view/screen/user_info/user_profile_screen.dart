@@ -1,5 +1,6 @@
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/desginsystem/strings.dart';
+import 'package:cano/permission/permission.dart';
 import 'package:cano/view/widget/custom_button.dart';
 import 'package:cano/view/widget/outlined_text_field.dart';
 import 'package:cano/view/widget/profile_image.dart';
@@ -69,14 +70,16 @@ class UserProfileScreen extends ConsumerWidget {
                           padding: EdgeInsets.all(2),
                           icon: Icon(Icons.add,
                               size: 15, color: AppColors.primary),
-                          onPressed: () {
-                            ref
-                                .read(userInfoProvider.notifier)
-                                .pickImageFromGallery(
-                                    context,
-                                    (imagePath) => ref
-                                        .watch(userInfoProvider.notifier)
-                                        .setProfileImageUrl(imagePath));
+                          onPressed: () async {
+                            await getGalleryPermissionStatus()
+                                ? ref
+                                    .read(userInfoProvider.notifier)
+                                    .pickImageFromGallery(
+                                        context,
+                                        (imagePath) => ref
+                                            .watch(userInfoProvider.notifier)
+                                            .setProfileImageUrl(imagePath))
+                                : requestGalleryPermission();
                           },
                         ),
                       ),
