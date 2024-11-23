@@ -1,6 +1,6 @@
-import 'package:cano/data/repository/search_repository.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cano/data/model/menu/menu_info.dart';
+import 'package:cano/data/repository/search/search_repository.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SearchState {
   final List<MenuInfo> menuInfoList;

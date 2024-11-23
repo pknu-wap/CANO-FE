@@ -1,8 +1,6 @@
-import 'dart:ffi';
-
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cano/data/model/menu/menu_info.dart';
-import 'package:cano/data/repository/menu_repository.dart';
+import 'package:cano/data/repository/menu/menu_repository.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MenuViewModel extends StateNotifier<MenuInfo> {
   MenuViewModel._internal(super.state);
@@ -78,7 +76,6 @@ class MenuViewModel extends StateNotifier<MenuInfo> {
     menuRepository.getFlavorAttribute();
   }
 }
-
 
 final menuProvider = StateNotifierProvider.autoDispose<MenuViewModel, MenuInfo>(
   (ref) => MenuViewModel(),

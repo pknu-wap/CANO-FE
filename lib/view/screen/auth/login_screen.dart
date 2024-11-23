@@ -29,11 +29,14 @@ class LoginScreen extends ConsumerWidget {
             SizedBox(
               height: 30,
             ),
-            const Text(AppStrings.appName,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 28,
-                    color: AppColors.primary)),
+            GestureDetector(
+              onTap: () => context.go('/menu'),
+              child: const Text(AppStrings.appName,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 28,
+                      color: AppColors.primary)),
+            ),
             const SizedBox(height: 30),
             CustomIconSvgButton(
                 imagePath: "assets/images/kakao_login.svg",
@@ -45,7 +48,6 @@ class LoginScreen extends ConsumerWidget {
             SizedBox(
               height: 15,
             ),
-
             CustomIconSvgButton(
               imagePath: "assets/images/google_login.svg",
               onPressed: () {
