@@ -24,13 +24,15 @@ class CanoUserRepository {
     return userResponse;
   }
 
-  Future<void> modifiyUserInfo(FormData formdata) async {
+  Future<bool> modifiyUserInfo(FormData formdata) async {
     dio.interceptors.add(AuthInterceptor());
     try {
       final result = await dio.put(apiUrl.modifiyUserInfo, data: formdata);
       print("회원 정보 변경 성공 $result");
+      return true;
     } catch (e) {
       print("회원 정보 변경 실패 : $e");
+      return false;
     }
   }
 }

@@ -11,7 +11,6 @@ import 'package:image_picker/image_picker.dart';
 import '../../desginsystem/strings.dart';
 
 class UserInfoViewmodel extends StateNotifier<UserInfo> {
-  // 내부 생성자
   UserInfoViewmodel._internal(super.state);
 
   static final UserInfoViewmodel _instance =
@@ -87,7 +86,7 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
     }
   }
 
-  Future<void> modifiyUserInfo() async {
+  Future<bool> modifiyUserInfo() async {
     final jsonData = {
       AppStrings.nameEng: state.name,
       AppStrings.acidityEng: state.acidity == null
@@ -114,7 +113,7 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
           : null
     });
 
-    canoUserRepository.modifiyUserInfo(formData);
+    return await canoUserRepository.modifiyUserInfo(formData);
     //
     // final dto = jsonEncode(jsonData);
     // List<MultipartFile>? imageFile;

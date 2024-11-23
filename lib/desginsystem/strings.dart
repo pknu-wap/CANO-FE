@@ -81,6 +81,10 @@ class AppStrings {
   static const String todayCoffeSearchText = "오늘의 커피를 검색해보세요.";
   static const String noSearchResultText = "대연동 근처에는 카노 카페의\n검색결과가 없습니다.";
   static const String addCafeText = "원하는 정보를 얻지 못했다면 새로운 카페를 추가해보세요";
+
+  // 회원 정보 변경
+  static const String modifiyUserInfoSuccess = "회원 정보가 정상적으로 등록되었습니다";
+  static const String modifiyUserInfoFailure = "회원 등록에 실패했습니다";
 }
 
 class apiUrl {

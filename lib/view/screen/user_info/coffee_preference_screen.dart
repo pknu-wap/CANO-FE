@@ -8,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../desginsystem/colors.dart';
+import '../../../utils/view/show_toast.dart';
 import '../../widget/custom_button.dart';
 
 class CoffeePreferenceScreen extends ConsumerWidget {
@@ -387,10 +388,19 @@ class CoffeePreferenceScreen extends ConsumerWidget {
                           context.pop();
                         }),
                     CustomButton(
-                      onPressed: () {
-                        print("카카오 요청 갑니다");
-                        ref.read(userInfoProvider.notifier).modifiyUserInfo();
-                        // context.go('/home');
+                      onPressed: () async {
+                        final isSuccess = await ref
+                            .read(userInfoProvider.notifier)
+                            .modifiyUserInfo();
+
+                        if (isSuccess) {
+                          print("회원 정보 변경 성공");
+                          showToast(AppStrings.modifiyUserInfoSuccess);
+                          context.go('/home');
+                        } else {
+                          print("회원 정보 변경 실패");
+                          showToast(AppStrings.modifiyUserInfoFailure);
+                        }
                       },
                       buttonColor: AppColors.primary,
                       text: AppStrings.finish,
