@@ -1,15 +1,13 @@
+// write_review_screen.dart
 import 'dart:io';
+
 import 'package:cano/data/model/review/review_info.dart';
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/desginsystem/strings.dart';
 import 'package:cano/viewmodel/review/review_viewmodel.dart';
-import 'package:cano/data/model/review/review_info.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:cano/view/widget/grey_textfield.dart';
-
-class WriteReviewScreen extends ConsumerStatefulWidget {
-  WriteReviewScreen({super.key});
-
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class WriteReviewScreen extends ConsumerWidget {
   const WriteReviewScreen({super.key});
@@ -95,6 +93,7 @@ class WriteReviewScreen extends ConsumerWidget {
                   ],
                 ),
                 const SizedBox(height: 16),
+
                 // 리뷰 텍스트
                 TextField(
                   style: const TextStyle(fontSize: 14),
@@ -104,7 +103,25 @@ class WriteReviewScreen extends ConsumerWidget {
                   maxLines: 5,
                   decoration: InputDecoration(
                     hintText: AppStrings.reviewHint,
-                    textController: reviewController),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(color: AppColors.barBorder),
+                    ),
+                    hintStyle: const TextStyle(
+                      fontSize: 12,
+                    ),
+                    filled: true,
+                    fillColor: AppColors.barBg,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: AppColors.barBorder),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: AppColors.barBorder),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 16),
                 const Text(
                   AppStrings.uploadPhoto,

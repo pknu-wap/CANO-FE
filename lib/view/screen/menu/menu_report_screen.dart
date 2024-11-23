@@ -1,10 +1,8 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/desginsystem/strings.dart';
-
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cano/view/widget/grey_textfield.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MenuReportScreen extends ConsumerStatefulWidget {
   const MenuReportScreen({super.key});
@@ -21,6 +19,7 @@ class _MenuReportScreenState extends ConsumerState<MenuReportScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(
@@ -184,7 +183,6 @@ class _MenuReportScreenState extends ConsumerState<MenuReportScreen> {
           ],
         ),
       ),
-
     );
   }
 }
