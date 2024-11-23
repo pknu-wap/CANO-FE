@@ -1,11 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/data/model/menu/menu_info.dart';
+import 'package:cano/desginsystem/colors.dart';
+import 'package:flutter/material.dart';
 
 class RatingBreakdownWidget extends StatelessWidget {
   final MenuInfo menuData;
 
-  const RatingBreakdownWidget({Key? key, required this.menuData}) : super(key: key);
+  const RatingBreakdownWidget({Key? key, required this.menuData})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class RatingBreakdownWidget extends StatelessWidget {
       children: menuData.ratingCountsByStar!.entries.map((entry) {
         final star = entry.key;
         final count = entry.value;
-        final total = menuData.ratingCount;
+        final total = menuData.scoreCount;
         final percentage = (total > 0) ? (count / total * 100).toInt() : 0;
 
         return Padding(

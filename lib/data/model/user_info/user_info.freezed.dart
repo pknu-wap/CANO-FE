@@ -26,7 +26,7 @@ mixin _$UserInfo {
   Intensitylevel? get bitterness => throw _privateConstructorUsedError;
   Intensitylevel? get sweetness => throw _privateConstructorUsedError;
   List<Aroma?> get aroma => throw _privateConstructorUsedError;
-  String get profileImageUrl => throw _privateConstructorUsedError;
+  String? get profileImageUrl => throw _privateConstructorUsedError;
 
   /// Serializes this UserInfo to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ abstract class $UserInfoCopyWith<$Res> {
       Intensitylevel? bitterness,
       Intensitylevel? sweetness,
       List<Aroma?> aroma,
-      String profileImageUrl});
+      String? profileImageUrl});
 }
 
 /// @nodoc
@@ -74,7 +74,7 @@ class _$UserInfoCopyWithImpl<$Res, $Val extends UserInfo>
     Object? bitterness = freezed,
     Object? sweetness = freezed,
     Object? aroma = null,
-    Object? profileImageUrl = null,
+    Object? profileImageUrl = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -101,10 +101,10 @@ class _$UserInfoCopyWithImpl<$Res, $Val extends UserInfo>
           ? _value.aroma
           : aroma // ignore: cast_nullable_to_non_nullable
               as List<Aroma?>,
-      profileImageUrl: null == profileImageUrl
+      profileImageUrl: freezed == profileImageUrl
           ? _value.profileImageUrl
           : profileImageUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -124,7 +124,7 @@ abstract class _$$UserInfoImplCopyWith<$Res>
       Intensitylevel? bitterness,
       Intensitylevel? sweetness,
       List<Aroma?> aroma,
-      String profileImageUrl});
+      String? profileImageUrl});
 }
 
 /// @nodoc
@@ -146,7 +146,7 @@ class __$$UserInfoImplCopyWithImpl<$Res>
     Object? bitterness = freezed,
     Object? sweetness = freezed,
     Object? aroma = null,
-    Object? profileImageUrl = null,
+    Object? profileImageUrl = freezed,
   }) {
     return _then(_$UserInfoImpl(
       name: null == name
@@ -173,10 +173,10 @@ class __$$UserInfoImplCopyWithImpl<$Res>
           ? _value._aroma
           : aroma // ignore: cast_nullable_to_non_nullable
               as List<Aroma?>,
-      profileImageUrl: null == profileImageUrl
+      profileImageUrl: freezed == profileImageUrl
           ? _value.profileImageUrl
           : profileImageUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -216,7 +216,7 @@ class _$UserInfoImpl implements _UserInfo {
   }
 
   @override
-  final String profileImageUrl;
+  final String? profileImageUrl;
 
   @override
   String toString() {
@@ -269,7 +269,7 @@ abstract class _UserInfo implements UserInfo {
       required final Intensitylevel? bitterness,
       required final Intensitylevel? sweetness,
       required final List<Aroma?> aroma,
-      required final String profileImageUrl}) = _$UserInfoImpl;
+      required final String? profileImageUrl}) = _$UserInfoImpl;
 
   factory _UserInfo.fromJson(Map<String, dynamic> json) =
       _$UserInfoImpl.fromJson;
@@ -287,7 +287,7 @@ abstract class _UserInfo implements UserInfo {
   @override
   List<Aroma?> get aroma;
   @override
-  String get profileImageUrl;
+  String? get profileImageUrl;
 
   /// Create a copy of UserInfo
   /// with the given fields replaced by the non-null parameter values.

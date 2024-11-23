@@ -1,16 +1,22 @@
+import 'dart:convert';
+
 import 'package:cano/data/model/user_info/user_info.dart';
+import 'package:cano/data/repository/user/cano_user_repository.dart';
+import 'package:cano/utils/format_string.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../desginsystem/strings.dart';
+
 class UserInfoViewmodel extends StateNotifier<UserInfo> {
-  // 내부 생성자
   UserInfoViewmodel._internal(super.state);
 
   static final UserInfoViewmodel _instance =
       UserInfoViewmodel._internal(UserInfo(
     name: "",
-    profileImageUrl: '',
+    profileImageUrl: null,
     acidity: null,
     body: null,
     bitterness: null,
@@ -22,18 +28,13 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
     return _instance;
   }
 
+  static final canoUserRepository = CanoUserRepository();
+
   void setName(String newName) {
     state = state.copyWith(name: newName);
   }
-  // void setAge(int newAge) {
-  //   state = state.copyWith(age: newAge);
-  // }
 
-  // void setGender(bool? newGender) {
-  //   state = state.copyWith(gender: newGender);
-  // }
-
-  void setProfileImageUrl(String newUrl) {
+  void setProfileImageUrl(String? newUrl) {
     state = state.copyWith(profileImageUrl: newUrl);
   }
 
@@ -83,6 +84,44 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
       String imagePath = image.path;
       onSuccess(imagePath);
     }
+  }
+
+  Future<bool> modifiyUserInfo() async {
+    final jsonData = {
+      AppStrings.nameEng: state.name,
+      AppStrings.acidityEng: state.acidity == null
+          ? null
+          : intensityLevelToRequest(state.acidity!.description),
+      AppStrings.bodyEng: state.body == null
+          ? null
+          : intensityLevelToRequest(state.body!.description),
+      AppStrings.bitternessEng: state.bitterness == null
+          ? null
+          : intensityLevelToRequest(state.bitterness!.description),
+      AppStrings.sweetnessEng: state.sweetness == null
+          ? null
+          : intensityLevelToRequest(state.sweetness!.description),
+    };
+
+    final formData = FormData.fromMap({
+      "dto": MultipartFile.fromString(
+        jsonEncode(jsonData),
+        contentType: DioMediaType.parse("application/json"),
+      ),
+      "image": state.profileImageUrl != null
+          ? await MultipartFile.fromFile(state.profileImageUrl!)
+          : null
+    });
+
+    return await canoUserRepository.modifiyUserInfo(formData);
+    //
+    // final dto = jsonEncode(jsonData);
+    // List<MultipartFile>? imageFile;
+    // if (state.profileImageUrl != null) {
+    //   imageFile = [await MultipartFile.fromFile(state.profileImageUrl!)];
+    // }
+    //
+    // canoUserRepository.modifiyUserInfo(dto, imageFile);
   }
 }
 

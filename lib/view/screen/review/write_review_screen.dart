@@ -1,12 +1,13 @@
 // write_review_screen.dart
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'dart:io';
+
+import 'package:cano/data/model/review/review_info.dart';
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/desginsystem/strings.dart';
-import 'dart:io';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cano/viewmodel/review/review_viewmodel.dart';
-import 'package:cano/data/model/review/review_info.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class WriteReviewScreen extends ConsumerWidget {
   const WriteReviewScreen({super.key});
@@ -259,7 +260,7 @@ class WriteReviewScreen extends ConsumerWidget {
 
                 const SizedBox(height: 15),
 
-                // Body 
+                // Body
                 Row(
                   children: [
                     const Text(
@@ -333,7 +334,7 @@ class WriteReviewScreen extends ConsumerWidget {
 
                 const SizedBox(height: 15),
 
-                // Bitterness 
+                // Bitterness
                 const Text(
                   AppStrings.bitterness,
                   style: TextStyle(fontWeight: FontWeight.bold),
@@ -379,7 +380,7 @@ class WriteReviewScreen extends ConsumerWidget {
 
                 const SizedBox(height: 15),
 
-                // Sweetness 
+                // Sweetness
                 const Text(
                   AppStrings.sweetness,
                   style: TextStyle(fontWeight: FontWeight.bold),
@@ -423,7 +424,7 @@ class WriteReviewScreen extends ConsumerWidget {
 
                 const SizedBox(height: 15),
 
-                // Aroma 
+                // Aroma
                 Row(
                   children: [
                     const Text(
@@ -500,7 +501,7 @@ class WriteReviewScreen extends ConsumerWidget {
                   alignment: Alignment.bottomCenter,
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.8,
-                    height: 54, 
+                    height: 54,
                     margin: const EdgeInsets.only(bottom: 24),
                     child: ElevatedButton(
                       onPressed: () async {
@@ -514,7 +515,7 @@ class WriteReviewScreen extends ConsumerWidget {
                                 : [];
 
                         final newReview = ReviewInfo(
-                          userName: '현재 유저', 
+                          userName: '현재 유저',
                           rating: reviewState.rating.toString(),
                           timestamp: DateTime.now(),
                           reviewText: reviewText,

@@ -1,16 +1,17 @@
-import 'package:cano/network/model/login_response.dart';
+import 'package:cano/network/model/auth/login_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'cano_auth_api.g.dart';
 
-@RestApi(baseUrl: '/https://cano.com/')
+@RestApi(baseUrl: 'http://3.34.234.63:8080/')
 abstract class CanoAuthApi {
   factory CanoAuthApi(Dio dio, {String baseUrl}) = _CanoAuthApi;
 
-  @POST("oauth2/login/kakao")
-  Future<String> loginWithKakao(@Body() String token);
+  @POST("api/auth/login/kakao")
+  Future<LoginResponse> loginWithKakao(@Body() Map<String, String> token);
 
-  @GET("api/user")
-  Future<LoginResponse> getTokens(@Header("Authorization") String token);
+  @POST("api/auth/reissue")
+  Future<LoginResponse> reissueAccessToken(
+      @Body() Map<String, String> refreshToken);
 }

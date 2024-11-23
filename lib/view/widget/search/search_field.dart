@@ -54,3 +54,58 @@ class SearchField extends StatelessWidget {
     );
   }
 }
+
+class AppBarSearchField extends StatelessWidget {
+  final String hintText;
+  final TextInputType keyboardType;
+  final double borderRadius;
+  final Color borderColor;
+  final double height;
+  final ValueChanged<String> onSearch;
+  final TextEditingController controller;
+
+  const AppBarSearchField(
+      {Key? key,
+      required this.hintText,
+      this.keyboardType = TextInputType.text,
+      this.borderRadius = 100,
+      this.borderColor = Colors.white,
+      required this.height,
+      required this.onSearch,
+      required this.controller})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height,
+      child: TextField(
+        cursorColor: Colors.white,
+        maxLines: 1,
+        keyboardType: keyboardType,
+        controller: controller,
+        style: TextStyle(color: Colors.white),
+        decoration: InputDecoration(
+          suffixIcon: IconButton(
+              onPressed: () {
+                onSearch(controller.text);
+              },
+              icon: Icon(
+                Icons.search,
+                color: Colors.white,
+              )),
+          contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          hintText: hintText,
+          hintStyle: TextStyle(color: Colors.white70),
+          border: OutlineInputBorder(),
+          enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: borderColor, width: 1.0),
+              borderRadius: BorderRadius.circular(borderRadius)),
+          focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: borderColor, width: 1.0),
+              borderRadius: BorderRadius.circular(borderRadius)),
+        ),
+      ),
+    );
+  }
+}

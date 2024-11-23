@@ -7,13 +7,13 @@ class MenuViewModel extends StateNotifier<MenuInfo> {
 
   static final MenuViewModel _instance = MenuViewModel._internal(
     const MenuInfo(
-      cafeName: "스타벅스",
-      menuName: "스타벅스 돌체 라떼",
+      id: 1,
+      name: "스타벅스 돌체 라떼",
       price: 5900,
-      rating: 4.88,
-      ratingCount: 201,
+      score: 4.88,
+      scoreCount: 201,
       isLike: false,
-      menuImageUrl: "",
+      image_url: "",
       ratingCountsByStar: {
         5: 180,
         4: 11,

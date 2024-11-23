@@ -1,21 +1,17 @@
-import 'package:cano/view/screen/menu/menu_report_screen.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:cano/data/model/menu/menu_info.dart';
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/desginsystem/strings.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
-import 'package:cano/viewmodel/menu/menu_viewmodel.dart';
-import 'package:cano/data/model/menu/menu_info.dart';
-import 'package:cano/viewmodel/review/review_viewmodel.dart';
-import 'package:cano/data/model/review/review_info.dart';
-import 'package:intl/intl.dart';
+import 'package:cano/view/screen/menu/menu_report_screen.dart';
 import 'package:cano/view/screen/review/write_review_screen.dart';
 import 'package:cano/view/widget/menu/flavor_profile_widget.dart';
 import 'package:cano/view/widget/menu/rating_breakdown_widget.dart';
 import 'package:cano/view/widget/menu/review_card_widget.dart';
+import 'package:cano/viewmodel/menu/menu_viewmodel.dart';
+import 'package:cano/viewmodel/review/review_viewmodel.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 class MenuScreen extends ConsumerWidget {
   const MenuScreen({super.key});
@@ -75,7 +71,7 @@ class MenuScreen extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    menuData.menuName,
+                    menuData.name,
                     style: const TextStyle(
                         fontSize: 24, fontWeight: FontWeight.bold),
                   ),
@@ -129,7 +125,7 @@ class MenuScreen extends ConsumerWidget {
                     style: const TextStyle(
                         fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  Text('(${menuData.ratingCount}개)',
+                  Text('(${menuData.scoreCount}개)',
                       style: const TextStyle(color: AppColors.secondary)),
                 ],
               ),
@@ -276,6 +272,6 @@ class MenuScreen extends ConsumerWidget {
     }
     int totalRatings = menuData.ratingCountsByStar!.entries
         .fold(0, (sum, entry) => sum + (entry.key * entry.value));
-    return totalRatings / menuData.ratingCount;
+    return totalRatings / menuData.scoreCount;
   }
 }
