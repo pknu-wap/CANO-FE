@@ -11,10 +11,12 @@ class AuthViewModel extends StateNotifier<void> {
   factory AuthViewModel() {
     return _instance;
   }
-  final AuthRepository authRepository = AuthRepository();
 
-  Future<void> loginWithKakao(VoidCallback onSuccess) async {
-    await authRepository.loginWithKakao(onSuccess);
+  static final authRepository = AuthRepository();
+
+  Future<void> loginWithKakao(
+      VoidCallback onBoarded, VoidCallback unOnBoarded) async {
+    await authRepository.loginWithKakao(onBoarded, unOnBoarded);
   }
 
   Future<void> unlinkWithKakao() async {

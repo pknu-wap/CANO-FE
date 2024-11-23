@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color cano = Color(0xff3D1712);
   static const Color primary = Color(0xFF3E160C);
-  static const Color barColor = Color(0xFFEFECDC);
+  static const Color barColor = Color(0xFFEEFECDC);
   static const Color selectedColor = Color(0xFFFF531D);
+  static const Color buttonColor = Color(0xFFFF5943);
+  static const Color textFieldColor = Color(0xFFF2F2F2);
   static const Color floatingButton = Color(0xFFFF531D);
   static const Color star = Color(0xFFFFB800);
   static const Color emptyStar = Color(0xD7D7D7D7);

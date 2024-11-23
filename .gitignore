@@ -49,5 +49,3 @@ app.*.map.json
 ios/Flutter/Debug.xcconfig
 ios/Flutter/Release.xcconfig
 
-# Build scripts
-update_env.sh

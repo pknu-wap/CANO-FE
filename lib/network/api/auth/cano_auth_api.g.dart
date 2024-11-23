@@ -14,7 +14,7 @@ class _CanoAuthApi implements CanoAuthApi {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= '/https://cano.com/';
+    baseUrl ??= 'http://3.34.234.63:8080/';
   }
 
   final Dio _dio;
@@ -24,19 +24,20 @@ class _CanoAuthApi implements CanoAuthApi {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<String> loginWithKakao(String token) async {
+  Future<LoginResponse> loginWithKakao(Map<String, String> token) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = token;
-    final _options = _setStreamType<String>(Options(
+    final _data = <String, dynamic>{};
+    _data.addAll(token);
+    final _options = _setStreamType<LoginResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          'oauth2/login/kakao',
+          'api/auth/login/kakao',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -45,10 +46,10 @@ class _CanoAuthApi implements CanoAuthApi {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<String>(_options);
-    late String _value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late LoginResponse _value;
     try {
-      _value = _result.data!;
+      _value = LoginResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -57,20 +58,21 @@ class _CanoAuthApi implements CanoAuthApi {
   }
 
   @override
-  Future<LoginResponse> getTokens(String token) async {
+  Future<LoginResponse> reissueAccessToken(
+      Map<String, String> refreshToken) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(refreshToken);
     final _options = _setStreamType<LoginResponse>(Options(
-      method: 'GET',
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          'api/user',
+          'api/auth/reissue',
           queryParameters: queryParameters,
           data: _data,
         )

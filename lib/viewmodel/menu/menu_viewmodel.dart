@@ -1,21 +1,19 @@
-import 'dart:ffi';
-
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cano/data/model/menu/menu_info.dart';
-import 'package:cano/data/repository/menu_repository.dart';
+import 'package:cano/data/repository/menu/menu_repository.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MenuViewModel extends StateNotifier<MenuInfo> {
   MenuViewModel._internal(super.state);
 
   static final MenuViewModel _instance = MenuViewModel._internal(
     const MenuInfo(
-      cafeName: "스타벅스",
-      menuName: "스타벅스 돌체 라떼",
+      id: 1,
+      name: "스타벅스 돌체 라떼",
       price: 5900,
-      rating: 4.88,
-      ratingCount: 201,
+      score: 4.88,
+      scoreCount: 201,
       isLike: false,
-      menuImageUrl: "",
+      image_url: "",
       ratingCountsByStar: {
         5: 180,
         4: 11,
@@ -79,10 +77,6 @@ class MenuViewModel extends StateNotifier<MenuInfo> {
   }
 }
 
-// final menuProvider = StateNotifierProvider.autoDispose<MenuViewModel, MenuInfo>(
-//   (ref) => MenuViewModel(),
-// );
-
-final menuProvider = StateNotifierProvider<MenuViewModel, MenuInfo>(
+final menuProvider = StateNotifierProvider.autoDispose<MenuViewModel, MenuInfo>(
   (ref) => MenuViewModel(),
 );

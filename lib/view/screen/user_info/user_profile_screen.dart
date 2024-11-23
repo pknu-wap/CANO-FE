@@ -1,6 +1,6 @@
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/desginsystem/strings.dart';
-import 'package:cano/utils/mediaquery.dart';
+import 'package:cano/permission/permission.dart';
 import 'package:cano/view/widget/custom_button.dart';
 import 'package:cano/view/widget/outlined_text_field.dart';
 import 'package:cano/view/widget/profile_image.dart';
@@ -67,21 +67,52 @@ class UserProfileScreen extends ConsumerWidget {
                             border: Border.all(
                                 color: AppColors.primary, width: 1.0)),
                         child: IconButton(
-                          padding: EdgeInsets.all(2), // 아이콘 간격 없애기
+                          padding: EdgeInsets.all(2),
                           icon: Icon(Icons.add,
                               size: 15, color: AppColors.primary),
-                          onPressed: () {
-                            ref
-                                .watch(userInfoProvider.notifier)
-                                .pickImageFromGallery(
-                                    context,
-                                    (imagePath) => ref
-                                        .watch(userInfoProvider.notifier)
-                                        .setProfileImageUrl(imagePath));
+                          onPressed: () async {
+                            await getGalleryPermissionStatus()
+                                ? ref
+                                    .read(userInfoProvider.notifier)
+                                    .pickImageFromGallery(
+                                        context,
+                                        (imagePath) => ref
+                                            .watch(userInfoProvider.notifier)
+                                            .setProfileImageUrl(imagePath))
+                                : requestGalleryPermission();
                           },
                         ),
                       ),
                     ),
+                    if (userInfo.profileImageUrl != null)
+                      Positioned(
+                        right: 0,
+                        top: 3,
+                        child: Container(
+                          width: 20,
+                          height: 20,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  color: AppColors.primary, width: 1.0)),
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                            ),
+                            child: Text(
+                              "X",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.black),
+                            ),
+                            onPressed: () {
+                              ref
+                                  .read(userInfoProvider.notifier)
+                                  .setProfileImageUrl(null);
+                            },
+                          ),
+                        ),
+                      ),
                   ],
                 ),
                 const SizedBox(width: 20),

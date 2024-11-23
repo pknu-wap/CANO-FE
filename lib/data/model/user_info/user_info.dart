@@ -13,7 +13,7 @@ class UserInfo with _$UserInfo {
       required Intensitylevel? bitterness,
       required Intensitylevel? sweetness,
       required List<Aroma?> aroma,
-      required String profileImageUrl}) = _UserInfo;
+      required String? profileImageUrl}) = _UserInfo;
 
   factory UserInfo.fromJson(Map<String, dynamic> json) =>
       _$UserInfoFromJson(json);
