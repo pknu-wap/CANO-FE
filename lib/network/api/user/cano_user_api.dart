@@ -11,4 +11,11 @@ abstract class CanoUserApi {
 
   @GET("api/members/me")
   Future<CanoUserResponse> getUserInfo();
+
+  // @PUT("api/members/me")
+  // @MultiPart()
+  // Future<CanoUserResponse> modifiyUserInfo(
+  //   @Part(name: "dto") String dto,
+  //   @Part(name: "image") List<MultipartFile>? imageFile,
+  // );
 }

@@ -388,7 +388,9 @@ class CoffeePreferenceScreen extends ConsumerWidget {
                         }),
                     CustomButton(
                       onPressed: () {
-                        context.go('/home');
+                        print("카카오 요청 갑니다");
+                        ref.read(userInfoProvider.notifier).modifiyUserInfo();
+                        // context.go('/home');
                       },
                       buttonColor: AppColors.primary,
                       text: AppStrings.finish,

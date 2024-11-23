@@ -16,6 +16,11 @@ class AppStrings {
   static const String normal = "보통";
   static const String strong = "강함";
   static const String veryStrong = "매우 강함";
+  static const String NONE = "NONE";
+  static const String LOW = "LOW";
+  static const String MEDIUM = "MEDIUM";
+  static const String HIGH = "HIGH";
+  static const String VERY_HIGH = "VERY_HIGH";
 
   //// 커피 맛 기준
   static const String acidity = "산미";
@@ -23,6 +28,12 @@ class AppStrings {
   static const String bitterness = "쓴맛";
   static const String sweetness = "달달함";
   static const String aroma = "아로마";
+  static const String nameEng = "name";
+  static const String acidityEng = "acidity";
+  static const String bodyEng = "body";
+  static const String bitternessEng = "bitterness";
+  static const String sweetnessEng = "sweetness";
+
   static const String bodyDescription =
       "커피의 바디감은 입 안에서 느껴지는 커피의 무게감과 질감을\n의미해요. 쉽게 말해, 커피를 마실 때 혀와 입안에 남는 감촉으로\n가볍고 맑은 느낌부터 진하고 묵직한 느낌까지 다양합니다.";
   static const String aromaDescription =
@@ -70,4 +81,8 @@ class AppStrings {
   static const String todayCoffeSearchText = "오늘의 커피를 검색해보세요.";
   static const String noSearchResultText = "대연동 근처에는 카노 카페의\n검색결과가 없습니다.";
   static const String addCafeText = "원하는 정보를 얻지 못했다면 새로운 카페를 추가해보세요";
+}
+
+class apiUrl {
+  static const modifiyUserInfo = "http://3.34.234.63:8080/api/members/me";
 }
