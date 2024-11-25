@@ -60,6 +60,9 @@ dependencies:
   path_provider: ^2.1.5
   intl: ^0.19.0
   url_launcher: ^6.3.1
+  flutter_image_compress: ^2.3.0
+  image: ^4.3.0
+  typed_data: ^1.4.0
 
 
 dev_dependencies:

@@ -8,6 +8,6 @@ void showToast(String message) {
     gravity: ToastGravity.BOTTOM,
     backgroundColor: Colors.white,
     textColor: Colors.black,
-    fontSize: 16.0,
+    fontSize: 13.0,
   );
 }

@@ -50,7 +50,12 @@ class AuthInterceptor extends Interceptor {
           await tokenManager.saveAccessToken(newAccessToekn);
           await tokenManager.saveRefreshToken(newRefreshToken);
 
-          final newOptions = err.requestOptions;
+          final options = err.requestOptions;
+          final data = options.data;
+          final newOptions = options.retryWith(
+            data: data is FormData ? data.clone() : data,
+          );
+
           newOptions.headers['Authorization'] = 'Bearer $newAccessToekn';
           final response = await Dio().fetch(newOptions);
           handler.resolve(response);
@@ -66,5 +71,18 @@ class AuthInterceptor extends Interceptor {
     }
 
     handler.next(err);
+  }
+}
+
+extension on RequestOptions {
+  RequestOptions retryWith({
+    Object? data,
+  }) {
+    return copyWith(
+      extra: {
+        ...extra,
+      },
+      data: data ?? this.data,
+    );
   }
 }

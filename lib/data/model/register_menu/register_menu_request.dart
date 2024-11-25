@@ -9,7 +9,7 @@ class RegisterMenuRequest with _$RegisterMenuRequest {
     required String cafeName,
     required String menuName,
     required int price,
-    required String imageUrl,
+    required String? imageUrl,
   }) = _RegisterMenuRequest;
 
   factory RegisterMenuRequest.fromJson(Map<String, dynamic> json) =>

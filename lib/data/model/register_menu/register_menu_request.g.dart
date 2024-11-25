@@ -12,7 +12,7 @@ _$RegisterMenuRequestImpl _$$RegisterMenuRequestImplFromJson(
       cafeName: json['cafeName'] as String,
       menuName: json['menuName'] as String,
       price: (json['price'] as num).toInt(),
-      imageUrl: json['imageUrl'] as String,
+      imageUrl: json['imageUrl'] as String?,
     );
 
 Map<String, dynamic> _$$RegisterMenuRequestImplToJson(
