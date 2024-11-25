@@ -150,14 +150,16 @@ class RegisterMenuScreen extends ConsumerWidget {
                         showDoubleButtonAlertDialog(
                             context, "메뉴 등록", AppStrings.askToRegisterMenu,
                             onConfirm: () async {
-                          await ref
-                                  .read(registerMenuProvider.notifier)
-                                  .registerMenu()
-                              ? () {
-                                  // context.pop();
-                                  showToast(AppStrings.registerMenuSuccess);
-                                }
-                              : () => showToast(AppStrings.registerMenuFailure);
+                          final isSuccess = await ref
+                              .read(registerMenuProvider.notifier)
+                              .registerMenu();
+
+                          if (isSuccess) {
+                            context.pop();
+                            showToast(AppStrings.registerMenuSuccess);
+                          } else {
+                            showToast(AppStrings.registerMenuFailure);
+                          }
                         })
                       }
                     : {},

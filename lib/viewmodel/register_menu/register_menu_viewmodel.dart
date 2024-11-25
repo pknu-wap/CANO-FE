@@ -32,6 +32,7 @@ class RegisterMenuViewmodel extends StateNotifier<RegisterMenuRequest> {
     final compressedBytes = state.imageUrl != null
         ? await compressImageToByte(state.imageUrl!)
         : null;
+
     final tempFile = compressedBytes != null
         ? await saveCompressedImage(compressedBytes)
         : null;

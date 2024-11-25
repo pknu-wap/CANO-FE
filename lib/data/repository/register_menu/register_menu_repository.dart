@@ -1,4 +1,3 @@
-import 'package:cano/viewmodel/auth/cano_token_manager.dart';
 import 'package:dio/dio.dart';
 
 import '../../../desginsystem/strings.dart';
@@ -20,7 +19,6 @@ class RegisterMenuRepository {
   Future<bool> registerMenu(FormData formData) async {
     dio.interceptors.add(AuthInterceptor());
     try {
-      print("CANO 메뉴 토큰 : ${await CanoTokenManager().getAccessToken()}");
       final result = await dio.post(apiUrl.registerMenu, data: formData);
       print("메뉴 등록 성공 $result");
       return true;

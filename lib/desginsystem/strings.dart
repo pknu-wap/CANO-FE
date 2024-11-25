@@ -94,7 +94,7 @@ class AppStrings {
   static const String menuNameHint = "예) 아이스 아메리카노";
   static const String priceHint = "단위나 쉼표 없이 적어주세요! 예) 4500";
   static const String cafeNameEng = "cafeName";
-  static const String menuNameEng = "menuName";
+  static const String menuNameEng = "name";
   static const String priceEng = "price";
 
   // 검색 화면

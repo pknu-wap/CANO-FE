@@ -34,6 +34,7 @@ Future<List<int>> compressImageToByte(String imagePath) async {
 Future<File> saveCompressedImage(List<int> bytes) async {
   final tempDir = await getTemporaryDirectory();
   final tempFile = File('${tempDir.path}/compressed_image.jpg');
+  print("임시 파일 메뉴 path : " + tempFile.path);
   await tempFile.writeAsBytes(bytes);
   return tempFile;
 }
