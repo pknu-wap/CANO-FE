@@ -13,8 +13,4 @@ abstract class SearchApi {
   @GET("api/menus/search")
   Future<List<SearchResponse>> searchWithKeyword(
       @Query("query") String keyword);
-
-  @GET("api/menus/search")
-  Future<List<SearchResponse>> getHomeMenus(
-      @Query("attribute") String attribute, @Query("degree") String degree);
 }

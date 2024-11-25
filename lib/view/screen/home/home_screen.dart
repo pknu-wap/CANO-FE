@@ -8,14 +8,25 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../desginsystem/strings.dart';
 
-class HomeScreen extends ConsumerWidget {
-  HomeScreen({super.key});
+class HomeScreen extends ConsumerStatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final homeState = ref.watch(homeProvider);
-    print("현재 상태 length : ${homeState}");
+  _HomeScreenState createState() => _HomeScreenState();
+}
 
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    ref.read(homeProvider.notifier).getHomeMenusWithType();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final homeState = ref.watch(homeProvider);
+
+    print("현재 상태 length : ${homeState}");
     ref.listen(homeProvider, (prev, next) {
       print("현재 상태: ${next}");
     });
@@ -25,30 +36,6 @@ class HomeScreen extends ConsumerWidget {
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
-          // SliverAppBar(
-          //   floating: true,
-          //   toolbarHeight: 30,
-          //   backgroundColor: AppColors.primary,
-          //   flexibleSpace: FlexibleSpaceBar(
-          //       background: Padding(
-          //     padding: const EdgeInsets.only(top: 30),
-          //     child: Column(
-          //       crossAxisAlignment: CrossAxisAlignment.start,
-          //       children: [
-          //         Container(
-          //           padding: EdgeInsets.only(left: 30),
-          //           child: Text(
-          //             AppStrings.mainTitle,
-          //             style: TextStyle(
-          //                 color: Colors.white,
-          //                 fontWeight: FontWeight.bold,
-          //                 fontSize: 20),
-          //           ),
-          //         ),
-          //       ],
-          //     ),
-          //   )),
-          // ),
           SliverPersistentHeader(
             delegate: _SearchBarDelegate(),
             pinned: true,

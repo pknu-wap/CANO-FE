@@ -110,14 +110,6 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
     });
 
     return await canoUserRepository.modifiyUserInfo(formData);
-    //
-    // final dto = jsonEncode(jsonData);
-    // List<MultipartFile>? imageFile;
-    // if (state.profileImageUrl != null) {
-    //   imageFile = [await MultipartFile.fromFile(state.profileImageUrl!)];
-    // }
-    //
-    // canoUserRepository.modifiyUserInfo(dto, imageFile);
   }
 }
 

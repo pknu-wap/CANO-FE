@@ -2,8 +2,6 @@ import 'package:cano/data/repository/search/search_repository.dart';
 import 'package:cano/network/model/search/search_response.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../auth/cano_token_manager.dart';
-
 class SearchState {
   final List<SearchResponse> menuInfoList;
   final List<String> keywordList;
@@ -46,12 +44,10 @@ class SearchViewmodel extends StateNotifier<SearchState> {
     try {
       setMenuInfoList([]);
       final searchResponses = await searchRepository.searchWithKeyword(keyword);
-
       print("검색 성공 : $searchResponses");
       searchResponses.forEach((menu) => _addMenutoMenuInfoList(menu));
     } catch (e) {
       print("검색 실패 : $e");
-      print("CANO 토큰 : ${await CanoTokenManager().getAccessToken()}");
     }
   }
 

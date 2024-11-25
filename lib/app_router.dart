@@ -1,5 +1,4 @@
 import 'package:cano/desginsystem/colors.dart';
-import 'package:cano/view/screen/auth/login_screen.dart';
 import 'package:cano/view/screen/home/home_screen.dart';
 import 'package:cano/view/screen/menu/menu_screen.dart';
 import 'package:cano/view/screen/my_page/my_page_screen.dart';
@@ -15,18 +14,12 @@ class AppRouter {
   static GoRouter router = GoRouter(
     routes: [
       GoRoute(
-          path: '/',
-          builder: (context, state) {
-            // return LoginScreen();
-            return FutureBuilder<bool>(
-                future: CanoTokenManager().checkToken(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData && snapshot.data == true)
-                    return HomeScreen();
-                  else
-                    return LoginScreen();
-                });
-          }),
+        path: '/',
+        redirect: (context, state) async {
+          final isLoggedIn = await CanoTokenManager().checkToken();
+          return isLoggedIn ? '/home' : '/login';
+        },
+      ),
       GoRoute(
           path: '/user_profile',
           builder: (context, state) {
