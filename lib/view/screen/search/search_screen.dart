@@ -33,6 +33,7 @@ class SearchScreen extends ConsumerWidget {
                   onSearch: (String) {
                     ref.read(searchProvider.notifier).setIsSearched();
                     ref.read(searchProvider.notifier).saveKeyword(String);
+                    ref.read(searchProvider.notifier).searchWithKeyword(String);
                   },
                   controller: searchController),
             ),

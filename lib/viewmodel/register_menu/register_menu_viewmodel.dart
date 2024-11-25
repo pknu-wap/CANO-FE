@@ -46,7 +46,12 @@ class RegisterMenuViewmodel extends StateNotifier<RegisterMenuRequest> {
           tempFile != null ? await MultipartFile.fromFile(tempFile.path) : null
     });
 
-    return await registerMenuRepository.registerMenu(formData);
+    final isSuccess = await registerMenuRepository.registerMenu(formData);
+    if (isSuccess)
+      state = RegisterMenuRequest(
+          cafeName: "", menuName: "", price: 0, imageUrl: null);
+
+    return isSuccess;
   }
 
   void setCafeName(String cafeName) {

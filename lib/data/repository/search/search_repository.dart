@@ -1,8 +1,9 @@
-import 'package:cano/data/model/menu/menu_info.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../network/api/search/search_api.dart';
+import '../../../network/auth_interceptor.dart';
+import '../../../network/model/search/search_response.dart';
 
 const String recentKeywordKey = "recent_keyword";
 
@@ -15,9 +16,11 @@ class SearchRepository {
     return _instance;
   }
 
-  static final searchApi = SearchApi(Dio());
+  static final dio = Dio();
+  static final searchApi = SearchApi(dio);
 
-  Future<List<MenuInfo>> searchWithKeyword(String query) async {
+  Future<List<SearchResponse>> searchWithKeyword(String query) async {
+    dio.interceptors.add(AuthInterceptor());
     return await searchApi.searchWithKeyword(query);
   }
 
