@@ -10,28 +10,28 @@ class HomeViewmodel extends StateNotifier<List<Map<String, List<HomeMenu>>>> {
   static final HomeViewmodel _instance = HomeViewmodel._internal([
     {
       FlavorDescriptions.acidityStrong: [
-        HomeMenu(
+        const HomeMenu(
             id: 1,
             name: "스타벅스 돌체 라떼",
             score: 4.8,
             attribute: AppStrings.acidity,
             degree: 88,
             image_url: "https://picsum.photos/23"),
-        HomeMenu(
+        const HomeMenu(
             id: 1,
             name: "투썸플레이스 연유 라떼",
             score: 3.6,
             attribute: AppStrings.acidity,
             degree: 88,
             image_url: "https://picsum.photos/43"),
-        HomeMenu(
+        const HomeMenu(
             id: 1,
             name: "부경대 파라다이스 아메리카노",
             score: 5.0,
             attribute: AppStrings.acidity,
             degree: 88,
             image_url: "https://picsum.photos/33"),
-        HomeMenu(
+        const HomeMenu(
             id: 1,
             name: "오빠 다방 아메리카노",
             score: 1.8,
@@ -42,28 +42,28 @@ class HomeViewmodel extends StateNotifier<List<Map<String, List<HomeMenu>>>> {
     },
     {
       FlavorDescriptions.sweetnessVeryStrong: [
-        HomeMenu(
+        const HomeMenu(
             id: 1,
             name: "스타벅스 돌체 라떼",
             score: 4.4,
             attribute: AppStrings.sweetness,
             degree: 88,
             image_url: "https://picsum.photos/69"),
-        HomeMenu(
+        const HomeMenu(
             id: 1,
             name: "051 아메리카노",
             score: 4.8,
             attribute: AppStrings.sweetness,
             degree: 88,
             image_url: "https://picsum.photos/32"),
-        HomeMenu(
+        const HomeMenu(
             id: 1,
             name: "051 카페라떼",
             score: 4.2,
             attribute: AppStrings.sweetness,
             degree: 88,
             image_url: "https://picsum.photos/22"),
-        HomeMenu(
+        const HomeMenu(
             id: 1,
             name: "노씨커피 옥수수 라떼",
             score: 4.8,
@@ -74,28 +74,28 @@ class HomeViewmodel extends StateNotifier<List<Map<String, List<HomeMenu>>>> {
     },
     {
       FlavorDescriptions.bodyModerate: [
-        HomeMenu(
+        const HomeMenu(
             id: 1,
             name: "스타벅스 돌체 라떼",
             score: 4.8,
             attribute: AppStrings.body,
             degree: 88,
             image_url: "https://picsum.photos/23"),
-        HomeMenu(
+        const HomeMenu(
             id: 1,
             name: "스타벅스 돌체 라떼",
             score: 4.8,
             attribute: AppStrings.body,
             degree: 88,
             image_url: "https://picsum.photos/43"),
-        HomeMenu(
+        const HomeMenu(
             id: 1,
             name: "스타벅스 돌체 라떼",
             score: 4.8,
             attribute: AppStrings.body,
             degree: 88,
             image_url: "https://picsum.photos/33"),
-        HomeMenu(
+        const HomeMenu(
             id: 1,
             name: "스타벅스 돌체 라떼",
             score: 4.8,

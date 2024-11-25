@@ -5,21 +5,22 @@ part 'menu_info.g.dart';
 
 @freezed
 class MenuInfo with _$MenuInfo {
-  const factory MenuInfo(
-      {required int id,
-      required String name,
-      required int price,
-      required double score,
-      required int scoreCount,
-      required bool isLike,
-      required double acidity,
-      required double body,
-      required double bitterness,
-      required double sweetness,
-      required List<String> aromas,
-      Map<String, int>? aromaCounts,
-      Map<int, int>? ratingCountsByStar,
-      required String image_url}) = _MenuInfo;
+  const factory MenuInfo({
+    required int id,
+    required String name,
+    required int price,
+    double? score, 
+    required int scoreCount,
+    required bool isLike,
+    double? acidity,
+    double? body,
+    double? bitterness, 
+    double? sweetness,
+    List<String>? aromas,
+    Map<String, int>? aromaCounts,
+    Map<int, int>? ratingCountsByStar,
+    required String imageUrl, 
+  }) = _MenuInfo;
 
   factory MenuInfo.fromJson(Map<String, dynamic> json) =>
       _$MenuInfoFromJson(json);

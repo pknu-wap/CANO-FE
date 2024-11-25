@@ -16,13 +16,13 @@ class SearchKeyword extends StatelessWidget {
   final bool isCano;
 
   const SearchKeyword({
-    Key? key,
+    super.key,
     required this.onPressed,
-    this.onClose = null,
+    this.onClose,
     required this.text,
     this.isCano = false,
     this.borderRadius = 12.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,49 +32,48 @@ class SearchKeyword extends StatelessWidget {
       },
       style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
-          padding: isCano ? null : EdgeInsets.only(left: 24, right: 5),
+          padding: isCano ? null : const EdgeInsets.only(left: 24, right: 5),
           shape: RoundedRectangleBorder(
-            side: BorderSide(
+            side: const BorderSide(
               color: AppColors.primary,
             ),
             borderRadius: BorderRadius.circular(borderRadius), // 둥근 모서리
           )),
       child: isCano
           ? Text(text,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12,
                 color: AppColors.primary,
               ))
-          : Container(
-              child: Row(
-                children: [
-                  Text(
-                    text,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: AppColors.primary,
-                    ),
+          : Row(
+              children: [
+                Text(
+                  text,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: AppColors.primary,
                   ),
-                  SizedBox(
-                    width: 5,
-                  ),
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                if (onClose != null)
                   TextButton(
                       onPressed: onClose,
                       style: TextButton.styleFrom(
                         padding: EdgeInsets.zero,
-                        minimumSize: Size(20, 30), // 원하는 크기로 최소 크기 설정
+                        minimumSize: const Size(20, 30), // 원하는 크기로 최소 크기 설정
                         tapTargetSize:
                             MaterialTapTargetSize.shrinkWrap, // 터치 영역 최소화
                       ),
-                      child: Text(
+                      child: const Text(
                         "X",
                         style: TextStyle(
                           fontSize: 12,
                           color: AppColors.primary,
                         ),
                       ))
-                ],
-              ),
+              ],
             ),
     );
   }
@@ -84,9 +83,9 @@ class MenuInfoLayout extends StatelessWidget {
   final MenuInfo menuInfo;
 
   const MenuInfoLayout({
-    Key? key,
+    super.key,
     required this.menuInfo,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -95,12 +94,13 @@ class MenuInfoLayout extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // 메뉴 이미지
             Container(
               width: mediaWidth(context, 0.24),
               height: mediaHeight(context, 0.12),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     color: Colors.black26,
                     blurRadius: 3,
@@ -110,24 +110,38 @@ class MenuInfoLayout extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10.0),
-                child: Image.asset(
-                  'assets/images/coffee_ex.png',
-                ),
+                child: menuInfo.imageUrl.isNotEmpty
+                    ? Image.network(
+                        menuInfo.imageUrl,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset(
+                            'assets/images/default.png',
+                            fit: BoxFit.cover,
+                          );
+                        },
+                      )
+                    : Image.asset(
+                        'assets/images/default.png',
+                        fit: BoxFit.cover,
+                      ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 18,
             ),
+            // 메뉴 정보
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // 메뉴 이름과 좋아요 아이콘
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         menuInfo.name,
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Icon(
                           menuInfo.isLike
@@ -136,101 +150,129 @@ class MenuInfoLayout extends StatelessWidget {
                           color: Colors.red),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
+                  // 별점 표시
                   Row(
                     children: [
                       Text(
-                        menuInfo.score.toString(),
-                        style: TextStyle(fontSize: 12),
+                        (menuInfo.score ?? 0.0).toString(),
+                        style: const TextStyle(fontSize: 12),
                       ),
-                      SizedBox(width: 3),
-                      StarRating(rating: menuInfo.score),
-                      SizedBox(
+                      const SizedBox(width: 3),
+                      StarRating(rating: menuInfo.score ?? 0.0),
+                      const SizedBox(
                         width: 3,
                       ),
                       Text(
                         "(${menuInfo.scoreCount})",
-                        style: TextStyle(color: Colors.black12, fontSize: 12),
+                        style: const TextStyle(
+                            color: Colors.black12, fontSize: 12),
                       )
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        AppStrings.price,
-                        style: TextStyle(fontSize: 12),
-                      ),
-                      Text(
-                        "${formatWithComma(menuInfo.price)}원",
-                        style: TextStyle(fontSize: 12),
-                      ),
-                    ],
+                  // 가격 표시
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          AppStrings.price,
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        Text(
+                          "${formatWithComma(menuInfo.price)}원",
+                          style: const TextStyle(fontSize: 12),
+                        ),
+                      ],
+                    ),
                   ),
-                  SizedBox(height: 3),
+                  const SizedBox(height: 3),
+                  // 맛 특성 표시 (Acidity)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         AppStrings.acidity,
                         style: TextStyle(fontSize: 12),
                       ),
-                      IntensityBar(intensity: menuInfo.acidity)
+                      IntensityBar(intensity: menuInfo.acidity ?? 0.0)
                     ],
                   ),
-                  SizedBox(
-                    height: 3,
-                  ),
+                  const SizedBox(height: 3),
+                  // 맛 특성 표시 (Body)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         AppStrings.body,
                         style: TextStyle(fontSize: 12),
                       ),
-                      IntensityBar(intensity: menuInfo.body)
+                      IntensityBar(intensity: menuInfo.body ?? 0.0)
                     ],
                   ),
+                  // 맛 특성 표시 (Bitterness)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         AppStrings.bitterness,
                         style: TextStyle(fontSize: 12),
                       ),
-                      IntensityBar(intensity: menuInfo.bitterness)
+                      IntensityBar(intensity: menuInfo.bitterness ?? 0.0)
                     ],
                   ),
-                  SizedBox(
-                    height: 3,
-                  ),
+                  const SizedBox(height: 3),
+                  // 맛 특성 표시 (Sweetness)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         AppStrings.sweetness,
                         style: TextStyle(fontSize: 12),
                       ),
-                      IntensityBar(intensity: menuInfo.sweetness)
+                      IntensityBar(intensity: menuInfo.sweetness ?? 0.0)
                     ],
                   ),
-                  SizedBox(
-                    height: 3,
-                  ),
+                  const SizedBox(height: 3),
+                  // 아로마 표시
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         AppStrings.aroma,
                         style: TextStyle(fontSize: 12),
                       ),
-                      Text(
-                        joinWithComma(menuInfo.aromas),
-                        style:
-                            TextStyle(fontSize: 12, color: AppColors.primary),
-                      )
+                      Expanded(
+                        child: menuInfo.aromas != null &&
+                                menuInfo.aromas!.isNotEmpty
+                            ? Wrap(
+                                spacing: 8.0,
+                                children: menuInfo.aromas!
+                                    .where((aroma) =>
+                                        menuInfo.aromaCounts != null &&
+                                        menuInfo.aromaCounts![aroma] != null &&
+                                        menuInfo.aromaCounts![aroma]! > 0)
+                                    .map(
+                                      (aroma) => Chip(
+                                        label: Text(
+                                          "$aroma ${menuInfo.aromaCounts![aroma]!}",
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
+                                        backgroundColor: AppColors.barBg,
+                                        side: BorderSide.none,
+                                      ),
+                                    )
+                                    .toList(),
+                              )
+                            : const Text(
+                                "아로마 정보가 없습니다.",
+                                style: TextStyle(
+                                    fontSize: 12, color: AppColors.primary),
+                              ),
+                      ),
                     ],
                   ),
                 ],

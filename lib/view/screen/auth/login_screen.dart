@@ -26,7 +26,7 @@ class LoginScreen extends ConsumerWidget {
                   context.go('/home');
                 },
                 child: SvgPicture.asset("assets/images/cano_icon.svg")),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             GestureDetector(
@@ -47,7 +47,7 @@ class LoginScreen extends ConsumerWidget {
                     context.go('/user_profile');
                   });
                 }),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             CustomIconSvgButton(

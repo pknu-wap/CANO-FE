@@ -2,81 +2,125 @@ import 'package:cano/data/model/menu/menu_info.dart';
 import 'package:cano/data/repository/menu/menu_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MenuViewModel extends StateNotifier<MenuInfo> {
-  MenuViewModel._internal(super.state);
-
-  static final MenuViewModel _instance = MenuViewModel._internal(
-    const MenuInfo(
-      id: 1,
-      name: "스타벅스 돌체 라떼",
-      price: 5900,
-      score: 4.88,
-      scoreCount: 201,
-      isLike: false,
-      image_url: "",
-      ratingCountsByStar: {
-        5: 180,
-        4: 11,
-        3: 10,
-        2: 0,
-        1: 0,
-      },
-      acidity: 0.38,
-      body: 0.72,
-      bitterness: 0,
-      sweetness: 0.88,
-      aromas: [
-        '우디향',
-        '마일드',
-        '견과류향',
-        '곡물향',
-        '구운 곡물향',
-        '아몬드향',
-        '코코아향',
-        '스파이시향',
-        '캐러멜향'
-      ],
-      aromaCounts: {
-        "우디향": 0,
-        "마일드": 0,
-        "견과류향": 0,
-        "곡물향": 0,
-        "구운 곡물향": 0,
-        "아몬드향": 17,
-        "코코아향": 8,
-        "스파이시향": 0,
-        "캐러멜향": 0,
-      },
-    ),
-  );
-
-  factory MenuViewModel() {
-    return _instance;
+class MenuViewModel extends StateNotifier<MenuInfo?> {
+  MenuViewModel() : super(null) {
+    fetchMenu(1); // 초기 메뉴 ID 설정
   }
 
   final MenuRepository menuRepository = MenuRepository();
 
-  Future<void> getMenuName() async {
-    menuRepository.getMenuName();
+  Future<void> fetchMenu(int id) async {
+    try {
+      final menuInfo = await menuRepository.getMenu(id);
+      if (menuInfo != null) {
+        state = menuInfo;
+      } else {
+        // 에러 처리 또는 기본값 설정
+        state = const MenuInfo(
+          id: 0,
+          name: "Unknown",
+          price: 0,
+          score: null,
+          scoreCount: 0,
+          isLike: false,
+          imageUrl: "",
+          ratingCountsByStar: {},
+          acidity: null,
+          body: null,
+          bitterness: null,
+          sweetness: null,
+          aromas: null,
+          aromaCounts: {},
+        );
+      }
+    } catch (e) {
+      // 에러 처리
+      print('Error fetching menu: $e');
+      state = null; // 에러 시 null로 설정하거나 기본값 설정
+    }
   }
 
-  Future<void> getReview() async {
-    menuRepository.getReview();
+  // 상태 변경 메서드들...
+  void setMenuName(String name) {
+    if (state != null) {
+      state = state!.copyWith(name: name);
+    }
   }
 
-  Future<void> getLikes() async {
-    menuRepository.getLikes();
+  void setPrice(int price) {
+    if (state != null) {
+      state = state!.copyWith(price: price);
+    }
   }
 
-  Future<void> getRatings() async {
-    menuRepository.getRatings();
+  void setScore(double? score) {
+    if (state != null) {
+      state = state!.copyWith(score: score);
+    }
   }
 
-  Future<void> getFlavorAttribute() async {
-    menuRepository.getFlavorAttribute();
+  void setScoreCount(int scoreCount) {
+    if (state != null) {
+      state = state!.copyWith(scoreCount: scoreCount);
+    }
+  }
+
+  void setIsLike(bool isLike) {
+    if (state != null) {
+      state = state!.copyWith(isLike: isLike);
+    }
+  }
+
+  void setImageUrl(String imageUrl) {
+    if (state != null) {
+      state = state!.copyWith(imageUrl: imageUrl);
+    }
+  }
+
+  void setRatingCountsByStar(Map<int, int> ratingCountsByStar) {
+    if (state != null) {
+      state = state!.copyWith(ratingCountsByStar: ratingCountsByStar);
+    }
+  }
+
+  void setAcidity(double? acidity) {
+    if (state != null) {
+      state = state!.copyWith(acidity: acidity);
+    }
+  }
+
+  void setBody(double? body) {
+    if (state != null) {
+      state = state!.copyWith(body: body);
+    }
+  }
+
+  void setBitterness(double? bitterness) {
+    if (state != null) {
+      state = state!.copyWith(bitterness: bitterness);
+    }
+  }
+
+  void setSweetness(double? sweetness) {
+    if (state != null) {
+      state = state!.copyWith(sweetness: sweetness);
+    }
+  }
+
+  void setAromas(List<String>? aromas) {
+    if (state != null) {
+      state = state!.copyWith(aromas: aromas);
+    }
+  }
+
+  void setAromaCounts(Map<String, int>? aromaCounts) {
+    if (state != null) {
+      state = state!.copyWith(aromaCounts: aromaCounts);
+    }
   }
 }
 
-final menuProvider = StateNotifierProvider.autoDispose<MenuViewModel, MenuInfo>(
+final menuProvider =
+    StateNotifierProvider.autoDispose<MenuViewModel, MenuInfo?>(
   (ref) => MenuViewModel(),
 );

@@ -16,7 +16,7 @@ class AppRouter {
       GoRoute(
           path: '/',
           builder: (context, state) {
-            return LoginScreen();
+            return const LoginScreen();
             // return FutureBuilder<bool>(
             //     future: CanoTokenManager().checkToken(),
             //     builder: (context, snapshot) {
@@ -44,7 +44,7 @@ class AppRouter {
       GoRoute(
           path: '/menu',
           builder: (context, state) {
-            return MenuScreen();
+            return const MenuScreen();
           }),
       StatefulShellRoute.indexedStack(
         branches: [
@@ -68,7 +68,7 @@ class AppRouter {
             routes: [
               GoRoute(
                 path: "/my_page",
-                builder: (context, state) => MyPageScreen(),
+                builder: (context, state) => const MyPageScreen(),
               ),
             ],
           ),

@@ -1,4 +1,6 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:cano/data/model/menu/menu_info.dart';
+import 'package:cano/network/api/menu/menu_detail_api.dart';
+import 'package:dio/dio.dart';
 
 class MenuRepository {
   static final MenuRepository _instance = MenuRepository._internal();
@@ -8,14 +10,16 @@ class MenuRepository {
   factory MenuRepository() {
     return _instance;
   }
-  
-  Future<void> getMenuName() async {}
 
-  Future<void> getReview() async {}
+  static final menuDetailApi = MenuDetailApi(Dio());
 
-  Future<void> getLikes() async {}
-
-  Future<void> getRatings() async {}
-
-  Future<void> getFlavorAttribute() async {}
+  Future<MenuInfo?> getMenu(int id) async {
+    try {
+      final menuInfo = await menuDetailApi.getMenu(id);
+      return menuInfo;
+    } catch (e) {
+      print('Error fetching menu: $e');
+      return null;
+    }
+  }
 }
