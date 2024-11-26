@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../desginsystem/colors.dart';
 import '../../../utils/mediaquery.dart';
+import '../../../viewmodel/auth/cano_token_manager.dart';
 import '../../widget/custom_button.dart';
 
 class MyPageScreen extends ConsumerStatefulWidget {
@@ -71,7 +72,13 @@ class _MyPageScreenState extends ConsumerState<MyPageScreen> {
             child: Row(
               children: [
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    CanoTokenManager().clearTokens();
+                    context.go('/login');
+                  },
+                  style: ButtonStyle(
+                      overlayColor: WidgetStateProperty.all(
+                          AppColors.primary.withOpacity(0.2))),
                   child: Text(
                     AppStrings.logout,
                     style: TextStyle(color: Colors.black26, fontSize: 13),
@@ -83,6 +90,9 @@ class _MyPageScreenState extends ConsumerState<MyPageScreen> {
                   onPressed: () {
                     context.push('/modify_user_profile');
                   },
+                  style: ButtonStyle(
+                      overlayColor: WidgetStateProperty.all(
+                          AppColors.primary.withOpacity(0.2))),
                   child: Text(
                     AppStrings.modify,
                     style: TextStyle(color: Colors.black26, fontSize: 13),
@@ -92,6 +102,9 @@ class _MyPageScreenState extends ConsumerState<MyPageScreen> {
                     style: TextStyle(color: Colors.black26, fontSize: 13)),
                 TextButton(
                   onPressed: () {},
+                  style: ButtonStyle(
+                      overlayColor: WidgetStateProperty.all(
+                          AppColors.primary.withOpacity(0.2))),
                   child: Text(
                     AppStrings.withDrawal,
                     style: TextStyle(color: Colors.black26, fontSize: 13),

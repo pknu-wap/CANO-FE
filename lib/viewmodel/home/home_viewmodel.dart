@@ -232,7 +232,6 @@ class HomeViewmodel extends StateNotifier<HomeState> {
   }
 }
 
-final homeProvider =
-    StateNotifierProvider.autoDispose<HomeViewmodel, HomeState>(
+final homeProvider = StateNotifierProvider<HomeViewmodel, HomeState>(
   (ref) => HomeViewmodel(),
 );
