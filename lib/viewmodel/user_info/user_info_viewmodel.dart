@@ -30,6 +30,10 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
 
   static final canoUserRepository = CanoUserRepository();
 
+  void setUserInfo(UserInfo userInfo) {
+    state = userInfo;
+  }
+
   void setName(String newName) {
     state = state.copyWith(name: newName);
   }

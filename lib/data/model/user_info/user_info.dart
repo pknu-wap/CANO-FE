@@ -24,7 +24,8 @@ enum Intensitylevel {
   weak(AppStrings.weak),
   normal(AppStrings.normal),
   strong(AppStrings.strong),
-  veryStrong(AppStrings.veryStrong);
+  veryStrong(AppStrings.veryStrong),
+  nullLevel("");
 
   final String description;
 
@@ -45,6 +46,13 @@ enum Intensitylevel {
       default:
         return null;
     }
+  }
+
+  static Intensitylevel? fromValue(String? value) {
+    return Intensitylevel.values.firstWhere(
+      (level) => level.description == value,
+      orElse: () => Intensitylevel.nullLevel,
+    );
   }
 }
 
