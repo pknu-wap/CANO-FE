@@ -6,10 +6,28 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/model/home/home_menu.dart';
 import '../../data/repository/user/cano_user_repository.dart';
 
-class HomeViewmodel extends StateNotifier<List<Map<String, List<HomeMenu>>>> {
+class HomeState {
+  final List<Map<String, List<HomeMenu>>> homeMenusList;
+  final String userName;
+
+  HomeState({
+    required this.homeMenusList,
+    required this.userName,
+  });
+
+  HomeState copyWith(
+      {List<Map<String, List<HomeMenu>>>? homeMenusList, String? userName}) {
+    return HomeState(
+        homeMenusList: homeMenusList ?? this.homeMenusList,
+        userName: userName ?? this.userName);
+  }
+}
+
+class HomeViewmodel extends StateNotifier<HomeState> {
   HomeViewmodel._internal(super.state);
 
-  static final HomeViewmodel _instance = HomeViewmodel._internal([]);
+  static final HomeViewmodel _instance =
+      HomeViewmodel._internal(HomeState(userName: "", homeMenusList: []));
 
   factory HomeViewmodel() {
     return _instance;
@@ -19,11 +37,17 @@ class HomeViewmodel extends StateNotifier<List<Map<String, List<HomeMenu>>>> {
   static final canoUserRepository = CanoUserRepository();
 
   void _addMapToList(Map<String, List<HomeMenu>> newMap) {
-    state = [...state, newMap];
+    state = state.copyWith(homeMenusList: [...state.homeMenusList, newMap]);
+  }
+
+  void _setUserName(String userName) {
+    state = state.copyWith(userName: userName);
   }
 
   Future<void> getHomeMenusWithType() async {
     final userResponse = await _getUserInfo();
+    _setUserName(userResponse.name!);
+
     if (userResponse.acidity != null)
       _getHomeMenusWithAcidity(userResponse.acidity!);
     if (userResponse.body != null) _getHomeMenusWithBody(userResponse.body!);
@@ -208,7 +232,7 @@ class HomeViewmodel extends StateNotifier<List<Map<String, List<HomeMenu>>>> {
   }
 }
 
-final homeProvider = StateNotifierProvider.autoDispose<HomeViewmodel,
-    List<Map<String, List<HomeMenu>>>>(
+final homeProvider =
+    StateNotifierProvider.autoDispose<HomeViewmodel, HomeState>(
   (ref) => HomeViewmodel(),
 );
