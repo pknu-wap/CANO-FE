@@ -23,15 +23,19 @@ class ModifyUserProfileScreen extends ConsumerStatefulWidget {
 class _ModifyUserProfileScreenState
     extends ConsumerState<ModifyUserProfileScreen> {
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() async {
+    super.didChangeDependencies();
+
     final userResponse = ref.watch(myPageProvider);
-    ref.read(userInfoProvider.notifier).setUserInfo(UserInfo(
+    await ref.read(userInfoProvider.notifier).setUserInfo(UserInfo(
         name: userResponse.name!,
-        acidity: Intensitylevel.fromValue(userResponse.acidity),
-        body: Intensitylevel.fromValue(userResponse.body),
-        bitterness: Intensitylevel.fromValue(userResponse.bitterness),
-        sweetness: Intensitylevel.fromValue(userResponse.sweetness),
+        acidity:
+            Intensitylevel.fromValue(intensityEngToKo(userResponse.acidity)),
+        body: Intensitylevel.fromValue(intensityEngToKo(userResponse.body)),
+        bitterness:
+            Intensitylevel.fromValue(intensityEngToKo(userResponse.bitterness)),
+        sweetness:
+            Intensitylevel.fromValue(intensityEngToKo(userResponse.sweetness)),
         aroma: [],
         profileImageUrl: userResponse.profileImageUrl));
   }
@@ -39,6 +43,7 @@ class _ModifyUserProfileScreenState
   @override
   Widget build(BuildContext context) {
     final userInfo = ref.watch(userInfoProvider);
+
     ref.listen(myPageProvider, (prev, next) {
       print("현재 상태: $next");
     });
@@ -54,7 +59,7 @@ class _ModifyUserProfileScreenState
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              height: 20,
+              height: 40,
             ),
             Container(
               alignment: Alignment.centerLeft,
@@ -63,7 +68,7 @@ class _ModifyUserProfileScreenState
                   onPressed: () => context.pop(),
                   icon: Icon(Icons.arrow_back_ios)),
             ),
-            SizedBox(height: 45),
+            SizedBox(height: 35),
             Padding(
               padding: const EdgeInsets.only(left: 30),
               child: Container(
@@ -89,7 +94,7 @@ class _ModifyUserProfileScreenState
                 const SizedBox(width: 30),
                 Stack(
                   children: [
-                    ProfileImage2(
+                    ProfileImage(
                       imagePath: userInfo.profileImageUrl,
                     ), // 기본 아이콘
                     Positioned(
@@ -160,6 +165,7 @@ class _ModifyUserProfileScreenState
                               fontSize: 16, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 10),
                       OutlinedTextField(
+                          initialText: userInfo.name,
                           onChanged: (text) {
                             ref.watch(userInfoProvider.notifier).setName(text);
                           },
@@ -182,12 +188,30 @@ class _ModifyUserProfileScreenState
                 buttonColor:
                     userInfo.name != "" ? AppColors.primary : Colors.black26,
                 onPressed: () {
-                  context.push('/modify_coffee_preference');
+                  if (userInfo.name.trim().isNotEmpty)
+                    context.push('/modify_coffee_preference');
                 },
               ),
             ),
             const SizedBox(height: 50),
           ],
         ));
+  }
+}
+
+String intensityEngToKo(String? IntensityEng) {
+  switch (IntensityEng) {
+    case AppStrings.VERY_HIGH:
+      return AppStrings.veryStrong;
+    case AppStrings.HIGH:
+      return AppStrings.strong;
+    case AppStrings.MEDIUM:
+      return AppStrings.normal;
+    case AppStrings.LOW:
+      return AppStrings.weak;
+    case AppStrings.NONE:
+      return AppStrings.none;
+    default:
+      return "";
   }
 }

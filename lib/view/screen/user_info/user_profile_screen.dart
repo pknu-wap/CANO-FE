@@ -142,10 +142,12 @@ class UserProfileScreen extends ConsumerWidget {
               child: CustomButton(
                 text: AppStrings.next,
                 height: 55,
-                buttonColor:
-                    userInfo.name != "" ? AppColors.primary : Colors.black26,
+                buttonColor: userInfo.name.trim().isNotEmpty != ""
+                    ? AppColors.primary
+                    : Colors.black26,
                 onPressed: () {
-                  context.push('/coffee_preference');
+                  if (userInfo.name.trim().isNotEmpty)
+                    context.push('/coffee_preference');
                 },
               ),
             ),

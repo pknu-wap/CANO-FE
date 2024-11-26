@@ -80,7 +80,9 @@ class _MyPageScreenState extends ConsumerState<MyPageScreen> {
                 Text("ㅣ",
                     style: TextStyle(color: Colors.black26, fontSize: 13)),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.push('/modify_user_profile');
+                  },
                   child: Text(
                     AppStrings.modify,
                     style: TextStyle(color: Colors.black26, fontSize: 13),

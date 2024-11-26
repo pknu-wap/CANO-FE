@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class OutlinedTextField extends StatelessWidget {
   final String hintText;
+  final String initialText;
   final TextInputType keyboardType;
   final double borderRadius;
   final Color borderColor;
@@ -11,6 +12,7 @@ class OutlinedTextField extends StatelessWidget {
 
   const OutlinedTextField({
     super.key,
+    this.initialText = "",
     required this.hintText,
     this.keyboardType = TextInputType.text,
     this.borderRadius = 12,
@@ -21,9 +23,14 @@ class OutlinedTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController controller = TextEditingController(
+      text: initialText.isNotEmpty ? initialText : null, // 초기값 설정
+    );
+
     return Container(
       height: height,
       child: TextField(
+        controller: controller,
         cursorColor: AppColors.primary,
         onChanged: onChanged,
         textAlign: TextAlign.center,

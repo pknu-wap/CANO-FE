@@ -2,6 +2,7 @@ import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/view/screen/auth/login_screen.dart';
 import 'package:cano/view/screen/home/home_screen.dart';
 import 'package:cano/view/screen/menu/menu_screen.dart';
+import 'package:cano/view/screen/my_page/modify_coffee_preference_screen.dart';
 import 'package:cano/view/screen/my_page/modify_user_profile_screen.dart';
 import 'package:cano/view/screen/my_page/my_page_screen.dart';
 import 'package:cano/view/screen/register_menu/register_menu_screen.dart';
@@ -45,7 +46,7 @@ class AppRouter {
       GoRoute(
           path: '/modify_coffee_preference',
           builder: (context, state) {
-            return CoffeePreferenceScreen();
+            return ModifyCoffeePreferenceScreen();
           }),
       GoRoute(
           path: '/register_menu',

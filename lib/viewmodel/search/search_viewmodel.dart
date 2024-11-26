@@ -15,7 +15,6 @@ class SearchState {
     required this.keywordList,
     required this.isSearched,
   });
-
   SearchState copyWith(
       {List<SearchResponse>? menuInfoList,
       List<String>? keywordList,

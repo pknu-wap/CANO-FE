@@ -30,7 +30,7 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
 
   static final canoUserRepository = CanoUserRepository();
 
-  void setUserInfo(UserInfo userInfo) {
+  Future<void> setUserInfo(UserInfo userInfo) async {
     state = userInfo;
   }
 
@@ -97,7 +97,8 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
           : intensityLevelToRequest(state.sweetness!.description),
     };
 
-    final compressedBytes = state.profileImageUrl != null
+    final compressedBytes = state.profileImageUrl != null &&
+            state.profileImageUrl?.contains("http") == false
         ? await compressImageToByte(state.profileImageUrl!)
         : null;
     final tempFile = compressedBytes != null
@@ -117,7 +118,6 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
   }
 }
 
-final userInfoProvider =
-    StateNotifierProvider.autoDispose<UserInfoViewmodel, UserInfo>(
+final userInfoProvider = StateNotifierProvider<UserInfoViewmodel, UserInfo>(
   (ref) => UserInfoViewmodel(),
 );
