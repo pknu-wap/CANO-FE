@@ -5,11 +5,24 @@ import 'package:cano/viewmodel/search/search_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SearchScreen extends ConsumerWidget {
+class SearchScreen extends ConsumerStatefulWidget {
   SearchScreen({super.key});
-  final searchController = TextEditingController();
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  _SearchScreenState createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends ConsumerState<SearchScreen> {
+  final searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    ref.read(searchProvider.notifier).setUserName();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final searchState = ref.watch(searchProvider);
 
     ref.listen(searchProvider, (prev, next) {
@@ -27,7 +40,8 @@ class SearchScreen extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: SearchField(
-                  hintText: AppStrings.todayCoffeSearchText,
+                  hintText:
+                      "${searchState.userName}${AppStrings.todayCoffeSearchSCript}",
                   height: 50,
                   borderRadius: 30,
                   onSearch: (String) {

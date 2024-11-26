@@ -1,4 +1,5 @@
 import 'package:cano/data/repository/search/search_repository.dart';
+import 'package:cano/data/repository/user/cano_user_repository.dart';
 import 'package:cano/network/model/search/search_response.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -6,20 +7,22 @@ class SearchState {
   final List<SearchResponse> menuInfoList;
   final List<String> keywordList;
   final bool isSearched;
+  final String userName;
 
   SearchState({
+    required this.userName,
     required this.menuInfoList,
     required this.keywordList,
     required this.isSearched,
   });
 
-  SearchState copyWith({
-    List<SearchResponse>? menuInfoList,
-    List<String>? keywordList,
-    bool? isSearched,
-    String? tabText,
-  }) {
+  SearchState copyWith(
+      {List<SearchResponse>? menuInfoList,
+      List<String>? keywordList,
+      bool? isSearched,
+      String? userName}) {
     return SearchState(
+      userName: userName ?? this.userName,
       menuInfoList: menuInfoList ?? this.menuInfoList,
       keywordList: keywordList ?? this.keywordList,
       isSearched: isSearched ?? this.isSearched,
@@ -32,13 +35,19 @@ class SearchViewmodel extends StateNotifier<SearchState> {
   SearchViewmodel._internal(super.state);
 
   static final SearchViewmodel _instance = SearchViewmodel._internal(
-      SearchState(menuInfoList: [], isSearched: false, keywordList: []));
+      SearchState(
+          menuInfoList: [], isSearched: false, keywordList: [], userName: ""));
 
   factory SearchViewmodel() {
     return _instance;
   }
 
   static final SearchRepository searchRepository = SearchRepository();
+  static final CanoUserRepository userRepository = CanoUserRepository();
+
+  Future<void> setUserName() async {
+    state = state.copyWith(userName: await userRepository.getUserName());
+  }
 
   Future<void> searchWithKeyword(String keyword) async {
     try {

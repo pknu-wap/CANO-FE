@@ -1,4 +1,5 @@
 import 'package:cano/desginsystem/colors.dart';
+import 'package:cano/view/screen/auth/login_screen.dart';
 import 'package:cano/view/screen/home/home_screen.dart';
 import 'package:cano/view/screen/menu/menu_screen.dart';
 import 'package:cano/view/screen/my_page/my_page_screen.dart';
@@ -20,6 +21,11 @@ class AppRouter {
           return isLoggedIn ? '/home' : '/login';
         },
       ),
+      GoRoute(
+          path: '/login',
+          builder: (context, state) {
+            return const LoginScreen();
+          }),
       GoRoute(
           path: '/user_profile',
           builder: (context, state) {
