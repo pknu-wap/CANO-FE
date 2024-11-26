@@ -4,9 +4,9 @@ import 'package:cano/view/widget/search/intensity_bar.dart';
 import 'package:cano/view/widget/search/star_rating.dart';
 import 'package:flutter/material.dart';
 
-import '../../../data/model/menu/menu_info.dart';
 import '../../../desginsystem/colors.dart';
 import '../../../desginsystem/strings.dart';
+import '../../../network/model/search/search_response.dart';
 
 class SearchKeyword extends StatelessWidget {
   final VoidCallback onPressed;
@@ -81,7 +81,7 @@ class SearchKeyword extends StatelessWidget {
 }
 
 class MenuInfoLayout extends StatelessWidget {
-  final MenuInfo menuInfo;
+  final SearchResponse menuInfo;
 
   const MenuInfoLayout({
     Key? key,
@@ -110,9 +110,7 @@ class MenuInfoLayout extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10.0),
-                child: Image.asset(
-                  'assets/images/coffee_ex.png',
-                ),
+                child: Image.network(menuInfo.imageUrl ,fit: BoxFit.fill,),
               ),
             ),
             SizedBox(
@@ -129,10 +127,10 @@ class MenuInfoLayout extends StatelessWidget {
                         menuInfo.name,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      Icon(
-                          menuInfo.isLike
-                              ? Icons.favorite
-                              : Icons.favorite_border,
+                      Icon(Icons.favorite_border,
+                          // menuInfo.isLike
+                          //     ? Icons.favorite
+                          //     : Icons.favorite_border,
                           color: Colors.red),
                     ],
                   ),
@@ -142,16 +140,19 @@ class MenuInfoLayout extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        menuInfo.score.toString(),
+                        menuInfo.score != null
+                            ? menuInfo.score.toString()
+                            : "0",
                         style: TextStyle(fontSize: 12),
                       ),
                       SizedBox(width: 3),
-                      StarRating(rating: menuInfo.score),
+                      StarRating(rating: menuInfo.score ?? 0),
                       SizedBox(
                         width: 3,
                       ),
                       Text(
-                        "(${menuInfo.scoreCount})",
+                        "(0)",
+                        // "(${menuInfo.scoreCount})",
                         style: TextStyle(color: Colors.black12, fontSize: 12),
                       )
                     ],
@@ -177,7 +178,7 @@ class MenuInfoLayout extends StatelessWidget {
                         AppStrings.acidity,
                         style: TextStyle(fontSize: 12),
                       ),
-                      IntensityBar(intensity: menuInfo.acidity)
+                      IntensityBar(intensity: menuInfo.acidity ?? 0)
                     ],
                   ),
                   SizedBox(
@@ -190,7 +191,7 @@ class MenuInfoLayout extends StatelessWidget {
                         AppStrings.body,
                         style: TextStyle(fontSize: 12),
                       ),
-                      IntensityBar(intensity: menuInfo.body)
+                      IntensityBar(intensity: menuInfo.body ?? 0)
                     ],
                   ),
                   Row(
@@ -200,7 +201,7 @@ class MenuInfoLayout extends StatelessWidget {
                         AppStrings.bitterness,
                         style: TextStyle(fontSize: 12),
                       ),
-                      IntensityBar(intensity: menuInfo.bitterness)
+                      IntensityBar(intensity: menuInfo.bitterness ?? 0)
                     ],
                   ),
                   SizedBox(
@@ -213,7 +214,7 @@ class MenuInfoLayout extends StatelessWidget {
                         AppStrings.sweetness,
                         style: TextStyle(fontSize: 12),
                       ),
-                      IntensityBar(intensity: menuInfo.sweetness)
+                      IntensityBar(intensity: menuInfo.sweetness ?? 0)
                     ],
                   ),
                   SizedBox(
@@ -226,11 +227,13 @@ class MenuInfoLayout extends StatelessWidget {
                         AppStrings.aroma,
                         style: TextStyle(fontSize: 12),
                       ),
-                      Text(
-                        joinWithComma(menuInfo.aromas),
-                        style:
-                            TextStyle(fontSize: 12, color: AppColors.primary),
-                      )
+                      menuInfo.aromas != null
+                          ? Text(
+                              joinWithComma(menuInfo.aromas!.keys.toList()),
+                              style: TextStyle(
+                                  fontSize: 12, color: AppColors.primary),
+                            )
+                          : Text("")
                     ],
                   ),
                 ],

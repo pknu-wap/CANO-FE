@@ -22,10 +22,10 @@ HomeMenu _$HomeMenuFromJson(Map<String, dynamic> json) {
 mixin _$HomeMenu {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  double get score => throw _privateConstructorUsedError;
+  double? get score => throw _privateConstructorUsedError;
   String get attribute => throw _privateConstructorUsedError;
-  double get degree => throw _privateConstructorUsedError;
-  String get image_url => throw _privateConstructorUsedError;
+  double? get degree => throw _privateConstructorUsedError;
+  String get imageUrl => throw _privateConstructorUsedError;
 
   /// Serializes this HomeMenu to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,10 +45,10 @@ abstract class $HomeMenuCopyWith<$Res> {
   $Res call(
       {int id,
       String name,
-      double score,
+      double? score,
       String attribute,
-      double degree,
-      String image_url});
+      double? degree,
+      String imageUrl});
 }
 
 /// @nodoc
@@ -68,10 +68,10 @@ class _$HomeMenuCopyWithImpl<$Res, $Val extends HomeMenu>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? score = null,
+    Object? score = freezed,
     Object? attribute = null,
-    Object? degree = null,
-    Object? image_url = null,
+    Object? degree = freezed,
+    Object? imageUrl = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -82,21 +82,21 @@ class _$HomeMenuCopyWithImpl<$Res, $Val extends HomeMenu>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      score: null == score
+      score: freezed == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       attribute: null == attribute
           ? _value.attribute
           : attribute // ignore: cast_nullable_to_non_nullable
               as String,
-      degree: null == degree
+      degree: freezed == degree
           ? _value.degree
           : degree // ignore: cast_nullable_to_non_nullable
-              as double,
-      image_url: null == image_url
-          ? _value.image_url
-          : image_url // ignore: cast_nullable_to_non_nullable
+              as double?,
+      imageUrl: null == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -113,10 +113,10 @@ abstract class _$$HomeMenuImplCopyWith<$Res>
   $Res call(
       {int id,
       String name,
-      double score,
+      double? score,
       String attribute,
-      double degree,
-      String image_url});
+      double? degree,
+      String imageUrl});
 }
 
 /// @nodoc
@@ -134,10 +134,10 @@ class __$$HomeMenuImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? score = null,
+    Object? score = freezed,
     Object? attribute = null,
-    Object? degree = null,
-    Object? image_url = null,
+    Object? degree = freezed,
+    Object? imageUrl = null,
   }) {
     return _then(_$HomeMenuImpl(
       id: null == id
@@ -148,21 +148,21 @@ class __$$HomeMenuImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      score: null == score
+      score: freezed == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       attribute: null == attribute
           ? _value.attribute
           : attribute // ignore: cast_nullable_to_non_nullable
               as String,
-      degree: null == degree
+      degree: freezed == degree
           ? _value.degree
           : degree // ignore: cast_nullable_to_non_nullable
-              as double,
-      image_url: null == image_url
-          ? _value.image_url
-          : image_url // ignore: cast_nullable_to_non_nullable
+              as double?,
+      imageUrl: null == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -177,7 +177,7 @@ class _$HomeMenuImpl implements _HomeMenu {
       required this.score,
       required this.attribute,
       required this.degree,
-      required this.image_url});
+      required this.imageUrl});
 
   factory _$HomeMenuImpl.fromJson(Map<String, dynamic> json) =>
       _$$HomeMenuImplFromJson(json);
@@ -187,17 +187,17 @@ class _$HomeMenuImpl implements _HomeMenu {
   @override
   final String name;
   @override
-  final double score;
+  final double? score;
   @override
   final String attribute;
   @override
-  final double degree;
+  final double? degree;
   @override
-  final String image_url;
+  final String imageUrl;
 
   @override
   String toString() {
-    return 'HomeMenu(id: $id, name: $name, score: $score, attribute: $attribute, degree: $degree, image_url: $image_url)';
+    return 'HomeMenu(id: $id, name: $name, score: $score, attribute: $attribute, degree: $degree, imageUrl: $imageUrl)';
   }
 
   @override
@@ -211,14 +211,14 @@ class _$HomeMenuImpl implements _HomeMenu {
             (identical(other.attribute, attribute) ||
                 other.attribute == attribute) &&
             (identical(other.degree, degree) || other.degree == degree) &&
-            (identical(other.image_url, image_url) ||
-                other.image_url == image_url));
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, name, score, attribute, degree, image_url);
+      Object.hash(runtimeType, id, name, score, attribute, degree, imageUrl);
 
   /// Create a copy of HomeMenu
   /// with the given fields replaced by the non-null parameter values.
@@ -240,10 +240,10 @@ abstract class _HomeMenu implements HomeMenu {
   const factory _HomeMenu(
       {required final int id,
       required final String name,
-      required final double score,
+      required final double? score,
       required final String attribute,
-      required final double degree,
-      required final String image_url}) = _$HomeMenuImpl;
+      required final double? degree,
+      required final String imageUrl}) = _$HomeMenuImpl;
 
   factory _HomeMenu.fromJson(Map<String, dynamic> json) =
       _$HomeMenuImpl.fromJson;
@@ -253,13 +253,13 @@ abstract class _HomeMenu implements HomeMenu {
   @override
   String get name;
   @override
-  double get score;
+  double? get score;
   @override
   String get attribute;
   @override
-  double get degree;
+  double? get degree;
   @override
-  String get image_url;
+  String get imageUrl;
 
   /// Create a copy of HomeMenu
   /// with the given fields replaced by the non-null parameter values.

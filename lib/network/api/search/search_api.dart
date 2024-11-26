@@ -1,4 +1,4 @@
-import 'package:cano/data/model/menu/menu_info.dart';
+import 'package:cano/network/model/search/search_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -10,6 +10,7 @@ part 'search_api.g.dart';
 abstract class SearchApi {
   factory SearchApi(Dio dio, {String baseUrl}) = _SearchApi;
 
-  @POST("/api/menus")
-  Future<List<MenuInfo>> searchWithKeyword(@Query('query') String query);
+  @GET("api/menus/search")
+  Future<List<SearchResponse>> searchWithKeyword(
+      @Query("query") String keyword);
 }

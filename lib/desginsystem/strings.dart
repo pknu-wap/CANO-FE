@@ -102,6 +102,7 @@ class AppStrings {
   static const String recentKeyword = "최근 검색어";
   static const String canoKeyword = "카노 추천 검색어";
   static const String todayCoffeSearchText = "오늘의 커피를 검색해보세요.";
+  static const String todayCoffeSearchSCript = "님, 오늘은 어떤 커피를 찾으세요?";
   static const String noSearchResultText = "대연동 근처에는 카노 카페의\n검색결과가 없습니다.";
   static const String addCafeText = "원하는 정보를 얻지 못했다면 새로운 카페를 추가해보세요";
 
