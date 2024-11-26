@@ -19,6 +19,8 @@ class AuthRepository {
     return _instance;
   }
 
+
+
   static final authApi = CanoAuthApi(Dio());
   static final tokenManager = CanoTokenManager();
   static final userRepositroy = CanoUserRepository();

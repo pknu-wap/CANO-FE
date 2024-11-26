@@ -1,6 +1,5 @@
 import 'package:cano/network/api/home/home_api.dart';
 import 'package:dio/dio.dart';
-
 import '../../model/home/home_menu.dart';
 
 class HomeRepository {
@@ -18,6 +17,8 @@ class HomeRepository {
   Future<List<HomeMenu>> getHomeMenusWithType(
       String type, String degree) async {
     return await homeApi.getHomeMenusWithType(type, degree);
+
+
   }
 
   Future<List<HomeMenu>> getHomeMenusWithAroma(String aromas) async {

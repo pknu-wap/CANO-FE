@@ -7,16 +7,17 @@ part 'review_info.g.dart';
 @freezed
 class ReviewInfo with _$ReviewInfo {
   const factory ReviewInfo({
-    required String userName,
-    required String rating,
-    required DateTime timestamp,
-    required String reviewText,
-    required List<String> reviewImageUrl,
-    required IntensityLevel? acidity,
-    required IntensityLevel? body,
-    required IntensityLevel? bitterness,
-    required IntensityLevel? sweetness,
+    required int id,
+    required String memberName,
+    required String contents,
+    required double score,
+    required List<String>? imageUrls,
+    IntensityLevel? acidity,
+    IntensityLevel? body,
+    IntensityLevel? bitterness,
+    IntensityLevel? sweetness,
     required List<Aroma>? aroma,
+    required DateTime createdAt,
   }) = _ReviewInfo;
 
   factory ReviewInfo.fromJson(Map<String, dynamic> json) =>

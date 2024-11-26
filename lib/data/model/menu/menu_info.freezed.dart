@@ -24,8 +24,8 @@ mixin _$MenuInfo {
   String get name => throw _privateConstructorUsedError;
   int get price => throw _privateConstructorUsedError;
   double? get score => throw _privateConstructorUsedError;
-  int get scoreCount => throw _privateConstructorUsedError;
-  bool get isLike => throw _privateConstructorUsedError;
+  int? get scoreCount => throw _privateConstructorUsedError;
+  bool? get isLike => throw _privateConstructorUsedError;
   double? get acidity => throw _privateConstructorUsedError;
   double? get body => throw _privateConstructorUsedError;
   double? get bitterness => throw _privateConstructorUsedError;
@@ -55,8 +55,8 @@ abstract class $MenuInfoCopyWith<$Res> {
       String name,
       int price,
       double? score,
-      int scoreCount,
-      bool isLike,
+      int? scoreCount,
+      bool? isLike,
       double? acidity,
       double? body,
       double? bitterness,
@@ -86,8 +86,8 @@ class _$MenuInfoCopyWithImpl<$Res, $Val extends MenuInfo>
     Object? name = null,
     Object? price = null,
     Object? score = freezed,
-    Object? scoreCount = null,
-    Object? isLike = null,
+    Object? scoreCount = freezed,
+    Object? isLike = freezed,
     Object? acidity = freezed,
     Object? body = freezed,
     Object? bitterness = freezed,
@@ -114,14 +114,14 @@ class _$MenuInfoCopyWithImpl<$Res, $Val extends MenuInfo>
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as double?,
-      scoreCount: null == scoreCount
+      scoreCount: freezed == scoreCount
           ? _value.scoreCount
           : scoreCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      isLike: null == isLike
+              as int?,
+      isLike: freezed == isLike
           ? _value.isLike
           : isLike // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       acidity: freezed == acidity
           ? _value.acidity
           : acidity // ignore: cast_nullable_to_non_nullable
@@ -171,8 +171,8 @@ abstract class _$$MenuInfoImplCopyWith<$Res>
       String name,
       int price,
       double? score,
-      int scoreCount,
-      bool isLike,
+      int? scoreCount,
+      bool? isLike,
       double? acidity,
       double? body,
       double? bitterness,
@@ -200,8 +200,8 @@ class __$$MenuInfoImplCopyWithImpl<$Res>
     Object? name = null,
     Object? price = null,
     Object? score = freezed,
-    Object? scoreCount = null,
-    Object? isLike = null,
+    Object? scoreCount = freezed,
+    Object? isLike = freezed,
     Object? acidity = freezed,
     Object? body = freezed,
     Object? bitterness = freezed,
@@ -228,14 +228,14 @@ class __$$MenuInfoImplCopyWithImpl<$Res>
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as double?,
-      scoreCount: null == scoreCount
+      scoreCount: freezed == scoreCount
           ? _value.scoreCount
           : scoreCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      isLike: null == isLike
+              as int?,
+      isLike: freezed == isLike
           ? _value.isLike
           : isLike // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       acidity: freezed == acidity
           ? _value.acidity
           : acidity // ignore: cast_nullable_to_non_nullable
@@ -280,8 +280,8 @@ class _$MenuInfoImpl implements _MenuInfo {
       required this.name,
       required this.price,
       this.score,
-      required this.scoreCount,
-      required this.isLike,
+      this.scoreCount,
+      this.isLike,
       this.acidity,
       this.body,
       this.bitterness,
@@ -306,9 +306,9 @@ class _$MenuInfoImpl implements _MenuInfo {
   @override
   final double? score;
   @override
-  final int scoreCount;
+  final int? scoreCount;
   @override
-  final bool isLike;
+  final bool? isLike;
   @override
   final double? acidity;
   @override
@@ -424,8 +424,8 @@ abstract class _MenuInfo implements MenuInfo {
       required final String name,
       required final int price,
       final double? score,
-      required final int scoreCount,
-      required final bool isLike,
+      final int? scoreCount,
+      final bool? isLike,
       final double? acidity,
       final double? body,
       final double? bitterness,
@@ -447,9 +447,9 @@ abstract class _MenuInfo implements MenuInfo {
   @override
   double? get score;
   @override
-  int get scoreCount;
+  int? get scoreCount;
   @override
-  bool get isLike;
+  bool? get isLike;
   @override
   double? get acidity;
   @override

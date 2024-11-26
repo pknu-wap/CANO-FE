@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MenuViewModel extends StateNotifier<MenuInfo?> {
   MenuViewModel() : super(null) {
-    fetchMenu(1); // 초기 메뉴 ID 설정
+    fetchMenu(1); // 초기 메뉴 ID
   }
 
   final MenuRepository menuRepository = MenuRepository();
@@ -24,13 +24,13 @@ class MenuViewModel extends StateNotifier<MenuInfo?> {
           scoreCount: 0,
           isLike: false,
           imageUrl: "",
-          ratingCountsByStar: {},
-          acidity: null,
-          body: null,
-          bitterness: null,
-          sweetness: null,
-          aromas: null,
-          aromaCounts: {},
+          ratingCountsByStar: {5: 0, 4: 0, 3: 0, 2: 0, 1: 0},
+          acidity: 0.0,
+          body: 0.0,
+          bitterness: 0.0,
+          sweetness: 0.0,
+          aromas: [""],
+          aromaCounts: {"": 0},
         );
       }
     } catch (e) {
@@ -116,6 +116,13 @@ class MenuViewModel extends StateNotifier<MenuInfo?> {
   void setAromaCounts(Map<String, int>? aromaCounts) {
     if (state != null) {
       state = state!.copyWith(aromaCounts: aromaCounts);
+    }
+  }
+
+  void toggleIsLike() {
+    if (state != null && state!.isLike != null) {
+      state = state!.copyWith(isLike: !state!.isLike!);
+      // 추가로 API 호출 등을 통해 서버와 동기화할 수 있습니다.
     }
   }
 }

@@ -515,11 +515,12 @@ class WriteReviewScreen extends ConsumerWidget {
                                 : [];
 
                         final newReview = ReviewInfo(
-                          userName: '현재 유저',
-                          rating: reviewState.rating.toString(),
-                          timestamp: DateTime.now(),
-                          reviewText: reviewText,
-                          reviewImageUrl: reviewImageUrls,
+                          id: 1,
+                          memberName: '현재 유저',
+                          score: reviewState.rating,
+                          createdAt: DateTime.now(),
+                          contents: reviewText,
+                          imageUrls: reviewImageUrls,
                           acidity: reviewState.selectedAcidity,
                           body: reviewState.selectedBody,
                           bitterness: reviewState.selectedBitterness,

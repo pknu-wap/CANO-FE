@@ -2,6 +2,7 @@ import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/utils/mediaquery.dart';
 import 'package:cano/view/widget/home/home_menu_layout.dart';
 import 'package:cano/view/widget/search/search_field.dart';
+import 'package:cano/viewmodel/auth/cano_token_manager.dart';
 import 'package:cano/viewmodel/home/home_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,6 +20,7 @@ class HomeScreen extends ConsumerWidget {
     ref.listen(homeProvider, (prev, next) {
       print("현재 상태: ${next}");
     });
+  
 
     return Scaffold(
       resizeToAvoidBottomInset: false,

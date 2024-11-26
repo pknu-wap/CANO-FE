@@ -13,11 +13,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
-class MenuScreen extends ConsumerWidget {
+class MenuScreen extends ConsumerStatefulWidget {
   const MenuScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  _MenuScreenState createState() => _MenuScreenState();
+}
+
+class _MenuScreenState extends ConsumerState<MenuScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // fetchMenu is already called in MenuViewModel's constructor
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final menuData = ref.watch(menuProvider);
     final reviewData = ref.watch(reviewViewModelProvider);
 
@@ -117,13 +128,15 @@ class MenuScreen extends ConsumerWidget {
                   ),
                   IconButton(
                     icon: Icon(
-                      menuData.isLike ? Icons.favorite : Icons.favorite_border,
+                      menuData.isLike ?? false
+                          ? Icons.favorite
+                          : Icons.favorite_border,
                       color: Colors.red,
                     ),
                     onPressed: () {
                       // 좋아요 기능 구현
                       final menuViewModel = ref.read(menuProvider.notifier);
-                      menuViewModel.setIsLike(!menuData.isLike);
+                      menuViewModel.toggleIsLike();
                       // 추가로 API 호출 등을 통해 서버와 동기화할 수 있습니다.
                     },
                   ),
@@ -145,7 +158,7 @@ class MenuScreen extends ConsumerWidget {
                     ),
                   ),
                   Text(
-                    "${(menuData.price)}원",
+                    "${menuData.price}원",
                     style: const TextStyle(
                       fontSize: 18,
                       color: AppColors.basicText,
@@ -166,7 +179,7 @@ class MenuScreen extends ConsumerWidget {
                     style: const TextStyle(
                         fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  Text('(${menuData.scoreCount}개)',
+                  Text('(${menuData.scoreCount ?? 0}개)',
                       style: const TextStyle(color: AppColors.secondary)),
                 ],
               ),
@@ -299,11 +312,12 @@ class MenuScreen extends ConsumerWidget {
   double _calculateAverageRating(MenuInfo menuData) {
     if (menuData.ratingCountsByStar == null ||
         menuData.ratingCountsByStar!.isEmpty ||
+        menuData.scoreCount == null ||
         menuData.scoreCount == 0) {
       return 0.0;
     }
     int totalRatings = menuData.ratingCountsByStar!.entries
         .fold(0, (sum, entry) => sum + (entry.key * entry.value));
-    return totalRatings / menuData.scoreCount;
+    return totalRatings / menuData.scoreCount!;
   }
 }

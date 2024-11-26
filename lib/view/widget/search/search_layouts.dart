@@ -144,7 +144,7 @@ class MenuInfoLayout extends StatelessWidget {
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Icon(
-                          menuInfo.isLike
+                          menuInfo.isLike!
                               ? Icons.favorite
                               : Icons.favorite_border,
                           color: Colors.red),
