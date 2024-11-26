@@ -57,7 +57,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "$_userName을 위한",
+                          "${_userName}${AppStrings.forNickName}",
                           style: TextStyle(fontSize: 14, color: Colors.black26),
                         ),
                         SizedBox(height: 5),

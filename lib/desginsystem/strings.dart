@@ -14,6 +14,8 @@ class AppStrings {
   static const String coffeeTasteModifiableText =
       "※ 작성하신 내용은 마이페이지에서 언제든지 수정할 수 있습니다.";
 
+  static const String forNickName = "님을 위한";
+
   //// 커피 강도
   static const String none = "없음";
   static const String weak = "약함";
