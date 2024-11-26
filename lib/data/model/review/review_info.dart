@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:cano/desginsystem/strings.dart';
+
+import '../../../desginsystem/strings.dart';
 
 part 'review_info.freezed.dart';
 part 'review_info.g.dart';

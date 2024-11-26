@@ -5,6 +5,9 @@ class AppStrings {
   static const String cancle = "취소";
 
   static const String login = "로그인";
+  static const String logout = "로그아웃";
+  static const String modify = "수정하기";
+  static const String withDrawal = "계정 탈퇴";
   static const String emailPlaceholder = "이메일을 입력해주세요.";
   static const String profileText = "프로필을 작성해주세요.";
   static const String interestRecommendationText =
@@ -15,6 +18,7 @@ class AppStrings {
       "※ 작성하신 내용은 마이페이지에서 언제든지 수정할 수 있습니다.";
 
   static const String forNickName = "님을 위한";
+  static const String forTaste = "님의 취향";
 
   //// 커피 강도
   static const String none = "없음";
@@ -70,6 +74,7 @@ class AppStrings {
   static const String menu = "메뉴";
   static const String coffee = "커피";
   static const String mainTitle = "오늘도 CANO";
+  static const String modifyCoffeTaste = "커피 취향 수정하기";
 
   static const searchCoffeeText = "찾는 커피가 없으신가요?";
   static const addCoffeeText = "커피 추가하기";

@@ -46,6 +46,14 @@ class CanoTokenManager extends StateNotifier<void> {
     final refreshTokenKey = await keyManager.getRefreshTokenKey();
     return _getToken(refreshTokenKey);
   }
+
+  Future<void> clearTokens() async {
+    final accessTokenKey = await keyManager.getAccessTokenKey();
+    final refreshTokenKey = await keyManager.getRefreshTokenKey();
+
+    await storage.delete(key: accessTokenKey);
+    await storage.delete(key: refreshTokenKey);
+  }
 }
 
 final authProvider = StateNotifierProvider.autoDispose<CanoTokenManager, void>(

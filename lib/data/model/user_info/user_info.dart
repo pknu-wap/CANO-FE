@@ -46,6 +46,12 @@ enum Intensitylevel {
         return null;
     }
   }
+
+  static Intensitylevel? fromValue(String? value) {
+    return Intensitylevel.values.firstWhere(
+      (level) => level.description == value,
+    );
+  }
 }
 
 enum Aroma {
