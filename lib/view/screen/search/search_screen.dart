@@ -18,7 +18,13 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   @override
   void initState() {
     super.initState();
-    ref.read(searchProvider.notifier).setUserName();
+    initializeData();
+  }
+
+  Future<void> initializeData() async {
+    final notifier = ref.read(searchProvider.notifier);
+    await notifier.setUserName();
+    await notifier.setKeywordList();
   }
 
   @override
@@ -26,8 +32,9 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     final searchState = ref.watch(searchProvider);
 
     ref.listen(searchProvider, (prev, next) {
-      print("현재 상태: ${next.menuInfoList}");
-      print("현재 상태: ${next.keywordList}");
+      print("현재 상태 userName : ${next.userName}");
+      print("현재 상태 menuInfoList: ${next.menuInfoList}");
+      print("현재 상태 keywordList: ${next.keywordList}");
     });
 
     return Scaffold(

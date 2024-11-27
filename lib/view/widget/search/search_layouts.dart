@@ -32,6 +32,7 @@ class SearchKeyword extends StatelessWidget {
       },
       style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
+          overlayColor: AppColors.primary,
           padding: isCano ? null : EdgeInsets.only(left: 24, right: 5),
           shape: RoundedRectangleBorder(
             side: BorderSide(
@@ -62,6 +63,7 @@ class SearchKeyword extends StatelessWidget {
                       onPressed: onClose,
                       style: TextButton.styleFrom(
                         padding: EdgeInsets.zero,
+                        overlayColor: AppColors.primary,
                         minimumSize: Size(20, 30), // 원하는 크기로 최소 크기 설정
                         tapTargetSize:
                             MaterialTapTargetSize.shrinkWrap, // 터치 영역 최소화
@@ -110,7 +112,10 @@ class MenuInfoLayout extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10.0),
-                child: Image.network(menuInfo.imageUrl ,fit: BoxFit.fill,),
+                child: Image.network(
+                  menuInfo.imageUrl,
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
             SizedBox(

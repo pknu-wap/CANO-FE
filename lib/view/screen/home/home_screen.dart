@@ -30,7 +30,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     _userName = ref.watch(homeProvider).userName;
 
     ref.listen(homeProvider, (prev, next) {
-      print("현재 상태: ${next.homeMenusList}");
+      print("현재 상태: userName ${next.userName}");
+      print("현재 상태 homeMenusList: ${next.homeMenusList}");
     });
 
     return Scaffold(
