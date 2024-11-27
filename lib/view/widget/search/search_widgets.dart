@@ -44,7 +44,9 @@ class _PreSearchWidgetState extends ConsumerState<PreSearchWidget> {
                         margin: EdgeInsets.symmetric(horizontal: 8.0),
                         child: SearchKeyword(
                           onPressed: () {
-                            ref.read(searchProvider.notifier).setIsSearched();
+                            ref
+                                .read(searchProvider.notifier)
+                                .setIsSearched(true);
                             ref
                                 .read(searchProvider.notifier)
                                 .searchWithKeyword(keywordList[index]);

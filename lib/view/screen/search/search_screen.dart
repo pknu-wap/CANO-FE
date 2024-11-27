@@ -37,29 +37,39 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
       print("현재 상태 keywordList: ${next.keywordList}");
     });
 
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(height: 65),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: SearchField(
-                  hintText:
-                      "${searchState.userName}${AppStrings.todayCoffeSearchSCript}",
-                  height: 50,
-                  borderRadius: 30,
-                  onSearch: (String) {
-                    ref.read(searchProvider.notifier).setIsSearched();
-                    ref.read(searchProvider.notifier).saveKeyword(String);
-                    ref.read(searchProvider.notifier).searchWithKeyword(String);
-                  },
-                  controller: searchController),
-            ),
-            searchState.isSearched ? PostSearchWidget() : PreSearchWidget(),
-          ],
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) async {
+        print("현재 상태 뒤로가기");
+        if (searchState.isSearched)
+          ref.read(searchProvider.notifier).setIsSearched(false);
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 65),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: SearchField(
+                    hintText:
+                        "${searchState.userName}${AppStrings.todayCoffeSearchSCript}",
+                    height: 50,
+                    borderRadius: 30,
+                    onSearch: (String) {
+                      ref.read(searchProvider.notifier).setIsSearched(true);
+                      ref.read(searchProvider.notifier).saveKeyword(String);
+                      ref
+                          .read(searchProvider.notifier)
+                          .searchWithKeyword(String);
+                    },
+                    controller: searchController),
+              ),
+              searchState.isSearched ? PostSearchWidget() : PreSearchWidget(),
+            ],
+          ),
         ),
       ),
     );

@@ -69,8 +69,8 @@ class SearchViewmodel extends StateNotifier<SearchState> {
     state = state.copyWith(menuInfoList: menus);
   }
 
-  void setIsSearched() {
-    state = state.copyWith(isSearched: true);
+  void setIsSearched(bool isSearched) {
+    state = state.copyWith(isSearched: isSearched);
   }
 
   Future<void> setKeywordList() async {
