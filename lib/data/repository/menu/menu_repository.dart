@@ -19,7 +19,7 @@ class MenuRepository {
     try {
       dio.interceptors.add(AuthInterceptor());
       final menuInfo = await menuDetailApi.getMenu(id);
-      print("메뉴 조회 성공 ${menuInfo}");
+      print("메뉴 조회 성공 $menuInfo");
       return menuInfo;
     } catch (e) {
       print('메뉴 조회 실패: $e');

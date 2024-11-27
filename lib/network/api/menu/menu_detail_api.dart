@@ -10,5 +10,6 @@ abstract class MenuDetailApi {
   factory MenuDetailApi(Dio dio, {String baseUrl}) = _MenuDetailApi;
 
   @GET("/api/menus/{id}")
+  
   Future<MenuInfo> getMenu(@Path("id") int id);
 }

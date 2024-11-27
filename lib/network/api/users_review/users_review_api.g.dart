@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'review_api.dart';
+part of 'users_review_api.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'review_api.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
-class _ReviewApi implements ReviewApi {
-  _ReviewApi(
+class _UsersReviewApi implements UsersReviewApi {
+  _UsersReviewApi(
     this._dio, {
     this.baseUrl,
     this.errorLogger,
@@ -24,12 +24,12 @@ class _ReviewApi implements ReviewApi {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<List<ReviewInfo>> getReview(int id) async {
+  Future<List<UsersReviewInfo>?> getReview(int id) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<ReviewInfo>>(Options(
+    final _options = _setStreamType<List<UsersReviewInfo>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -46,10 +46,11 @@ class _ReviewApi implements ReviewApi {
           baseUrl,
         )));
     final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<ReviewInfo> _value;
+    late List<UsersReviewInfo>? _value;
     try {
-      _value = _result.data!
-          .map((dynamic i) => ReviewInfo.fromJson(i as Map<String, dynamic>))
+      _value = _result.data
+          ?.map((dynamic i) =>
+              UsersReviewInfo.fromJson(i as Map<String, dynamic>))
           .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);

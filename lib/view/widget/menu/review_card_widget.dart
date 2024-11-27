@@ -1,15 +1,30 @@
+// review_card_widget.dart
+import 'package:cano/data/model/users_review/users_review_info.dart';
 import 'package:flutter/material.dart';
 import 'package:cano/desginsystem/colors.dart';
-import 'package:cano/data/model/review/review_info.dart';
 import 'package:intl/intl.dart';
 
 class ReviewCardWidget extends StatelessWidget {
-  final ReviewInfo review;
+  final UsersReviewInfo review;
 
   const ReviewCardWidget({super.key, required this.review});
 
   @override
   Widget build(BuildContext context) {
+    final hasImages = review.imageUrls != null &&
+        review.imageUrls!.isNotEmpty &&
+        review.imageUrls!.any((url) => url.isNotEmpty);
+
+    final String displayName = (review.memberName != null && review.memberName!.isNotEmpty)
+        ? review.memberName!
+        : 'Unknown';
+
+    final String displayDate = (review.createdAt != null && review.createdAt!.isNotEmpty)
+        ? review.createdAt!
+        : 'Unknown Date';
+
+    final String displayContents = review.contents ?? '';
+
     return Card(
       elevation: 0,
       shape: const RoundedRectangleBorder(
@@ -21,7 +36,7 @@ class ReviewCardWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 첫 번째 행: 아바타, 유저 정보, 더보기 아이콘
+            // 아바타, 유저 정보, 더보기 아이콘
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -29,7 +44,7 @@ class ReviewCardWidget extends StatelessWidget {
                 CircleAvatar(
                   backgroundColor: Colors.grey.shade300,
                   child: Text(
-                    review.memberName.isNotEmpty ? review.memberName[0] : 'U',
+                    displayName.isNotEmpty ? displayName[0] : 'U',
                     style: const TextStyle(color: Colors.white),
                   ),
                 ),
@@ -40,7 +55,7 @@ class ReviewCardWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        review.memberName,
+                        displayName,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
@@ -48,7 +63,7 @@ class ReviewCardWidget extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        DateFormat('yyyy.MM.dd').format(review.createdAt),
+                        displayDate,
                         style: TextStyle(
                           color: Colors.grey.shade600,
                           fontSize: 12,
@@ -80,13 +95,12 @@ class ReviewCardWidget extends StatelessWidget {
             const SizedBox(height: 8),
             // 리뷰 텍스트
             Text(
-              review.contents,
+              displayContents,
               style: const TextStyle(fontSize: 14),
             ),
             const SizedBox(height: 8),
             // 리뷰 이미지 (있을 경우)
-            if (review.imageUrls!.isNotEmpty &&
-                review.imageUrls!.any((url) => url.isNotEmpty)) ...[
+            if (hasImages) ...[
               SizedBox(
                 height: 100,
                 child: ListView.builder(
@@ -141,4 +155,6 @@ class ReviewCardWidget extends StatelessWidget {
       ),
     );
   }
+
+ 
 }

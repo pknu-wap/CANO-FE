@@ -1,4 +1,5 @@
 import 'package:cano/view/screen/menu/menu_report_screen.dart';
+import 'package:cano/viewmodel/users_review/users_review_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:cano/data/model/menu/menu_info.dart';
 import 'package:cano/desginsystem/colors.dart';
@@ -8,7 +9,7 @@ import 'package:cano/view/widget/menu/flavor_profile_widget.dart';
 import 'package:cano/view/widget/menu/rating_breakdown_widget.dart';
 import 'package:cano/view/widget/menu/review_card_widget.dart';
 import 'package:cano/viewmodel/menu/menu_viewmodel.dart';
-import 'package:cano/viewmodel/review/review_viewmodel.dart';
+import 'package:cano/viewmodel/submit_review/review_viewmodel.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -30,7 +31,7 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
   @override
   Widget build(BuildContext context) {
     final menuData = ref.watch(menuProvider);
-    final reviewData = ref.watch(reviewViewModelProvider);
+    final reviewData = ref.watch(usersReviewViewModelProvider);
 
     // 메뉴 데이터가 null인 경우 로딩 인디케이터 표시
     if (menuData == null) {

@@ -1,8 +1,8 @@
 // review_viewmodel.dart
-import 'package:cano/data/repository/review/review_repository.dart';
+import 'package:cano/data/repository/submit_review/submit_review_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cano/data/model/review/review_info.dart';
+import 'package:cano/data/model/submit_review/review_info.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ReviewState {
@@ -58,7 +58,7 @@ class ReviewState {
 }
 
 class ReviewViewModel extends StateNotifier<ReviewState> {
-  final ReviewRepository reviewRepository;
+  final SubmitReviewRepository reviewRepository;
 
   ReviewViewModel({required this.reviewRepository})
       : super(
@@ -202,5 +202,5 @@ class ReviewViewModel extends StateNotifier<ReviewState> {
 // Provider 정의
 final reviewViewModelProvider =
     StateNotifierProvider.autoDispose<ReviewViewModel, ReviewState>(
-  (ref) => ReviewViewModel(reviewRepository: ReviewRepository()),
+  (ref) => ReviewViewModel(reviewRepository: SubmitReviewRepository()),
 );

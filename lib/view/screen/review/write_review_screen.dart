@@ -1,10 +1,10 @@
 // write_review_screen.dart
 import 'dart:io';
 
-import 'package:cano/data/model/review/review_info.dart';
+import 'package:cano/data/model/submit_review/review_info.dart';
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/desginsystem/strings.dart';
-import 'package:cano/viewmodel/review/review_viewmodel.dart';
+import 'package:cano/viewmodel/submit_review/review_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
