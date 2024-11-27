@@ -5,6 +5,7 @@ import 'package:cano/view/widget/search/search_field.dart';
 import 'package:cano/viewmodel/home/home_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../desginsystem/strings.dart';
 
@@ -86,8 +87,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               final homeMenu = homeMenus[itemIndex];
                               return Padding(
                                 padding: const EdgeInsets.only(right: 25),
-                                child: HomeMenuLayout(
-                                    onClick: () {}, menu: homeMenu),
+                                child: InkWell(
+                                  onTap: () {
+                                    context.push(
+                                        '/menu/${homeMenus[itemIndex].id}');
+                                  },
+                                  child: HomeMenuLayout(menu: homeMenu),
+                                ),
                               );
                             },
                           ),

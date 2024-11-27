@@ -1,7 +1,3 @@
-
-import 'package:cano/view/screen/menu/menu_report_screen.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:cano/data/model/menu/menu_info.dart';
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/desginsystem/strings.dart';
@@ -44,7 +40,6 @@ class MenuScreen extends ConsumerWidget {
                   builder: (context) => const MenuReportScreen(),
                 ),
               );
-
             },
             child: const Text(
               AppStrings.menuIsWrong,

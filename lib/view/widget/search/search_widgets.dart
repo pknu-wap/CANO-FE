@@ -105,7 +105,10 @@ class PostSearchWidget extends ConsumerWidget {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 30),
                     child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          context.push(
+                              '/menu/${searchState.menuInfoList[index].id}');
+                        },
                         child: Container(
                           child: MenuInfoLayout(
                               menuInfo: searchState.menuInfoList[index]),

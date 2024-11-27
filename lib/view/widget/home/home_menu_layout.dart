@@ -6,11 +6,9 @@ import '../../../data/model/home/home_menu.dart';
 
 class HomeMenuLayout extends StatelessWidget {
   final HomeMenu menu;
-  final VoidCallback onClick;
 
   const HomeMenuLayout({
     Key? key,
-    required this.onClick,
     required this.menu,
   }) : super(key: key);
 
