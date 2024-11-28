@@ -11,5 +11,5 @@ abstract class SubmitReviewApi {
 
   @POST("/api/menus/{menu_id}/reviews")
   @MultiPart()
-  Future<String> submitReview(@Body() Map<String, dynamic> submitReviewRequest);
+  Future<String> submitReview(@Body() FormData formData);
 }

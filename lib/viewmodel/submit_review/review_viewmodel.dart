@@ -14,15 +14,15 @@ class ReviewViewModel extends StateNotifier<ReviewInfo> {
   ReviewViewModel({required this.reviewRepository})
       : super(
           ReviewInfo(
-            id: 0, // 초기화 시 임시 ID
+            id: 0,
             memberName: '',
             contents: '',
             score: 0.0,
-            imageUrls: [],
-            acidity: IntensityLevel.none,
-            body: IntensityLevel.none,
-            bitterness: IntensityLevel.none,
-            sweetness: IntensityLevel.none,
+            images: [],
+            acidity: null,
+            body: null,
+            bitterness: null,
+            sweetness: null,
             aroma: [],
             createdAt: DateTime.now(),
           ),
@@ -32,45 +32,45 @@ class ReviewViewModel extends StateNotifier<ReviewInfo> {
   Future<bool> submitReview(ReviewInfo newReview) async {
     // DTO로 변환
     final jsonData = {
-      "id": state.id,
-      "memberName": state.memberName,
-      "contents": state.contents,
       "score": state.score,
+      "contents": state.contents,
       "acidity": state.acidity?.value,
       "body": state.body?.value,
       "bitterness": state.bitterness?.value,
       "sweetness": state.sweetness?.value,
-      "aroma": state.aroma?.map((aroma) => aroma.scent).toList(),
-      "createdAt": state.createdAt.toIso8601String(),
     };
 
-    // 이미지 파일 처리
-    final compressedBytes =
-        state.imageUrls != null && state.imageUrls!.isNotEmpty
-            ? await compressImageToByte(state.imageUrls!.first)
-            : null;
+    // print(state.acidity?.value);
+    
+    // 이미지 파일 처리 (여러 이미지 지원)
+    List<MultipartFile> imageFiles = [];
 
-    final tempFile = compressedBytes != null
-        ? await saveCompressedImage(compressedBytes)
-        : null;
+    if (state.images != null && state.images!.isNotEmpty) {
+      for (String imagePath in state.images!) {
+        final compressedBytes = await compressImageToByte(imagePath);
+        final tempFile = await saveCompressedImage(compressedBytes);
 
-      final formData = FormData.fromMap({
-        "dto": MultipartFile.fromString(
-          jsonEncode(jsonData),
-          contentType: DioMediaType.parse("application/json"),
-        ),
-        "image": tempFile != null ? await MultipartFile.fromFile(tempFile.path) : null,
-      });
-
-       // API 호출
-      final isSuccess = await reviewRepository.submitReview(newReview);
-      if (isSuccess) {
-        resetState();
+        if (tempFile != null) {
+          final multipartFile = await MultipartFile.fromFile(tempFile.path);
+          imageFiles.add(multipartFile);
+        }
       }
-      return isSuccess;
-  
-    
-    
+    }
+
+    final formData = FormData.fromMap({
+      "dto": MultipartFile.fromString(
+        jsonEncode(jsonData),
+        contentType: DioMediaType.parse("application/json"),
+      ),
+      "images": imageFiles,
+    });
+
+    // API 호출
+    final isSuccess = await reviewRepository.submitReview(formData);
+    if (isSuccess) {
+      resetState();
+    }
+    return isSuccess;
   }
 
   /// 상태 초기화 메서드
@@ -80,11 +80,11 @@ class ReviewViewModel extends StateNotifier<ReviewInfo> {
       memberName: '',
       contents: '',
       score: 0.0,
-      imageUrls: [],
-      acidity: IntensityLevel.none,
-      body: IntensityLevel.none,
-      bitterness: IntensityLevel.none,
-      sweetness: IntensityLevel.none,
+      images: null,
+      acidity: null,
+      body: null,
+      bitterness: null,
+      sweetness: null,
       aroma: [],
       createdAt: DateTime.now(),
     );
@@ -106,17 +106,16 @@ class ReviewViewModel extends StateNotifier<ReviewInfo> {
     final XFile? pickedFile =
         await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
-      final updatedUrls = List<String>.from(state.imageUrls ?? [])
+      final updatedUrls = List<String>.from(state.images ?? [])
         ..add(pickedFile.path);
-      state = state.copyWith(imageUrls: updatedUrls);
+      state = state.copyWith(images: updatedUrls);
     }
   }
 
   /// 이미지 제거 메서드
   void removeImage(int index) {
-    final updatedUrls = List<String>.from(state.imageUrls ?? [])
-      ..removeAt(index);
-    state = state.copyWith(imageUrls: updatedUrls);
+    final updatedUrls = List<String>.from(state.images ?? [])..removeAt(index);
+    state = state.copyWith(images: updatedUrls);
   }
 
   /// 산미 설정
@@ -151,8 +150,10 @@ class ReviewViewModel extends StateNotifier<ReviewInfo> {
   }
 }
 
-// Provider 정의
+final dio = Dio();
+final reviewRepository = SubmitReviewRepository();
+
 final reviewViewModelProvider =
     StateNotifierProvider.autoDispose<ReviewViewModel, ReviewInfo>(
-  (ref) => ReviewViewModel(reviewRepository: SubmitReviewRepository()),
+  (ref) => ReviewViewModel(reviewRepository: reviewRepository),
 );

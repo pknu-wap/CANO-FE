@@ -24,7 +24,7 @@ mixin _$ReviewInfo {
   String get memberName => throw _privateConstructorUsedError;
   String get contents => throw _privateConstructorUsedError;
   double get score => throw _privateConstructorUsedError;
-  List<String>? get imageUrls => throw _privateConstructorUsedError;
+  List<String>? get images => throw _privateConstructorUsedError;
   IntensityLevel? get acidity => throw _privateConstructorUsedError;
   IntensityLevel? get body => throw _privateConstructorUsedError;
   IntensityLevel? get bitterness => throw _privateConstructorUsedError;
@@ -53,7 +53,7 @@ abstract class $ReviewInfoCopyWith<$Res> {
       String memberName,
       String contents,
       double score,
-      List<String>? imageUrls,
+      List<String>? images,
       IntensityLevel? acidity,
       IntensityLevel? body,
       IntensityLevel? bitterness,
@@ -81,7 +81,7 @@ class _$ReviewInfoCopyWithImpl<$Res, $Val extends ReviewInfo>
     Object? memberName = null,
     Object? contents = null,
     Object? score = null,
-    Object? imageUrls = freezed,
+    Object? images = freezed,
     Object? acidity = freezed,
     Object? body = freezed,
     Object? bitterness = freezed,
@@ -106,9 +106,9 @@ class _$ReviewInfoCopyWithImpl<$Res, $Val extends ReviewInfo>
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as double,
-      imageUrls: freezed == imageUrls
-          ? _value.imageUrls
-          : imageUrls // ignore: cast_nullable_to_non_nullable
+      images: freezed == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       acidity: freezed == acidity
           ? _value.acidity
@@ -151,7 +151,7 @@ abstract class _$$ReviewInfoImplCopyWith<$Res>
       String memberName,
       String contents,
       double score,
-      List<String>? imageUrls,
+      List<String>? images,
       IntensityLevel? acidity,
       IntensityLevel? body,
       IntensityLevel? bitterness,
@@ -177,7 +177,7 @@ class __$$ReviewInfoImplCopyWithImpl<$Res>
     Object? memberName = null,
     Object? contents = null,
     Object? score = null,
-    Object? imageUrls = freezed,
+    Object? images = freezed,
     Object? acidity = freezed,
     Object? body = freezed,
     Object? bitterness = freezed,
@@ -202,9 +202,9 @@ class __$$ReviewInfoImplCopyWithImpl<$Res>
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as double,
-      imageUrls: freezed == imageUrls
-          ? _value._imageUrls
-          : imageUrls // ignore: cast_nullable_to_non_nullable
+      images: freezed == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       acidity: freezed == acidity
           ? _value.acidity
@@ -242,14 +242,14 @@ class _$ReviewInfoImpl implements _ReviewInfo {
       required this.memberName,
       required this.contents,
       required this.score,
-      required final List<String>? imageUrls,
+      required final List<String>? images,
       this.acidity,
       this.body,
       this.bitterness,
       this.sweetness,
       final List<Aroma>? aroma,
       required this.createdAt})
-      : _imageUrls = imageUrls,
+      : _images = images,
         _aroma = aroma;
 
   factory _$ReviewInfoImpl.fromJson(Map<String, dynamic> json) =>
@@ -263,12 +263,12 @@ class _$ReviewInfoImpl implements _ReviewInfo {
   final String contents;
   @override
   final double score;
-  final List<String>? _imageUrls;
+  final List<String>? _images;
   @override
-  List<String>? get imageUrls {
-    final value = _imageUrls;
+  List<String>? get images {
+    final value = _images;
     if (value == null) return null;
-    if (_imageUrls is EqualUnmodifiableListView) return _imageUrls;
+    if (_images is EqualUnmodifiableListView) return _images;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -296,7 +296,7 @@ class _$ReviewInfoImpl implements _ReviewInfo {
 
   @override
   String toString() {
-    return 'ReviewInfo(id: $id, memberName: $memberName, contents: $contents, score: $score, imageUrls: $imageUrls, acidity: $acidity, body: $body, bitterness: $bitterness, sweetness: $sweetness, aroma: $aroma, createdAt: $createdAt)';
+    return 'ReviewInfo(id: $id, memberName: $memberName, contents: $contents, score: $score, images: $images, acidity: $acidity, body: $body, bitterness: $bitterness, sweetness: $sweetness, aroma: $aroma, createdAt: $createdAt)';
   }
 
   @override
@@ -310,8 +310,7 @@ class _$ReviewInfoImpl implements _ReviewInfo {
             (identical(other.contents, contents) ||
                 other.contents == contents) &&
             (identical(other.score, score) || other.score == score) &&
-            const DeepCollectionEquality()
-                .equals(other._imageUrls, _imageUrls) &&
+            const DeepCollectionEquality().equals(other._images, _images) &&
             (identical(other.acidity, acidity) || other.acidity == acidity) &&
             (identical(other.body, body) || other.body == body) &&
             (identical(other.bitterness, bitterness) ||
@@ -331,7 +330,7 @@ class _$ReviewInfoImpl implements _ReviewInfo {
       memberName,
       contents,
       score,
-      const DeepCollectionEquality().hash(_imageUrls),
+      const DeepCollectionEquality().hash(_images),
       acidity,
       body,
       bitterness,
@@ -361,7 +360,7 @@ abstract class _ReviewInfo implements ReviewInfo {
       required final String memberName,
       required final String contents,
       required final double score,
-      required final List<String>? imageUrls,
+      required final List<String>? images,
       final IntensityLevel? acidity,
       final IntensityLevel? body,
       final IntensityLevel? bitterness,
@@ -381,7 +380,7 @@ abstract class _ReviewInfo implements ReviewInfo {
   @override
   double get score;
   @override
-  List<String>? get imageUrls;
+  List<String>? get images;
   @override
   IntensityLevel? get acidity;
   @override

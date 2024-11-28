@@ -134,7 +134,7 @@ class WriteReviewScreen extends ConsumerWidget {
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    for (int i = 0; i < reviewState.imageUrls!.length; i++)
+                    for (int i = 0; i < reviewState.images!.length; i++)
                       Stack(
                         children: [
                           Container(
@@ -144,7 +144,7 @@ class WriteReviewScreen extends ConsumerWidget {
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                 image:
-                                    FileImage(File(reviewState.imageUrls![i])),
+                                    FileImage(File(reviewState.images![i])),
                                 fit: BoxFit.cover,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
@@ -165,7 +165,7 @@ class WriteReviewScreen extends ConsumerWidget {
                           ),
                         ],
                       ),
-                    if (reviewState.imageUrls!.length < 2)
+                    if (reviewState.images!.length < 2)
                       GestureDetector(
                         onTap: reviewViewModel.addImage,
                         child: Container(
@@ -504,9 +504,9 @@ class WriteReviewScreen extends ConsumerWidget {
                       onPressed: () async {
                         final reviewText = reviewState.contents.trim();
 
-                        final List<String> reviewImageUrls =
-                            reviewState.imageUrls!.isNotEmpty
-                                ? reviewState.imageUrls!
+                        final List<String> reviewImages =
+                            reviewState.images!.isNotEmpty
+                                ? reviewState.images!
                                     .map((path) => 'file://$path')
                                     .toList()
                                 : [];
@@ -517,7 +517,7 @@ class WriteReviewScreen extends ConsumerWidget {
                           score: reviewState.score,
                           createdAt: reviewState.createdAt,
                           contents: reviewText,
-                          imageUrls: reviewImageUrls,
+                          images: reviewImages,
                           acidity: reviewState.acidity,
                           body: reviewState.body,
                           bitterness: reviewState.bitterness,

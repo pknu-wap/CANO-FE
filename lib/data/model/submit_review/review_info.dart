@@ -11,7 +11,7 @@ class ReviewInfo with _$ReviewInfo {
     required String memberName,
     required String contents,
     required double score,
-    required List<String>? imageUrls,
+    required List<String>? images,
     IntensityLevel? acidity,
     IntensityLevel? body,
     IntensityLevel? bitterness,

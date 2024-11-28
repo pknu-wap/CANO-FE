@@ -12,16 +12,16 @@ class SubmitReviewRepository {
     return _instance;
   }
 
-  final Dio dio = Dio();
-
-
-
   static final submitReviewApi = SubmitReviewApi(Dio());
-
-  Future<bool> submitReview(ReviewInfo reviewInfo) async {
-    final message =
-        await submitReviewApi.submitReview(reviewInfo.toJson());
-    if (message == "success") return true;
-    return false;
+  
+  Future<bool> submitReview(FormData formData) async {
+    try {
+      final message = await submitReviewApi.submitReview(formData);
+      if (message == "success") return true;
+      return false;
+    } catch (e) {
+      print('Error submitting review: $e');
+      return false;
+    }
   }
 }

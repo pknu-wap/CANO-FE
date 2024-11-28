@@ -12,9 +12,8 @@ _$ReviewInfoImpl _$$ReviewInfoImplFromJson(Map<String, dynamic> json) =>
       memberName: json['memberName'] as String,
       contents: json['contents'] as String,
       score: (json['score'] as num).toDouble(),
-      imageUrls: (json['imageUrls'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
+      images:
+          (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
       acidity: $enumDecodeNullable(_$IntensityLevelEnumMap, json['acidity']),
       body: $enumDecodeNullable(_$IntensityLevelEnumMap, json['body']),
       bitterness:
@@ -33,7 +32,7 @@ Map<String, dynamic> _$$ReviewInfoImplToJson(_$ReviewInfoImpl instance) =>
       'memberName': instance.memberName,
       'contents': instance.contents,
       'score': instance.score,
-      'imageUrls': instance.imageUrls,
+      'images': instance.images,
       'acidity': _$IntensityLevelEnumMap[instance.acidity],
       'body': _$IntensityLevelEnumMap[instance.body],
       'bitterness': _$IntensityLevelEnumMap[instance.bitterness],

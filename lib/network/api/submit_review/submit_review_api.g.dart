@@ -24,16 +24,16 @@ class _SubmitReviewApi implements SubmitReviewApi {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<String> submitReview(Map<String, dynamic> submitReviewRequest) async {
+  Future<String> submitReview(FormData formData) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(submitReviewRequest);
+    final _data = formData;
     final _options = _setStreamType<String>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
+      contentType: 'multipart/form-data',
     )
         .compose(
           _dio.options,
