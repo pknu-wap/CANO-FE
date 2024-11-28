@@ -49,7 +49,9 @@ class HomeMenuLayout extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(menu.attribute),
-              Text(menu.degree != null ? "${(menu.degree! * 100)}%" : "0")
+              Text(menu.degree != null
+                  ? "${(menu.degree! * 100).toInt()}%"
+                  : "0")
             ],
           )
         ],
