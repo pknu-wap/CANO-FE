@@ -16,7 +16,7 @@ class ReviewInfo with _$ReviewInfo {
     IntensityLevel? body,
     IntensityLevel? bitterness,
     IntensityLevel? sweetness,
-    required List<Aroma>? aroma,
+    List<Aroma>? aroma,
     required DateTime createdAt,
   }) = _ReviewInfo;
 
@@ -25,31 +25,22 @@ class ReviewInfo with _$ReviewInfo {
 }
 
 enum IntensityLevel {
-  none(AppStrings.none),
-  weak(AppStrings.weak),
-  normal(AppStrings.normal),
-  strong(AppStrings.strong),
-  veryStrong(AppStrings.veryStrong);
+  none("NONE"),
+  low("LOW"),
+  medium("MEDIUM"),
+  high("HIGH"),
+  veryHigh("VERY_HIGH");
 
-  final String description;
+  final String value;
 
-  const IntensityLevel(this.description);
+  const IntensityLevel(this.value);
 
-  static IntensityLevel? fromString(String value) {
-    switch (value) {
-      case AppStrings.none:
-        return IntensityLevel.none;
-      case AppStrings.weak:
-        return IntensityLevel.weak;
-      case AppStrings.normal:
-        return IntensityLevel.normal;
-      case AppStrings.strong:
-        return IntensityLevel.strong;
-      case AppStrings.veryStrong:
-        return IntensityLevel.veryStrong;
-      default:
-        return null;
-    }
+  static IntensityLevel? fromString(String? value) {
+    if (value == null) return null;
+    return IntensityLevel.values.firstWhere(
+      (level) => level.value == value,
+      orElse: () => IntensityLevel.none,
+    );
   }
 }
 

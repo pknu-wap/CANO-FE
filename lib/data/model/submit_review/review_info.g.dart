@@ -44,10 +44,10 @@ Map<String, dynamic> _$$ReviewInfoImplToJson(_$ReviewInfoImpl instance) =>
 
 const _$IntensityLevelEnumMap = {
   IntensityLevel.none: 'none',
-  IntensityLevel.weak: 'weak',
-  IntensityLevel.normal: 'normal',
-  IntensityLevel.strong: 'strong',
-  IntensityLevel.veryStrong: 'veryStrong',
+  IntensityLevel.low: 'low',
+  IntensityLevel.medium: 'medium',
+  IntensityLevel.high: 'high',
+  IntensityLevel.veryHigh: 'veryHigh',
 };
 
 const _$AromaEnumMap = {

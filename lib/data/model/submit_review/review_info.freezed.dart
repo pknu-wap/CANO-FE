@@ -247,7 +247,7 @@ class _$ReviewInfoImpl implements _ReviewInfo {
       this.body,
       this.bitterness,
       this.sweetness,
-      required final List<Aroma>? aroma,
+      final List<Aroma>? aroma,
       required this.createdAt})
       : _imageUrls = imageUrls,
         _aroma = aroma;
@@ -366,7 +366,7 @@ abstract class _ReviewInfo implements ReviewInfo {
       final IntensityLevel? body,
       final IntensityLevel? bitterness,
       final IntensityLevel? sweetness,
-      required final List<Aroma>? aroma,
+      final List<Aroma>? aroma,
       required final DateTime createdAt}) = _$ReviewInfoImpl;
 
   factory _ReviewInfo.fromJson(Map<String, dynamic> json) =

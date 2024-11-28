@@ -1,206 +1,158 @@
-// review_viewmodel.dart
-import 'package:cano/data/repository/submit_review/submit_review_repository.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cano/data/model/submit_review/review_info.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:cano/data/model/submit_review/review_info.dart';
+import 'package:cano/data/repository/submit_review/submit_review_repository.dart';
+import 'dart:convert';
+import 'package:dio/dio.dart';
+import '../../desginsystem/strings.dart';
+import '../../utils/image_utils.dart';
 
-class ReviewState {
-  final List<ReviewInfo> reviews;
-  final double rating;
-  final String reviewText;
-  final TextEditingController reviewController;
-  final List<String> uploadedImagePaths;
-  final IntensityLevel? selectedAcidity;
-  final IntensityLevel? selectedBody;
-  final IntensityLevel? selectedBitterness;
-  final IntensityLevel? selectedSweetness;
-  final List<Aroma> selectedAromas;
-
-  ReviewState({
-    required this.reviews,
-    required this.rating,
-    required this.reviewText,
-    required this.reviewController,
-    required this.uploadedImagePaths,
-    required this.selectedAcidity,
-    required this.selectedBody,
-    required this.selectedBitterness,
-    required this.selectedSweetness,
-    required this.selectedAromas,
-  });
-
-  ReviewState copyWith({
-    List<ReviewInfo>? reviews,
-    double? rating,
-    String? reviewText,
-    TextEditingController? reviewController,
-    List<String>? uploadedImagePaths,
-    IntensityLevel? selectedAcidity,
-    IntensityLevel? selectedBody,
-    IntensityLevel? selectedBitterness,
-    IntensityLevel? selectedSweetness,
-    List<Aroma>? selectedAromas,
-  }) {
-    return ReviewState(
-      reviews: reviews ?? this.reviews,
-      rating: rating ?? this.rating,
-      reviewText: reviewText ?? this.reviewText,
-      reviewController: reviewController ?? this.reviewController,
-      uploadedImagePaths: uploadedImagePaths ?? this.uploadedImagePaths,
-      selectedAcidity: selectedAcidity ?? this.selectedAcidity,
-      selectedBody: selectedBody ?? this.selectedBody,
-      selectedBitterness: selectedBitterness ?? this.selectedBitterness,
-      selectedSweetness: selectedSweetness ?? this.selectedSweetness,
-      selectedAromas: selectedAromas ?? this.selectedAromas,
-    );
-  }
-}
-
-class ReviewViewModel extends StateNotifier<ReviewState> {
+/// 리뷰 ViewModel
+class ReviewViewModel extends StateNotifier<ReviewInfo> {
   final SubmitReviewRepository reviewRepository;
 
   ReviewViewModel({required this.reviewRepository})
       : super(
-          ReviewState(
-            reviews: [],
-            rating: 0.0,
-            reviewText: '',
-            reviewController: TextEditingController(),
-            uploadedImagePaths: [],
-            selectedAcidity: null,
-            selectedBody: null,
-            selectedBitterness: null,
-            selectedSweetness: null,
-            selectedAromas: [],
+          ReviewInfo(
+            id: 0, // 초기화 시 임시 ID
+            memberName: '',
+            contents: '',
+            score: 0.0,
+            imageUrls: [],
+            acidity: IntensityLevel.none,
+            body: IntensityLevel.none,
+            bitterness: IntensityLevel.none,
+            sweetness: IntensityLevel.none,
+            aroma: [],
+            createdAt: DateTime.now(),
           ),
-        ) {
-    fetchReview(1); // 초기 리뷰 ID 설정
+        );
+
+  /// 리뷰 제출 메서드
+  Future<bool> submitReview(ReviewInfo newReview) async {
+    // DTO로 변환
+    final jsonData = {
+      "id": state.id,
+      "memberName": state.memberName,
+      "contents": state.contents,
+      "score": state.score,
+      "acidity": state.acidity?.value,
+      "body": state.body?.value,
+      "bitterness": state.bitterness?.value,
+      "sweetness": state.sweetness?.value,
+      "aroma": state.aroma?.map((aroma) => aroma.scent).toList(),
+      "createdAt": state.createdAt.toIso8601String(),
+    };
+
+    // 이미지 파일 처리
+    final compressedBytes =
+        state.imageUrls != null && state.imageUrls!.isNotEmpty
+            ? await compressImageToByte(state.imageUrls!.first)
+            : null;
+
+    final tempFile = compressedBytes != null
+        ? await saveCompressedImage(compressedBytes)
+        : null;
+
+      final formData = FormData.fromMap({
+        "dto": MultipartFile.fromString(
+          jsonEncode(jsonData),
+          contentType: DioMediaType.parse("application/json"),
+        ),
+        "image": tempFile != null ? await MultipartFile.fromFile(tempFile.path) : null,
+      });
+
+       // API 호출
+      final isSuccess = await reviewRepository.submitReview(newReview);
+      if (isSuccess) {
+        resetState();
+      }
+      return isSuccess;
+  
+    
+    
   }
 
-  /// 리뷰 목록을 가져오는 메서드
-  Future<void> fetchReview(int id) async {
-    try {
-      final reviewInfoList = await reviewRepository.getReview(id);
-      if (reviewInfoList != null) {
-        state = state.copyWith(reviews: reviewInfoList);
-      } else {
-        // API 응답이 null일 경우 기본 리뷰 추가
-        state = state.copyWith(
-          reviews: [
-            ReviewInfo(
-              id: 0,
-              memberName: "",
-              contents: "",
-              score: 0.0,
-              imageUrls: null,
-              acidity: null,
-              body: null,
-              bitterness: null,
-              sweetness: null,
-              aroma: null,
-              createdAt: DateTime.now(),
-            ),
-          ],
-          rating: 0.0,
-          reviewText: '',
-          reviewController: TextEditingController(),
-          uploadedImagePaths: [],
-          selectedAcidity: null,
-          selectedBody: null,
-          selectedBitterness: null,
-          selectedSweetness: null,
-          selectedAromas: [],
-        );
-      }
-    } catch (e, stackTrace) {
-      // 에러 처리: 로그 출력 및 상태 초기화
-      print('Error fetching review: $e');
-      print(stackTrace);
-      state = state.copyWith(
-        reviews: [],
-        rating: 0.0,
-        reviewText: '',
-        reviewController: TextEditingController(),
-        uploadedImagePaths: [],
-        selectedAcidity: null,
-        selectedBody: null,
-        selectedBitterness: null,
-        selectedSweetness: null,
-        selectedAromas: [],
-      );
-    }
+  /// 상태 초기화 메서드
+  void resetState() {
+    state = ReviewInfo(
+      id: 0,
+      memberName: '',
+      contents: '',
+      score: 0.0,
+      imageUrls: [],
+      acidity: IntensityLevel.none,
+      body: IntensityLevel.none,
+      bitterness: IntensityLevel.none,
+      sweetness: IntensityLevel.none,
+      aroma: [],
+      createdAt: DateTime.now(),
+    );
   }
 
   /// 별점 설정 메서드
-  void setRating(double newRating) {
-    state = state.copyWith(rating: newRating);
+  void setScore(double score) {
+    state = state.copyWith(score: score);
+  }
+
+  /// 리뷰 텍스트 설정
+  void setContents(String contents) {
+    state = state.copyWith(contents: contents);
   }
 
   /// 이미지 추가 메서드
   Future<void> addImage() async {
-    final ImagePicker picker = ImagePicker();
+    final picker = ImagePicker();
     final XFile? pickedFile =
         await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
-      final updatedPaths = List<String>.from(state.uploadedImagePaths)
+      final updatedUrls = List<String>.from(state.imageUrls ?? [])
         ..add(pickedFile.path);
-      state = state.copyWith(uploadedImagePaths: updatedPaths);
+      state = state.copyWith(imageUrls: updatedUrls);
     }
   }
 
   /// 이미지 제거 메서드
   void removeImage(int index) {
-    final updatedPaths = List<String>.from(state.uploadedImagePaths)
+    final updatedUrls = List<String>.from(state.imageUrls ?? [])
       ..removeAt(index);
-    state = state.copyWith(uploadedImagePaths: updatedPaths);
+    state = state.copyWith(imageUrls: updatedUrls);
   }
 
-  /// 리뷰 텍스트 변경 시 상태 업데이트
-  void setReviewText(String text) {
-    state = state.copyWith(reviewText: text);
+  /// 산미 설정
+  void setAcidity(IntensityLevel? acidity) {
+    state = state.copyWith(acidity: acidity);
   }
 
-  /// Acidity 설정 메서드
-  void setSelectedAcidity(IntensityLevel? level) {
-    state = state.copyWith(selectedAcidity: level);
+  /// 바디감 설정
+  void setBody(IntensityLevel? body) {
+    state = state.copyWith(body: body);
   }
 
-  /// Body 설정 메서드
-  void setSelectedBody(IntensityLevel? level) {
-    state = state.copyWith(selectedBody: level);
+  /// 쓴맛 설정
+  void setBitterness(IntensityLevel? bitterness) {
+    state = state.copyWith(bitterness: bitterness);
   }
 
-  /// Bitterness 설정 메서드
-  void setSelectedBitterness(IntensityLevel? level) {
-    state = state.copyWith(selectedBitterness: level);
+  /// 단맛 설정
+  void setSweetness(IntensityLevel? sweetness) {
+    state = state.copyWith(sweetness: sweetness);
   }
 
-  /// Sweetness 설정 메서드
-  void setSelectedSweetness(IntensityLevel? level) {
-    state = state.copyWith(selectedSweetness: level);
-  }
-
-  /// Aroma 추가/제거 메서드
+  /// Aroma 토글 메서드
   void toggleAroma(Aroma aroma) {
-    final updatedAromas = List<Aroma>.from(state.selectedAromas);
+    final updatedAromas = List<Aroma>.from(state.aroma ?? []);
     if (updatedAromas.contains(aroma)) {
       updatedAromas.remove(aroma);
     } else {
       updatedAromas.add(aroma);
     }
-    state = state.copyWith(selectedAromas: updatedAromas);
-  }
-
-  /// 리뷰 추가 메서드
-  void addReview(ReviewInfo newReview) {
-    final updatedReviews = [...state.reviews, newReview];
-    state = state.copyWith(reviews: updatedReviews);
+    state = state.copyWith(aroma: updatedAromas);
   }
 }
 
 // Provider 정의
 final reviewViewModelProvider =
-    StateNotifierProvider.autoDispose<ReviewViewModel, ReviewState>(
+    StateNotifierProvider.autoDispose<ReviewViewModel, ReviewInfo>(
   (ref) => ReviewViewModel(reviewRepository: SubmitReviewRepository()),
 );
