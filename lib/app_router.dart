@@ -72,6 +72,14 @@ class AppRouter {
               menuId: menuId,
             );
           }),
+      GoRoute(
+          path: '/menu/:menuid',
+          builder: (context, state) {
+            final menuId = int.parse(state.pathParameters['menuId']!);
+            return MenuScreen(
+              menuId: menuId,
+            );
+          }),
       StatefulShellRoute.indexedStack(
         branches: [
           StatefulShellBranch(
