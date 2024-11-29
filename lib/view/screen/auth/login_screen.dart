@@ -21,22 +21,15 @@ class LoginScreen extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            GestureDetector(
-                onTap: () {
-                  context.go('/home');
-                },
-                child: SvgPicture.asset("assets/images/cano_icon.svg")),
+            SvgPicture.asset("assets/images/cano_icon.svg"),
             const SizedBox(
               height: 30,
             ),
-            GestureDetector(
-              onTap: () => context.go('/menu'),
-              child: const Text(AppStrings.appName,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 28,
-                      color: AppColors.primary)),
-            ),
+            const Text(AppStrings.appName,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 28,
+                    color: AppColors.primary)),
             const SizedBox(height: 30),
             CustomIconSvgButton(
                 imagePath: "assets/images/kakao_login.svg",
@@ -53,9 +46,9 @@ class LoginScreen extends ConsumerWidget {
             CustomIconSvgButton(
               imagePath: "assets/images/google_login.svg",
               onPressed: () {
-                ref
-                    .read(authProvider.notifier)
-                    .loginWithGoogle(() => context.go('/user_profile'));
+                // ref
+                //     .read(authProvider.notifier)
+                //     .loginWithGoogle(() => context.go('/user_profile'));
               },
             ),
           ],
