@@ -259,7 +259,7 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
               ),
             ),
             SizedBox(
-              height: 30,
+              height: 55,
             )
           ],
         ),
