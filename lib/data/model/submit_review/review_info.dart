@@ -8,16 +8,17 @@ part 'review_info.g.dart';
 @freezed
 class ReviewInfo with _$ReviewInfo {
   const factory ReviewInfo({
-    required String userName,
-    required String rating,
-    required DateTime timestamp,
-    required String reviewText,
-    required List<String> reviewImageUrl,
-    required IntensityLevel? acidity,
-    required IntensityLevel? body,
-    required IntensityLevel? bitterness,
-    required IntensityLevel? sweetness,
-    required List<Aroma>? aroma,
+    required int id,
+    required String memberName,
+    required String contents,
+    required double score,
+    required List<String>? images,
+    IntensityLevel? acidity,
+    IntensityLevel? body,
+    IntensityLevel? bitterness,
+    IntensityLevel? sweetness,
+    List<Aroma>? aroma,
+    required DateTime createdAt,
   }) = _ReviewInfo;
 
   factory ReviewInfo.fromJson(Map<String, dynamic> json) =>
@@ -25,31 +26,22 @@ class ReviewInfo with _$ReviewInfo {
 }
 
 enum IntensityLevel {
-  none(AppStrings.none),
-  weak(AppStrings.weak),
-  normal(AppStrings.normal),
-  strong(AppStrings.strong),
-  veryStrong(AppStrings.veryStrong);
+  none("NONE"),
+  low("LOW"),
+  medium("MEDIUM"),
+  high("HIGH"),
+  veryHigh("VERY_HIGH");
 
-  final String description;
+  final String value;
 
-  const IntensityLevel(this.description);
+  const IntensityLevel(this.value);
 
-  static IntensityLevel? fromString(String value) {
-    switch (value) {
-      case AppStrings.none:
-        return IntensityLevel.none;
-      case AppStrings.weak:
-        return IntensityLevel.weak;
-      case AppStrings.normal:
-        return IntensityLevel.normal;
-      case AppStrings.strong:
-        return IntensityLevel.strong;
-      case AppStrings.veryStrong:
-        return IntensityLevel.veryStrong;
-      default:
-        return null;
-    }
+  static IntensityLevel? fromString(String? value) {
+    if (value == null) return null;
+    return IntensityLevel.values.firstWhere(
+      (level) => level.value == value,
+      orElse: () => IntensityLevel.none,
+    );
   }
 }
 

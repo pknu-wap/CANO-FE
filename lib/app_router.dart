@@ -6,6 +6,7 @@ import 'package:cano/view/screen/my_page/modify_coffee_preference_screen.dart';
 import 'package:cano/view/screen/my_page/modify_user_profile_screen.dart';
 import 'package:cano/view/screen/my_page/my_page_screen.dart';
 import 'package:cano/view/screen/register_menu/register_menu_screen.dart';
+import 'package:cano/view/screen/review/write_review_screen.dart';
 import 'package:cano/view/screen/search/search_screen.dart';
 import 'package:cano/view/screen/user_info/coffee_preference_screen.dart';
 import 'package:cano/view/screen/user_info/user_profile_screen.dart';
@@ -54,15 +55,30 @@ class AppRouter {
             return RegisterMenuScreen();
           }),
       GoRoute(
-          path: '/menu',
+          path: '/write_review',
           builder: (context, state) {
-            return MenuScreen();
+            return WriteReviewScreen();
+          }),
+      // GoRoute(
+      //     path: '/menu',
+      //     builder: (context, state) {
+      //       return MenuScreen();
+      //     }),
+      GoRoute(
+          path: '/menu/:menuId',
+          builder: (context, state) {
+            final menuId = int.parse(state.pathParameters['menuId']!);
+            return MenuScreen(
+              menuId: menuId,
+            );
           }),
       GoRoute(
           path: '/menu/:menuid',
           builder: (context, state) {
-            final menuId = state.pathParameters['menuId'];
-            return MenuScreen();
+            final menuId = int.parse(state.pathParameters['menuId']!);
+            return MenuScreen(
+              menuId: menuId,
+            );
           }),
       StatefulShellRoute.indexedStack(
         branches: [

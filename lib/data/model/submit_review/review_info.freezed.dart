@@ -20,16 +20,17 @@ ReviewInfo _$ReviewInfoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ReviewInfo {
-  String get userName => throw _privateConstructorUsedError;
-  String get rating => throw _privateConstructorUsedError;
-  DateTime get timestamp => throw _privateConstructorUsedError;
-  String get reviewText => throw _privateConstructorUsedError;
-  List<String> get reviewImageUrl => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
+  String get memberName => throw _privateConstructorUsedError;
+  String get contents => throw _privateConstructorUsedError;
+  double get score => throw _privateConstructorUsedError;
+  List<String>? get images => throw _privateConstructorUsedError;
   IntensityLevel? get acidity => throw _privateConstructorUsedError;
   IntensityLevel? get body => throw _privateConstructorUsedError;
   IntensityLevel? get bitterness => throw _privateConstructorUsedError;
   IntensityLevel? get sweetness => throw _privateConstructorUsedError;
   List<Aroma>? get aroma => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
 
   /// Serializes this ReviewInfo to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,16 +49,17 @@ abstract class $ReviewInfoCopyWith<$Res> {
       _$ReviewInfoCopyWithImpl<$Res, ReviewInfo>;
   @useResult
   $Res call(
-      {String userName,
-      String rating,
-      DateTime timestamp,
-      String reviewText,
-      List<String> reviewImageUrl,
+      {int id,
+      String memberName,
+      String contents,
+      double score,
+      List<String>? images,
       IntensityLevel? acidity,
       IntensityLevel? body,
       IntensityLevel? bitterness,
       IntensityLevel? sweetness,
-      List<Aroma>? aroma});
+      List<Aroma>? aroma,
+      DateTime createdAt});
 }
 
 /// @nodoc
@@ -75,38 +77,39 @@ class _$ReviewInfoCopyWithImpl<$Res, $Val extends ReviewInfo>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userName = null,
-    Object? rating = null,
-    Object? timestamp = null,
-    Object? reviewText = null,
-    Object? reviewImageUrl = null,
+    Object? id = null,
+    Object? memberName = null,
+    Object? contents = null,
+    Object? score = null,
+    Object? images = freezed,
     Object? acidity = freezed,
     Object? body = freezed,
     Object? bitterness = freezed,
     Object? sweetness = freezed,
     Object? aroma = freezed,
+    Object? createdAt = null,
   }) {
     return _then(_value.copyWith(
-      userName: null == userName
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      memberName: null == memberName
+          ? _value.memberName
+          : memberName // ignore: cast_nullable_to_non_nullable
               as String,
-      rating: null == rating
-          ? _value.rating
-          : rating // ignore: cast_nullable_to_non_nullable
+      contents: null == contents
+          ? _value.contents
+          : contents // ignore: cast_nullable_to_non_nullable
               as String,
-      timestamp: null == timestamp
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      reviewText: null == reviewText
-          ? _value.reviewText
-          : reviewText // ignore: cast_nullable_to_non_nullable
-              as String,
-      reviewImageUrl: null == reviewImageUrl
-          ? _value.reviewImageUrl
-          : reviewImageUrl // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      score: null == score
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as double,
+      images: freezed == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       acidity: freezed == acidity
           ? _value.acidity
           : acidity // ignore: cast_nullable_to_non_nullable
@@ -127,6 +130,10 @@ class _$ReviewInfoCopyWithImpl<$Res, $Val extends ReviewInfo>
           ? _value.aroma
           : aroma // ignore: cast_nullable_to_non_nullable
               as List<Aroma>?,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 }
@@ -140,16 +147,17 @@ abstract class _$$ReviewInfoImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String userName,
-      String rating,
-      DateTime timestamp,
-      String reviewText,
-      List<String> reviewImageUrl,
+      {int id,
+      String memberName,
+      String contents,
+      double score,
+      List<String>? images,
       IntensityLevel? acidity,
       IntensityLevel? body,
       IntensityLevel? bitterness,
       IntensityLevel? sweetness,
-      List<Aroma>? aroma});
+      List<Aroma>? aroma,
+      DateTime createdAt});
 }
 
 /// @nodoc
@@ -165,38 +173,39 @@ class __$$ReviewInfoImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userName = null,
-    Object? rating = null,
-    Object? timestamp = null,
-    Object? reviewText = null,
-    Object? reviewImageUrl = null,
+    Object? id = null,
+    Object? memberName = null,
+    Object? contents = null,
+    Object? score = null,
+    Object? images = freezed,
     Object? acidity = freezed,
     Object? body = freezed,
     Object? bitterness = freezed,
     Object? sweetness = freezed,
     Object? aroma = freezed,
+    Object? createdAt = null,
   }) {
     return _then(_$ReviewInfoImpl(
-      userName: null == userName
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      memberName: null == memberName
+          ? _value.memberName
+          : memberName // ignore: cast_nullable_to_non_nullable
               as String,
-      rating: null == rating
-          ? _value.rating
-          : rating // ignore: cast_nullable_to_non_nullable
+      contents: null == contents
+          ? _value.contents
+          : contents // ignore: cast_nullable_to_non_nullable
               as String,
-      timestamp: null == timestamp
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      reviewText: null == reviewText
-          ? _value.reviewText
-          : reviewText // ignore: cast_nullable_to_non_nullable
-              as String,
-      reviewImageUrl: null == reviewImageUrl
-          ? _value._reviewImageUrl
-          : reviewImageUrl // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      score: null == score
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as double,
+      images: freezed == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       acidity: freezed == acidity
           ? _value.acidity
           : acidity // ignore: cast_nullable_to_non_nullable
@@ -217,6 +226,10 @@ class __$$ReviewInfoImplCopyWithImpl<$Res>
           ? _value._aroma
           : aroma // ignore: cast_nullable_to_non_nullable
               as List<Aroma>?,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -225,36 +238,39 @@ class __$$ReviewInfoImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ReviewInfoImpl implements _ReviewInfo {
   const _$ReviewInfoImpl(
-      {required this.userName,
-      required this.rating,
-      required this.timestamp,
-      required this.reviewText,
-      required final List<String> reviewImageUrl,
-      required this.acidity,
-      required this.body,
-      required this.bitterness,
-      required this.sweetness,
-      required final List<Aroma>? aroma})
-      : _reviewImageUrl = reviewImageUrl,
+      {required this.id,
+      required this.memberName,
+      required this.contents,
+      required this.score,
+      required final List<String>? images,
+      this.acidity,
+      this.body,
+      this.bitterness,
+      this.sweetness,
+      final List<Aroma>? aroma,
+      required this.createdAt})
+      : _images = images,
         _aroma = aroma;
 
   factory _$ReviewInfoImpl.fromJson(Map<String, dynamic> json) =>
       _$$ReviewInfoImplFromJson(json);
 
   @override
-  final String userName;
+  final int id;
   @override
-  final String rating;
+  final String memberName;
   @override
-  final DateTime timestamp;
+  final String contents;
   @override
-  final String reviewText;
-  final List<String> _reviewImageUrl;
+  final double score;
+  final List<String>? _images;
   @override
-  List<String> get reviewImageUrl {
-    if (_reviewImageUrl is EqualUnmodifiableListView) return _reviewImageUrl;
+  List<String>? get images {
+    final value = _images;
+    if (value == null) return null;
+    if (_images is EqualUnmodifiableListView) return _images;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_reviewImageUrl);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -276,8 +292,11 @@ class _$ReviewInfoImpl implements _ReviewInfo {
   }
 
   @override
+  final DateTime createdAt;
+
+  @override
   String toString() {
-    return 'ReviewInfo(userName: $userName, rating: $rating, timestamp: $timestamp, reviewText: $reviewText, reviewImageUrl: $reviewImageUrl, acidity: $acidity, body: $body, bitterness: $bitterness, sweetness: $sweetness, aroma: $aroma)';
+    return 'ReviewInfo(id: $id, memberName: $memberName, contents: $contents, score: $score, images: $images, acidity: $acidity, body: $body, bitterness: $bitterness, sweetness: $sweetness, aroma: $aroma, createdAt: $createdAt)';
   }
 
   @override
@@ -285,38 +304,39 @@ class _$ReviewInfoImpl implements _ReviewInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ReviewInfoImpl &&
-            (identical(other.userName, userName) ||
-                other.userName == userName) &&
-            (identical(other.rating, rating) || other.rating == rating) &&
-            (identical(other.timestamp, timestamp) ||
-                other.timestamp == timestamp) &&
-            (identical(other.reviewText, reviewText) ||
-                other.reviewText == reviewText) &&
-            const DeepCollectionEquality()
-                .equals(other._reviewImageUrl, _reviewImageUrl) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.memberName, memberName) ||
+                other.memberName == memberName) &&
+            (identical(other.contents, contents) ||
+                other.contents == contents) &&
+            (identical(other.score, score) || other.score == score) &&
+            const DeepCollectionEquality().equals(other._images, _images) &&
             (identical(other.acidity, acidity) || other.acidity == acidity) &&
             (identical(other.body, body) || other.body == body) &&
             (identical(other.bitterness, bitterness) ||
                 other.bitterness == bitterness) &&
             (identical(other.sweetness, sweetness) ||
                 other.sweetness == sweetness) &&
-            const DeepCollectionEquality().equals(other._aroma, _aroma));
+            const DeepCollectionEquality().equals(other._aroma, _aroma) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      userName,
-      rating,
-      timestamp,
-      reviewText,
-      const DeepCollectionEquality().hash(_reviewImageUrl),
+      id,
+      memberName,
+      contents,
+      score,
+      const DeepCollectionEquality().hash(_images),
       acidity,
       body,
       bitterness,
       sweetness,
-      const DeepCollectionEquality().hash(_aroma));
+      const DeepCollectionEquality().hash(_aroma),
+      createdAt);
 
   /// Create a copy of ReviewInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -336,30 +356,31 @@ class _$ReviewInfoImpl implements _ReviewInfo {
 
 abstract class _ReviewInfo implements ReviewInfo {
   const factory _ReviewInfo(
-      {required final String userName,
-      required final String rating,
-      required final DateTime timestamp,
-      required final String reviewText,
-      required final List<String> reviewImageUrl,
-      required final IntensityLevel? acidity,
-      required final IntensityLevel? body,
-      required final IntensityLevel? bitterness,
-      required final IntensityLevel? sweetness,
-      required final List<Aroma>? aroma}) = _$ReviewInfoImpl;
+      {required final int id,
+      required final String memberName,
+      required final String contents,
+      required final double score,
+      required final List<String>? images,
+      final IntensityLevel? acidity,
+      final IntensityLevel? body,
+      final IntensityLevel? bitterness,
+      final IntensityLevel? sweetness,
+      final List<Aroma>? aroma,
+      required final DateTime createdAt}) = _$ReviewInfoImpl;
 
   factory _ReviewInfo.fromJson(Map<String, dynamic> json) =
       _$ReviewInfoImpl.fromJson;
 
   @override
-  String get userName;
+  int get id;
   @override
-  String get rating;
+  String get memberName;
   @override
-  DateTime get timestamp;
+  String get contents;
   @override
-  String get reviewText;
+  double get score;
   @override
-  List<String> get reviewImageUrl;
+  List<String>? get images;
   @override
   IntensityLevel? get acidity;
   @override
@@ -370,6 +391,8 @@ abstract class _ReviewInfo implements ReviewInfo {
   IntensityLevel? get sweetness;
   @override
   List<Aroma>? get aroma;
+  @override
+  DateTime get createdAt;
 
   /// Create a copy of ReviewInfo
   /// with the given fields replaced by the non-null parameter values.

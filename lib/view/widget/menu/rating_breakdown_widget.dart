@@ -10,16 +10,19 @@ class RatingBreakdownWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (menuData.ratingCountsByStar == null) {
+    if (menuData.ratingCountsByStar == null ||
+        menuData.ratingCountsByStar!.isEmpty) {
       return const SizedBox.shrink();
     }
+
+
+    final int total = menuData.scoreCount ?? 0;
 
     return Column(
       children: menuData.ratingCountsByStar!.entries.map((entry) {
         final star = entry.key;
         final count = entry.value;
-        final total = menuData.scoreCount;
-        final percentage = (total > 0) ? (count / total * 100).toInt() : 0;
+        final int percentage = (total > 0) ? ((count / total) * 100).toInt() : 0;
 
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 4.0),
@@ -31,7 +34,7 @@ class RatingBreakdownWidget extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: LinearProgressIndicator(
-                  value: total > 0 ? count / total : 0,
+                  value: total > 0 ? (count / total) : 0,
                   backgroundColor: AppColors.barBg,
                   color: AppColors.star,
                 ),

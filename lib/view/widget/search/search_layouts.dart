@@ -146,7 +146,7 @@ class MenuInfoLayout extends StatelessWidget {
                     children: [
                       Text(
                         menuInfo.score != null
-                            ? menuInfo.score.toString()
+                            ? menuInfo.score!.toStringAsFixed(1)
                             : "0",
                         style: TextStyle(fontSize: 12),
                       ),

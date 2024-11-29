@@ -30,7 +30,6 @@ class SearchState {
 }
 
 class SearchViewmodel extends StateNotifier<SearchState> {
-  // 내부 생성자
   SearchViewmodel._internal(super.state);
 
   static final SearchViewmodel _instance = SearchViewmodel._internal(

@@ -174,4 +174,20 @@ class FlavorDescriptions {
   static const String sweetnessModerate = "단맛이 적당한";
   static const String sweetnessWeak = "단맛이 약한";
   static const String sweetnessNone = "단맛이 없는";
+
+  // 메뉴 등록
+  static const String registerMenu = "메뉴 등록";
+  static const String askToRegisterMenu = "메뉴를 등록하시겠습니까?";
+  static const String registerMenuSuccess = "메뉴가 등록되었습니다";
+  static const String registerMenuFailure = "메뉴 등록에 실패했습니다";
+  static const String cafeName = "카페 이름";
+  static const String menuName = "메뉴 이름";
+  static const String priceText = "가격 (단위: 원)";
+  static const String registerImage = "대표 이미지 등록";
+  static const String cafeNameHint = "띄어쓰기 없이 작성해주세요! 예) OO까페";
+  static const String menuNameHint = "예) 아이스 아메리카노";
+  static const String priceHint = "단위나 쉼표 없이 적어주세요! 예) 4500";
+  static const String cafeNameEng = "cafeName";
+  static const String menuNameEng = "name";
+  static const String priceEng = "price";
 }
