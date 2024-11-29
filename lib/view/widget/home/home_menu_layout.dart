@@ -16,15 +16,15 @@ class HomeMenuLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: mediaWidth(context, 0.3),
-      height: mediaHeight(context, 0.3),
+      height: mediaHeight(context, 0.4),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: Image.network(menu.imageUrl,
-                height: mediaHeight(context, 0.15),
-                width: mediaWidth(context, 0.3),
+                height: mediaHeight(context, 0.155),
+                width: mediaWidth(context, 0.35),
                 fit: BoxFit.fill),
           ),
           SizedBox(

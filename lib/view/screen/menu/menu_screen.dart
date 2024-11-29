@@ -1,4 +1,3 @@
-import 'package:cano/data/model/menu/menu_info.dart';
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/desginsystem/strings.dart';
 import 'package:cano/view/screen/menu/menu_report_screen.dart';
@@ -64,8 +63,6 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
         ),
       );
     }
-
-    double averageRating = _calculateAverageRating(menuData);
 
     return Scaffold(
       appBar: AppBar(
@@ -168,14 +165,15 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
               ),
             ),
             const SizedBox(height: 8),
-            // 별점 표시
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Row(
                 children: [
                   const Icon(Icons.star, color: AppColors.star),
                   Text(
-                    averageRating.toStringAsFixed(2),
+                    menuData.score != null
+                        ? menuData.score!.toStringAsFixed(2)
+                        : "0",
                     style: const TextStyle(
                         fontSize: 18, fontWeight: FontWeight.bold),
                   ),
@@ -260,6 +258,9 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                     .toList(),
               ),
             ),
+            SizedBox(
+              height: 30,
+            )
           ],
         ),
       ),
@@ -299,17 +300,5 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,
     );
-  }
-
-  double _calculateAverageRating(MenuInfo menuData) {
-    if (menuData.ratingCountsByStar == null ||
-        menuData.ratingCountsByStar!.isEmpty ||
-        menuData.scoreCount == null ||
-        menuData.scoreCount == 0) {
-      return 0.0;
-    }
-    int totalRatings = menuData.ratingCountsByStar!.entries
-        .fold(0, (sum, entry) => sum + (entry.key * entry.value));
-    return totalRatings / menuData.scoreCount!;
   }
 }

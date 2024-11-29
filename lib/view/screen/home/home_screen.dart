@@ -1,13 +1,13 @@
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/utils/mediaquery.dart';
 import 'package:cano/view/widget/home/home_menu_layout.dart';
-import 'package:cano/view/widget/search/search_field.dart';
 import 'package:cano/viewmodel/home/home_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../desginsystem/strings.dart';
+import '../../widget/search/search_field.dart';
 
 late String _userName;
 

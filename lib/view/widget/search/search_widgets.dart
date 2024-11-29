@@ -82,20 +82,27 @@ class PostSearchWidget extends ConsumerWidget {
             children: [
               Text(AppStrings.searchCoffeeText,
                   style: TextStyle(color: Colors.grey, fontSize: 13)),
-              TextButton(
-                  onPressed: () => context.push('/register_menu'),
-                  style: TextButton.styleFrom(overlayColor: Colors.grey),
-                  child: Text(
-                    AppStrings.addCoffeeText,
-                    style: TextStyle(
-                        fontSize: 15,
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.bold),
-                  ))
+              Transform.translate(
+                offset: Offset(-20, 0),
+                child: SizedBox(
+                  width: 150,
+                  height: 50,
+                  child: TextButton(
+                      onPressed: () => context.push('/register_menu'),
+                      style: TextButton.styleFrom(overlayColor: Colors.grey),
+                      child: Text(
+                        AppStrings.addCoffeeText,
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.bold),
+                      )),
+                ),
+              )
             ],
           ),
           Transform.translate(
-            offset: Offset(0, -30),
+            offset: Offset(0, -25),
             child: ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),

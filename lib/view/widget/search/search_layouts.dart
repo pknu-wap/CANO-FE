@@ -199,6 +199,9 @@ class MenuInfoLayout extends StatelessWidget {
                       IntensityBar(intensity: menuInfo.body ?? 0)
                     ],
                   ),
+                  SizedBox(
+                    height: 3,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
