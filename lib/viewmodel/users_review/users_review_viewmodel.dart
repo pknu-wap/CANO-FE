@@ -45,6 +45,11 @@ class UsersReviewViewmodel extends StateNotifier<UsersReviewState> {
     }
     state = state.copyWith(isLoading: false);
   }
+
+  Future<bool> deleteMenu(int id) async {
+    final isSuccess = await usersReviewRepository.deleteMenu(id);
+    return isSuccess;
+  }
 }
 
 final usersReviewViewModelProvider =

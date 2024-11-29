@@ -3,14 +3,19 @@ import 'package:cano/data/model/users_review/users_review_info.dart';
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/utils/format_string.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ReviewCardWidget extends StatelessWidget {
+import '../../../viewmodel/users_review/users_review_viewmodel.dart';
+
+class ReviewCardWidget extends ConsumerWidget {
   final UsersReviewInfo review;
+  final String userName;
 
-  const ReviewCardWidget({super.key, required this.review});
+  const ReviewCardWidget(
+      {super.key, required this.review, required this.userName});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final hasImages = review.imageUrls != null &&
         review.imageUrls!.isNotEmpty &&
         review.imageUrls!.any((url) => url.isNotEmpty);
@@ -86,12 +91,32 @@ class ReviewCardWidget extends StatelessWidget {
                   ),
                 ),
                 // 더보기 아이콘
-                IconButton(
-                  icon: const Icon(Icons.more_vert),
-                  onPressed: () {
-                    // 더보기 버튼 클릭 시 동작 구현
-                  },
-                ),
+
+                review.memberName == userName
+                    ? PopupMenuButton<String>(
+                        icon: const Icon(Icons.more_vert),
+                        onSelected: (String value) {
+                          if (value == 'delete') {
+                            ref
+                                .read(usersReviewViewModelProvider.notifier)
+                                .deleteMenu(review.id);
+                            ref
+                                .read(usersReviewViewModelProvider.notifier)
+                                .fetchReviews(review.menuId);
+                          }
+                        },
+                        itemBuilder: (BuildContext context) => [
+                          const PopupMenuItem<String>(
+                            value: 'delete',
+                            child: Text(
+                              '삭제',
+                              style: TextStyle(fontSize: 14),
+                            ),
+                          ),
+                        ],
+                        color: Colors.white,
+                      )
+                    : SizedBox.shrink()
               ],
             ),
             const SizedBox(height: 8),

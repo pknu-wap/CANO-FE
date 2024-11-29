@@ -25,11 +25,13 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
     super.initState();
     ref.read(menuProvider.notifier).fetchMenu(widget.menuId);
     ref.read(usersReviewViewModelProvider.notifier).fetchReviews(widget.menuId);
+    ref.read(menuProvider.notifier).setUserName();
   }
 
   @override
   Widget build(BuildContext context) {
-    final menuData = ref.watch(menuProvider);
+    final menuData = ref.watch(menuProvider).menuInfo;
+    final userName = ref.watch(menuProvider).userName;
     final reviewData = ref.watch(usersReviewViewModelProvider);
 
     if (menuData == null) {
@@ -132,8 +134,8 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                     ),
                     onPressed: () {
                       // 좋아요 기능 구현
-                      final menuViewModel = ref.read(menuProvider.notifier);
-                      menuViewModel.toggleIsLike();
+                      // final menuViewModel = ref.read(menuProvider.notifier);
+                      // menuViewModel.toggleIsLike();
                       // 추가로 API 호출 등을 통해 서버와 동기화할 수 있습니다.
                     },
                   ),
@@ -254,7 +256,10 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Column(
                 children: reviewData.reviews
-                    .map((review) => ReviewCardWidget(review: review))
+                    .map((review) => ReviewCardWidget(
+                          review: review,
+                          userName: userName,
+                        ))
                     .toList(),
               ),
             ),
