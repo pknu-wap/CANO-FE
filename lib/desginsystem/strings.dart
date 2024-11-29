@@ -126,8 +126,12 @@ class AppStrings {
   static const String reviewHint = "더 나은 서비스 제공을 위해 해당 메뉴에 대한 정보를 위주로 작성해주세요!";
   static const String uploadPhoto = '사진 업로드';
   static const String uploadReviewAlert = '리뷰를 입력해주세요.';
-  static const String submitReviewAlert = '리뷰가 작성되었습니다!';
+  static const String askToWriteReview = "리뷰를 등록하시겠습니까?";
+  static const String submitReviewSuccess = '리뷰가 등록되었습니다';
+  static const String submitReviewFailure = '리뷰 등록에 실패했습니다';
   static const String writeReview = '리뷰 쓰기';
+  static const String scoreEng = "score";
+  static const String contentsEng = "contents";
 
   // 메뉴 리포트
   static const String whichPartIsWrong = "어떤 부분이 잘못되었나요?";
@@ -144,6 +148,8 @@ class AppStrings {
 class apiUrl {
   static const modifiyUserInfo = "http://3.34.234.63:8080/api/members/me";
   static const registerMenu = "http://3.34.234.63:8080/api/menus";
+  static const writeReview =
+      "http://3.34.234.63:8080/api/menus/{menuId}/reviews";
 }
 
 class FlavorDescriptions {

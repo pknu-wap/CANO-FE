@@ -36,18 +36,20 @@ class AuthInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     if (err.response?.statusCode == 401) {
+      print(
+          "진짜 리뷰 에러 code, data ${err.response?.statusCode} ${err.response?.data}");
       try {
         final refreshToken = await tokenManager.getRefreshToken();
         if (refreshToken != null) {
           final refreshToken = await tokenManager.getRefreshToken();
           final tokenResponse =
               await authApi.reissueAccessToken({"refreshToken": refreshToken!});
-          final newAccessToekn = tokenResponse.accessToken;
+          final newAccessToken = tokenResponse.accessToken;
           final newRefreshToken = tokenResponse.refreshToken;
 
-          print("새로운 Access Token 재발급 성공 - access Token: ${newAccessToekn}");
+          print("새로운 Access Token 재발급 성공 - access Token: ${newAccessToken}");
           print("새로운 Refresh Token 재발급 성공 - refresh Token: ${newRefreshToken}");
-          await tokenManager.saveAccessToken(newAccessToekn);
+          await tokenManager.saveAccessToken(newAccessToken);
           await tokenManager.saveRefreshToken(newRefreshToken);
 
           final options = err.requestOptions;
@@ -56,7 +58,7 @@ class AuthInterceptor extends Interceptor {
             data: data is FormData ? data.clone() : data,
           );
 
-          newOptions.headers['Authorization'] = 'Bearer $newAccessToekn';
+          newOptions.headers['Authorization'] = 'Bearer $newAccessToken';
           final response = await Dio().fetch(newOptions);
           handler.resolve(response);
           return;

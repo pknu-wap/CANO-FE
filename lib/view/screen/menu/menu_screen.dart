@@ -184,13 +184,11 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                 ],
               ),
             ),
-            // 별점 별로 정리
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: RatingBreakdownWidget(menuData: menuData),
             ),
             const SizedBox(height: 16),
-            // 맛 프로필 표시
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: FlavorProfileWidget(menuData: menuData),
@@ -204,7 +202,7 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8.0),
                   child: Text(
-                    "아로마",
+                    AppStrings.aroma,
                     style: TextStyle(
                       color: AppColors.basicText,
                       fontSize: 12,
@@ -270,7 +268,7 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
         height: 54,
         child: ElevatedButton(
           onPressed: () {
-            context.push("/write_review");
+            context.push("/write_review/${widget.menuId}");
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.floatingButton,

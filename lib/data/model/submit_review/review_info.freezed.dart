@@ -25,11 +25,11 @@ mixin _$ReviewInfo {
   String get contents => throw _privateConstructorUsedError;
   double get score => throw _privateConstructorUsedError;
   List<String>? get images => throw _privateConstructorUsedError;
-  IntensityLevel? get acidity => throw _privateConstructorUsedError;
-  IntensityLevel? get body => throw _privateConstructorUsedError;
-  IntensityLevel? get bitterness => throw _privateConstructorUsedError;
-  IntensityLevel? get sweetness => throw _privateConstructorUsedError;
-  List<Aroma>? get aroma => throw _privateConstructorUsedError;
+  Intensitylevel? get acidity => throw _privateConstructorUsedError;
+  Intensitylevel? get body => throw _privateConstructorUsedError;
+  Intensitylevel? get bitterness => throw _privateConstructorUsedError;
+  Intensitylevel? get sweetness => throw _privateConstructorUsedError;
+  List<Aroma?> get aroma => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
 
   /// Serializes this ReviewInfo to a JSON map.
@@ -54,11 +54,11 @@ abstract class $ReviewInfoCopyWith<$Res> {
       String contents,
       double score,
       List<String>? images,
-      IntensityLevel? acidity,
-      IntensityLevel? body,
-      IntensityLevel? bitterness,
-      IntensityLevel? sweetness,
-      List<Aroma>? aroma,
+      Intensitylevel? acidity,
+      Intensitylevel? body,
+      Intensitylevel? bitterness,
+      Intensitylevel? sweetness,
+      List<Aroma?> aroma,
       DateTime createdAt});
 }
 
@@ -86,7 +86,7 @@ class _$ReviewInfoCopyWithImpl<$Res, $Val extends ReviewInfo>
     Object? body = freezed,
     Object? bitterness = freezed,
     Object? sweetness = freezed,
-    Object? aroma = freezed,
+    Object? aroma = null,
     Object? createdAt = null,
   }) {
     return _then(_value.copyWith(
@@ -113,23 +113,23 @@ class _$ReviewInfoCopyWithImpl<$Res, $Val extends ReviewInfo>
       acidity: freezed == acidity
           ? _value.acidity
           : acidity // ignore: cast_nullable_to_non_nullable
-              as IntensityLevel?,
+              as Intensitylevel?,
       body: freezed == body
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
-              as IntensityLevel?,
+              as Intensitylevel?,
       bitterness: freezed == bitterness
           ? _value.bitterness
           : bitterness // ignore: cast_nullable_to_non_nullable
-              as IntensityLevel?,
+              as Intensitylevel?,
       sweetness: freezed == sweetness
           ? _value.sweetness
           : sweetness // ignore: cast_nullable_to_non_nullable
-              as IntensityLevel?,
-      aroma: freezed == aroma
+              as Intensitylevel?,
+      aroma: null == aroma
           ? _value.aroma
           : aroma // ignore: cast_nullable_to_non_nullable
-              as List<Aroma>?,
+              as List<Aroma?>,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -152,11 +152,11 @@ abstract class _$$ReviewInfoImplCopyWith<$Res>
       String contents,
       double score,
       List<String>? images,
-      IntensityLevel? acidity,
-      IntensityLevel? body,
-      IntensityLevel? bitterness,
-      IntensityLevel? sweetness,
-      List<Aroma>? aroma,
+      Intensitylevel? acidity,
+      Intensitylevel? body,
+      Intensitylevel? bitterness,
+      Intensitylevel? sweetness,
+      List<Aroma?> aroma,
       DateTime createdAt});
 }
 
@@ -182,7 +182,7 @@ class __$$ReviewInfoImplCopyWithImpl<$Res>
     Object? body = freezed,
     Object? bitterness = freezed,
     Object? sweetness = freezed,
-    Object? aroma = freezed,
+    Object? aroma = null,
     Object? createdAt = null,
   }) {
     return _then(_$ReviewInfoImpl(
@@ -209,23 +209,23 @@ class __$$ReviewInfoImplCopyWithImpl<$Res>
       acidity: freezed == acidity
           ? _value.acidity
           : acidity // ignore: cast_nullable_to_non_nullable
-              as IntensityLevel?,
+              as Intensitylevel?,
       body: freezed == body
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
-              as IntensityLevel?,
+              as Intensitylevel?,
       bitterness: freezed == bitterness
           ? _value.bitterness
           : bitterness // ignore: cast_nullable_to_non_nullable
-              as IntensityLevel?,
+              as Intensitylevel?,
       sweetness: freezed == sweetness
           ? _value.sweetness
           : sweetness // ignore: cast_nullable_to_non_nullable
-              as IntensityLevel?,
-      aroma: freezed == aroma
+              as Intensitylevel?,
+      aroma: null == aroma
           ? _value._aroma
           : aroma // ignore: cast_nullable_to_non_nullable
-              as List<Aroma>?,
+              as List<Aroma?>,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -243,11 +243,11 @@ class _$ReviewInfoImpl implements _ReviewInfo {
       required this.contents,
       required this.score,
       required final List<String>? images,
-      this.acidity,
-      this.body,
-      this.bitterness,
-      this.sweetness,
-      final List<Aroma>? aroma,
+      required this.acidity,
+      required this.body,
+      required this.bitterness,
+      required this.sweetness,
+      required final List<Aroma?> aroma,
       required this.createdAt})
       : _images = images,
         _aroma = aroma;
@@ -274,21 +274,19 @@ class _$ReviewInfoImpl implements _ReviewInfo {
   }
 
   @override
-  final IntensityLevel? acidity;
+  final Intensitylevel? acidity;
   @override
-  final IntensityLevel? body;
+  final Intensitylevel? body;
   @override
-  final IntensityLevel? bitterness;
+  final Intensitylevel? bitterness;
   @override
-  final IntensityLevel? sweetness;
-  final List<Aroma>? _aroma;
+  final Intensitylevel? sweetness;
+  final List<Aroma?> _aroma;
   @override
-  List<Aroma>? get aroma {
-    final value = _aroma;
-    if (value == null) return null;
+  List<Aroma?> get aroma {
     if (_aroma is EqualUnmodifiableListView) return _aroma;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_aroma);
   }
 
   @override
@@ -361,11 +359,11 @@ abstract class _ReviewInfo implements ReviewInfo {
       required final String contents,
       required final double score,
       required final List<String>? images,
-      final IntensityLevel? acidity,
-      final IntensityLevel? body,
-      final IntensityLevel? bitterness,
-      final IntensityLevel? sweetness,
-      final List<Aroma>? aroma,
+      required final Intensitylevel? acidity,
+      required final Intensitylevel? body,
+      required final Intensitylevel? bitterness,
+      required final Intensitylevel? sweetness,
+      required final List<Aroma?> aroma,
       required final DateTime createdAt}) = _$ReviewInfoImpl;
 
   factory _ReviewInfo.fromJson(Map<String, dynamic> json) =
@@ -382,15 +380,15 @@ abstract class _ReviewInfo implements ReviewInfo {
   @override
   List<String>? get images;
   @override
-  IntensityLevel? get acidity;
+  Intensitylevel? get acidity;
   @override
-  IntensityLevel? get body;
+  Intensitylevel? get body;
   @override
-  IntensityLevel? get bitterness;
+  Intensitylevel? get bitterness;
   @override
-  IntensityLevel? get sweetness;
+  Intensitylevel? get sweetness;
   @override
-  List<Aroma>? get aroma;
+  List<Aroma?> get aroma;
   @override
   DateTime get createdAt;
 

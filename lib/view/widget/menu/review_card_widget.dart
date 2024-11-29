@@ -1,8 +1,8 @@
 // review_card_widget.dart
 import 'package:cano/data/model/users_review/users_review_info.dart';
-import 'package:flutter/material.dart';
 import 'package:cano/desginsystem/colors.dart';
-import 'package:intl/intl.dart';
+import 'package:cano/utils/format_string.dart';
+import 'package:flutter/material.dart';
 
 class ReviewCardWidget extends StatelessWidget {
   final UsersReviewInfo review;
@@ -15,13 +15,15 @@ class ReviewCardWidget extends StatelessWidget {
         review.imageUrls!.isNotEmpty &&
         review.imageUrls!.any((url) => url.isNotEmpty);
 
-    final String displayName = (review.memberName != null && review.memberName!.isNotEmpty)
-        ? review.memberName!
-        : 'Unknown';
+    final String displayName =
+        (review.memberName != null && review.memberName!.isNotEmpty)
+            ? review.memberName!
+            : 'Unknown';
 
-    final String displayDate = (review.createdAt != null && review.createdAt!.isNotEmpty)
-        ? review.createdAt!
-        : 'Unknown Date';
+    final String displayDate =
+        (review.createdAt != null && review.createdAt!.isNotEmpty)
+            ? extractDate(review.createdAt!)
+            : 'Unknown Date';
 
     final String displayContents = review.contents ?? '';
 
@@ -155,6 +157,4 @@ class ReviewCardWidget extends StatelessWidget {
       ),
     );
   }
-
- 
 }

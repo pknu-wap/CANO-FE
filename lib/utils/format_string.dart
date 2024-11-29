@@ -21,3 +21,8 @@ String? intensityLevelToRequest(String description) {
   };
   return map[description];
 }
+
+String extractDate(String datetime) {
+  DateTime parsedDate = DateTime.parse(datetime);
+  return parsedDate.toString().substring(0, 10);
+}

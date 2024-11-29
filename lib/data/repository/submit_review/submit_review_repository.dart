@@ -1,6 +1,7 @@
-import 'package:cano/data/model/submit_review/review_info.dart';
-import 'package:cano/network/api/submit_review/submit_review_api.dart';
 import 'package:dio/dio.dart';
+
+import '../../../desginsystem/strings.dart';
+import '../../../network/auth_interceptor.dart';
 
 class SubmitReviewRepository {
   static final SubmitReviewRepository _instance =
@@ -12,15 +13,19 @@ class SubmitReviewRepository {
     return _instance;
   }
 
-  static final submitReviewApi = SubmitReviewApi(Dio());
-  
-  Future<bool> submitReview(FormData formData) async {
+  static final dio = Dio();
+  // static final submitReviewApi = SubmitReviewApi(Dio());
+
+  Future<bool> submitReview(int menuId, FormData formData) async {
+    dio.interceptors.add(AuthInterceptor());
     try {
-      final message = await submitReviewApi.submitReview(formData);
-      if (message == "success") return true;
-      return false;
+      final result = await dio.post(
+          apiUrl.writeReview.replaceAll("{menuId}", menuId.toString()),
+          data: formData);
+      print("리뷰 작성 성공 $result");
+      return true;
     } catch (e) {
-      print('Error submitting review: $e');
+      print("리뷰 작성 실패 : $e");
       return false;
     }
   }

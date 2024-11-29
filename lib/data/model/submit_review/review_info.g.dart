@@ -14,14 +14,14 @@ _$ReviewInfoImpl _$$ReviewInfoImplFromJson(Map<String, dynamic> json) =>
       score: (json['score'] as num).toDouble(),
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      acidity: $enumDecodeNullable(_$IntensityLevelEnumMap, json['acidity']),
-      body: $enumDecodeNullable(_$IntensityLevelEnumMap, json['body']),
+      acidity: $enumDecodeNullable(_$IntensitylevelEnumMap, json['acidity']),
+      body: $enumDecodeNullable(_$IntensitylevelEnumMap, json['body']),
       bitterness:
-          $enumDecodeNullable(_$IntensityLevelEnumMap, json['bitterness']),
+          $enumDecodeNullable(_$IntensitylevelEnumMap, json['bitterness']),
       sweetness:
-          $enumDecodeNullable(_$IntensityLevelEnumMap, json['sweetness']),
-      aroma: (json['aroma'] as List<dynamic>?)
-          ?.map((e) => $enumDecode(_$AromaEnumMap, e))
+          $enumDecodeNullable(_$IntensitylevelEnumMap, json['sweetness']),
+      aroma: (json['aroma'] as List<dynamic>)
+          .map((e) => $enumDecodeNullable(_$AromaEnumMap, e))
           .toList(),
       createdAt: DateTime.parse(json['createdAt'] as String),
     );
@@ -33,20 +33,20 @@ Map<String, dynamic> _$$ReviewInfoImplToJson(_$ReviewInfoImpl instance) =>
       'contents': instance.contents,
       'score': instance.score,
       'images': instance.images,
-      'acidity': _$IntensityLevelEnumMap[instance.acidity],
-      'body': _$IntensityLevelEnumMap[instance.body],
-      'bitterness': _$IntensityLevelEnumMap[instance.bitterness],
-      'sweetness': _$IntensityLevelEnumMap[instance.sweetness],
-      'aroma': instance.aroma?.map((e) => _$AromaEnumMap[e]!).toList(),
+      'acidity': _$IntensitylevelEnumMap[instance.acidity],
+      'body': _$IntensitylevelEnumMap[instance.body],
+      'bitterness': _$IntensitylevelEnumMap[instance.bitterness],
+      'sweetness': _$IntensitylevelEnumMap[instance.sweetness],
+      'aroma': instance.aroma.map((e) => _$AromaEnumMap[e]).toList(),
       'createdAt': instance.createdAt.toIso8601String(),
     };
 
-const _$IntensityLevelEnumMap = {
-  IntensityLevel.none: 'none',
-  IntensityLevel.low: 'low',
-  IntensityLevel.medium: 'medium',
-  IntensityLevel.high: 'high',
-  IntensityLevel.veryHigh: 'veryHigh',
+const _$IntensitylevelEnumMap = {
+  Intensitylevel.none: 'none',
+  Intensitylevel.weak: 'weak',
+  Intensitylevel.normal: 'normal',
+  Intensitylevel.strong: 'strong',
+  Intensitylevel.veryStrong: 'veryStrong',
 };
 
 const _$AromaEnumMap = {

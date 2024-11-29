@@ -1,61 +1,74 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
+import 'dart:convert';
+
 import 'package:cano/data/model/submit_review/review_info.dart';
 import 'package:cano/data/repository/submit_review/submit_review_repository.dart';
-import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
+
+import '../../data/model/user_info/user_info.dart';
 import '../../desginsystem/strings.dart';
+import '../../utils/format_string.dart';
 import '../../utils/image_utils.dart';
 
 /// 리뷰 ViewModel
 class ReviewViewModel extends StateNotifier<ReviewInfo> {
-  final SubmitReviewRepository reviewRepository;
+  ReviewViewModel._internal(
+    super.state,
+  );
 
-  ReviewViewModel({required this.reviewRepository})
-      : super(
-          ReviewInfo(
-            id: 0,
-            memberName: '',
-            contents: '',
-            score: 0.0,
-            images: [],
-            acidity: null,
-            body: null,
-            bitterness: null,
-            sweetness: null,
-            aroma: [],
-            createdAt: DateTime.now(),
-          ),
-        );
+  static final ReviewViewModel _instance = ReviewViewModel._internal(
+    ReviewInfo(
+      id: 0,
+      memberName: '',
+      contents: '',
+      score: 0.0,
+      images: [],
+      acidity: null,
+      body: null,
+      bitterness: null,
+      sweetness: null,
+      aroma: [],
+      createdAt: DateTime.now(),
+    ),
+  );
 
-  /// 리뷰 제출 메서드
-  Future<bool> submitReview(ReviewInfo newReview) async {
-    // DTO로 변환
+  factory ReviewViewModel() {
+    return _instance;
+  }
+
+  static final reviewRepository = SubmitReviewRepository();
+
+  Future<bool> submitReview(int menuId) async {
     final jsonData = {
-      "score": state.score,
-      "contents": state.contents,
-      "acidity": state.acidity?.value,
-      "body": state.body?.value,
-      "bitterness": state.bitterness?.value,
-      "sweetness": state.sweetness?.value,
+      AppStrings.scoreEng: state.score,
+      AppStrings.contentsEng: state.contents,
+      AppStrings.acidityEng: state.acidity == null
+          ? null
+          : intensityLevelToRequest(state.acidity!.description),
+      AppStrings.bodyEng: state.body == null
+          ? null
+          : intensityLevelToRequest(state.body!.description),
+      AppStrings.bitternessEng: state.bitterness == null
+          ? null
+          : intensityLevelToRequest(state.bitterness!.description),
+      AppStrings.sweetnessEng: state.sweetness == null
+          ? null
+          : intensityLevelToRequest(state.sweetness!.description),
     };
 
-    // print(state.acidity?.value);
-    
-    // 이미지 파일 처리 (여러 이미지 지원)
     List<MultipartFile> imageFiles = [];
 
     if (state.images != null && state.images!.isNotEmpty) {
       for (String imagePath in state.images!) {
         final compressedBytes = await compressImageToByte(imagePath);
         final tempFile = await saveCompressedImage(compressedBytes);
-
-        if (tempFile != null) {
-          final multipartFile = await MultipartFile.fromFile(tempFile.path);
-          imageFiles.add(multipartFile);
-        }
+        final multipartFile = await MultipartFile.fromFile(tempFile.path);
+        imageFiles.add(multipartFile);
       }
     }
+
+    print("리뷰 images : ${imageFiles}");
 
     final formData = FormData.fromMap({
       "dto": MultipartFile.fromString(
@@ -65,22 +78,18 @@ class ReviewViewModel extends StateNotifier<ReviewInfo> {
       "images": imageFiles,
     });
 
-    // API 호출
-    final isSuccess = await reviewRepository.submitReview(formData);
-    if (isSuccess) {
-      resetState();
-    }
+    final isSuccess = await reviewRepository.submitReview(menuId, formData);
+    if (isSuccess) _resetState();
     return isSuccess;
   }
 
-  /// 상태 초기화 메서드
-  void resetState() {
+  void _resetState() {
     state = ReviewInfo(
       id: 0,
       memberName: '',
       contents: '',
       score: 0.0,
-      images: null,
+      images: [],
       acidity: null,
       body: null,
       bitterness: null,
@@ -118,42 +127,42 @@ class ReviewViewModel extends StateNotifier<ReviewInfo> {
     state = state.copyWith(images: updatedUrls);
   }
 
-  /// 산미 설정
-  void setAcidity(IntensityLevel? acidity) {
-    state = state.copyWith(acidity: acidity);
+  void setAcidity(String description) {
+    state = state.copyWith(acidity: Intensitylevel.fromString(description));
   }
 
-  /// 바디감 설정
-  void setBody(IntensityLevel? body) {
-    state = state.copyWith(body: body);
+  void setBody(String description) {
+    state = state.copyWith(body: Intensitylevel.fromString(description));
   }
 
-  /// 쓴맛 설정
-  void setBitterness(IntensityLevel? bitterness) {
-    state = state.copyWith(bitterness: bitterness);
+  void setBitterness(String description) {
+    state = state.copyWith(bitterness: Intensitylevel.fromString(description));
   }
 
-  /// 단맛 설정
-  void setSweetness(IntensityLevel? sweetness) {
-    state = state.copyWith(sweetness: sweetness);
+  void setSweetness(String description) {
+    state = state.copyWith(sweetness: Intensitylevel.fromString(description));
   }
 
-  /// Aroma 토글 메서드
-  void toggleAroma(Aroma aroma) {
-    final updatedAromas = List<Aroma>.from(state.aroma ?? []);
-    if (updatedAromas.contains(aroma)) {
-      updatedAromas.remove(aroma);
+  void addAroma(String scent) {
+    state = state.copyWith(aroma: [...state.aroma, Aroma.fromString(scent)]);
+  }
+
+  void toggleAroma(String scent) {
+    final aromaToAdd = Aroma.fromString(scent);
+
+    if (state.aroma.contains(aromaToAdd)) {
+      state = state.copyWith(
+        aroma: List.from(state.aroma)..remove(aromaToAdd),
+      );
     } else {
-      updatedAromas.add(aroma);
+      state = state.copyWith(
+        aroma: [...state.aroma, aromaToAdd],
+      );
     }
-    state = state.copyWith(aroma: updatedAromas);
   }
 }
 
-final dio = Dio();
-final reviewRepository = SubmitReviewRepository();
-
 final reviewViewModelProvider =
-    StateNotifierProvider.autoDispose<ReviewViewModel, ReviewInfo>(
-  (ref) => ReviewViewModel(reviewRepository: reviewRepository),
+    StateNotifierProvider<ReviewViewModel, ReviewInfo>(
+  (ref) => ReviewViewModel(),
 );

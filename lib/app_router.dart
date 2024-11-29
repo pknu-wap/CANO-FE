@@ -55,15 +55,11 @@ class AppRouter {
             return RegisterMenuScreen();
           }),
       GoRoute(
-          path: '/write_review',
+          path: '/write_review/:menuId',
           builder: (context, state) {
-            return WriteReviewScreen();
+            final menuId = int.parse(state.pathParameters['menuId']!);
+            return WriteReviewScreen(menuId: menuId);
           }),
-      // GoRoute(
-      //     path: '/menu',
-      //     builder: (context, state) {
-      //       return MenuScreen();
-      //     }),
       GoRoute(
           path: '/menu/:menuId',
           builder: (context, state) {

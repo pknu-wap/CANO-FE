@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:cano/data/model/menu/menu_info.dart';
+import 'package:flutter/material.dart';
+
 import '../../../desginsystem/colors.dart';
 
 class FlavorProfileWidget extends StatelessWidget {
@@ -10,10 +11,10 @@ class FlavorProfileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final attributes = [
-      {'label': '산미', 'value': menuData.acidity},
-      {'label': '바디감', 'value': menuData.body},
-      {'label': '쓴맛', 'value': menuData.bitterness},
-      {'label': '달달함', 'value': menuData.sweetness},
+      {'label': '산미', 'value': menuData.acidity ?? 0},
+      {'label': '바디감', 'value': menuData.body ?? 0},
+      {'label': '쓴맛', 'value': menuData.bitterness ?? 0},
+      {'label': '달달함', 'value': menuData.sweetness ?? 0},
     ];
 
     return Column(

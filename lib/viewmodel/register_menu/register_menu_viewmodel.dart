@@ -47,11 +47,14 @@ class RegisterMenuViewmodel extends StateNotifier<RegisterMenuRequest> {
     });
 
     final isSuccess = await registerMenuRepository.registerMenu(formData);
-    if (isSuccess)
-      state = RegisterMenuRequest(
-          cafeName: "", menuName: "", price: 0, imageUrl: null);
+    if (isSuccess) _resetState();
 
     return isSuccess;
+  }
+
+  void _resetState() {
+    state = RegisterMenuRequest(
+        cafeName: "", menuName: "", price: 0, imageUrl: null);
   }
 
   void setCafeName(String cafeName) {
