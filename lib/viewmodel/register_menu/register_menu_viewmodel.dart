@@ -1,17 +1,20 @@
-import 'dart:io';
+import 'dart:convert';
 
 import 'package:cano/data/model/register_menu/register_menu_request.dart';
 import 'package:cano/data/repository/register_menu/register_menu_repository.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
+
+import '../../desginsystem/strings.dart';
+import '../../utils/image_utils.dart';
 
 class RegisterMenuViewmodel extends StateNotifier<RegisterMenuRequest> {
   RegisterMenuViewmodel._internal(super.state);
 
   static final RegisterMenuViewmodel _instance =
       RegisterMenuViewmodel._internal(const RegisterMenuRequest(
-          cafeName: "", menuName: "", price: 0, imageUrl: ""));
+          cafeName: "", menuName: "", price: 0, imageUrl: null));
 
   factory RegisterMenuViewmodel() {
     return _instance;
@@ -19,8 +22,36 @@ class RegisterMenuViewmodel extends StateNotifier<RegisterMenuRequest> {
 
   static final registerMenuRepository = RegisterMenuRepository();
 
-  Future<bool> registerMenu(RegisterMenuRequest registerMenuRequest) async {
-    return await registerMenuRepository.registerMenu(registerMenuRequest);
+  Future<bool> registerMenu() async {
+    final jsonData = {
+      AppStrings.cafeNameEng: state.cafeName,
+      AppStrings.menuNameEng: state.menuName,
+      AppStrings.priceEng: state.price
+    };
+
+    final compressedBytes = state.imageUrl != null
+        ? await compressImageToByte(state.imageUrl!)
+        : null;
+
+    final tempFile = compressedBytes != null
+        ? await saveCompressedImage(compressedBytes)
+        : null;
+
+    final formData = FormData.fromMap({
+      "dto": MultipartFile.fromString(
+        jsonEncode(jsonData),
+        contentType: DioMediaType.parse("application/json"),
+      ),
+      "image":
+          tempFile != null ? await MultipartFile.fromFile(tempFile.path) : null
+    });
+
+    final isSuccess = await registerMenuRepository.registerMenu(formData);
+    if (isSuccess)
+      state = RegisterMenuRequest(
+          cafeName: "", menuName: "", price: 0, imageUrl: null);
+
+    return isSuccess;
   }
 
   void setCafeName(String cafeName) {
@@ -35,25 +66,12 @@ class RegisterMenuViewmodel extends StateNotifier<RegisterMenuRequest> {
     state = state.copyWith(price: price);
   }
 
-  void setImageUrl(String url) {
+  void setImageUrl(String? url) {
     state = state.copyWith(imageUrl: url);
   }
 
-  Future<void> pickImageFromGallery(
-      BuildContext context, void onSuccess(String)) async {
-    final ImagePicker _picker = ImagePicker();
-
-    // 갤러리에서 이미지 선택
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-
-    if (image != null) {
-      // 선택된 이미지의 경로
-      String imagePath = image.path;
-      final fileSize = await File(image.path).length();
-      print("File size: ${fileSize / 1024} KB");
-      print("File size: ${fileSize / (1024 * 1024)} MB");
-      onSuccess(imagePath);
-    }
+  Future<void> pickMenuImage(BuildContext context) async {
+    setImageUrl(await pickImageFromGallery(context));
   }
 }
 

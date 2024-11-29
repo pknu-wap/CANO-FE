@@ -1,25 +1,27 @@
-import 'package:cano/data/model/menu/menu_info.dart';
 import 'package:cano/data/repository/search/search_repository.dart';
+import 'package:cano/data/repository/user/cano_user_repository.dart';
+import 'package:cano/network/model/search/search_response.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SearchState {
-  final List<MenuInfo> menuInfoList;
+  final List<SearchResponse> menuInfoList;
   final List<String> keywordList;
   final bool isSearched;
+  final String userName;
 
   SearchState({
+    required this.userName,
     required this.menuInfoList,
     required this.keywordList,
     required this.isSearched,
   });
-
-  SearchState copyWith({
-    List<MenuInfo>? menuInfoList,
-    List<String>? keywordList,
-    bool? isSearched,
-    String? tabText,
-  }) {
+  SearchState copyWith(
+      {List<SearchResponse>? menuInfoList,
+      List<String>? keywordList,
+      bool? isSearched,
+      String? userName}) {
     return SearchState(
+      userName: userName ?? this.userName,
       menuInfoList: menuInfoList ?? this.menuInfoList,
       keywordList: keywordList ?? this.keywordList,
       isSearched: isSearched ?? this.isSearched,
@@ -28,111 +30,46 @@ class SearchState {
 }
 
 class SearchViewmodel extends StateNotifier<SearchState> {
-  // 내부 생성자
   SearchViewmodel._internal(super.state);
 
-  static final SearchViewmodel _instance =
-      SearchViewmodel._internal(SearchState(
-          menuInfoList: [
-            const MenuInfo(
-                name: '컴포즈 커피 돌체 라떼',
-                price: 5900,
-                score: 3.5,
-                scoreCount: 300,
-                isLike: true,
-                imageUrl: '',
-                acidity: 0.38,
-                aromas: ["아몬드", "곡물"],
-                body: 0.72,
-                bitterness: 0.4,
-                sweetness: 0.88,
-                id: 1),
-            const MenuInfo(
-                name: '컴포즈 커피 돌체 라떼',
-                price: 5900,
-                score: 3.5,
-                scoreCount: 300,
-                isLike: true,
-                imageUrl: '',
-                acidity: 0.38,
-                aromas: ["아몬드", "곡물"],
-                body: 0.72,
-                bitterness: 0.4,
-                sweetness: 0.88,
-                id: 1),
-            const MenuInfo(
-                name: '컴포즈 커피 돌체 라떼',
-                price: 5900,
-                score: 3.5,
-                scoreCount: 300,
-                isLike: true,
-                imageUrl: '',
-                acidity: 0.38,
-                aromas: ["아몬드", "곡물"],
-                body: 0.72,
-                bitterness: 0.4,
-                sweetness: 0.88,
-                id: 1),
-            const MenuInfo(
-                name: '컴포즈 커피 돌체 라떼',
-                price: 5900,
-                score: 3.5,
-                scoreCount: 300,
-                isLike: true,
-                imageUrl: '',
-                acidity: 0.38,
-                aromas: ["아몬드", "곡물"],
-                body: 0.72,
-                bitterness: 0.4,
-                sweetness: 0.88,
-                id: 1),
-            const MenuInfo(
-                name: '컴포즈 커피 돌체 라떼',
-                price: 5900,
-                score: 3.5,
-                scoreCount: 300,
-                isLike: true,
-                imageUrl: '',
-                acidity: 0.38,
-                aromas: ["아몬드", "곡물"],
-                body: 0.72,
-                bitterness: 0.4,
-                sweetness: 0.88,
-                id: 1),
-            const MenuInfo(
-                name: '컴포즈 커피 돌체 라떼',
-                price: 5900,
-                score: 3.5,
-                scoreCount: 300,
-                isLike: true,
-                imageUrl: '',
-                acidity: 0.38,
-                aromas: ["아몬드", "곡물"],
-                body: 0.72,
-                bitterness: 0.4,
-                sweetness: 0.88,
-                id: 1),
-          ],
-          isSearched: false,
-          keywordList: []));
+  static final SearchViewmodel _instance = SearchViewmodel._internal(
+      SearchState(
+          menuInfoList: [], isSearched: false, keywordList: [], userName: ""));
 
   factory SearchViewmodel() {
     return _instance;
   }
 
   static final SearchRepository searchRepository = SearchRepository();
+  static final CanoUserRepository userRepository = CanoUserRepository();
 
-  Future<void> searchWithKeyword(String query) async {
-    final menus = await searchRepository.searchWithKeyword(query);
-    setMenuInfoList(menus);
+  Future<void> setUserName() async {
+    state = state.copyWith(userName: await userRepository.getUserName());
   }
 
-  void setMenuInfoList(List<MenuInfo> menus) {
+  Future<void> searchWithKeyword(String keyword) async {
+    try {
+      setMenuInfoList([]);
+      final searchResponses = await searchRepository.searchWithKeyword(keyword);
+      print("검색 성공 : $searchResponses");
+      searchResponses.forEach((menu) => _addMenutoMenuInfoList(menu));
+    } catch (e) {
+      print("검색 실패 : $e");
+    }
+  }
+
+  void _addMenutoMenuInfoList(SearchResponse menu) {
+    state = state.copyWith(
+      menuInfoList: [...state.menuInfoList, menu],
+    );
+  }
+
+  void setMenuInfoList(List<SearchResponse> menus) {
     state = state.copyWith(menuInfoList: menus);
   }
 
-  void setIsSearched() {
-    state = state.copyWith(isSearched: true);
+  void setIsSearched(bool isSearched) {
+    state = state.copyWith(isSearched: isSearched);
   }
 
   Future<void> setKeywordList() async {
@@ -151,7 +88,6 @@ class SearchViewmodel extends StateNotifier<SearchState> {
   }
 }
 
-final searchProvider =
-    StateNotifierProvider.autoDispose<SearchViewmodel, SearchState>(
+final searchProvider = StateNotifierProvider<SearchViewmodel, SearchState>(
   (ref) => SearchViewmodel(),
 );

@@ -4,17 +4,49 @@ import 'package:cano/permission/permission.dart';
 import 'package:cano/view/widget/custom_button.dart';
 import 'package:cano/view/widget/outlined_text_field.dart';
 import 'package:cano/view/widget/profile_image.dart';
+import 'package:cano/viewmodel/my_page/my_page_viewmodel.dart';
 import 'package:cano/viewmodel/user_info/user_info_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class UserProfileScreen extends ConsumerWidget {
-  const UserProfileScreen({super.key});
+import '../../../data/model/user_info/user_info.dart';
+
+class ModifyUserProfileScreen extends ConsumerStatefulWidget {
+  const ModifyUserProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  _ModifyUserProfileScreenState createState() =>
+      _ModifyUserProfileScreenState();
+}
+
+class _ModifyUserProfileScreenState
+    extends ConsumerState<ModifyUserProfileScreen> {
+  @override
+  void didChangeDependencies() async {
+    super.didChangeDependencies();
+
+    final userResponse = ref.watch(myPageProvider);
+    await ref.read(userInfoProvider.notifier).setUserInfo(UserInfo(
+        name: userResponse.name!,
+        acidity:
+            Intensitylevel.fromValue(intensityEngToKo(userResponse.acidity)),
+        body: Intensitylevel.fromValue(intensityEngToKo(userResponse.body)),
+        bitterness:
+            Intensitylevel.fromValue(intensityEngToKo(userResponse.bitterness)),
+        sweetness:
+            Intensitylevel.fromValue(intensityEngToKo(userResponse.sweetness)),
+        aroma: [],
+        profileImageUrl: userResponse.profileImageUrl));
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final userInfo = ref.watch(userInfoProvider);
+
+    ref.listen(myPageProvider, (prev, next) {
+      print("현재 상태: $next");
+    });
 
     ref.listen(userInfoProvider, (prev, next) {
       print("현재 상태: $next");
@@ -26,7 +58,17 @@ class UserProfileScreen extends ConsumerWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 65),
+            SizedBox(
+              height: 40,
+            ),
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.only(left: 10),
+              child: IconButton(
+                  onPressed: () => context.pop(),
+                  icon: Icon(Icons.arrow_back_ios)),
+            ),
+            SizedBox(height: 35),
             Padding(
               padding: const EdgeInsets.only(left: 30),
               child: Container(
@@ -123,6 +165,7 @@ class UserProfileScreen extends ConsumerWidget {
                               fontSize: 16, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 10),
                       OutlinedTextField(
+                          initialText: userInfo.name,
                           onChanged: (text) {
                             ref.watch(userInfoProvider.notifier).setName(text);
                           },
@@ -142,17 +185,33 @@ class UserProfileScreen extends ConsumerWidget {
               child: CustomButton(
                 text: AppStrings.next,
                 height: 55,
-                buttonColor: userInfo.name.trim().isNotEmpty != ""
-                    ? AppColors.primary
-                    : Colors.black26,
+                buttonColor:
+                    userInfo.name != "" ? AppColors.primary : Colors.black26,
                 onPressed: () {
                   if (userInfo.name.trim().isNotEmpty)
-                    context.push('/coffee_preference');
+                    context.push('/modify_coffee_preference');
                 },
               ),
             ),
             const SizedBox(height: 50),
           ],
         ));
+  }
+}
+
+String intensityEngToKo(String? IntensityEng) {
+  switch (IntensityEng) {
+    case AppStrings.VERY_HIGH:
+      return AppStrings.veryStrong;
+    case AppStrings.HIGH:
+      return AppStrings.strong;
+    case AppStrings.MEDIUM:
+      return AppStrings.normal;
+    case AppStrings.LOW:
+      return AppStrings.weak;
+    case AppStrings.NONE:
+      return AppStrings.none;
+    default:
+      return "";
   }
 }

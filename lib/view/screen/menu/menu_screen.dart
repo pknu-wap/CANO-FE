@@ -1,21 +1,20 @@
-import 'package:cano/view/screen/menu/menu_report_screen.dart';
-import 'package:cano/viewmodel/users_review/users_review_viewmodel.dart';
-import 'package:flutter/material.dart';
 import 'package:cano/data/model/menu/menu_info.dart';
 import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/desginsystem/strings.dart';
-import 'package:cano/view/screen/review/write_review_screen.dart';
+import 'package:cano/view/screen/menu/menu_report_screen.dart';
 import 'package:cano/view/widget/menu/flavor_profile_widget.dart';
 import 'package:cano/view/widget/menu/rating_breakdown_widget.dart';
 import 'package:cano/view/widget/menu/review_card_widget.dart';
 import 'package:cano/viewmodel/menu/menu_viewmodel.dart';
-import 'package:cano/viewmodel/submit_review/review_viewmodel.dart';
+import 'package:cano/viewmodel/users_review/users_review_viewmodel.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 class MenuScreen extends ConsumerStatefulWidget {
-  const MenuScreen({super.key});
+  final menuId;
+  const MenuScreen({super.key, required this.menuId});
 
   @override
   _MenuScreenState createState() => _MenuScreenState();
@@ -25,7 +24,8 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
   @override
   void initState() {
     super.initState();
-    // fetchMenu is already called in MenuViewModel's constructor
+    ref.read(menuProvider.notifier).fetchMenu(widget.menuId);
+    ref.read(usersReviewViewModelProvider.notifier).fetchReviews(widget.menuId);
   }
 
   @override
@@ -33,7 +33,6 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
     final menuData = ref.watch(menuProvider);
     final reviewData = ref.watch(usersReviewViewModelProvider);
 
-    // 메뉴 데이터가 null인 경우 로딩 인디케이터 표시
     if (menuData == null) {
       return Scaffold(
         appBar: AppBar(
@@ -266,18 +265,12 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
           ],
         ),
       ),
-      // 리뷰 쓰기 버튼(플로팅)
       floatingActionButton: SizedBox(
         width: 150,
         height: 54,
         child: ElevatedButton(
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const WriteReviewScreen(),
-              ),
-            );
+            context.push("/write_review");
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.floatingButton,

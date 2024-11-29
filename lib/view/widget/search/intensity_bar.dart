@@ -26,7 +26,7 @@ class IntensityBar extends StatelessWidget {
         ),
       ),
       Text(
-        "${(intensity * 100).toString()}%",
+        "${(intensity * 100).toInt()}%",
         style: TextStyle(
           fontSize: 12,
           color: AppColors.primary,

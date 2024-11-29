@@ -1,13 +1,9 @@
-
 import 'package:cano/desginsystem/colors.dart';
-import 'package:cano/utils/mediaquery.dart';
-import 'package:cano/view/widget/custom_button.dart';
 import 'package:cano/view/widget/search/search_layouts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../desginsystem/colors.dart';
 import '../../../desginsystem/strings.dart';
 import '../../../viewmodel/search/search_viewmodel.dart';
 
@@ -19,12 +15,6 @@ class PreSearchWidget extends ConsumerStatefulWidget {
 }
 
 class _PreSearchWidgetState extends ConsumerState<PreSearchWidget> {
-  @override
-  void initState() {
-    super.initState();
-    ref.read(searchProvider.notifier).setKeywordList();
-  }
-
   @override
   Widget build(BuildContext context) {
     final keywordList = ref.watch(searchProvider).keywordList;
@@ -49,11 +39,18 @@ class _PreSearchWidgetState extends ConsumerState<PreSearchWidget> {
               itemCount: keywordList.length,
               itemBuilder: (BuildContext context, int index) {
                 return keywordList[index] == ""
-                    ? null
+                    ? SizedBox.shrink()
                     : Container(
                         margin: EdgeInsets.symmetric(horizontal: 8.0),
                         child: SearchKeyword(
-                          onPressed: () {},
+                          onPressed: () {
+                            ref
+                                .read(searchProvider.notifier)
+                                .setIsSearched(true);
+                            ref
+                                .read(searchProvider.notifier)
+                                .searchWithKeyword(keywordList[index]);
+                          },
                           onClose: () => ref
                               .read(searchProvider.notifier)
                               .removeKeyword(keywordList[index]),
@@ -108,7 +105,10 @@ class PostSearchWidget extends ConsumerWidget {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 30),
                     child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          context.push(
+                              '/menu/${searchState.menuInfoList[index].id}');
+                        },
                         child: Container(
                           child: MenuInfoLayout(
                               menuInfo: searchState.menuInfoList[index]),

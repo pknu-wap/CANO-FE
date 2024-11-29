@@ -1,6 +1,7 @@
 import 'package:cano/data/model/user_info/user_info.dart';
 import 'package:cano/desginsystem/strings.dart';
 import 'package:cano/utils/mediaquery.dart';
+import 'package:cano/viewmodel/my_page/my_page_viewmodel.dart';
 import 'package:cano/viewmodel/user_info/user_info_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,8 +12,8 @@ import '../../../desginsystem/colors.dart';
 import '../../../utils/view/show_toast.dart';
 import '../../widget/custom_button.dart';
 
-class CoffeePreferenceScreen extends ConsumerWidget {
-  CoffeePreferenceScreen({super.key});
+class ModifyCoffeePreferenceScreen extends ConsumerWidget {
+  ModifyCoffeePreferenceScreen({super.key});
 
   final intensitys =
       Intensitylevel.values.map((level) => level.description).toList();
@@ -23,7 +24,7 @@ class CoffeePreferenceScreen extends ConsumerWidget {
     final userInfo = ref.watch(userInfoProvider);
 
     ref.listen(userInfoProvider, (prev, next) {
-      print("current State: $next");
+      print("현재 상태: $next");
     });
 
     return Scaffold(
@@ -395,7 +396,9 @@ class CoffeePreferenceScreen extends ConsumerWidget {
 
                         if (isSuccess) {
                           showToast(AppStrings.modifiyUserInfoSuccess);
-                          context.go('/home');
+                          ref.read(myPageProvider.notifier).getUserInfo();
+                          context.pop();
+                          context.pop();
                         } else {
                           showToast(AppStrings.modifiyUserInfoFailure);
                         }

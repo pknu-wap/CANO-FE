@@ -24,6 +24,11 @@ class CanoUserRepository {
     return userResponse;
   }
 
+  Future<String> getUserName() async {
+    final userResponse = await getUserInfo();
+    return userResponse.name!;
+  }
+
   Future<bool> modifiyUserInfo(FormData formdata) async {
     dio.interceptors.add(AuthInterceptor());
     try {

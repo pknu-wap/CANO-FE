@@ -5,6 +5,9 @@ class AppStrings {
   static const String cancle = "취소";
 
   static const String login = "로그인";
+  static const String logout = "로그아웃";
+  static const String modify = "수정하기";
+  static const String withDrawal = "계정 탈퇴";
   static const String emailPlaceholder = "이메일을 입력해주세요.";
   static const String profileText = "프로필을 작성해주세요.";
   static const String interestRecommendationText =
@@ -13,6 +16,9 @@ class AppStrings {
   static const String coffeePreferenceText = "님의 커피 취향을 알려주세요.";
   static const String coffeeTasteModifiableText =
       "※ 작성하신 내용은 마이페이지에서 언제든지 수정할 수 있습니다.";
+
+  static const String forNickName = "님을 위한";
+  static const String forTaste = "님의 취향";
 
   //// 커피 강도
   static const String none = "없음";
@@ -68,6 +74,7 @@ class AppStrings {
   static const String menu = "메뉴";
   static const String coffee = "커피";
   static const String mainTitle = "오늘도 CANO";
+  static const String modifyCoffeTaste = "커피 취향 수정하기";
 
   static const searchCoffeeText = "찾는 커피가 없으신가요?";
   static const addCoffeeText = "커피 추가하기";
@@ -84,7 +91,8 @@ class AppStrings {
   // 메뉴 등록
   static const String registerMenu = "메뉴 등록";
   static const String askToRegisterMenu = "메뉴를 등록하시겠습니까?";
-  static const String registerMenuScript = "메뉴가 등록되었습니다";
+  static const String registerMenuSuccess = "메뉴가 등록되었습니다";
+  static const String registerMenuFailure = "메뉴 등록에 실패했습니다";
   static const String cafeName = "카페 이름";
   static const String menuName = "메뉴 이름";
   static const String priceText = "가격 (단위: 원)";
@@ -92,12 +100,16 @@ class AppStrings {
   static const String cafeNameHint = "띄어쓰기 없이 작성해주세요! 예) OO까페";
   static const String menuNameHint = "예) 아이스 아메리카노";
   static const String priceHint = "단위나 쉼표 없이 적어주세요! 예) 4500";
+  static const String cafeNameEng = "cafeName";
+  static const String menuNameEng = "name";
+  static const String priceEng = "price";
 
   // 검색 화면
   static const String search = "검색";
   static const String recentKeyword = "최근 검색어";
   static const String canoKeyword = "카노 추천 검색어";
   static const String todayCoffeSearchText = "오늘의 커피를 검색해보세요.";
+  static const String todayCoffeSearchSCript = "님, 오늘은 어떤 커피를 찾으세요?";
   static const String noSearchResultText = "대연동 근처에는 카노 카페의\n검색결과가 없습니다.";
   static const String addCafeText = "원하는 정보를 얻지 못했다면 새로운 카페를 추가해보세요";
 
@@ -131,10 +143,7 @@ class AppStrings {
 
 class apiUrl {
   static const modifiyUserInfo = "http://3.34.234.63:8080/api/members/me";
-
-  // 메인 화면
-  static const String mainTitle = "오늘도 CANO";
-  static const String coffee = "커피";
+  static const registerMenu = "http://3.34.234.63:8080/api/menus";
 }
 
 class FlavorDescriptions {

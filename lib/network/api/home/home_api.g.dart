@@ -24,25 +24,25 @@ class _HomeApi implements HomeApi {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<List<HomeMenu>> getHomeMenusWithType(
-    String type,
+  Future<List<SearchResponse>> getHomeMenusWithType(
+    String attribute,
     String degree,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'type': type,
+      r'attribute': attribute,
       r'degree': degree,
     };
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<HomeMenu>>(Options(
+    final _options = _setStreamType<List<SearchResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          'api/menus/attribute',
+          'api/menus/search',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -52,45 +52,11 @@ class _HomeApi implements HomeApi {
           baseUrl,
         )));
     final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<HomeMenu> _value;
+    late List<SearchResponse> _value;
     try {
       _value = _result.data!
-          .map((dynamic i) => HomeMenu.fromJson(i as Map<String, dynamic>))
-          .toList();
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<List<HomeMenu>> getHomeMenusWithAroma(String aromas) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'type': aromas};
-    final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<HomeMenu>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          '/api/menus/aroma',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
-    final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<HomeMenu> _value;
-    try {
-      _value = _result.data!
-          .map((dynamic i) => HomeMenu.fromJson(i as Map<String, dynamic>))
+          .map(
+              (dynamic i) => SearchResponse.fromJson(i as Map<String, dynamic>))
           .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);

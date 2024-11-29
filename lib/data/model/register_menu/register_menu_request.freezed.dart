@@ -23,7 +23,7 @@ mixin _$RegisterMenuRequest {
   String get cafeName => throw _privateConstructorUsedError;
   String get menuName => throw _privateConstructorUsedError;
   int get price => throw _privateConstructorUsedError;
-  String get imageUrl => throw _privateConstructorUsedError;
+  String? get imageUrl => throw _privateConstructorUsedError;
 
   /// Serializes this RegisterMenuRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $RegisterMenuRequestCopyWith<$Res> {
           RegisterMenuRequest value, $Res Function(RegisterMenuRequest) then) =
       _$RegisterMenuRequestCopyWithImpl<$Res, RegisterMenuRequest>;
   @useResult
-  $Res call({String cafeName, String menuName, int price, String imageUrl});
+  $Res call({String cafeName, String menuName, int price, String? imageUrl});
 }
 
 /// @nodoc
@@ -62,7 +62,7 @@ class _$RegisterMenuRequestCopyWithImpl<$Res, $Val extends RegisterMenuRequest>
     Object? cafeName = null,
     Object? menuName = null,
     Object? price = null,
-    Object? imageUrl = null,
+    Object? imageUrl = freezed,
   }) {
     return _then(_value.copyWith(
       cafeName: null == cafeName
@@ -77,10 +77,10 @@ class _$RegisterMenuRequestCopyWithImpl<$Res, $Val extends RegisterMenuRequest>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as int,
-      imageUrl: null == imageUrl
+      imageUrl: freezed == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -93,7 +93,7 @@ abstract class _$$RegisterMenuRequestImplCopyWith<$Res>
       __$$RegisterMenuRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String cafeName, String menuName, int price, String imageUrl});
+  $Res call({String cafeName, String menuName, int price, String? imageUrl});
 }
 
 /// @nodoc
@@ -112,7 +112,7 @@ class __$$RegisterMenuRequestImplCopyWithImpl<$Res>
     Object? cafeName = null,
     Object? menuName = null,
     Object? price = null,
-    Object? imageUrl = null,
+    Object? imageUrl = freezed,
   }) {
     return _then(_$RegisterMenuRequestImpl(
       cafeName: null == cafeName
@@ -127,10 +127,10 @@ class __$$RegisterMenuRequestImplCopyWithImpl<$Res>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as int,
-      imageUrl: null == imageUrl
+      imageUrl: freezed == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -154,7 +154,7 @@ class _$RegisterMenuRequestImpl implements _RegisterMenuRequest {
   @override
   final int price;
   @override
-  final String imageUrl;
+  final String? imageUrl;
 
   @override
   String toString() {
@@ -202,7 +202,7 @@ abstract class _RegisterMenuRequest implements RegisterMenuRequest {
       {required final String cafeName,
       required final String menuName,
       required final int price,
-      required final String imageUrl}) = _$RegisterMenuRequestImpl;
+      required final String? imageUrl}) = _$RegisterMenuRequestImpl;
 
   factory _RegisterMenuRequest.fromJson(Map<String, dynamic> json) =
       _$RegisterMenuRequestImpl.fromJson;
@@ -214,7 +214,7 @@ abstract class _RegisterMenuRequest implements RegisterMenuRequest {
   @override
   int get price;
   @override
-  String get imageUrl;
+  String? get imageUrl;
 
   /// Create a copy of RegisterMenuRequest
   /// with the given fields replaced by the non-null parameter values.

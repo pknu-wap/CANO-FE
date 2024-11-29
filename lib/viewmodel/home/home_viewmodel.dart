@@ -1,220 +1,237 @@
 import 'package:cano/data/repository/home/home_repository.dart';
 import 'package:cano/desginsystem/strings.dart';
+import 'package:cano/network/model/user/cano_user_response.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/model/home/home_menu.dart';
+import '../../data/repository/user/cano_user_repository.dart';
 
-class HomeViewmodel extends StateNotifier<List<Map<String, List<HomeMenu>>>> {
+class HomeState {
+  final List<Map<String, List<HomeMenu>>> homeMenusList;
+  final String userName;
+
+  HomeState({
+    required this.homeMenusList,
+    required this.userName,
+  });
+
+  HomeState copyWith(
+      {List<Map<String, List<HomeMenu>>>? homeMenusList, String? userName}) {
+    return HomeState(
+        homeMenusList: homeMenusList ?? this.homeMenusList,
+        userName: userName ?? this.userName);
+  }
+}
+
+class HomeViewmodel extends StateNotifier<HomeState> {
   HomeViewmodel._internal(super.state);
 
-  static final HomeViewmodel _instance = HomeViewmodel._internal([
-    {
-      FlavorDescriptions.acidityStrong: [
-        const HomeMenu(
-            id: 1,
-            name: "스타벅스 돌체 라떼",
-            score: 4.8,
-            attribute: AppStrings.acidity,
-            degree: 88,
-            image_url: "https://picsum.photos/23"),
-        const HomeMenu(
-            id: 1,
-            name: "투썸플레이스 연유 라떼",
-            score: 3.6,
-            attribute: AppStrings.acidity,
-            degree: 88,
-            image_url: "https://picsum.photos/43"),
-        const HomeMenu(
-            id: 1,
-            name: "부경대 파라다이스 아메리카노",
-            score: 5.0,
-            attribute: AppStrings.acidity,
-            degree: 88,
-            image_url: "https://picsum.photos/33"),
-        const HomeMenu(
-            id: 1,
-            name: "오빠 다방 아메리카노",
-            score: 1.8,
-            attribute: AppStrings.acidity,
-            degree: 88,
-            image_url: "https://picsum.photos/13"),
-      ],
-    },
-    {
-      FlavorDescriptions.sweetnessVeryStrong: [
-        const HomeMenu(
-            id: 1,
-            name: "스타벅스 돌체 라떼",
-            score: 4.4,
-            attribute: AppStrings.sweetness,
-            degree: 88,
-            image_url: "https://picsum.photos/69"),
-        const HomeMenu(
-            id: 1,
-            name: "051 아메리카노",
-            score: 4.8,
-            attribute: AppStrings.sweetness,
-            degree: 88,
-            image_url: "https://picsum.photos/32"),
-        const HomeMenu(
-            id: 1,
-            name: "051 카페라떼",
-            score: 4.2,
-            attribute: AppStrings.sweetness,
-            degree: 88,
-            image_url: "https://picsum.photos/22"),
-        const HomeMenu(
-            id: 1,
-            name: "노씨커피 옥수수 라떼",
-            score: 4.8,
-            attribute: AppStrings.sweetness,
-            degree: 88,
-            image_url: "https://picsum.photos/12"),
-      ],
-    },
-    {
-      FlavorDescriptions.bodyModerate: [
-        const HomeMenu(
-            id: 1,
-            name: "스타벅스 돌체 라떼",
-            score: 4.8,
-            attribute: AppStrings.body,
-            degree: 88,
-            image_url: "https://picsum.photos/23"),
-        const HomeMenu(
-            id: 1,
-            name: "스타벅스 돌체 라떼",
-            score: 4.8,
-            attribute: AppStrings.body,
-            degree: 88,
-            image_url: "https://picsum.photos/43"),
-        const HomeMenu(
-            id: 1,
-            name: "스타벅스 돌체 라떼",
-            score: 4.8,
-            attribute: AppStrings.body,
-            degree: 88,
-            image_url: "https://picsum.photos/33"),
-        const HomeMenu(
-            id: 1,
-            name: "스타벅스 돌체 라떼",
-            score: 4.8,
-            attribute: AppStrings.body,
-            degree: 88,
-            image_url: "https://picsum.photos/13"),
-      ],
-    }
-  ]);
+  static final HomeViewmodel _instance =
+      HomeViewmodel._internal(HomeState(userName: "", homeMenusList: []));
 
   factory HomeViewmodel() {
     return _instance;
   }
 
   static final homeRepository = HomeRepository();
+  static final canoUserRepository = CanoUserRepository();
 
   void _addMapToList(Map<String, List<HomeMenu>> newMap) {
-    state = [...state, newMap];
+    state = state.copyWith(homeMenusList: [...state.homeMenusList, newMap]);
   }
 
-  Future<void> _getHomeMenusWithType(String type, String degree) async {
+  void _setUserName(String userName) {
+    state = state.copyWith(userName: userName);
+  }
+
+  Future<void> getHomeMenusWithType() async {
+    final userResponse = await _getUserInfo();
+    _setUserName(userResponse.name!);
+
+    if (userResponse.acidity != null)
+      _getHomeMenusWithAcidity(userResponse.acidity!);
+    if (userResponse.body != null) _getHomeMenusWithBody(userResponse.body!);
+    if (userResponse.sweetness != null)
+      _getHomeMenusWithSweetness(userResponse.sweetness!);
+    if (userResponse.bitterness != null)
+      _getHomeMenusWithBitterness(userResponse.bitterness!);
+  }
+
+  Future<void> _getHomeMenusWithAcidity(String degree) async {
+    final searchResponses = await homeRepository.getHomeMenusWithType(
+        AppStrings.acidityEng, degree);
+
+    final List<HomeMenu> homeMenus = searchResponses
+        .map((menu) => HomeMenu(
+              id: menu.id,
+              name: menu.name,
+              score: menu.score,
+              attribute: AppStrings.acidity,
+              degree: menu.acidity,
+              imageUrl: menu.imageUrl,
+            ))
+        .toList();
+
     final newMap = {
-      getFlavorDescriptionWithType(type, degree):
-          await homeRepository.getHomeMenusWithType(type, degree)
+      getFlavorDescriptionWithType(AppStrings.acidity, degree): homeMenus
     };
     _addMapToList(newMap);
   }
 
-  Future<void> _getHomeMenusWithAroma(String aroma) async {
-    final newMap = {aroma: await homeRepository.getHomeMenusWithAroma(aroma)};
+  Future<void> _getHomeMenusWithBody(String degree) async {
+    final searchResponses =
+        await homeRepository.getHomeMenusWithType(AppStrings.bodyEng, degree);
+    final List<HomeMenu> homeMenus = searchResponses
+        .map((menu) => HomeMenu(
+              id: menu.id,
+              name: menu.name,
+              score: menu.score,
+              attribute: AppStrings.body,
+              degree: menu.body,
+              imageUrl: menu.imageUrl,
+            ))
+        .toList();
+
+    final newMap = {
+      getFlavorDescriptionWithType(AppStrings.body, degree): homeMenus
+    };
     _addMapToList(newMap);
   }
+
+  Future<void> _getHomeMenusWithSweetness(String degree) async {
+    final searchResponses = await homeRepository.getHomeMenusWithType(
+        AppStrings.sweetnessEng, degree);
+    final List<HomeMenu> homeMenus = searchResponses
+        .map((menu) => HomeMenu(
+              id: menu.id,
+              name: menu.name,
+              score: menu.score,
+              attribute: AppStrings.sweetness,
+              degree: menu.sweetness,
+              imageUrl: menu.imageUrl,
+            ))
+        .toList();
+
+    final newMap = {
+      getFlavorDescriptionWithType(AppStrings.sweetness, degree): homeMenus
+    };
+    _addMapToList(newMap);
+  }
+
+  Future<void> _getHomeMenusWithBitterness(String degree) async {
+    final searchResponses = await homeRepository.getHomeMenusWithType(
+        AppStrings.bitternessEng, degree);
+    final List<HomeMenu> homeMenus = searchResponses
+        .map((menu) => HomeMenu(
+              id: menu.id,
+              name: menu.name,
+              score: menu.score,
+              attribute: AppStrings.bitterness,
+              degree: menu.bitterness,
+              imageUrl: menu.imageUrl,
+            ))
+        .toList();
+
+    final newMap = {
+      getFlavorDescriptionWithType(AppStrings.bitterness, degree): homeMenus
+    };
+    _addMapToList(newMap);
+  }
+
+  Future<CanoUserResponse> _getUserInfo() async {
+    return await canoUserRepository.getUserInfo();
+  }
+
+  // Future<void> _getHomeMenusWithAroma(String aroma) async {
+  //   final newMap = {aroma: await homeRepository.getHomeMenusWithAroma(aroma)};
+  //   _addMapToList(newMap);
+  // }
 
   // type과 degree를 받아서 올바른 맛 설명을 반환하는 함수
   static String getFlavorDescriptionWithType(String type, String degree) {
     switch (type) {
-      case '산미':
+      case AppStrings.acidity:
         return _getAcidityDescription(degree);
-      case '바디감':
+      case AppStrings.body:
         return _getBodyDescription(degree);
-      case '쓴맛':
+      case AppStrings.bitterness:
         return _getBitternessDescription(degree);
-      case '단맛':
+      case AppStrings.sweetness:
         return _getSweetnessDescription(degree);
       default:
-        return '없음';
+        return "";
     }
   }
 
   static String _getAcidityDescription(String degree) {
     switch (degree) {
-      case '매우 강한':
+      case AppStrings.VERY_HIGH:
         return FlavorDescriptions.acidityVeryStrong;
-      case '강한':
+      case AppStrings.HIGH:
         return FlavorDescriptions.acidityStrong;
-      case '적당한':
+      case AppStrings.MEDIUM:
         return FlavorDescriptions.acidityModerate;
-      case '약한':
+      case AppStrings.LOW:
         return FlavorDescriptions.acidityWeak;
-      case '없는':
+      case AppStrings.NONE:
         return FlavorDescriptions.acidityNone;
       default:
-        return '알 수 없는 산미 정도';
+        return "";
     }
   }
 
   static String _getBodyDescription(String degree) {
     switch (degree) {
-      case '매우 강한':
+      case AppStrings.VERY_HIGH:
         return FlavorDescriptions.bodyVeryStrong;
-      case '강한':
+      case AppStrings.HIGH:
         return FlavorDescriptions.bodyStrong;
-      case '적당한':
+      case AppStrings.MEDIUM:
         return FlavorDescriptions.bodyModerate;
-      case '약한':
+      case AppStrings.LOW:
         return FlavorDescriptions.bodyWeak;
-      case '없는':
+      case AppStrings.NONE:
         return FlavorDescriptions.bodyNone;
       default:
-        return '알 수 없는 바디감 정도';
+        return "";
     }
   }
 
   static String _getBitternessDescription(String degree) {
     switch (degree) {
-      case '매우 강한':
+      case AppStrings.VERY_HIGH:
         return FlavorDescriptions.bitternessVeryStrong;
-      case '강한':
+      case AppStrings.HIGH:
         return FlavorDescriptions.bitternessStrong;
-      case '적당한':
+      case AppStrings.MEDIUM:
         return FlavorDescriptions.bitternessModerate;
-      case '약한':
+      case AppStrings.LOW:
         return FlavorDescriptions.bitternessWeak;
-      case '없는':
+      case AppStrings.NONE:
         return FlavorDescriptions.bitternessNone;
       default:
-        return '알 수 없는 쓴맛 정도';
+        return "";
     }
   }
 
   static String _getSweetnessDescription(String degree) {
     switch (degree) {
-      case '매우 강한':
+      case AppStrings.VERY_HIGH:
         return FlavorDescriptions.sweetnessVeryStrong;
-      case '강한':
+      case AppStrings.HIGH:
         return FlavorDescriptions.sweetnessStrong;
-      case '적당한':
+      case AppStrings.MEDIUM:
         return FlavorDescriptions.sweetnessModerate;
-      case '약한':
+      case AppStrings.LOW:
         return FlavorDescriptions.sweetnessWeak;
-      case '없는':
+      case AppStrings.NONE:
         return FlavorDescriptions.sweetnessNone;
       default:
-        return '알 수 없는 단맛 정도';
+        return "";
     }
   }
 }
 
-final homeProvider = StateNotifierProvider.autoDispose<HomeViewmodel,
-    List<Map<String, List<HomeMenu>>>>(
+final homeProvider = StateNotifierProvider<HomeViewmodel, HomeState>(
   (ref) => HomeViewmodel(),
 );

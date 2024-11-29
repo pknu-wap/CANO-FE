@@ -6,9 +6,9 @@ import 'package:cano/utils/format_string.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../desginsystem/strings.dart';
+import '../../utils/image_utils.dart';
 
 class UserInfoViewmodel extends StateNotifier<UserInfo> {
   UserInfoViewmodel._internal(super.state);
@@ -29,6 +29,10 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
   }
 
   static final canoUserRepository = CanoUserRepository();
+
+  Future<void> setUserInfo(UserInfo userInfo) async {
+    state = userInfo;
+  }
 
   void setName(String newName) {
     state = state.copyWith(name: newName);
@@ -72,18 +76,8 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
     }
   }
 
-  Future<void> pickImageFromGallery(
-      BuildContext context, void onSuccess(String)) async {
-    final ImagePicker _picker = ImagePicker();
-
-    // 갤러리에서 이미지 선택
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-
-    if (image != null) {
-      // 선택된 이미지의 경로
-      String imagePath = image.path;
-      onSuccess(imagePath);
-    }
+  Future<void> pickProfileImage(BuildContext context) async {
+    setProfileImageUrl(await pickImageFromGallery(context));
   }
 
   Future<bool> modifiyUserInfo() async {
@@ -103,29 +97,27 @@ class UserInfoViewmodel extends StateNotifier<UserInfo> {
           : intensityLevelToRequest(state.sweetness!.description),
     };
 
+    final compressedBytes = state.profileImageUrl != null &&
+            state.profileImageUrl?.contains("http") == false
+        ? await compressImageToByte(state.profileImageUrl!)
+        : null;
+    final tempFile = compressedBytes != null
+        ? await saveCompressedImage(compressedBytes)
+        : null;
+
     final formData = FormData.fromMap({
       "dto": MultipartFile.fromString(
         jsonEncode(jsonData),
         contentType: DioMediaType.parse("application/json"),
       ),
-      "image": state.profileImageUrl != null
-          ? await MultipartFile.fromFile(state.profileImageUrl!)
-          : null
+      "image":
+          tempFile != null ? await MultipartFile.fromFile(tempFile.path) : null
     });
 
     return await canoUserRepository.modifiyUserInfo(formData);
-    //
-    // final dto = jsonEncode(jsonData);
-    // List<MultipartFile>? imageFile;
-    // if (state.profileImageUrl != null) {
-    //   imageFile = [await MultipartFile.fromFile(state.profileImageUrl!)];
-    // }
-    //
-    // canoUserRepository.modifiyUserInfo(dto, imageFile);
   }
 }
 
-final userInfoProvider =
-    StateNotifierProvider.autoDispose<UserInfoViewmodel, UserInfo>(
+final userInfoProvider = StateNotifierProvider<UserInfoViewmodel, UserInfo>(
   (ref) => UserInfoViewmodel(),
 );

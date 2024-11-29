@@ -2,55 +2,44 @@ import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/utils/mediaquery.dart';
 import 'package:cano/view/widget/home/home_menu_layout.dart';
 import 'package:cano/view/widget/search/search_field.dart';
-import 'package:cano/viewmodel/auth/cano_token_manager.dart';
 import 'package:cano/viewmodel/home/home_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../desginsystem/strings.dart';
 
-class HomeScreen extends ConsumerWidget {
-  HomeScreen({super.key});
+late String _userName;
+
+class HomeScreen extends ConsumerStatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final homeState = ref.watch(homeProvider);
-    print("현재 상태 length : ${homeState}");
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    ref.read(homeProvider.notifier).getHomeMenusWithType();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final homeMenusList = ref.watch(homeProvider).homeMenusList;
+    _userName = ref.watch(homeProvider).userName;
 
     ref.listen(homeProvider, (prev, next) {
-      print("현재 상태: ${next}");
+      print("현재 상태: userName ${next.userName}");
+      print("현재 상태 homeMenusList: ${next.homeMenusList}");
     });
-  
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
-          // SliverAppBar(
-          //   floating: true,
-          //   toolbarHeight: 30,
-          //   backgroundColor: AppColors.primary,
-          //   flexibleSpace: FlexibleSpaceBar(
-          //       background: Padding(
-          //     padding: const EdgeInsets.only(top: 30),
-          //     child: Column(
-          //       crossAxisAlignment: CrossAxisAlignment.start,
-          //       children: [
-          //         Container(
-          //           padding: EdgeInsets.only(left: 30),
-          //           child: Text(
-          //             AppStrings.mainTitle,
-          //             style: TextStyle(
-          //                 color: Colors.white,
-          //                 fontWeight: FontWeight.bold,
-          //                 fontSize: 20),
-          //           ),
-          //         ),
-          //       ],
-          //     ),
-          //   )),
-          // ),
           SliverPersistentHeader(
             delegate: _SearchBarDelegate(),
             pinned: true,
@@ -61,8 +50,8 @@ class HomeScreen extends ConsumerWidget {
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
-                  final sectionTitle = homeState[index].keys.first;
-                  final homeMenus = homeState[index][sectionTitle];
+                  final sectionTitle = homeMenusList[index].keys.first;
+                  final homeMenus = homeMenusList[index][sectionTitle];
 
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -70,7 +59,7 @@ class HomeScreen extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "OOO님을 위한",
+                          "${_userName}${AppStrings.forNickName}",
                           style: TextStyle(fontSize: 14, color: Colors.black26),
                         ),
                         SizedBox(height: 5),
@@ -98,8 +87,13 @@ class HomeScreen extends ConsumerWidget {
                               final homeMenu = homeMenus[itemIndex];
                               return Padding(
                                 padding: const EdgeInsets.only(right: 25),
-                                child: HomeMenuLayout(
-                                    onClick: () {}, menu: homeMenu),
+                                child: InkWell(
+                                  onTap: () {
+                                    context.push(
+                                        '/menu/${homeMenus[itemIndex].id}');
+                                  },
+                                  child: HomeMenuLayout(menu: homeMenu),
+                                ),
                               );
                             },
                           ),
@@ -108,7 +102,7 @@ class HomeScreen extends ConsumerWidget {
                     ),
                   );
                 },
-                childCount: homeState.length,
+                childCount: homeMenusList.length,
               ),
             ),
           ),
@@ -146,7 +140,7 @@ class _SearchBarDelegate extends SliverPersistentHeaderDelegate {
               height: 20,
             ),
             AppBarSearchField(
-                hintText: AppStrings.todayCoffeSearchText,
+                hintText: "${_userName}${AppStrings.todayCoffeSearchSCript}",
                 height: 40,
                 onSearch: (String) {},
                 controller: appBarSearchController),

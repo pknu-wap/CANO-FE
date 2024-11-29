@@ -24,19 +24,19 @@ class _SearchApi implements SearchApi {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<List<MenuInfo>> searchWithKeyword(String query) async {
+  Future<List<SearchResponse>> searchWithKeyword(String keyword) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'query': query};
+    final queryParameters = <String, dynamic>{r'query': keyword};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<MenuInfo>>(Options(
-      method: 'POST',
+    final _options = _setStreamType<List<SearchResponse>>(Options(
+      method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/api/menus',
+          'api/menus/search',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -46,10 +46,11 @@ class _SearchApi implements SearchApi {
           baseUrl,
         )));
     final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<MenuInfo> _value;
+    late List<SearchResponse> _value;
     try {
       _value = _result.data!
-          .map((dynamic i) => MenuInfo.fromJson(i as Map<String, dynamic>))
+          .map(
+              (dynamic i) => SearchResponse.fromJson(i as Map<String, dynamic>))
           .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);

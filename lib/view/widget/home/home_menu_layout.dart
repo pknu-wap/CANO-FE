@@ -6,11 +6,9 @@ import '../../../data/model/home/home_menu.dart';
 
 class HomeMenuLayout extends StatelessWidget {
   final HomeMenu menu;
-  final VoidCallback onClick;
 
   const HomeMenuLayout({
     Key? key,
-    required this.onClick,
     required this.menu,
   }) : super(key: key);
 
@@ -24,7 +22,7 @@ class HomeMenuLayout extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(15),
-            child: Image.network(menu.image_url,
+            child: Image.network(menu.imageUrl,
                 height: mediaHeight(context, 0.15),
                 width: mediaWidth(context, 0.3),
                 fit: BoxFit.fill),
@@ -43,13 +41,18 @@ class HomeMenuLayout extends StatelessWidget {
           SizedBox(
             height: 5,
           ),
-          StarRating(rating: menu.score),
+          StarRating(rating: menu.score ?? 0),
           SizedBox(
             height: 5,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text(menu.attribute), Text("${menu.degree}%")],
+            children: [
+              Text(menu.attribute),
+              Text(menu.degree != null
+                  ? "${(menu.degree! * 100).toInt()}%"
+                  : "0")
+            ],
           )
         ],
       ),

@@ -2,11 +2,15 @@ import 'package:cano/desginsystem/colors.dart';
 import 'package:cano/view/screen/auth/login_screen.dart';
 import 'package:cano/view/screen/home/home_screen.dart';
 import 'package:cano/view/screen/menu/menu_screen.dart';
+import 'package:cano/view/screen/my_page/modify_coffee_preference_screen.dart';
+import 'package:cano/view/screen/my_page/modify_user_profile_screen.dart';
 import 'package:cano/view/screen/my_page/my_page_screen.dart';
 import 'package:cano/view/screen/register_menu/register_menu_screen.dart';
+import 'package:cano/view/screen/review/write_review_screen.dart';
 import 'package:cano/view/screen/search/search_screen.dart';
 import 'package:cano/view/screen/user_info/coffee_preference_screen.dart';
 import 'package:cano/view/screen/user_info/user_profile_screen.dart';
+import 'package:cano/viewmodel/auth/cano_token_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,17 +18,16 @@ class AppRouter {
   static GoRouter router = GoRouter(
     routes: [
       GoRoute(
-          path: '/',
+        path: '/',
+        redirect: (context, state) async {
+          final isLoggedIn = await CanoTokenManager().checkToken();
+          return isLoggedIn ? '/home' : '/login';
+        },
+      ),
+      GoRoute(
+          path: '/login',
           builder: (context, state) {
             return const LoginScreen();
-            // return FutureBuilder<bool>(
-            //     future: CanoTokenManager().checkToken(),
-            //     builder: (context, snapshot) {
-            //       if (snapshot.hasData && snapshot.data == true)
-            //         return HomeScreen();
-            //       else
-            //         return LoginScreen();
-            //     });
           }),
       GoRoute(
           path: '/user_profile',
@@ -37,14 +40,37 @@ class AppRouter {
             return CoffeePreferenceScreen();
           }),
       GoRoute(
+          path: '/modify_user_profile',
+          builder: (context, state) {
+            return const ModifyUserProfileScreen();
+          }),
+      GoRoute(
+          path: '/modify_coffee_preference',
+          builder: (context, state) {
+            return ModifyCoffeePreferenceScreen();
+          }),
+      GoRoute(
           path: '/register_menu',
           builder: (context, state) {
             return RegisterMenuScreen();
           }),
       GoRoute(
-          path: '/menu',
+          path: '/write_review',
           builder: (context, state) {
-            return const MenuScreen();
+            return WriteReviewScreen();
+          }),
+      // GoRoute(
+      //     path: '/menu',
+      //     builder: (context, state) {
+      //       return MenuScreen();
+      //     }),
+      GoRoute(
+          path: '/menu/:menuId',
+          builder: (context, state) {
+            final menuId = int.parse(state.pathParameters['menuId']!);
+            return MenuScreen(
+              menuId: menuId,
+            );
           }),
       StatefulShellRoute.indexedStack(
         branches: [
@@ -68,7 +94,7 @@ class AppRouter {
             routes: [
               GoRoute(
                 path: "/my_page",
-                builder: (context, state) => const MyPageScreen(),
+                builder: (context, state) => MyPageScreen(),
               ),
             ],
           ),
