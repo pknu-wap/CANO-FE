@@ -67,51 +67,47 @@ class _MyPageScreenState extends ConsumerState<MyPageScreen> {
           SizedBox(
             height: 5,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 65),
-            child: Row(
-              children: [
-                TextButton(
-                  onPressed: () {
-                    CanoTokenManager().clearTokens();
-                    context.go('/login');
-                  },
-                  style: ButtonStyle(
-                      overlayColor: WidgetStateProperty.all(
-                          AppColors.primary.withOpacity(0.2))),
-                  child: Text(
-                    AppStrings.logout,
-                    style: TextStyle(color: Colors.black26, fontSize: 13),
-                  ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () {
+                  CanoTokenManager().clearTokens();
+                  context.go('/login');
+                },
+                style: ButtonStyle(
+                    overlayColor: WidgetStateProperty.all(
+                        AppColors.primary.withOpacity(0.2))),
+                child: Text(
+                  AppStrings.logout,
+                  style: TextStyle(color: Colors.black26, fontSize: 13),
                 ),
-                Text("ㅣ",
-                    style: TextStyle(color: Colors.black26, fontSize: 13)),
-                TextButton(
-                  onPressed: () {
-                    context.push('/modify_user_profile');
-                  },
-                  style: ButtonStyle(
-                      overlayColor: WidgetStateProperty.all(
-                          AppColors.primary.withOpacity(0.2))),
-                  child: Text(
-                    AppStrings.modify,
-                    style: TextStyle(color: Colors.black26, fontSize: 13),
-                  ),
+              ),
+              Text("ㅣ", style: TextStyle(color: Colors.black26, fontSize: 13)),
+              TextButton(
+                onPressed: () {
+                  context.push('/modify_user_profile');
+                },
+                style: ButtonStyle(
+                    overlayColor: WidgetStateProperty.all(
+                        AppColors.primary.withOpacity(0.2))),
+                child: Text(
+                  AppStrings.modify,
+                  style: TextStyle(color: Colors.black26, fontSize: 13),
                 ),
-                Text("ㅣ",
-                    style: TextStyle(color: Colors.black26, fontSize: 13)),
-                TextButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                      overlayColor: WidgetStateProperty.all(
-                          AppColors.primary.withOpacity(0.2))),
-                  child: Text(
-                    AppStrings.withDrawal,
-                    style: TextStyle(color: Colors.black26, fontSize: 13),
-                  ),
+              ),
+              Text("ㅣ", style: TextStyle(color: Colors.black26, fontSize: 13)),
+              TextButton(
+                onPressed: () {},
+                style: ButtonStyle(
+                    overlayColor: WidgetStateProperty.all(
+                        AppColors.primary.withOpacity(0.2))),
+                child: Text(
+                  AppStrings.withDrawal,
+                  style: TextStyle(color: Colors.black26, fontSize: 13),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           SizedBox(
             height: 15,
