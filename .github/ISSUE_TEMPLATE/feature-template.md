@@ -1,8 +1,8 @@
 ---
-name: feature tempalte
+name: feature template
 about: 기능 추가
 title: ''
-labels: ''
+labels: feature
 assignees: ''
 
 ---
