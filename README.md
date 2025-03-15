@@ -91,7 +91,7 @@
 ![로그인](https://github.com/user-attachments/assets/c17a2b5c-9826-48dc-9b63-a1e1d0d511d0)
 
 ### 사용자 커피 취향 조사
-(![커피 취향 조사](https://github.com/user-attachments/assets/f63e57ef-20c8-4cfc-8acb-db1b10b80d9c))
+![커피 취향 조사](https://github.com/user-attachments/assets/f63e57ef-20c8-4cfc-8acb-db1b10b80d9c)
 
 ### 메인 화면
 - 사용자의 커피 취향에 따른 커피들 추천
